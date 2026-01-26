@@ -3,6 +3,7 @@
 Bienvenue dans la documentation technique des composants de ForgeEngine.
 
 ## 🧱 Liste des Composants
+- [Page](./components/Page.md)
 - [AppBar](./components/AppBar.md)
 - [Hero](./components/Hero.md)
 - [Button](./components/Button.md)

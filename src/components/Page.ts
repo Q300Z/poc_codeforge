@@ -1,29 +1,32 @@
-import { Component } from "../types.js";
-import { getStyleVariables } from "../utils/style.js";
-import { validateStyle } from "../utils/validator.js";
+import { createComponent } from "../utils/factory.js";
 
-const AUTHORIZED_TOKENS = [
-  "brand-primary",
-  "brand-secondary",
-  "appbar-bg",
-  "appbar-text",
-  "appbar-border",
-  "btn-bg-default",
-  "btn-text-default",
-  "hero-bg-default",
-  "hero-text-default",
-  "section-py",
-];
+const AUTHORIZED_TOKENS = {
+  "brand-primary": "Couleur primaire de la marque.",
+  "brand-secondary": "Couleur secondaire de la marque.",
+  "appbar-bg": "Couleur de fond globale de l'AppBar.",
+  "appbar-text": "Couleur de texte globale de l'AppBar.",
+  "appbar-border": "Couleur de bordure globale de l'AppBar.",
+  "btn-bg-default": "Couleur de fond par défaut de tous les boutons.",
+  "btn-text-default": "Couleur de texte par défaut de tous les boutons.",
+  "hero-bg-default": "Couleur de fond par défaut de tous les Hero.",
+  "hero-text-default": "Couleur de texte par défaut de tous les Hero.",
+  "section-py": "Padding vertical par défaut de toutes les sections.",
+};
 
-export const Page: Component = (meta, children, style) => {
-  validateStyle("Page", style, AUTHORIZED_TOKENS);
-  const globalStyles = getStyleVariables(style);
-  const debug = meta.debug === true;
+export const Page = createComponent({
+  name: "Page",
+  description: "Composant racine gérant le layout global, le thème et l'injection du header/footer.",
+  metaSchema: {
+    appName: "Nom de l'application (utilisé comme titre de page).",
+    debug: "Active le mode debug visuel (true/false).",
+  },
+  authorizedTokens: AUTHORIZED_TOKENS,
+  template: (meta, children, styleVars, _a11yAttrs, _id) => {
+    const debug = meta.debug === true;
+    const header = (meta.renderedHeader as string) || "";
+    const footer = (meta.renderedFooter as string) || "";
 
-  const header = (meta.renderedHeader as string) || "";
-  const footer = (meta.renderedFooter as string) || "";
-
-  return `
+    return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-white">
 <head>
@@ -54,7 +57,7 @@ export const Page: Component = (meta, children, style) => {
       }
     </style>
 </head>
-<body class="site-wrapper" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
+<body class="site-wrapper" style="${styleVars}" ${debug ? 'data-debug-theme="true"' : ""}>
     ${header}
     
     <main class="main-content">
@@ -67,4 +70,5 @@ export const Page: Component = (meta, children, style) => {
 </body>
 </html>
 `;
-};
+  },
+});
