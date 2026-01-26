@@ -2,7 +2,7 @@ import { createComponent } from "../utils/factory.js";
 
 export const AppBar = createComponent({
   name: "AppBar",
-  authorizedTokens: ["appbar-bg", "appbar-text", "appbar-border"],
+  authorizedTokens: ["appbar-bg", "appbar-text", "appbar-border", "backdrop-filter"],
   template: (meta, _children, styleVars, a11yAttrs, id) => {
     const title = meta.title || "My App";
     const links = (meta.links as { label: string; href: string }[]) || [];

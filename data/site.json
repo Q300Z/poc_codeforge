@@ -1,18 +1,51 @@
 {
   "meta": {
-    "appName": "ForgeEngine Showcase",
-    "version": "3.2.0",
-    "createdAt": "2026-01-26T13:00:00.000Z"
+    "appName": "ForgeEngine Ultimate Showcase",
+    "version": "3.5.0",
+    "createdAt": "2026-01-26T14:00:00.000Z"
   },
   "style": {
-    "brand-primary": "#6366f1",
-    "brand-secondary": "#14b8a6",
+    "brand-primary": "#4f46e5",
+    "brand-secondary": "#06b6d4",
     "btn-bg-default": "var(--brand-primary)",
     "btn-text-default": "#ffffff",
-    "appbar-bg": "#ffffff",
-    "appbar-border": "#e5e7eb",
-    "hero-bg-default": "#f9fafb",
-    "section-py": "5rem"
+    "appbar-bg": "rgba(255, 255, 255, 0.8)",
+    "appbar-border": "#f3f4f6",
+    "hero-bg-default": "#ffffff",
+    "section-py": "4rem"
+  },
+  "layout": {
+    "header": {
+      "id": "global-nav",
+      "type": "AppBar",
+      "meta": {
+        "title": "ForgeEngine",
+        "links": [
+          { "label": "Showcase", "href": "index.html" },
+          { "label": "Layouts", "href": "layouts.html" },
+          { "label": "Contact", "href": "contact.html" }
+        ]
+      }
+    },
+    "footer": {
+      "id": "global-footer",
+      "type": "Section",
+      "style": { "section-bg": "#111827", "section-py": "2rem" },
+      "children": [
+        {
+          "id": "footer-cont",
+          "type": "Container",
+          "children": [
+            {
+              "id": "footer-text",
+              "type": "Hero",
+              "meta": { "title": "ForgeEngine POC", "subtitle": "© 2026" },
+              "style": { "hero-text": "#9ca3af", "hero-bg": "transparent" }
+            }
+          ]
+        }
+      ]
+    }
   },
   "pages": [
     {
@@ -20,77 +53,22 @@
       "content": {
         "id": "home-page",
         "type": "Page",
-        "meta": { "debug": false },
         "children": [
           {
-            "id": "main-nav",
-            "type": "AppBar",
-            "meta": {
-              "title": "ForgeEngine",
-              "links": [
-                { "label": "Accueil", "href": "index.html" },
-                { "label": "Fonctionnalités", "href": "features.html" },
-                { "label": "Contact", "href": "contact.html" }
-              ]
-            }
-          },
-          {
-            "id": "welcome-hero",
+            "id": "hero-home",
             "type": "Hero",
-            "meta": {
-              "title": "Le futur du No-Code est hybride",
-              "subtitle": "Générez des sites industriels, accessibles et performants à partir de simples contrats JSON.",
-              "version": "1.0.0"
-            },
-            "style": {
-              "hero-bg": "#EEF2FF",
-              "hero-text": "var(--brand-primary)"
-            }
+            "meta": { "title": "Bienvenue", "subtitle": "Découvrez nos différents types de layouts." }
           },
           {
-            "id": "features-preview",
-            "type": "Section",
-            "style": { "section-bg": "#ffffff" },
+            "id": "cta",
+            "type": "Container",
             "children": [
               {
-                "id": "features-cont",
-                "type": "Container",
+                "id": "s",
+                "type": "Stack",
+                "meta": { "align": "center" },
                 "children": [
-                  {
-                    "id": "features-stack",
-                    "type": "Stack",
-                    "meta": { "direction": "vertical", "align": "center", "gap": 10 },
-                    "children": [
-                      {
-                        "id": "features-grid",
-                        "type": "Grid",
-                        "meta": { "cols": 3, "gap": 8 },
-                        "children": [
-                          {
-                            "id": "card-1",
-                            "type": "Button",
-                            "meta": { "label": "⚡ Performance", "action": "alert('Vitesse maximale !')" }
-                          },
-                          {
-                            "id": "card-2",
-                            "type": "Button",
-                            "meta": { "label": "♿ Accessibilité", "action": "alert('WCAG Compliant')" }
-                          },
-                          {
-                            "id": "card-3",
-                            "type": "Button",
-                            "meta": { "label": "🎨 Design Tokens", "action": "alert('CSS Variables')" }
-                          }
-                        ]
-                      },
-                      {
-                        "id": "cta-main",
-                        "type": "Button",
-                        "meta": { "label": "Découvrir toutes les features", "action": "features.html" },
-                        "style": { "btn-bg": "var(--brand-secondary)" }
-                      }
-                    ]
-                  }
+                  { "id": "b", "type": "Button", "meta": { "label": "Voir les Layouts", "action": "layouts.html" } }
                 ]
               }
             ]
@@ -99,43 +77,100 @@
       }
     },
     {
-      "slug": "features",
+      "slug": "layouts",
       "content": {
-        "id": "features-page",
+        "id": "layouts-page",
         "type": "Page",
-        "meta": { "debug": true },
         "children": [
-          {
-            "id": "nav-feat",
-            "type": "AppBar",
-            "meta": { "title": "Features", "links": [{ "label": "Retour", "href": "index.html" }] }
-          },
           {
             "id": "feat-hero",
             "type": "Hero",
-            "meta": { "title": "Capacités Techniques", "subtitle": "Sous le capot du moteur de rendu." }
+            "meta": { "title": "Galerie de Layouts", "subtitle": "Démonstration des capacités de placement Mobile-First." }
           },
           {
-            "id": "absolute-demo-sec",
+            "id": "grid-demo",
             "type": "Section",
-            "style": { "section-bg": "#f3f4f6", "section-py": "10rem" },
             "children": [
               {
-                "id": "abs-cont",
+                "id": "c1",
                 "type": "Container",
-                "style": { "position": "relative", "height": "200px" },
                 "children": [
+                  { "id": "t1", "type": "Hero", "meta": { "title": "1. Grille Responsive (3 cols)", "subtitle": "S'empile sur mobile." }, "style": { "section-py": "1rem" } },
                   {
-                    "id": "floating-btn",
-                    "type": "Button",
-                    "meta": { "label": "Position Absolue", "action": "console.log('I am floating')" },
-                    "style": {
-                      "position": "absolute",
-                      "top": "50px",
-                      "left": "20%",
-                      "btn-bg": "#e11d48",
-                      "width": "200px"
-                    }
+                    "id": "grid",
+                    "type": "Grid",
+                    "meta": { "cols": 3, "gap": 6 },
+                    "children": [
+                      { "id": "box1", "type": "Box", "style": { "bg-color": "#f87171" } },
+                      { "id": "box2", "type": "Box", "style": { "bg-color": "#60a5fa" } },
+                      { "id": "box3", "type": "Box", "style": { "bg-color": "#34d399" } }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "stack-demo",
+            "type": "Section",
+            "style": { "section-bg": "#f8fafc" },
+            "children": [
+              {
+                "id": "c2",
+                "type": "Container",
+                "children": [
+                  { "id": "t2", "type": "Hero", "meta": { "title": "2. Stacks", "subtitle": "Vertical vs Horizontal" }, "style": { "section-py": "1rem" } },
+                  {
+                    "id": "stacks-grid",
+                    "type": "Grid",
+                    "meta": { "cols": 2, "gap": 12 },
+                    "children": [
+                      {
+                        "id": "v-stack",
+                        "type": "Stack",
+                        "meta": { "direction": "vertical", "gap": 4 },
+                        "children": [
+                          { "id": "sv1", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } },
+                          { "id": "sv2", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } },
+                          { "id": "sv3", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } }
+                        ]
+                      },
+                      {
+                        "id": "h-stack",
+                        "type": "Stack",
+                        "meta": { "direction": "horizontal", "gap": 4 },
+                        "children": [
+                          { "id": "sh1", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } },
+                          { "id": "sh2", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } },
+                          { "id": "sh3", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "overflow-demo",
+            "type": "Section",
+            "children": [
+              {
+                "id": "c3",
+                "type": "Container",
+                "children": [
+                  { "id": "t3", "type": "Hero", "meta": { "title": "3. Gestion de l'Overflow", "subtitle": "Exemple d'une liste scrollable horizontalement (Stack + overflow-x)." }, "style": { "section-py": "1rem" } },
+                  {
+                    "id": "scroll-stack",
+                    "type": "Stack",
+                    "meta": { "direction": "horizontal" },
+                    "style": { "overflow-x": "auto", "width": "100%", "stack-gap": "1.5rem" },
+                    "children": [
+                      { "id": "ob1", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
+                      { "id": "ob2", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
+                      { "id": "ob3", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
+                      { "id": "ob4", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } }
+                    ]
                   }
                 ]
               }
@@ -150,46 +185,7 @@
         "id": "contact-page",
         "type": "Page",
         "children": [
-          {
-            "id": "nav-contact",
-            "type": "AppBar",
-            "meta": { "title": "Contact", "links": [{ "label": "Accueil", "href": "index.html" }] }
-          },
-          {
-            "id": "contact-hero",
-            "type": "Hero",
-            "meta": { "title": "Parlons de votre projet", "subtitle": "Une équipe à votre écoute." }
-          },
-          {
-            "id": "contact-stack-sec",
-            "type": "Section",
-            "children": [
-              {
-                "id": "contact-cont",
-                "type": "Container",
-                "children": [
-                  {
-                    "id": "contact-actions",
-                    "type": "Stack",
-                    "meta": { "direction": "horizontal", "justify": "center", "gap": 4 },
-                    "children": [
-                      {
-                        "id": "mail-btn",
-                        "type": "Button",
-                        "meta": { "label": "Envoyer un mail", "action": "mailto:hello@example.com" }
-                      },
-                      {
-                        "id": "home-back",
-                        "type": "Button",
-                        "meta": { "label": "Accueil", "action": "index.html" },
-                        "style": { "btn-bg": "#94a3b8" }
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
+          { "id": "ch", "type": "Hero", "meta": { "title": "Contact", "subtitle": "Parlons ensemble." } }
         ]
       }
     }

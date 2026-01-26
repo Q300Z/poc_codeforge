@@ -23,6 +23,9 @@ export const Page: Component = (meta, children, style) => {
   const globalStyles = getStyleVariables(style);
   const debug = meta.debug === true;
 
+  const header = (meta.renderedHeader as string) || "";
+  const footer = (meta.renderedFooter as string) || "";
+
   return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-white">
@@ -54,10 +57,16 @@ export const Page: Component = (meta, children, style) => {
       }
     </style>
 </head>
-<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
-    <main>
+<body class="site-wrapper" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
+    ${header}
+    
+    <main class="main-content">
         ${children.join("")}
     </main>
+
+    <footer class="w-full">
+      ${footer}
+    </footer>
 </body>
 </html>
 `;

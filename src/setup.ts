@@ -1,4 +1,5 @@
 import { AppBar } from "./components/AppBar.js";
+import { Box } from "./components/Box.js";
 import { Button } from "./components/Button.js";
 import { Container } from "./components/Container.js";
 import { Grid } from "./components/Grid.js";
@@ -17,4 +18,5 @@ export function setupRegistry() {
   registry.Section = Section;
   registry.Container = Container;
   registry.Stack = Stack;
+  registry.Box = Box;
 }

@@ -17,9 +17,13 @@ export interface SiteNode {
     createdAt: string;
     [key: string]: unknown;
   };
-  style?: Record<string, string>; // Global styles applied to all pages
+  style?: Record<string, string>;
+  layout?: {
+    header?: Node;
+    footer?: Node;
+  };
   pages: {
-    slug: string; // e.g., "index", "about", "contact"
+    slug: string;
     content: PageNode;
   }[];
 }

@@ -2,7 +2,7 @@ import { createComponent } from "../utils/factory.js";
 
 export const Hero = createComponent({
   name: "Hero",
-  authorizedTokens: ["hero-bg", "hero-text", "hero-bg-default", "hero-text-default"],
+  authorizedTokens: ["hero-bg", "hero-text", "hero-bg-default", "hero-text-default", "section-py"],
   template: (meta, _, styleVars, a11yAttrs) => `
     <section 
       class="hero-section" 

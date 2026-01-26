@@ -28,18 +28,21 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
 
   const siteData: SiteNode = JSON.parse(fs.readFileSync(absoluteJsonPath, "utf-8"));
   
-  // 1. Préparation des entrées pour Rollup
   const input: Record<string, string> = {};
   const tempFiles: string[] = [];
 
   for (const page of siteData.pages) {
-    // On s'assure que meta existe
     page.content.meta = page.content.meta || {};
-    // On injecte les métadonnées globales dans chaque page si besoin
     page.content.meta.appName = siteData.meta.appName;
-    
-    // On peut aussi fusionner les styles globaux du site avec ceux de la page
     page.content.style = { ...siteData.style, ...page.content.style };
+
+    // On pré-rend le header et le footer s'ils existent
+    if (siteData.layout?.header) {
+      page.content.meta.renderedHeader = render(siteData.layout.header);
+    }
+    if (siteData.layout?.footer) {
+      page.content.meta.renderedFooter = render(siteData.layout.footer);
+    }
 
     const html = render(page.content);
     const fileName = `${page.slug}.html`;
@@ -50,7 +53,6 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     tempFiles.push(filePath);
   }
 
-  // 2. Lancement du build Vite
   try {
     await viteBuild({
       root: path.join(__dirname, ".."),
@@ -64,7 +66,6 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     });
     console.log(`\n✅ Multi-page site successfully generated in: ${absoluteOutDir}`);
   } finally {
-    // Nettoyage des fichiers temporaires
     for (const file of tempFiles) {
       if (fs.existsSync(file)) fs.unlinkSync(file);
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ForgeEngine Showcase</title>
+    <title>ForgeEngine Ultimate Showcase</title>
     <style>
       .btn-base {
         padding: 0.5rem 1rem;
@@ -27,41 +27,44 @@
         outline: 1px dashed rgba(255, 0, 255, 0.3);
       }
     </style>
-  <link rel="stylesheet" crossorigin href="/assets/style-CqFWNLUn.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-CGuus_FT.css">
 </head>
-<body class="h-full" style="--brand-primary: #6366f1; --brand-secondary: #14b8a6; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: #ffffff; --appbar-border: #e5e7eb; --hero-bg-default: #f9fafb; --section-py: 5rem;" >
-    <main>
-        
+<body class="site-wrapper" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --appbar-border: #f3f4f6; --hero-bg-default: #ffffff; --section-py: 4rem;" >
+    
     <nav 
       style="" 
       class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
-      id="nav-contact" 
+      id="global-nav" 
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <span class="text-xl font-bold tracking-tight">Contact</span>
+            <span class="text-xl font-bold tracking-tight">ForgeEngine</span>
           </div>
           
           <div class="hidden md:flex items-center space-x-8">
             
-              <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Accueil</a>
+              <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Showcase</a>
+            
+              <a href="layouts.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Layouts</a>
+            
+              <a href="contact.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
             
           </div>
 
           <div class="flex items-center md:hidden">
             <button 
-              id="btn-nav-contact"
+              id="btn-global-nav"
               type="button" 
               class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               aria-expanded="false"
-              aria-controls="menu-nav-contact"
+              aria-controls="menu-global-nav"
             >
               <span class="sr-only">Ouvrir le menu</span>
-              <svg id="icon-m-nav-contact" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="icon-m-global-nav" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <svg id="icon-c-nav-contact" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="icon-c-global-nav" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -69,20 +72,24 @@
         </div>
       </div>
 
-      <div id="menu-nav-contact" class="hidden md:hidden border-t border-gray-100 bg-white">
+      <div id="menu-global-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           
-            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Accueil</a>
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Showcase</a>
+          
+            <a href="layouts.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Layouts</a>
+          
+            <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Contact</a>
           
         </div>
       </div>
 
       <script>
         (function() {
-          const button = document.getElementById('btn-nav-contact');
-          const menu = document.getElementById('menu-nav-contact');
-          const menuIcon = document.getElementById('icon-m-nav-contact');
-          const closeIcon = document.getElementById('icon-c-nav-contact');
+          const button = document.getElementById('btn-global-nav');
+          const menu = document.getElementById('menu-global-nav');
+          const menuIcon = document.getElementById('icon-m-global-nav');
+          const closeIcon = document.getElementById('icon-c-global-nav');
 
           if (button && menu) {
             button.addEventListener('click', () => {
@@ -97,60 +104,53 @@
       </script>
     </nav>
     
+    
+    <main class="main-content">
+        
     <section 
       class="hero-section" 
       style=""
-      id="contact-hero" 
+      id="ch" 
       aria-labelledby="hero-title"
     >
       <h1 id="hero-title" class="hero-title">
-        Parlons de votre projet
+        Contact
       </h1>
-      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Une équipe à votre écoute.</p>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Parlons ensemble.</p>
     </section>
   
+    </main>
+
+    <footer class="w-full">
+      
     <section 
-      style="" 
+      style="--section-bg: #111827; --section-py: 2rem;" 
       class="section-pad bg-[var(--section-bg,transparent)]"
-      id="contact-stack-sec" 
+      id="global-footer" 
     >
       
     <div 
       style="" 
       class="container-center"
-      id="contact-cont" 
+      id="footer-cont" 
     >
       
-      <div 
-        style="" 
-        class="flex flex-row gap-4 items-start justify-center"
-        id="contact-actions" 
-      >
-        
-        <a 
-          href="mailto:hello@example.com"
-          style=""
-          class="btn-base no-underline"
-          id="mail-btn" 
-        >
-          Envoyer un mail
-        </a>
-      
-        <a 
-          href="index.html"
-          style="--btn-bg: #94a3b8;"
-          class="btn-base no-underline"
-          id="home-back" 
-        >
-          Accueil
-        </a>
-      
-      </div>
-    
+    <section 
+      class="hero-section" 
+      style="--hero-text: #9ca3af; --hero-bg: transparent;"
+      id="footer-text" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        ForgeEngine POC
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">© 2026</p>
+    </section>
+  
     </div>
   
     </section>
   
-    </main>
+    </footer>
 </body>
 </html>

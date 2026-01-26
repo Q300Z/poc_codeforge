@@ -37,6 +37,9 @@ Les tests sont le garant de la stabilité. Chaque composant doit être testé su
 3.  **Accessibilité:** Audit automatique (axe-core) et vérification manuelle des rôles/attributs.
 4.  **Style:** Vérification de la présence des classes Tailwind critiques pour le layout et le responsive.
 
+## ⚠️ Stabilité & E2E
+- **Attention :** Le fichier `data/site.json` sert de base de référence pour les tests End-to-End (Playwright). Toute modification de sa structure, de ses IDs ou de ses textes (appName, titres) peut casser la CI. Veillez à mettre à jour les fichiers `.spec.ts` dans le dossier `e2e/` en cas de changement majeur.
+
 ## 🛠️ Stack Technique
 - **Langage:** TypeScript (Strongly Typed).
 - **Runtime:** Node.js (ESM).

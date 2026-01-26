@@ -13,7 +13,7 @@ const GAP_MAP: Record<number, string> = {
 
 export const Stack = createComponent({
   name: "Stack",
-  authorizedTokens: ["stack-gap"],
+  authorizedTokens: ["stack-gap", "overflow", "overflow-x", "overflow-y", "width", "height"],
   template: (meta, children, styleVars, a11yAttrs) => {
     const direction = meta.direction === "horizontal" ? "flex-row" : "flex-col";
     const align = meta.align || "start";
@@ -24,7 +24,7 @@ export const Stack = createComponent({
 
     return `
       <div 
-        style="${styleVars}" 
+        style="${styleVars}; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible)); width: var(--width, auto); height: var(--height, auto);" 
         class="flex ${direction} ${gapClass} items-${align} justify-${justify}"
         ${a11yAttrs}
       >

@@ -5,9 +5,8 @@ test.describe("Navigation Multi-Page", () => {
     await page.goto("/");
     
     if (isMobile) {
-      await page.locator("[id^='btn-main-nav']").click();
-      // On clique sur le lien dans le menu mobile
-      await page.locator("#menu-main-nav").getByRole("link", { name: "Contact", exact: true }).click();
+      await page.getByRole("button", { name: /Ouvrir/i }).click();
+      await page.locator("[id^='menu-']").getByRole("link", { name: "Contact", exact: true }).click();
     } else {
       await page.locator("nav").getByRole("link", { name: "Contact", exact: true }).click();
     }
@@ -19,12 +18,12 @@ test.describe("Navigation Multi-Page", () => {
     await page.goto("/");
 
     if (isMobile) {
-      await page.locator("[id^='btn-main-nav']").click();
-      await page.locator("#menu-main-nav").getByRole("link", { name: "Fonctionnalités" }).click();
+      await page.getByRole("button", { name: /Ouvrir/i }).click();
+      await page.locator("[id^='menu-']").getByRole("link", { name: "Layouts" }).click();
     } else {
-      await page.locator("nav").getByRole("link", { name: "Fonctionnalités" }).click();
+      await page.locator("nav").getByRole("link", { name: "Layouts" }).click();
     }
     
-    await expect(page).toHaveURL(/\/features.html$/);
+    await expect(page).toHaveURL(/\/layouts.html$/);
   });
 });

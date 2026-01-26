@@ -1,20 +1,37 @@
 @import "tailwindcss";
 
 @layer components {
+  /* Sticky Footer Layout */
+  .site-wrapper {
+    @apply flex flex-col min-h-screen;
+  }
+
+  .main-content {
+    @apply flex-grow;
+  }
+
   /* Layout Classes */
   .section-pad {
     padding-top: var(--section-py, 4rem);
     padding-bottom: var(--section-py, 4rem);
+    height: var(--height, auto);
+    min-height: var(--min-height, auto);
+    overflow: var(--overflow, visible);
+    overflow-x: var(--overflow-x, var(--overflow, visible));
+    overflow-y: var(--overflow-y, var(--overflow, visible));
   }
 
   .container-center {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
     max-width: var(--container-width, 80rem);
+    position: var(--position, relative);
+    height: var(--height, auto);
+    overflow: var(--overflow, visible);
   }
 
   /* Components */
   .btn-base {
-    @apply px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
     background-color: var(--btn-bg, var(--btn-bg-default, theme(colors.blue.600)));
     color: var(--btn-text, var(--btn-text-default, white));
   }
