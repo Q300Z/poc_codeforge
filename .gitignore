@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Build
+dist/
+build/
+
+# Tests
+coverage/
+.vitest-results/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+output.html
+test-output.html
+*.log

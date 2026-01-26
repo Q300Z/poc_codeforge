@@ -1,0 +1,38 @@
+{
+  "type": "Page",
+  "props": {
+    "title": "Design System Token Driven",
+    "debug": true
+  },
+  "style": {
+    "brand-primary": "#4f46e5",
+    "brand-secondary": "#10b981",
+    "btn-bg-default": "var(--brand-primary)",
+    "hero-bg-default": "#f8fafc",
+    "hero-text-default": "var(--brand-primary)"
+  },
+  "children": [
+    {
+      "type": "Hero",
+      "props": {
+        "title": "Token Architecture",
+        "subtitle": "Séparation entre l'identité (tokens) et l'usage (defaults components)."
+      }
+    },
+    {
+      "type": "Button",
+      "props": {
+        "label": "Bouton Primaire"
+      }
+    },
+    {
+      "type": "Button",
+      "props": {
+        "label": "Bouton Secondaire"
+      },
+      "style": {
+        "btn-bg": "var(--brand-secondary)"
+      }
+    }
+  ]
+}
