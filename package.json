@@ -1,6 +1,6 @@
 {
   "name": "@q300z/codeforge",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Industrial JSON to HTML Render Engine with Design Tokens and Multi-page support",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
