@@ -1,17 +1,17 @@
 # 📚 Bibliothèque de Composants
 
-Bienvenue dans la documentation technique des composants de ForgeEngine.
+Bienvenue dans la documentation technique des composants de CodeForge.
 
 ## 🧱 Liste des Composants
-- [Page](./components/Page.md)
 - [AppBar](./components/AppBar.md)
-- [Hero](./components/Hero.md)
-- [Button](./components/Button.md)
-- [Grid](./components/Grid.md)
-- [Section](./components/Section.md)
-- [Container](./components/Container.md)
-- [Stack](./components/Stack.md)
 - [Box](./components/Box.md)
+- [Button](./components/Button.md)
+- [Container](./components/Container.md)
+- [Grid](./components/Grid.md)
+- [Hero](./components/Hero.md)
+- [Page](./components/Page.md)
+- [Section](./components/Section.md)
+- [Stack](./components/Stack.md)
 
 ---
-*Généré automatiquement par ForgeEngine.*
+*Généré automatiquement par CodeForge.*

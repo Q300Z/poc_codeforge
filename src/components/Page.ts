@@ -15,7 +15,8 @@ const AUTHORIZED_TOKENS = {
 
 export const Page = createComponent({
   name: "Page",
-  description: "Composant racine gérant le layout global, le thème et l'injection du header/footer.",
+  description:
+    "Composant racine gérant le layout global, le thème et l'injection du header/footer.",
   metaSchema: {
     appName: "Nom de l'application (utilisé comme titre de page).",
     debug: "Active le mode debug visuel (true/false).",

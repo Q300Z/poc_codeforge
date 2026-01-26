@@ -1,12 +1,12 @@
 {
-  "name": "@q300z/forge-engine",
+  "name": "@q300z/codeforge",
   "version": "1.0.1",
   "description": "Industrial JSON to HTML Render Engine with Design Tokens and Multi-page support",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "forge-engine": "./dist/cli.js"
+    "codeforge": "./dist/cli.js"
   },
   "files": [
     "dist",

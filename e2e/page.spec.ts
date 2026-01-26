@@ -6,7 +6,7 @@ test.describe("Page de rendu JSON", () => {
   });
 
   test("devrait afficher le titre correct de l'application", async ({ page }) => {
-    await expect(page).toHaveTitle(/ForgeEngine Ultimate Showcase/);
+    await expect(page).toHaveTitle(/CodeForge Ultimate Showcase/);
   });
 
   test("le menu mobile devrait s'ouvrir et se fermer", async ({ page, isMobile }) => {

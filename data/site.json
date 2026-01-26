@@ -1,6 +1,6 @@
 {
   "meta": {
-    "appName": "ForgeEngine Ultimate Showcase",
+    "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
     "createdAt": "2026-01-26T14:00:00.000Z"
   },
@@ -20,32 +20,18 @@
       "id": "global-nav",
       "type": "AppBar",
       "meta": {
-        "title": "ForgeEngine",
+        "title": "CodeForge",
         "links": [
-          {
-            "label": "Showcase",
-            "href": "index.html"
-          },
-          {
-            "label": "Layouts",
-            "href": "layouts.html"
-          },
-          {
-            "label": "Contact",
-            "href": "contact.html"
-          }
-        ],
-        "createdAt": "2026-01-26T10:32:13.573Z",
-        "version": "1.0"
+          { "label": "Showcase", "href": "index.html" },
+          { "label": "Layouts", "href": "layouts.html" },
+          { "label": "Contact", "href": "contact.html" }
+        ]
       }
     },
     "footer": {
       "id": "global-footer",
       "type": "Section",
-      "style": {
-        "section-bg": "#111827",
-        "section-py": "2rem"
-      },
+      "style": { "section-bg": "#111827", "section-py": "2rem" },
       "children": [
         {
           "id": "footer-cont",
@@ -54,16 +40,8 @@
             {
               "id": "footer-text",
               "type": "Hero",
-              "meta": {
-                "title": "ForgeEngine POC",
-                "subtitle": "© 2026",
-                "createdAt": "2026-01-26T10:32:13.573Z",
-                "version": "1.0"
-              },
-              "style": {
-                "hero-text": "#9ca3af",
-                "hero-bg": "transparent"
-              }
+              "meta": { "title": "CodeForge POC", "subtitle": "© 2026" },
+              "style": { "hero-text": "#9ca3af", "hero-bg": "transparent" }
             }
           ]
         }

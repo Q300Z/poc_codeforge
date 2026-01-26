@@ -20,6 +20,7 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
     if (!comp.doc) continue;
 
     const { name, description, metaSchema, authorizedTokens } = comp.doc;
+    // Lien relatif vers le dossier components/
     componentLinks.push("- [" + name + "](./components/" + name + ".md)");
 
     let markdown = "# 🧱 Composant : " + name + "\n\n" + description + "\n\n";
@@ -34,7 +35,6 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
       markdown += "\n";
     }
 
-    // Affichage des tokens seulement s'ils ont une description (filtré par la factory)
     if (Object.keys(authorizedTokens).length > 0) {
       markdown += "## 🎨 Design Tokens (style)\n";
       markdown += "Ces jetons sont spécifiques à ce composant.\n\n";
@@ -76,14 +76,16 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
     fs.writeFileSync(path.join(outputDir, name + ".md"), markdown.trim());
   }
 
+  // Génération de l'index dans docs/README.md (pas à la racine)
   let indexMarkdown = "# 📚 Bibliothèque de Composants\n\n";
-  indexMarkdown += "Bienvenue dans la documentation technique des composants de ForgeEngine.\n\n";
+  indexMarkdown += "Bienvenue dans la documentation technique des composants de CodeForge.\n\n";
   indexMarkdown += "## 🧱 Liste des Composants\n";
-  indexMarkdown += componentLinks.join("\n") + "\n\n";
-  indexMarkdown += "---\n*Généré automatiquement par ForgeEngine.*";
+  indexMarkdown += componentLinks.sort().join("\n") + "\n\n";
+  indexMarkdown += "---\n*Généré automatiquement par CodeForge.*";
 
-  fs.writeFileSync(path.join(outputDir, "..", "README.md"), indexMarkdown.trim());
+  const indexPath = path.join(outputDir, "..", "README.md");
+  fs.writeFileSync(indexPath, indexMarkdown.trim());
 
   // eslint-disable-next-line no-console
-  console.log("\n📚 Documentation and Index generated for " + components.length + " components.");
+  console.log("\n📚 Documentation generated in: " + outputDir);
 }
