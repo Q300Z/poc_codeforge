@@ -14,11 +14,13 @@ export * from "./components/Button.js";
 export * from "./components/Container.js";
 export * from "./components/Grid.js";
 export * from "./components/Hero.js";
+export * from "./components/Image.js";
 export * from "./components/Page.js";
 export * from "./components/Section.js";
 export * from "./components/Stack.js";
 export * from "./components/Text.js";
 export * from "./components/Title.js";
+export * from "./components/Video.js";
 
 import { build as viteBuild } from "vite";
 import path from "path";

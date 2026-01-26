@@ -4,11 +4,13 @@ import { Button } from "./components/Button.js";
 import { Container } from "./components/Container.js";
 import { Grid } from "./components/Grid.js";
 import { Hero } from "./components/Hero.js";
+import { Image } from "./components/Image.js";
 import { Page } from "./components/Page.js";
 import { Section } from "./components/Section.js";
 import { Stack } from "./components/Stack.js";
 import { Text } from "./components/Text.js";
 import { Title } from "./components/Title.js";
+import { Video } from "./components/Video.js";
 import { registry } from "./registry.js";
 
 export function setupRegistry() {
@@ -23,4 +25,6 @@ export function setupRegistry() {
   registry.Box = Box;
   registry.Title = Title;
   registry.Text = Text;
+  registry.Image = Image;
+  registry.Video = Video;
 }
