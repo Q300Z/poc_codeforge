@@ -20,7 +20,7 @@ describe("Layout Components", () => {
   it("Stack should handle vertical and horizontal directions", () => {
     const vert = Stack({ direction: "vertical" }, []);
     const horiz = Stack({ direction: "horizontal" }, []);
-    
+
     expect(vert).toContain("flex-col");
     expect(horiz).toContain("flex-row");
   });

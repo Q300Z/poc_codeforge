@@ -1,79 +1,71 @@
 {
   "meta": {
     "appName": "ScreenDraft",
-    "version": "2.1",
-    "createdAt": "2026-01-26T12:00:00.000Z"
+    "createdAt": "2026-01-26T11:55:00.000Z",
+    "version": "2.0",
+    "title": "Design System v2 - Standardisé",
+    "debug": false
   },
   "id": "main-page",
   "type": "Page",
   "style": {
     "brand-primary": "#4f46e5",
-    "btn-bg-default": "var(--brand-primary)"
+    "brand-secondary": "#10b981",
+    "btn-bg-default": "var(--brand-primary)",
+    "appbar-bg": "#ffffff",
+    "hero-bg-default": "#f8fafc"
   },
   "children": [
     {
-      "id": "nav",
+      "id": "navbar-1",
       "type": "AppBar",
-      "meta": { "title": "Engine v2.1" }
+      "meta": {
+        "createdAt": "2026-01-26T11:55:00.000Z",
+        "version": "1.0.2",
+        "title": "RenderEngine",
+        "links": [
+          { "label": "Accueil", "href": "#" },
+          { "label": "Composants", "href": "#" }
+        ]
+      }
     },
     {
-      "id": "hero-sec",
-      "type": "Section",
-      "style": { "section-bg": "#f8fafc" },
-      "children": [
-        {
-          "id": "hero-cont",
-          "type": "Container",
-          "children": [
-            {
-              "id": "hero",
-              "type": "Hero",
-              "meta": {
-                "title": "Placement Intelligent",
-                "subtitle": "Utilisation de Sections, Containers et Stacks pour un layout robuste."
-              }
-            }
-          ]
-        }
-      ]
+      "id": "hero-section-1",
+      "type": "Hero",
+      "meta": {
+        "createdAt": "2026-01-26T11:55:00.000Z",
+        "version": "1.1.0",
+        "title": "Architecture Redirection",
+        "subtitle": "Les boutons supportent maintenant les liens (<a>) et les actions (JS)."
+      }
     },
     {
-      "id": "body-sec",
-      "type": "Section",
+      "id": "content-grid",
+      "type": "Grid",
+      "meta": {
+        "createdAt": "2026-01-26T12:00:00.000Z",
+        "cols": 2,
+        "gap": 8
+      },
       "children": [
         {
-          "id": "body-cont",
-          "type": "Container",
-          "children": [
-            {
-              "id": "main-stack",
-              "type": "Stack",
-              "meta": { "direction": "vertical", "align": "center" },
-              "style": { "stack-gap": "3rem" },
-              "children": [
-                {
-                  "id": "grid",
-                  "type": "Grid",
-                  "meta": { "cols": 3 },
-                    "children": [
-                    { "id": "b1", "type": "Button", "meta": { "label": "Card 1" } },
-                    { "id": "b2", "type": "Button", "meta": { "label": "Card 2" } },
-                    { "id": "b3", "type": "Button", "meta": { "label": "Card 3" } }
-                  ]
-                },
-                {
-                  "id": "footer-actions",
-                  "type": "Stack",
-                  "meta": { "direction": "horizontal", "justify": "center" },
-                  "style": { "stack-gap": "1rem" },
-                  "children": [
-                    { "id": "ba1", "type": "Button", "meta": { "label": "Annuler" }, "style": { "btn-bg": "#94a3b8" } },
-                    { "id": "ba2", "type": "Button", "meta": { "label": "Confirmer" } }
-                  ]
-                }
-              ]
-            }
-          ]
+          "id": "btn-js",
+          "type": "Button",
+          "meta": {
+            "label": "Action Alerte",
+            "action": "alert('Action JS')"
+          }
+        },
+        {
+          "id": "btn-link",
+          "type": "Button",
+          "meta": {
+            "label": "Voir la documentation",
+            "action": "/docs/intro"
+          },
+          "style": {
+            "btn-bg": "var(--brand-secondary)"
+          }
         }
       ]
     }

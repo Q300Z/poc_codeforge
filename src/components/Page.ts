@@ -21,7 +21,7 @@ export const Page: Component = (meta, children, style) => {
   validateStyle("Page", style, AUTHORIZED_TOKENS);
   const globalStyles = getStyleVariables(style);
   const debug = meta.debug === true;
-  
+
   return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-white">
@@ -53,7 +53,7 @@ export const Page: Component = (meta, children, style) => {
       }
     </style>
 </head>
-<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ''}>
+<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
     <main>
         ${children.join("")}
     </main>

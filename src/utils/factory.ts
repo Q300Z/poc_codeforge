@@ -15,12 +15,7 @@ interface FactoryOptions {
 }
 
 export function createComponent({ name, authorizedTokens, template }: FactoryOptions): Component {
-  return (
-    meta,
-    children,
-    style,
-    id = `gen-${Math.random().toString(36).slice(2, 9)}`
-  ) => {
+  return (meta, children, style, id = `gen-${Math.random().toString(36).slice(2, 9)}`) => {
     validateStyle(name, style, authorizedTokens);
     const styleVars = getStyleVariables(style);
 

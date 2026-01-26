@@ -27,7 +27,7 @@ test.describe('Page de rendu JSON', () => {
     if (isMobile) {
       await expect(grid).toHaveClass(/grid-cols-1/);
     } else {
-      await expect(grid).toHaveClass(/md:grid-cols-3/);
+      await expect(grid).toHaveClass(/md:grid-cols-2/);
     }
   });
 });
