@@ -9,35 +9,43 @@ import { SiteNode } from "./src/types.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// On s'assure que les composants sont prêts
-setupRegistry();
-
-const jsonPath = path.join(__dirname, "data/site.json");
-const siteData: SiteNode = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
-
-// En mode build, on doit générer les fichiers physiques AVANT que Vite/Rollup ne commence
-// car Rollup a besoin de trouver les fichiers d'entrée listés dans input.
-if (process.argv.includes("build")) {
-  siteData.pages.forEach((page) => {
-    page.content.meta = page.content.meta || {};
-    page.content.meta.appName = siteData.meta.appName;
-    page.content.style = { ...siteData.style, ...page.content.style };
-
-    if (siteData.layout?.header) {
-      page.content.meta.renderedHeader = render(siteData.layout.header);
-    }
-    if (siteData.layout?.footer) {
-      page.content.meta.renderedFooter = render(siteData.layout.footer);
-    }
-
-    const html = render(page.content);
-    fs.writeFileSync(path.join(__dirname, `${page.slug}.html`), html);
-  });
+// Helper pour charger les données sans polluer le scope global
+function getSiteData(): SiteNode {
+  const jsonPath = path.join(__dirname, "data/site.json");
+  return JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
 }
 
 function jsonTransformPlugin() {
+  const jsonPath = path.join(__dirname, "data/site.json");
+
   return {
     name: "json-transform-plugin",
+    
+    buildStart() {
+      this.addWatchFile(jsonPath);
+      
+      // En mode build, on génère les fichiers physiques
+      if (process.argv.includes("build")) {
+        setupRegistry();
+        const siteData = getSiteData();
+        siteData.pages.forEach((page) => {
+          const content = { ...page.content };
+          content.meta = { ...content.meta, appName: siteData.meta.appName };
+          content.style = { ...siteData.style, ...content.style };
+
+          if (siteData.layout?.header) {
+            content.meta.renderedHeader = render(siteData.layout.header);
+          }
+          if (siteData.layout?.footer) {
+            content.meta.renderedFooter = render(siteData.layout.footer);
+          }
+
+          const html = render(content);
+          fs.writeFileSync(path.join(__dirname, `${page.slug}.html`), html);
+        });
+      }
+    },
+
     configureServer(server) {
       server.watcher.add(jsonPath);
       server.watcher.on("change", (file) => {
@@ -48,22 +56,24 @@ function jsonTransformPlugin() {
         const url = req.url || "/";
         if (url === "/" || url.endsWith(".html")) {
           try {
+            setupRegistry();
+            const siteData = getSiteData();
             let slug = url === "/" ? "index" : url.replace(/^\//, "").replace(".html", "");
             const page = siteData.pages.find((p) => p.slug === slug);
 
             if (page) {
-              page.content.meta = page.content.meta || {};
-              page.content.meta.appName = siteData.meta.appName;
-              page.content.style = { ...siteData.style, ...page.content.style };
+              const content = { ...page.content };
+              content.meta = { ...content.meta, appName: siteData.meta.appName };
+              content.style = { ...siteData.style, ...content.style };
 
               if (siteData.layout?.header) {
-                page.content.meta.renderedHeader = render(siteData.layout.header);
+                content.meta.renderedHeader = render(siteData.layout.header);
               }
               if (siteData.layout?.footer) {
-                page.content.meta.renderedFooter = render(siteData.layout.footer);
+                content.meta.renderedFooter = render(siteData.layout.footer);
               }
 
-              let html = render(page.content);
+              let html = render(content);
               html = await server.transformIndexHtml(url, html);
               res.statusCode = 200;
               res.setHeader("Content-Type", "text/html");
@@ -81,17 +91,32 @@ function jsonTransformPlugin() {
   };
 }
 
-export default defineConfig({
-  plugins: [jsonTransformPlugin()],
-  server: { watch: { usePolling: true } },
-  build: {
-    outDir: "generated",
-    emptyOutDir: true,
-    rollupOptions: {
-      input: siteData.pages.reduce((acc, page) => {
+export default defineConfig(({ command }) => {
+  const isBuild = command === 'build';
+  let rollupInput = {};
+
+  if (isBuild) {
+    try {
+      const siteData = getSiteData();
+      rollupInput = siteData.pages.reduce((acc, page) => {
         acc[page.slug] = path.resolve(__dirname, `${page.slug}.html`);
         return acc;
-      }, {} as Record<string, string>),
+      }, {} as Record<string, string>);
+    } catch (e) {
+      // Fallback si le JSON est corrompu pendant le build
+      rollupInput = { main: path.resolve(__dirname, "index.html") };
+    }
+  }
+
+  return {
+    plugins: [jsonTransformPlugin()],
+    server: { watch: { usePolling: true } },
+    build: {
+      outDir: "generated",
+      emptyOutDir: true,
+      rollupOptions: {
+        input: rollupInput,
+      },
     },
-  },
+  };
 });
