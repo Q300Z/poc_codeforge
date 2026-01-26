@@ -7,7 +7,13 @@ export const Hero = createComponent({
     title: "Titre principal (H1).",
     subtitle: "Paragraphe descriptif optionnel.",
   },
-  authorizedTokens: ["hero-bg", "hero-text", "hero-bg-default", "hero-text-default", "section-py"],
+  authorizedTokens: {
+    "hero-bg": "Couleur de fond du bandeau.",
+    "hero-text": "Couleur du texte du titre.",
+    "hero-bg-default": "", // Pas de description -> ne sera pas affiché dans la doc
+    "hero-text-default": "", // Idem
+    "section-py": "", // Idem
+  },
   template: (meta, _, styleVars, a11yAttrs) => `
     <section 
       class="hero-section" 

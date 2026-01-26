@@ -15,10 +15,10 @@ Ces jetons sont spécifiques à ce composant.
 
 | Token | Description |
 | :--- | :--- |
-| `--btn-bg` | Personnalisation de l'identité. |
-| `--btn-text` | Personnalisation de l'identité. |
-| `--bg-color` | Personnalisation de l'identité. |
-| `--text-color` | Personnalisation de l'identité. |
+| `--btn-bg` | Couleur de fond spécifique au bouton. |
+| `--btn-text` | Couleur du texte spécifique au bouton. |
+| `--bg-color` | Variable CSS pour le fond (alias legacy). |
+| `--text-color` | Variable CSS pour le texte (alias legacy). |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :

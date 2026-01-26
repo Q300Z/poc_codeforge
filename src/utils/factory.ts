@@ -4,9 +4,9 @@ import { validateStyle } from "./validator.js";
 
 interface FactoryOptions {
   name: string;
-  description?: string; // Documentation du composant
-  metaSchema?: Record<string, string>; // Description des champs meta
-  authorizedTokens: string[];
+  description?: string;
+  metaSchema?: Record<string, string>;
+  authorizedTokens: string[] | Record<string, string>;
   template: (
     meta: Record<string, unknown>,
     children: ComponentHTML[],
@@ -16,15 +16,12 @@ interface FactoryOptions {
   ) => string;
 }
 
-/**
- * Interface étendue pour porter la documentation
- */
 export interface DocumentedComponent extends Component {
   doc?: {
     name: string;
     description: string;
     metaSchema: Record<string, string>;
-    authorizedTokens: string[];
+    authorizedTokens: Record<string, string>;
   };
 }
 
@@ -35,13 +32,28 @@ export function createComponent({
   authorizedTokens,
   template,
 }: FactoryOptions): DocumentedComponent {
+  // Toujours extraire les clés pour la validation
+  const tokenKeys = Array.isArray(authorizedTokens)
+    ? authorizedTokens
+    : Object.keys(authorizedTokens);
+
+  // Filtrer les tokens pour la doc : on ne garde que ceux qui ont une description explicite
+  const tokenDoc: Record<string, string> = {};
+  if (!Array.isArray(authorizedTokens)) {
+    for (const [token, desc] of Object.entries(authorizedTokens)) {
+      if (desc && desc.trim().length > 0) {
+        tokenDoc[token] = desc;
+      }
+    }
+  }
+
   const component: DocumentedComponent = (
     meta,
     children,
     style,
     id = `gen-${Math.random().toString(36).slice(2, 9)}`
   ) => {
-    validateStyle(name, style, authorizedTokens);
+    validateStyle(name, style, tokenKeys);
     const styleVars = getStyleVariables(style);
 
     const ariaAttrs = Object.entries(meta)
@@ -54,12 +66,11 @@ export function createComponent({
     return template(meta, children, styleVars, a11yAttrs, id);
   };
 
-  // On attache la documentation à la fonction
   component.doc = {
     name,
     description,
     metaSchema,
-    authorizedTokens,
+    authorizedTokens: tokenDoc,
   };
 
   return component;

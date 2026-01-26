@@ -13,7 +13,16 @@ const GAP_MAP: Record<number, string> = {
 
 export const Stack = createComponent({
   name: "Stack",
-  authorizedTokens: ["stack-gap"],
+  description: "Moteur d'espacement utilisant Flexbox pour aligner des éléments.",
+  metaSchema: {
+    direction: "Orientation des éléments : 'vertical' (colonne) ou 'horizontal' (ligne).",
+    align: "Alignement des items (start, center, end, stretch).",
+    justify: "Justification du contenu (start, center, end, between).",
+    gap: "Espacement entre les items (0, 2, 4, 6, 8, 10, 12, 16).",
+  },
+  authorizedTokens: {
+    "stack-gap": "Espacement personnalisé via CSS Variable.",
+  },
   template: (meta, children, styleVars, a11yAttrs) => {
     const direction = meta.direction === "horizontal" ? "flex-row" : "flex-col";
     const align = meta.align || "start";

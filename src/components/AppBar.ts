@@ -2,6 +2,11 @@ import { createComponent } from "../utils/factory.js";
 
 export const AppBar = createComponent({
   name: "AppBar",
+  description: "Barre de navigation supérieure avec support du menu burger sur mobile.",
+  metaSchema: {
+    title: "Le titre de l'application affiché à gauche.",
+    links: "Tableau d'objets { label: string, href: string } pour la navigation.",
+  },
   authorizedTokens: [
     "appbar-bg",
     "appbar-text",

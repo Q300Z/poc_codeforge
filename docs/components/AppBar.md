@@ -1,24 +1,14 @@
 # 🧱 Composant : AppBar
 
-
+Barre de navigation supérieure avec support du menu burger sur mobile.
 
 ## 📥 Paramètres (meta)
 Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-
-## 🎨 Design Tokens (style)
-Ces jetons sont spécifiques à ce composant.
-
-| Token | Description |
-| :--- | :--- |
-| `--appbar-bg` | Personnalisation de l'identité. |
-| `--appbar-text` | Personnalisation de l'identité. |
-| `--appbar-border` | Personnalisation de l'identité. |
-| `--backdrop-filter` | Personnalisation de l'identité. |
-| `--width` | Personnalisation de l'identité. |
-| `--width-md` | Personnalisation de l'identité. |
+| `title` | Le titre de l'application affiché à gauche. |
+| `links` | Tableau d'objets { label: string, href: string } pour la navigation. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :
@@ -30,6 +20,8 @@ Ce composant supporte également tous les utilitaires de mise en page globaux :
   "id": "appbar-1",
   "type": "AppBar",
   "meta": {
+    "title": "...",
+    "links": "..."
   },
   "style": {
     "width": "100%"

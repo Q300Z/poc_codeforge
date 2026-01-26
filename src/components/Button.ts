@@ -7,7 +7,12 @@ export const Button = createComponent({
     label: "Le texte affiché sur le bouton.",
     action: "URL de redirection (ex: /home, http://...) ou code JavaScript (ex: alert('hi')).",
   },
-  authorizedTokens: ["btn-bg", "btn-text", "bg-color", "text-color"],
+  authorizedTokens: {
+    "btn-bg": "Couleur de fond spécifique au bouton.",
+    "btn-text": "Couleur du texte spécifique au bouton.",
+    "bg-color": "Variable CSS pour le fond (alias legacy).",
+    "text-color": "Variable CSS pour le texte (alias legacy).",
+  },
   template: (meta, _, styleVars, a11yAttrs) => {
     const action = (meta.action as string) || "";
     const isLink =

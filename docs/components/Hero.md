@@ -15,11 +15,8 @@ Ces jetons sont spécifiques à ce composant.
 
 | Token | Description |
 | :--- | :--- |
-| `--hero-bg` | Personnalisation de l'identité. |
-| `--hero-text` | Personnalisation de l'identité. |
-| `--hero-bg-default` | Personnalisation de l'identité. |
-| `--hero-text-default` | Personnalisation de l'identité. |
-| `--section-py` | Personnalisation de l'identité. |
+| `--hero-bg` | Couleur de fond du bandeau. |
+| `--hero-text` | Couleur du texte du titre. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :

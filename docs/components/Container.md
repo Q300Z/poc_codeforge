@@ -1,19 +1,13 @@
 # 🧱 Composant : Container
 
-
+Conteneur structurel qui centre son contenu avec une largeur maximale.
 
 ## 📥 Paramètres (meta)
 Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-
-## 🎨 Design Tokens (style)
-Ces jetons sont spécifiques à ce composant.
-
-| Token | Description |
-| :--- | :--- |
-| `--container-width` | Personnalisation de l'identité. |
+| `container-width` | Largeur maximale du conteneur (ex: 1200px, 80rem). |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :
@@ -25,6 +19,7 @@ Ce composant supporte également tous les utilitaires de mise en page globaux :
   "id": "container-1",
   "type": "Container",
   "meta": {
+    "container-width": "..."
   },
   "style": {
     "width": "100%"
