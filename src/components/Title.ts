@@ -16,7 +16,7 @@ export const Title = createComponent({
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);
     const tag = `h${level}`;
-    
+
     return `
       <${tag} 
         style="${styleVars}" 

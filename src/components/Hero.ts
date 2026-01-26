@@ -1,6 +1,6 @@
 import { createComponent } from "../utils/factory.js";
-import { Title } from "./Title.js";
 import { Text } from "./Text.js";
+import { Title } from "./Title.js";
 
 export const Hero = createComponent({
   name: "Hero",
@@ -17,19 +17,14 @@ export const Hero = createComponent({
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id) => {
     // On utilise les composants Title et Text en interne pour la cohérence
     const renderedTitle = Title(
-      { content: meta.title || "Default Title", level: 1 }, 
-      [], 
+      { content: meta.title || "Default Title", level: 1 },
+      [],
       { "text-color": "var(--hero-text, inherit)" },
       `${id}-title`
     );
 
-    const renderedSubtitle = meta.subtitle 
-      ? Text(
-          { content: meta.subtitle }, 
-          [], 
-          { "text-color": "inherit" },
-          `${id}-subtitle`
-        )
+    const renderedSubtitle = meta.subtitle
+      ? Text({ content: meta.subtitle }, [], { "text-color": "inherit" }, `${id}-subtitle`)
       : "";
 
     return `

@@ -4,22 +4,33 @@ import { axe } from "vitest-axe";
 import { Button } from "./Button.js";
 
 describe("Button Component", () => {
-  const props = { label: "Click me" };
+  const meta = {
+    label: "Click me",
+    version: "1.0.0",
+    createdAt: "2026-01-26T10:00:00Z",
+  };
 
   it("should render a <button> for JS actions", () => {
-    const html = Button({ ...props, action: "alert('hi')" }, [], {});
+    const html = Button({ ...meta, action: "alert('hi')" }, [], {}, "btn-1");
     expect(html).toContain("<button");
     expect(html).toContain("onclick=\"alert('hi')\"");
+    expect(html).toContain('id="btn-1"');
   });
 
   it("should render an <a> tag for links (starting with /)", () => {
-    const html = Button({ ...props, action: "/home" }, [], {});
+    const html = Button({ ...meta, action: "/home" }, [], {}, "btn-1");
     expect(html).toContain("<a");
     expect(html).toContain('href="/home"');
   });
 
+  it("should render an <a> tag for relative html links", () => {
+    const html = Button({ ...meta, action: "contact.html" }, [], {}, "btn-1");
+    expect(html).toContain("<a");
+    expect(html).toContain('href="contact.html"');
+  });
+
   it("should be accessible", async () => {
-    const html = Button(props, [], {});
+    const html = Button(meta, [], {}, "btn-1");
     const container = document.createElement("div");
     container.innerHTML = html;
 
@@ -28,15 +39,9 @@ describe("Button Component", () => {
     expect(results).toHaveNoViolations();
   });
 
-  it("should render an <a> tag for relative html links", () => {
-    const html = Button({ ...props, action: "contact.html" }, [], {});
-    expect(html).toContain("<a");
-    expect(html).toContain('href="contact.html"');
-  });
-
   it("should apply custom CSS variables from style prop", () => {
     const style = { "bg-color": "#ff0000" };
-    const html = Button(props, [], style);
+    const html = Button(meta, [], style, "btn-1");
     expect(html).toContain("--bg-color: #ff0000");
   });
 });

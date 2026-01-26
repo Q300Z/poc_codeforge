@@ -39,14 +39,13 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run reset:site && vite",
     "dev:file": "VITE_JSON_PATH=$JSON_PATH vite",
-    "build": "tsc && vite build",
-    "build:lib": "tsc",
+    "build": "npm run build:lib && npm run build:showcase",
+    "build:lib": "vite build --config vite.config.lib.ts",
     "build:showcase": "node --loader ts-node/esm src/gen-showcase.ts",
     "reset:site": "node --loader ts-node/esm src/reset-site-json.ts",
     "clean": "rm -rf dist generated coverage test-dist-site test-multi-site test-output.html index.html docs.html layouts.html contact.html canvas.html",
-    "start": "node --loader ts-node/esm src/index.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "docs": "node --loader ts-node/esm src/gen-docs.ts",
@@ -77,6 +76,7 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0",
     "vite": "^6.0.11",
+    "vite-plugin-dts": "^4.5.0",
     "vitest": "^3.0.4",
     "vitest-axe": "^0.1.0"
   }

@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
 
-// Utilisation des builders spécifiques
+// Utilisation du Design Pattern Builder finalisé
 import {
   AppBarBuilder,
   BoxBuilder,
@@ -10,7 +10,6 @@ import {
   ContainerBuilder,
   GridBuilder,
   HeroBuilder,
-  NodeBuilder,
   PageBuilder,
   SectionBuilder,
   SiteBuilder,
@@ -21,8 +20,6 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const today = "2026-01-26T14:00:00.000Z";
 
 // 1. Header Global
 const header = new AppBarBuilder("global-nav")
@@ -36,13 +33,13 @@ const header = new AppBarBuilder("global-nav")
 
 // 2. Footer Global
 const footer = new SectionBuilder("global-footer")
-  .withStyle({ "section-bg": "#111827", "section-py": 0 })
+  .withStyle({ "section-bg": "#111827", "section-py": 32 })
   .addChild(
     new ContainerBuilder("footer-cont").addChild(
       new HeroBuilder("footer-text")
         .withTitle("CodeForge POC")
         .withSubtitle("© 2026")
-        .withStyle({ "hero-text": "#9ca3af", "hero-bg": "transparent", "height": "10%" })
+        .withStyle({ "hero-text": "#9ca3af", "hero-bg": "transparent" })
     )
   );
 
@@ -109,9 +106,9 @@ const layoutsPage = new PageBuilder("layouts-page")
 
 site.addPage("layouts", layoutsPage);
 
-// 6. NOUVELLE PAGE : Canvas (Positionnement Absolu x/y)
+// 6. Page Canvas
 const canvasPage = new PageBuilder("canvas-page")
-  .withStyle({ position: "relative", height: "600px", overflow: "hidden" })
+  .withStyle({ position: "relative", height: 600, overflow: "hidden" })
   .addChild(
     new HeroBuilder("canvas-hero")
       .withTitle("Mode Canvas")
@@ -139,22 +136,11 @@ const canvasPage = new PageBuilder("canvas-page")
         "bg-color": "#fbbf24",
         "z-index": 10
       })
-  )
-  .addChild(
-    new ButtonBuilder("abs-btn")
-      .withLabel("Bouton Flottant")
-      .withStyle({
-        position: "absolute",
-        top: 450,
-        left: "50%",
-        transform: "translateX(-50%)",
-        "btn-bg": "#e11d48"
-      })
   );
 
 site.addPage("canvas", canvasPage);
 
-// 6. Page Contact
+// 7. Page Contact
 const contactPage = new PageBuilder("contact-page")
   .addChild(
     new HeroBuilder("contact-hero")
@@ -178,6 +164,6 @@ site.addPage("contact", contactPage);
 const showcaseSite = site.build();
 const jsonPath = path.resolve(__dirname, "../data/site.json");
 
-console.log("🔄 Resetting data/site.json with Canvas Page...");
+console.log("🔄 Resetting data/site.json...");
 fs.writeFileSync(jsonPath, JSON.stringify(showcaseSite, null, 2));
-console.log("✅ data/site.json has been restored with Canvas demo!");
+console.log("✅ data/site.json has been restored!");

@@ -7,6 +7,9 @@ export class NodeBuilder<TMeta = Record<string, any>, TStyle = Record<string, an
   protected node: Node<any, any>;
 
   constructor(id: string, type: string) {
+    if (!id || !type) {
+      throw new Error(`[CodeForge Builder] "id" and "type" are mandatory for NodeBuilder`);
+    }
     this.node = {
       id,
       type,
@@ -19,13 +22,28 @@ export class NodeBuilder<TMeta = Record<string, any>, TStyle = Record<string, an
     };
   }
 
-  withStyle(style: TStyle & BaseStyles & Record<string, string | number>): this {
-    this.node.style = { ...this.node.style, ...style };
+  withMeta(meta: TMeta): this {
+    this.node.meta = { ...this.node.meta, ...meta };
     return this;
   }
 
   withVersion(version: string): this {
     this.node.meta.version = version;
+    return this;
+  }
+
+  withCreatedAt(date: string): this {
+    this.node.meta.createdAt = date;
+    return this;
+  }
+
+  withAudioDescription(desc: string): this {
+    this.node.meta.audioDescription = desc;
+    return this;
+  }
+
+  withStyle(style: TStyle & BaseStyles & Record<string, string | number>): this {
+    this.node.style = { ...this.node.style, ...style };
     return this;
   }
 
@@ -42,18 +60,10 @@ export class NodeBuilder<TMeta = Record<string, any>, TStyle = Record<string, an
 }
 
 /**
- * Builders Spécifiques avec Typage des Tokens
+ * Builders Spécifiques
  */
 
-export class AppBarBuilder extends NodeBuilder<
-  any,
-  {
-    "appbar-bg"?: string;
-    "appbar-text"?: string;
-    "appbar-border"?: string;
-    "backdrop-filter"?: string;
-  }
-> {
+export class AppBarBuilder extends NodeBuilder {
   constructor(id: string) {
     super(id, "AppBar");
   }
@@ -67,40 +77,7 @@ export class AppBarBuilder extends NodeBuilder<
   }
 }
 
-export class ButtonBuilder extends NodeBuilder<
-  any,
-  {
-    "btn-bg"?: string;
-    "btn-text"?: string;
-    "bg-color"?: string;
-    "text-color"?: string;
-  }
-> {
-  constructor(id: string) {
-    super(id, "Button");
-  }
-  withLabel(label: string): this {
-    this.node.meta.label = label;
-    return this;
-  }
-  withAction(action: string): this {
-    this.node.meta.action = action;
-    return this;
-  }
-  withAudioDescription(desc: string): this {
-    this.node.meta.audioDescription = desc;
-    return this;
-  }
-}
-
-export class HeroBuilder extends NodeBuilder<
-  any,
-  {
-    "hero-bg"?: string;
-    "hero-text"?: string;
-    "section-py"?: string | number;
-  }
-> {
+export class HeroBuilder extends NodeBuilder {
   constructor(id: string) {
     super(id, "Hero");
   }
@@ -114,58 +91,48 @@ export class HeroBuilder extends NodeBuilder<
   }
 }
 
-export class TitleBuilder extends NodeBuilder<any, {
-
-  "font-size"?: string | number;
-
-  "text-color"?: string;
-
-  "bg-color"?: string;
-
-}> {
-
-  constructor(id: string) { super(id, "Title"); }
-
-  withContent(content: string): this { this.node.meta.content = content; return this; }
-
-  withLevel(level: 1 | 2 | 3 | 4 | 5 | 6): this { this.node.meta.level = level; return this; }
-
-}
-
-
-
-export class TextBuilder extends NodeBuilder<any, {
-
-  "font-size"?: string | number;
-
-  "text-color"?: string;
-
-  "line-height"?: string | number;
-
-}> {
-
-  constructor(id: string) { super(id, "Text"); }
-
-  withContent(content: string): this { this.node.meta.content = content; return this; }
-
-  withTag(tag: "p" | "span" | "div"): this { this.node.meta.tag = tag; return this; }
-
-}
-
-
-
-export class BoxBuilder extends NodeBuilder<any, {
-    "bg-color"?: string;
-    "border-radius"?: string | number;
-    "flex-shrink"?: string | number;
-  }
-> {
+export class TitleBuilder extends NodeBuilder {
   constructor(id: string) {
-    super(id, "Box");
+    super(id, "Title");
+  }
+  withContent(content: string): this {
+    this.node.meta.content = content;
+    return this;
+  }
+  withLevel(level: 1 | 2 | 3 | 4 | 5 | 6): this {
+    this.node.meta.level = level;
+    return this;
   }
 }
 
-// ... Autres builders
+export class TextBuilder extends NodeBuilder {
+  constructor(id: string) {
+    super(id, "Text");
+  }
+  withContent(content: string): this {
+    this.node.meta.content = content;
+    return this;
+  }
+  withTag(tag: "p" | "span" | "div"): this {
+    this.node.meta.tag = tag;
+    return this;
+  }
+}
+
+export class ButtonBuilder extends NodeBuilder {
+  constructor(id: string) {
+    super(id, "Button");
+  }
+  withLabel(label: string): this {
+    this.node.meta.label = label;
+    return this;
+  }
+  withAction(action: string): this {
+    this.node.meta.action = action;
+    return this;
+  }
+}
+
 export class GridBuilder extends NodeBuilder {
   constructor(id: string) {
     super(id, "Grid");
@@ -202,26 +169,21 @@ export class StackBuilder extends NodeBuilder {
   }
 }
 
-export class SectionBuilder extends NodeBuilder<
-  any,
-  {
-    "section-bg"?: string;
-    "section-py"?: string | number;
-  }
-> {
+export class SectionBuilder extends NodeBuilder {
   constructor(id: string) {
     super(id, "Section");
   }
 }
 
-export class ContainerBuilder extends NodeBuilder<
-  any,
-  {
-    "container-width"?: string | number;
-  }
-> {
+export class ContainerBuilder extends NodeBuilder {
   constructor(id: string) {
     super(id, "Container");
+  }
+}
+
+export class BoxBuilder extends NodeBuilder {
+  constructor(id: string) {
+    super(id, "Box");
   }
 }
 

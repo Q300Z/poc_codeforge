@@ -2,7 +2,7 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-26T15:33:36.001Z"
+    "createdAt": "2026-01-26T15:58:34.812Z"
   },
   "style": {
     "brand-primary": "#4f46e5",
@@ -19,7 +19,7 @@
       "type": "AppBar",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T15:33:36.000Z",
+        "createdAt": "2026-01-26T15:58:34.812Z",
         "title": "CodeForge",
         "links": [
           {
@@ -48,11 +48,11 @@
       "type": "Section",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T15:33:36.001Z"
+        "createdAt": "2026-01-26T15:58:34.812Z"
       },
       "style": {
         "section-bg": "#111827",
-        "section-py": 32
+        "section-py": 0
       },
       "children": [
         {
@@ -60,7 +60,7 @@
           "type": "Container",
           "meta": {
             "version": "1.0.0",
-            "createdAt": "2026-01-26T15:33:36.001Z"
+            "createdAt": "2026-01-26T15:58:34.812Z"
           },
           "style": {},
           "children": [
@@ -69,13 +69,14 @@
               "type": "Hero",
               "meta": {
                 "version": "1.0.0",
-                "createdAt": "2026-01-26T15:33:36.001Z",
+                "createdAt": "2026-01-26T15:58:34.812Z",
                 "title": "CodeForge POC",
                 "subtitle": "© 2026"
               },
               "style": {
                 "hero-text": "#9ca3af",
-                "hero-bg": "transparent"
+                "hero-bg": "transparent",
+                "height": "10%"
               },
               "children": []
             }
@@ -92,7 +93,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:33:36.001Z"
+          "createdAt": "2026-01-26T15:58:34.812Z"
         },
         "style": {},
         "children": [
@@ -101,7 +102,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z",
+              "createdAt": "2026-01-26T15:58:34.812Z",
               "title": "Bienvenue",
               "subtitle": "Découvrez la puissance des Builders typés."
             },
@@ -113,7 +114,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z"
+              "createdAt": "2026-01-26T15:58:34.812Z"
             },
             "style": {},
             "children": [
@@ -122,7 +123,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:33:36.001Z",
+                  "createdAt": "2026-01-26T15:58:34.812Z",
                   "align": "center"
                 },
                 "style": {},
@@ -132,7 +133,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.3.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.812Z",
                       "label": "Voir les Layouts",
                       "action": "layouts.html",
                       "audioDescription": "Naviguer vers la page layouts"
@@ -154,7 +155,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:33:36.001Z"
+          "createdAt": "2026-01-26T15:58:34.813Z"
         },
         "style": {},
         "children": [
@@ -163,7 +164,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z",
+              "createdAt": "2026-01-26T15:58:34.813Z",
               "title": "Galerie de Layouts",
               "subtitle": "Mise en page fluide et typée via Builders."
             },
@@ -175,7 +176,7 @@
             "type": "Section",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z"
+              "createdAt": "2026-01-26T15:58:34.813Z"
             },
             "style": {},
             "children": [
@@ -184,7 +185,7 @@
                 "type": "Container",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:33:36.001Z"
+                  "createdAt": "2026-01-26T15:58:34.813Z"
                 },
                 "style": {},
                 "children": [
@@ -193,7 +194,7 @@
                     "type": "Hero",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.813Z",
                       "title": "1. Grille Responsive (3 cols)",
                       "subtitle": "S'empile sur mobile."
                     },
@@ -207,7 +208,7 @@
                     "type": "Grid",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.813Z",
                       "cols": 3,
                       "gap": 6
                     },
@@ -218,7 +219,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:33:36.001Z"
+                          "createdAt": "2026-01-26T15:58:34.813Z"
                         },
                         "style": {
                           "bg-color": "#f87171"
@@ -230,7 +231,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:33:36.001Z"
+                          "createdAt": "2026-01-26T15:58:34.813Z"
                         },
                         "style": {
                           "bg-color": "#60a5fa"
@@ -242,7 +243,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:33:36.001Z"
+                          "createdAt": "2026-01-26T15:58:34.813Z"
                         },
                         "style": {
                           "bg-color": "#34d399"
@@ -265,7 +266,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:33:36.001Z"
+          "createdAt": "2026-01-26T15:58:34.813Z"
         },
         "style": {
           "position": "relative",
@@ -278,7 +279,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z",
+              "createdAt": "2026-01-26T15:58:34.813Z",
               "title": "Mode Canvas",
               "subtitle": "Emplacements précis via coordonnées X et Y."
             },
@@ -290,7 +291,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z"
+              "createdAt": "2026-01-26T15:58:34.813Z"
             },
             "style": {
               "position": "absolute",
@@ -307,7 +308,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z"
+              "createdAt": "2026-01-26T15:58:34.813Z"
             },
             "style": {
               "position": "absolute",
@@ -325,7 +326,7 @@
             "type": "Button",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z",
+              "createdAt": "2026-01-26T15:58:34.813Z",
               "label": "Bouton Flottant"
             },
             "style": {
@@ -347,7 +348,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:33:36.001Z"
+          "createdAt": "2026-01-26T15:58:34.813Z"
         },
         "style": {},
         "children": [
@@ -356,7 +357,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z",
+              "createdAt": "2026-01-26T15:58:34.813Z",
               "title": "Contact",
               "subtitle": "Parlons ensemble."
             },
@@ -368,7 +369,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:33:36.001Z"
+              "createdAt": "2026-01-26T15:58:34.813Z"
             },
             "style": {},
             "children": [
@@ -377,7 +378,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:33:36.001Z"
+                  "createdAt": "2026-01-26T15:58:34.813Z"
                 },
                 "style": {},
                 "children": [
@@ -386,7 +387,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.813Z",
                       "content": "Envoyez-nous un message",
                       "level": 2
                     },
@@ -398,7 +399,7 @@
                     "type": "Text",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.813Z",
                       "content": "Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge."
                     },
                     "style": {},
@@ -409,7 +410,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:33:36.001Z",
+                      "createdAt": "2026-01-26T15:58:34.813Z",
                       "label": "Email",
                       "action": "mailto:hello@codeforge.dev"
                     },

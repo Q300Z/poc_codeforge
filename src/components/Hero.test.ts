@@ -5,22 +5,28 @@ import { axe } from "vitest-axe";
 import { Hero } from "./Hero.js";
 
 describe("Hero Component", () => {
-  const props = { title: "Hello", subtitle: "World" };
+  const meta = {
+    title: "Hello",
+    subtitle: "World",
+    version: "1.0.0",
+    createdAt: "2026-01-26T10:00:00Z",
+  };
 
   const renderComponent = (html: string) => {
     document.body.innerHTML = html;
   };
 
   it("should render title and subtitle", () => {
-    const html = Hero(props, [], {});
+    const html = Hero(meta, [], {}, "hero-1");
     renderComponent(html);
 
     expect(screen.getByText("Hello")).toBeInTheDocument();
+    expect(screen.getByText("World")).toBeInTheDocument();
   });
 
   it("should apply custom CSS variables", () => {
     const style = { "hero-bg": "#000", "hero-text": "#fff" };
-    const html = Hero(props, [], style);
+    const html = Hero(meta, [], style, "hero-1");
     renderComponent(html);
 
     const section = document.querySelector("section");
@@ -29,7 +35,7 @@ describe("Hero Component", () => {
   });
 
   it("should be accessible", async () => {
-    const html = Hero(props, [], {});
+    const html = Hero(meta, [], {}, "hero-1");
     const container = document.createElement("div");
     container.innerHTML = html;
 

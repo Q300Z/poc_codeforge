@@ -1,4 +1,19 @@
 /**
+ * Structure de base OBLIGATOIRE d'un élément CodeForge
+ */
+export interface Node<TMeta = Record<string, any>, TStyle = Record<string, any>> {
+  id: string; // Obligatoire
+  type: string; // Obligatoire
+  meta: TMeta & {
+    version: string; // Obligatoire
+    createdAt: string; // Obligatoire
+    audioDescription?: string;
+  };
+  style?: TStyle & BaseStyles & Record<string, string | number>;
+  children?: Node<any, any>[];
+}
+
+/**
  * Propriétés de mise en page autorisées globalement
  */
 export type LayoutProperty =
@@ -31,18 +46,6 @@ export type ResponsiveLayoutProps = {
 
 export type BaseStyles = Partial<Record<LayoutProperty, string | number>> & ResponsiveLayoutProps;
 
-export interface Node<TMeta = Record<string, any>, TStyle = Record<string, any>> {
-  id: string;
-  type: string;
-  meta: TMeta & {
-    version?: string;
-    createdAt?: string;
-    audioDescription?: string;
-  };
-  style?: TStyle & BaseStyles & Record<string, string | number>;
-  children?: Node<any, any>[];
-}
-
 export interface PageNode extends Node {
   type: "Page";
 }
@@ -65,7 +68,6 @@ export interface SiteNode {
   }[];
 }
 
-// Format Externe ScreenDraft (pour compatibilité)
 export interface ScreenDraftComponent {
   id: string;
   type: string;

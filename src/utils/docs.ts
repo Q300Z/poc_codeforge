@@ -85,7 +85,7 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
   indexMarkdown += componentLinks.sort().join("\n") + "\n\n";
   indexMarkdown += "---\n*Généré automatiquement par CodeForge.*";
 
-  const indexPath = path.join(outputDir, "..", "README.md");
+  const indexPath = path.join(outputDir, "..", "README-DOC.md");
   fs.writeFileSync(indexPath, indexMarkdown.trim());
 
   // eslint-disable-next-line no-console
