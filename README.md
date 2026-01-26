@@ -1,83 +1,114 @@
-# 🚀 ForgeEngine - Moteur de Rendu (JSON → HTML)
+# 🚀 ForgeEngine - Traducteur JSON → HTML
 
 ![Tests Status](https://github.com/Q300Z/poc_codeforge/actions/workflows/test.yml/badge.svg)
 
-Un moteur de rendu industriel ultra-léger et accessible. Il transforme une structure déclarative JSON en sites web modernes, optimisés et multi-pages, en utilisant la puissance native du navigateur (Cascade CSS, CSS Variables).
-
-## 🌟 Points Forts
-
-- **Performance Maximale** : Rendu statique sans framework JS au runtime.
-- **Support Multi-Page** : Génération de sites complets avec routage automatique via slugs.
-- **Layout Global** : Définition centralisée du Header et Footer pour une cohérence parfaite.
-- **Design System par Tokens** : Thémisation complète via variables CSS (White-label ready).
-- **Component Factory** : Validation automatique, accessibilité native et isolation des styles.
-- **Développement Moderne** : Hot Module Replacement (HMR) via Vite pour un feedback instantané.
-- **Qualité Certifiée** : Couverture de tests de 100% sur le cœur et tests E2E multi-plateformes.
-
-## 🛠 Stack Technique
-
-- **Langage** : TypeScript (Strict typing, zero `any`)
-- **Styles** : Tailwind CSS 4 + CSS Custom Properties
-- **Build & Dev** : Vite + PostCSS
-- **Tests** : Vitest (Unit) + Playwright (E2E) + Axe-core (Accessibilité)
+## 🎯 Objectif
+ForgeEngine est une bibliothèque minimaliste dont la mission est de **traduire une structure de données JSON en code HTML sémantique et accessible.** Elle agit comme une couche de projection pure qui transforme un arbre déclaratif (le "Quoi") en un document web structuré (le "Comment"), en utilisant la puissance native du navigateur (Cascade CSS et Variables CSS).
 
 ---
 
-## 📖 Développement
+## 🛠 Utilisation
 
-### Lancer le serveur de développement (HMR)
+### Installation
 ```bash
-npm run dev
+npm install @q300z/forge-engine
 ```
 
-### Générer le site de production
-Le site est généré par défaut dans le dossier `generated/`.
-```bash
-node dist/cli.js data/site.json generated
-```
+### En tant que bibliothèque (Lib)
+Vous pouvez intégrer ForgeEngine dans n'importe quel projet Node.js pour transformer des données en fragments ou sites complets.
 
-### Nettoyer le projet
-Supprime les builds, dossiers générés et rapports de tests.
-```bash
-npm run clean
-```
-
----
-
-## ⚠️ Stabilité & E2E
-
-Le fichier `data/site.json` est la **référence pour les tests End-to-End**. 
-> **Note :** Si vous modifiez les IDs, le `appName` ou la structure de ce fichier, veillez à mettre à jour les tests dans `e2e/` pour éviter de casser la CI.
-
----
-
-## 🧱 Architecture des Composants
-
-### Exemple de création d'un composant
+#### 1. Traduction directe (String HTML)
 ```typescript
-export const MyComponent = createComponent({
-  name: "MyComponent",
-  authorizedTokens: ["my-bg", "my-text"],
-  template: (meta, children, styleVars, a11yAttrs, id) => `
-    <div id="${id}" style="${styleVars}" class="bg-[var(--my-bg)]" ${a11yAttrs}>
-      ${meta.content}
-    </div>
-  `
-});
+import { render, setupRegistry, Node } from "@q300z/forge-engine";
+
+// Initialisation du dictionnaire de composants
+setupRegistry();
+
+const myNode: Node = {
+  id: "hero-1",
+  type: "Hero",
+  meta: { title: "Bienvenue" }
+};
+
+const html = render(myNode);
+```
+
+#### 2. Génération de site (SSG)
+Pour générer un dossier complet avec HTML optimisé et CSS Tailwind compilé.
+```typescript
+import { buildSite } from "@q300z/forge-engine";
+
+// Prend un JSON de site et génère le dossier /generated
+await buildSite("./structure.json", "./generated");
+```
+
+### En tant qu'outil (CLI)
+Idéal pour les scripts de build ou l'automatisation.
+```bash
+npx forge-engine ./data/site.json ./generated
 ```
 
 ---
 
-## 🧪 Tests & Qualité
+## 💻 Développement
+
+### Prérequis
+- **Node.js** : version 20 ou supérieure.
+- **NPM** : version 9 ou supérieure.
+
+### Installation locale
+```bash
+git clone https://github.com/Q300Z/poc_codeforge.git
+cd poc_render_engine
+npm install
+```
+
+---
+
+## ⌨️ Commandes
+
+| Commande | Description |
+| :--- | :--- |
+| `npm run dev` | Lance le serveur de dev avec Hot-Reload (observe `data/site.json`). |
+| `npm run build:lib` | Compile la bibliothèque TypeScript dans le dossier `dist/`. |
+| `npm run clean` | Supprime les builds, les dossiers générés et les rapports. |
+| `npm run lint` | Vérifie et corrige automatiquement le style du code. |
+
+---
+
+## 🧱 Ajout d'un composant
+
+Le traducteur est extensible. Vous pouvez ajouter vos propres règles de traduction.
+
+```typescript
+import { createComponent, registry } from "@q300z/forge-engine";
+
+export const CustomBox = createComponent({
+  name: "CustomBox",
+  authorizedTokens: ["bg-color"],
+  template: (meta, children, styleVars, a11yAttrs, id) => `
+    <div id="${id}" style="${styleVars}" class="p-4" ${a11yAttrs}>
+      ${meta.content}
+      ${children.join("")}
+    </div>
+  `,
+});
+
+// Enregistrement dans le dictionnaire
+registry.CustomBox = CustomBox;
+```
+
+---
+
+## 🧪 Tests
 
 ```bash
-# Lancer les tests unitaires et la couverture
+# Tests unitaires et couverture (Cœur à 100%)
 npm test
 npx vitest run --coverage
 
-# Lancer les tests E2E (nécessite un build préalable)
+# Tests End-to-End (Playwright)
 npm run test:e2e
-
-# Linter et formater le code
-npm run lint
 ```
+
+> **Note :** Le fichier `data/site.json` est utilisé par les tests E2E. Sa modification peut nécessiter une mise à jour des fichiers dans `e2e/`.
