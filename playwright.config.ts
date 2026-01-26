@@ -22,8 +22,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    // Pour les tests E2E, on génère le site showcase dédié
-    command: 'npm run build:showcase && npx vite preview --port 4173',
+    // Pour les tests E2E, on compile la lib ET on génère le site showcase
+    command: 'npm run build && npx vite preview --port 4173',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
   },
