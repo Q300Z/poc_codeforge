@@ -49,11 +49,45 @@ export class ButtonBuilder extends NodeBuilder<ButtonMeta, ButtonStyles> {
  */
 export const Button = createComponent({
   name: "Button",
-  version: "1.3.0",
-  description: "Bouton ou lien interactif.",
-  metaSchema: { label: "Texte", action: "URL ou JS" },
-  authorizedTokens: ["btn-bg", "btn-text", "bg-color", "text-color"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
+  version: "1.2.0",
+  description:
+    "Bouton interactif supportant plusieurs variantes visuelles et l'accessibilité native.",
+  metaSchema: {
+    label: {
+      type: "string",
+      description: "Texte affiché à l'intérieur du bouton",
+      required: true,
+      default: "Click me",
+    },
+    variant: {
+      type: "enum",
+      description: "Style visuel du bouton",
+      options: ["primary", "secondary", "outline", "ghost"],
+      default: "primary",
+    },
+    href: {
+      type: "string",
+      description: "Si présent, transforme le bouton en lien (balise <a>)",
+      required: false,
+    },
+  },
+  authorizedTokens: {
+    "btn-bg-default": "Couleur de fond par défaut",
+    "btn-text-default": "Couleur du texte par défaut",
+    "btn-radius": "Arrondi des angles",
+  },
+  examples: [
+    {
+      description: "Création d'un bouton d'action principal avec redirection.",
+      builderCode: `const myButton = new ButtonBuilder("btn-001")
+  .withLabel("Découvrir l'offre")
+  .withVariant("primary")
+  .withHref("/offres")
+  .withAudioDescription("En savoir plus sur nos offres promotionnelles")
+  .build();`,
+    },
+  ],
+  template: (meta, _children, styleVars, a11yAttrs) => {
     const action = meta.action || "";
     const isLink = action.startsWith("/") || action.startsWith("http") || action.endsWith(".html");
     const label = meta.label || "Click me";

@@ -49,8 +49,34 @@ export class HeroBuilder extends NodeBuilder<HeroMeta, HeroStyles> {
 export const Hero = createComponent({
   name: "Hero",
   version: "1.3.0",
-  description: "Bandeau d'accueil sémantique.",
-  authorizedTokens: ["hero-bg", "hero-text", "section-py"],
+  description: "Bandeau d'accueil sémantique à fort impact avec titre et sous-titre.",
+  metaSchema: {
+    title: {
+      type: "string",
+      description: "Titre principal affiché en grand (H1)",
+      required: true,
+    },
+    subtitle: {
+      type: "string",
+      description: "Paragraphe descriptif affiché sous le titre",
+      required: false,
+    },
+  },
+  authorizedTokens: {
+    "hero-bg": "Couleur ou dégradé de fond de la section",
+    "hero-text": "Couleur du texte du titre",
+    "section-py": "Padding vertical (hauteur) du bandeau",
+  },
+  examples: [
+    {
+      description: "Configuration d'un bandeau d'accueil classique.",
+      builderCode: `const hero = new HeroBuilder("main-hero")
+  .withTitle("Propulsez vos idées")
+  .withSubtitle("La plateforme low-code pour les équipes ambitieuses.")
+  .withStyle({ "hero-bg": "#f3f4f6", "section-py": 80 })
+  .build();`,
+    },
+  ],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id) => {
     const renderedTitle = Title(
       {

@@ -56,7 +56,48 @@ export class StackBuilder extends NodeBuilder<StackMeta, StackStyles> {
 export const Stack = createComponent({
   name: "Stack",
   version: "1.1.0",
-  authorizedTokens: ["stack-gap"],
+  description:
+    "Conteneur flexible permettant d'aligner ses enfants verticalement ou horizontalement avec un espacement régulier.",
+  metaSchema: {
+    direction: {
+      type: "enum",
+      description: "Orientation des éléments",
+      options: ["vertical", "horizontal"],
+      default: "vertical",
+    },
+    align: {
+      type: "enum",
+      description: "Alignement sur l'axe transverse",
+      options: ["start", "center", "end", "stretch"],
+      default: "stretch",
+    },
+    justify: {
+      type: "enum",
+      description: "Justification sur l'axe principal",
+      options: ["start", "center", "end", "between"],
+      default: "start",
+    },
+    gap: {
+      type: "number",
+      description: "Espacement entre les éléments (échelle Tailwind 0-16)",
+      default: 6,
+    },
+  },
+  authorizedTokens: {
+    "stack-gap": "Espacement personnalisé (écrase la propriété gap si présent)",
+  },
+  examples: [
+    {
+      description: "Alignement horizontal centré de boutons.",
+      builderCode: `const actions = new StackBuilder("action-stack")
+  .withDirection("horizontal")
+  .withAlign("center")
+  .withGap(4)
+  .addChild(btn1)
+  .addChild(btn2)
+  .build();`,
+    },
+  ],
   template: (meta: Record<string, any>, children, styleVars, a11yAttrs) => {
     return `<div style="${styleVars}" class="flex ${meta.direction === "horizontal" ? "flex-row" : "flex-col"} gap-${meta.gap || 6}" ${a11yAttrs}>${children.join("")}</div>`;
   },

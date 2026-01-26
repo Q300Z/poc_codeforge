@@ -54,7 +54,35 @@ const COLUMN_MAP: Record<number, string> = {
 export const Grid = createComponent({
   name: "Grid",
   version: "1.1.0",
-  authorizedTokens: ["grid-gap", "grid-bg"],
+  description: "Système de grille responsive (1 à 12 colonnes sur desktop, 1 colonne sur mobile).",
+  metaSchema: {
+    cols: {
+      type: "number",
+      description: "Nombre de colonnes sur desktop (1, 2, 3, 4, 5, 6 ou 12)",
+      default: 2,
+    },
+    gap: {
+      type: "number",
+      description: "Espacement entre les cellules (échelle Tailwind 0-16)",
+      default: 8,
+    },
+  },
+  authorizedTokens: {
+    "grid-gap": "Espacement personnalisé",
+    "grid-bg": "Couleur de fond du conteneur de grille",
+  },
+  examples: [
+    {
+      description: "Grille de 3 colonnes pour afficher des cartes de services.",
+      builderCode: `const grid = new GridBuilder("services-grid")
+  .withCols(3)
+  .withGap(10)
+  .addChild(card1)
+  .addChild(card2)
+  .addChild(card3)
+  .build();`,
+    },
+  ],
   template: (meta: Record<string, any>, children, styleVars, a11yAttrs) => {
     const colClass = COLUMN_MAP[meta.cols as number] || "md:grid-cols-2";
     return `

@@ -16,10 +16,10 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
   const components = Object.entries(registry) as [string, DocumentedComponent][];
   const componentLinks: string[] = [];
 
-  for (const [_, comp] of components) {
+  for (const [name, comp] of components) {
     if (!comp.doc) continue;
 
-    const { name, version, description, metaSchema, authorizedTokens } = comp.doc;
+    const { version, description, metaSchema, authorizedTokens, examples } = comp.doc as any;
     // Lien relatif vers le dossier components/
     componentLinks.push("- [" + name + "](./components/" + name + ".md)");
 
@@ -27,14 +27,27 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
     markdown += "**Version :** `" + version + "`\n\n";
     markdown += description + "\n\n";
 
-    if (Object.keys(metaSchema).length > 0) {
-      markdown += "## 📥 Paramètres (meta)\n";
-      markdown += "Ces champs doivent être placés dans l'objet `meta` du JSON.\n\n";
-      markdown += "| Champ | Description |\n| :--- | :--- |\n";
+    if (metaSchema && Object.keys(metaSchema).length > 0) {
+      markdown += "## 📥 Paramètres (meta)\n\n";
+      markdown += "| Champ | Type | Requis | Défaut | Description |\n";
+      markdown += "| :--- | :--- | :--- | :--- | :--- |\n";
       for (const key in metaSchema) {
-        markdown += "| `" + key + "` | " + metaSchema[key] + " |\n";
+        const field = metaSchema[key];
+        const req = field.required ? "✅" : "❌";
+        const def = field.default !== undefined ? "`" + JSON.stringify(field.default) + "`" : "-";
+        const type = field.type === "enum" ? `enum (${field.options?.join(", ")})` : field.type;
+        markdown += `| \`${key}\` | \`${type}\` | ${req} | ${def} | ${field.description} |\n`;
       }
       markdown += "\n";
+    }
+
+    if (examples && examples.length > 0) {
+      markdown += "## 🛠️ Builder Example\n\n";
+      for (const ex of examples) {
+        if (ex.description) markdown += `${ex.description}\n\n`;
+        markdown += "### Usage du Builder\n";
+        markdown += "```typescript\n" + ex.builderCode + "\n```\n\n";
+      }
     }
 
     if (Object.keys(authorizedTokens).length > 0) {
@@ -42,7 +55,7 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
       markdown += "Ces jetons sont spécifiques à ce composant.\n\n";
       markdown += "| Token | Description |\n| :--- | :--- |\n";
       for (const token in authorizedTokens) {
-        markdown += "| `--" + token + "` | " + authorizedTokens[token] + " |\n";
+        markdown += "| `--" + token + "` | " + (authorizedTokens[token] || "") + " |\n";
       }
       markdown += "\n";
     }
@@ -71,7 +84,7 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
     }
 
     markdown += "  },\n";
-    markdown += '  "style": {\n    "width": "100%"\n  }\n';
+    markdown += '  "style": {    "width": "100%"  }\n';
     markdown += "}\n";
     markdown += "```";
 

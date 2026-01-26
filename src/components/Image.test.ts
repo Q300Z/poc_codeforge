@@ -1,12 +1,13 @@
 import { describe, expect, it } from "vitest";
+
 import { Image } from "./Image.js";
 
 describe("Image Component", () => {
-  const meta = { 
-    src: "test.jpg", 
+  const meta = {
+    src: "test.jpg",
     alt: "Une image de test",
     version: "1.0.0",
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   it("should render <img> with src and alt", () => {

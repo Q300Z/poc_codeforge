@@ -53,7 +53,7 @@ npx codeforge ./data/site.json ./generated
 ## 💻 Développement
 
 ### Prérequis
-- **Node.js** : version 20 ou supérieure.
+- **Node.js** : version 25 ou supérieure.
 - **NPM** : version 9 ou supérieure.
 
 ### Installation locale

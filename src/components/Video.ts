@@ -1,5 +1,5 @@
-import { createComponent } from "../utils/factory.js";
 import { NodeBuilder } from "../utils/builder.js";
+import { createComponent } from "../utils/factory.js";
 
 /** Interface des métadonnées pour le composant Video. */
 export interface VideoMeta {
@@ -28,13 +28,26 @@ export interface VideoStyles {
  * @description Constructeur fluide pour le composant Video.
  */
 export class VideoBuilder extends NodeBuilder<VideoMeta, VideoStyles> {
-  constructor(id: string) { super(id, "Video"); }
+  constructor(id: string) {
+    super(id, "Video");
+  }
   /** Définit la source vidéo. */
-  withSrc(src: string): this { this.node.meta.src = src; return this; }
+  withSrc(src: string): this {
+    this.node.meta.src = src;
+    return this;
+  }
   /** Définit l'image de couverture. */
-  withPoster(url: string): this { this.node.meta.poster = url; return this; }
+  withPoster(url: string): this {
+    this.node.meta.poster = url;
+    return this;
+  }
   /** Configure les options de lecture. */
-  withOptions(opts: { controls?: boolean, autoplay?: boolean, loop?: boolean, muted?: boolean }): this {
+  withOptions(opts: {
+    controls?: boolean;
+    autoplay?: boolean;
+    loop?: boolean;
+    muted?: boolean;
+  }): this {
     this.node.meta = { ...this.node.meta, ...opts };
     return this;
   }

@@ -10,12 +10,14 @@ import {
   ContainerBuilder,
   GridBuilder,
   HeroBuilder,
+  ImageBuilder,
   PageBuilder,
   SectionBuilder,
   SiteBuilder,
   StackBuilder,
   TextBuilder,
   TitleBuilder,
+  VideoBuilder,
 } from "./index.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,6 +30,7 @@ const header = new AppBarBuilder("global-nav")
     { label: "Showcase", href: "index.html" },
     { label: "Layouts", href: "layouts.html" },
     { label: "Canvas", href: "canvas.html" },
+    { label: "Media", href: "media.html" },
     { label: "Contact", href: "contact.html" },
   ]);
 
@@ -175,9 +178,100 @@ const canvasPage = new PageBuilder("canvas-page")
         "bg-color": "#fbbf24",
         "z-index": 10
       })
+  )
+  .addChild(
+    new TitleBuilder("abs-title")
+      .withContent("Placement Libre")
+      .withLevel(3)
+      .withStyle({
+        position: "absolute",
+        top: 220,
+        right: 100,
+        "text-color": "#1e1b4b"
+      })
+  )
+  .addChild(
+    new TextBuilder("abs-text")
+      .withContent("Ce texte est positionné dynamiquement via des coordonnées CSS absolues.")
+      .withStyle({
+        position: "absolute",
+        bottom: 50,
+        left: 50,
+        "max-width": "300px",
+        "text-color": "#4338ca"
+      })
+  )
+  .addChild(
+    new ButtonBuilder("abs-btn")
+      .withLabel("Action Flottante")
+      .withAction("alert('Cliqué !')")
+      .withStyle({
+        position: "absolute",
+        top: 400,
+        right: 50,
+        "z-index": 20
+      })
+  )
+  .addChild(
+    new ImageBuilder("abs-img")
+      .withSrc("https://picsum.photos/seed/canvas/300/200")
+      .withAlt("Image flottante")
+      .withStyle({
+        position: "absolute",
+        top: 50,
+        right: 50,
+        width: 200,
+        "border-radius": "20px",
+        "z-index": 5
+      })
+  )
+  .addChild(
+    new VideoBuilder("abs-video")
+      .withSrc("https://www.w3schools.com/html/mov_bbb.mp4")
+      .withOptions({ controls: true, muted: true, autoplay: true, loop: true })
+      .withStyle({
+        position: "absolute",
+        bottom: 20,
+        right: 20,
+        width: 250,
+        "border-radius": "10px",
+        "z-index": 15
+      })
   );
 
 site.addPage("canvas", canvasPage);
+
+// 6.5 Page Media
+const mediaPage = new PageBuilder("media-page")
+  .addChild(
+    new HeroBuilder("media-hero")
+      .withTitle("Composants Média")
+      .withSubtitle("Intégrez des images et des vidéos de manière accessible.")
+  )
+  .addChild(
+    new ContainerBuilder("media-container").addChild(
+      new GridBuilder("media-grid")
+        .withCols(2)
+        .withGap(8)
+        .addChild(
+          new ImageBuilder("demo-image")
+            .withSrc("https://picsum.photos/seed/codeforge/800/600")
+            .withAlt("Une image de démonstration générée aléatoirement")
+            .withAudioDescription("Image décorative montrant la puissance du rendu visuel")
+            .withStyle({ "border-radius": "12px" })
+        )
+        .addChild(
+          new VideoBuilder("demo-video")
+            .withSrc("https://www.w3schools.com/html/mov_bbb.mp4")
+            .withPoster("https://picsum.photos/seed/video-poster/800/600")
+            .withOptions({ controls: true, autoplay: false })
+            .withAudioDescription("Vidéo de démonstration Big Buck Bunny")
+            .withStyle({ "border-radius": "12px" })
+        )
+    )
+  );
+
+site.addPage("media", mediaPage);
 
 // 7. Page Contact
 const contactPage = new PageBuilder("contact-page")

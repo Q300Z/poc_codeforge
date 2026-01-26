@@ -36,19 +36,19 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=25.0.0"
   },
   "scripts": {
     "dev": "npm run build:lib && node dist/reset-site-json.js && vite",
     "dev:file": "VITE_JSON_PATH=$JSON_PATH vite",
     "build": "npm run build:lib && npm run build:showcase",
     "build:lib": "vite build --config vite.config.lib.ts",
-    "build:showcase": "node dist/gen-showcase.js",
+    "build:showcase": "node dist/cli.js data/site.json generated",
     "reset:site": "node dist/reset-site-json.js",
-    "clean": "rm -rf dist generated coverage test-dist-site test-multi-site test-output.html index.html docs.html layouts.html contact.html canvas.html",
+    "clean": "rm -rf dist generated coverage",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "docs": "npm run build:lib && node dist/gen-docs.js",
+    "demo": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node examples/demo.ts",
     "release": "release-it",
     "lint": "eslint src/**/*.ts --fix"
   },

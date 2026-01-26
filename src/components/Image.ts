@@ -1,5 +1,5 @@
-import { createComponent } from "../utils/factory.js";
 import { NodeBuilder } from "../utils/builder.js";
+import { createComponent } from "../utils/factory.js";
 
 /** Interface des métadonnées pour le composant Image. */
 export interface ImageMeta {
@@ -22,11 +22,19 @@ export interface ImageStyles {
  * @description Constructeur fluide pour le composant Image.
  */
 export class ImageBuilder extends NodeBuilder<ImageMeta, ImageStyles> {
-  constructor(id: string) { super(id, "Image"); }
+  constructor(id: string) {
+    super(id, "Image");
+  }
   /** Définit la source de l'image. */
-  withSrc(src: string): this { this.node.meta.src = src; return this; }
+  withSrc(src: string): this {
+    this.node.meta.src = src;
+    return this;
+  }
   /** Définit le texte alternatif (A11y). */
-  withAlt(alt: string): this { this.node.meta.alt = alt; return this; }
+  withAlt(alt: string): this {
+    this.node.meta.alt = alt;
+    return this;
+  }
 }
 
 /**
@@ -40,7 +48,7 @@ export const Image = createComponent({
   authorizedTokens: ["border-radius", "object-fit"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     if (!meta.src) return "<!-- Image manquante -->";
-    
+
     return `
       <img 
         src="${meta.src}" 

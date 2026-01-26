@@ -52,12 +52,6 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     page.content.meta.appName = siteData.meta.appName;
     page.content.style = { ...siteData.style, ...page.content.style };
 
-    const children = [];
-    if (siteData.layout?.header) children.push(siteData.layout.header);
-    if (page.content.children) children.push(...page.content.children);
-    if (siteData.layout?.footer) children.push(siteData.layout.footer);
-    page.content.children = children;
-
     if (page.content.meta) {
       if (siteData.layout?.header) page.content.meta.renderedHeader = render(siteData.layout.header);
       if (siteData.layout?.footer) page.content.meta.renderedFooter = render(siteData.layout.footer);
@@ -65,16 +59,28 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
 
     const html = render(page.content);
     const fileName = `${page.slug}.html`;
-    const filePath = path.join(__dirname, "..", fileName);
     
+    // Création d'un dossier temporaire pour le build
+    const tempDir = path.resolve(process.cwd(), ".codeforge_tmp");
+    if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+
+    const filePath = path.join(tempDir, fileName);
     fs.writeFileSync(filePath, html);
+    
     input[page.slug] = filePath;
-    tempFiles.push(filePath);
+    tempFiles.push(tempDir); // On stocke le dossier pour le supprimer à la fin
   }
 
   try {
     await viteBuild({
-      root: path.join(__dirname, ".."),
+      configFile: false,
+      root: path.resolve(process.cwd(), ".codeforge_tmp"),
+      // On aide Vite à trouver les assets (style.css) qui sont à la racine du projet
+      resolve: {
+        alias: {
+          "/src": path.resolve(process.cwd(), "src"),
+        },
+      },
       build: {
         outDir: absoluteOutDir,
         emptyOutDir: true,
@@ -82,8 +88,9 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
       },
     });
   } finally {
-    for (const file of tempFiles) {
-      if (fs.existsSync(file)) fs.unlinkSync(file);
+    // Nettoyage récursif du dossier temporaire
+    for (const dir of [...new Set(tempFiles)]) {
+      if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
     }
   }
 }

@@ -13,7 +13,6 @@ export default defineConfig({
         index: path.resolve(__dirname, "src/index.ts"),
         cli: path.resolve(__dirname, "src/cli.ts"),
         "reset-site-json": path.resolve(__dirname, "src/reset-site-json.ts"),
-        "gen-showcase": path.resolve(__dirname, "src/gen-showcase.ts"),
         "gen-docs": path.resolve(__dirname, "src/gen-docs.ts"),
       },
       formats: ["es"],

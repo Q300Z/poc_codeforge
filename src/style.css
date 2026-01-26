@@ -86,15 +86,28 @@
     outline-offset: -1px;
   }
 
-  /* Button Component */
-  .btn-base {
-    @apply inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold tracking-tight transition-all duration-200 active:scale-95;
-    background-color: var(--btn-bg, var(--btn-bg-default, #2563eb));
-    color: var(--btn-text, var(--btn-text-default, white));
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    
-    &:hover {
-      @apply filter brightness-110 shadow-lg -translate-y-0.5;
+    /* Button Component */
+
+    .btn-base {
+
+      @apply inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold tracking-tight;
+
+      background-color: var(--btn-bg, var(--btn-bg-default, #2563eb));
+
+      color: var(--btn-text, var(--btn-text-default, white));
+
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+      
+
+      &:hover {
+
+        @apply filter brightness-110 shadow-lg;
+
+      }
+
     }
+
   }
-}
+
+  

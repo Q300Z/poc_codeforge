@@ -48,8 +48,39 @@ export class AppBarBuilder extends NodeBuilder<AppBarMeta, AppBarStyles> {
 export const AppBar = createComponent({
   name: "AppBar",
   version: "1.1.0",
-  description: "Barre de navigation supérieure avec menu mobile.",
-  authorizedTokens: ["appbar-bg", "appbar-text", "appbar-border", "backdrop-filter"],
+  description:
+    "Barre de navigation supérieure (Sticky) avec support mobile et menu burger automatique.",
+  metaSchema: {
+    title: {
+      type: "string",
+      description: "Titre de l'application affiché à gauche",
+      default: "My App",
+    },
+    links: {
+      type: "array",
+      description: "Liste des liens de navigation { label: string, href: string }",
+      default: [],
+    },
+  },
+  authorizedTokens: {
+    "appbar-bg": "Couleur de fond de la barre",
+    "appbar-text": "Couleur de texte des liens",
+    "appbar-border": "Couleur de la bordure inférieure",
+    "backdrop-filter": "Effet de flou sur le fond (ex: blur(10px))",
+  },
+  examples: [
+    {
+      description: "Barre de navigation avec liens principaux.",
+      builderCode: `const nav = new AppBarBuilder("main-nav")
+  .withTitle("CodeForge")
+  .withLinks([
+    { label: "Accueil", href: "/" },
+    { label: "Docs", href: "/docs" },
+    { label: "Blog", href: "/blog" }
+  ])
+  .build();`,
+    },
+  ],
   template: (meta: Record<string, any>, _children, styleVars, a11yAttrs, id) => {
     const title = meta.title || "My App";
     const links = (meta.links as AppBarMeta["links"]) || [];

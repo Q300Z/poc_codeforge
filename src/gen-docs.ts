@@ -19,7 +19,7 @@ async function run() {
 
     // 2. Lancement du générateur
     const outputDir = "docs/components";
-    await generateComponentDocs();
+    await generateComponentDocs(outputDir);
 
     console.log(`✨ Documentation générée avec succès dans : ${outputDir}`);
   } catch (error) {

@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeForge Demo</title>
+  <link rel="stylesheet" crossorigin href="/assets/index-C1us9DHa.css">
+</head>
+<body class="site-wrapper h-full" style="border-radius: 8px;" >
+    <header>
+    <nav 
+      style="" 
+      class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
+      id="main-nav" data-component-version="1.0.0"  
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <span class="text-xl font-bold tracking-tight">CodeForge SDK</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Accueil</a><a href="/docs" class="text-sm font-medium hover:text-blue-600 transition-colors">Documentation</a>
+          </div>
+          <div class="flex items-center md:hidden">
+            <button 
+              id="btn-main-nav" 
+              type="button" 
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100" 
+              aria-expanded="false" 
+              aria-controls="menu-main-nav"
+              aria-label="Ouvrir le menu"
+            >
+              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="menu-main-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Accueil</a><a href="/docs" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Documentation</a>
+        </div>
+      </div>
+      <script>
+        (function() {
+          const btn = document.getElementById('btn-main-nav');
+          const menu = document.getElementById('menu-main-nav');
+          if (btn && menu) {
+            btn.addEventListener('click', () => {
+              const exp = btn.getAttribute('aria-expanded') === 'true';
+              btn.setAttribute('aria-expanded', !exp);
+              menu.classList.toggle('hidden');
+            });
+          }
+        })();
+      </script>
+    </nav></header>
+    <main class="main-content">
+    <nav 
+      style="" 
+      class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
+      id="main-nav" data-component-version="1.0.0"  
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <span class="text-xl font-bold tracking-tight">CodeForge SDK</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Accueil</a><a href="/docs" class="text-sm font-medium hover:text-blue-600 transition-colors">Documentation</a>
+          </div>
+          <div class="flex items-center md:hidden">
+            <button 
+              id="btn-main-nav" 
+              type="button" 
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100" 
+              aria-expanded="false" 
+              aria-controls="menu-main-nav"
+              aria-label="Ouvrir le menu"
+            >
+              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="menu-main-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Accueil</a><a href="/docs" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Documentation</a>
+        </div>
+      </div>
+      <script>
+        (function() {
+          const btn = document.getElementById('btn-main-nav');
+          const menu = document.getElementById('menu-main-nav');
+          if (btn && menu) {
+            btn.addEventListener('click', () => {
+              const exp = btn.getAttribute('aria-expanded') === 'true';
+              btn.setAttribute('aria-expanded', !exp);
+              menu.classList.toggle('hidden');
+            });
+          }
+        })();
+      </script>
+    </nav>
+    <section class="hero-section" style="" id="hero" data-component-version="1.0.0"  >
+      <div class="hero-content">
+        
+      <h1 
+        style="--text-color: var(--hero-text, inherit); font-size: var(--font-size, 3.75rem); font-weight: 800;" 
+        class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] tracking-tight leading-tight m-0"
+        id="hero-title" data-component-version="1.1.0"  
+      >
+        Construisez plus vite.
+      </h1>
+    
+        <div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">
+      <p 
+        style="" 
+        class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
+        id="hero-subtitle" data-component-version="1.0.0"  
+      >
+        Le moteur de rendu JSON -> HTML industriel.
+      </p>
+    </div>
+      </div>
+    </section>
+      <section 
+        style="" 
+        class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="features" data-component-version="1.0.0"  
+      >
+        <a href="/get-started" style="" class="btn-base" id="btn-1" data-component-version="1.0.0"  >Démarrer</a><a href="https://github.com" style="" class="btn-base" id="btn-2" data-component-version="1.0.0"  >GitHub</a>
+      </section></main>
+    <footer class="w-full"></footer>
+</body>
+</html>

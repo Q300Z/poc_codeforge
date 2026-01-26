@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "appName": "CodeForge Demo",
+    "version": "1.0.0",
+    "createdAt": "2026-01-26T20:32:15.869Z"
+  },
+  "style": {
+    "border-radius": "8px"
+  },
+  "layout": {
+    "header": {
+      "id": "main-nav",
+      "type": "AppBar",
+      "meta": {
+        "version": "1.0.0",
+        "createdAt": "2026-01-26T20:32:15.869Z",
+        "title": "CodeForge SDK",
+        "links": [
+          {
+            "label": "Accueil",
+            "href": "index.html"
+          },
+          {
+            "label": "Documentation",
+            "href": "/docs"
+          }
+        ]
+      }
+    }
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "content": {
+        "id": "home-page",
+        "type": "Page",
+        "meta": {
+          "version": "1.0.0",
+          "createdAt": "2026-01-26T20:32:15.870Z",
+          "appName": "Ma Super Démo"
+        },
+        "children": [
+          {
+            "id": "hero",
+            "type": "Hero",
+            "meta": {
+              "version": "1.0.0",
+              "createdAt": "2026-01-26T20:32:15.870Z",
+              "title": "Construisez plus vite.",
+              "subtitle": "Le moteur de rendu JSON -> HTML industriel."
+            }
+          },
+          {
+            "id": "features",
+            "type": "Grid",
+            "meta": {
+              "version": "1.0.0",
+              "createdAt": "2026-01-26T20:32:15.870Z",
+              "cols": 3,
+              "gap": 8
+            },
+            "children": [
+              {
+                "id": "btn-1",
+                "type": "Button",
+                "meta": {
+                  "version": "1.0.0",
+                  "createdAt": "2026-01-26T20:32:15.870Z",
+                  "label": "Démarrer",
+                  "action": "/get-started"
+                }
+              },
+              {
+                "id": "btn-2",
+                "type": "Button",
+                "meta": {
+                  "version": "1.0.0",
+                  "createdAt": "2026-01-26T20:32:15.870Z",
+                  "label": "GitHub",
+                  "action": "https://github.com"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

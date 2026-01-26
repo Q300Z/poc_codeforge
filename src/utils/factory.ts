@@ -6,12 +6,24 @@ import { validateStyle } from "./validator.js";
  * Options de configuration pour la Factory.
  * @internal
  */
+interface MetaField {
+  type: "string" | "number" | "boolean" | "enum" | "object" | "array";
+  description: string;
+  default?: any;
+  required?: boolean;
+  options?: string[]; // Pour les enums
+}
+
 interface FactoryOptions {
   name: string;
   version: string;
   description?: string;
-  metaSchema?: Record<string, string>;
+  metaSchema?: Record<string, MetaField | string>;
   authorizedTokens: string[] | Record<string, string>;
+  examples?: {
+    builderCode: string;
+    description?: string;
+  }[];
   template: (
     meta: Record<string, any>,
     children: ComponentHTML[],
@@ -26,8 +38,12 @@ export interface DocumentedComponent extends Component {
     name: string;
     version: string;
     description: string;
-    metaSchema: Record<string, string>;
+    metaSchema: Record<string, any>;
     authorizedTokens: Record<string, string>;
+    examples?: {
+      builderCode: string;
+      description?: string;
+    }[];
   };
 }
 
@@ -37,14 +53,17 @@ export interface DocumentedComponent extends Component {
  * Le champ "audioDescription" devient "aria-label".
  * Le champ "ariaRole" devient "role".
  */
-export function createComponent({
-  name,
-  version,
-  description = "",
-  metaSchema = {},
-  authorizedTokens,
-  template,
-}: FactoryOptions): DocumentedComponent {
+export function createComponent(options: FactoryOptions): DocumentedComponent {
+  const {
+    name,
+    version,
+    description = "",
+    metaSchema = {},
+    authorizedTokens,
+    examples,
+    template,
+  } = options;
+
   const tokenKeys = Array.isArray(authorizedTokens)
     ? authorizedTokens
     : Object.keys(authorizedTokens);
@@ -92,6 +111,17 @@ export function createComponent({
     return template(finalMeta, children, styleVars, a11yAttrs, finalId);
   };
 
-  component.doc = { name, version, description, metaSchema, authorizedTokens: {} };
+  const tokensObj = Array.isArray(authorizedTokens)
+    ? authorizedTokens.reduce((acc, t) => ({ ...acc, [t]: "" }), {})
+    : authorizedTokens;
+
+  component.doc = {
+    name,
+    version,
+    description,
+    metaSchema,
+    authorizedTokens: tokensObj,
+    examples,
+  };
   return component;
 }

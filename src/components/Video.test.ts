@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
+
 import { Video } from "./Video.js";
 
 describe("Video Component", () => {
-  const meta = { 
+  const meta = {
     src: "test.mp4",
     version: "1.0.0",
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   it("should render <video> with src and default controls", () => {
