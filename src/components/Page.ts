@@ -3,19 +3,19 @@ import { getStyleVariables } from "../utils/style.js";
 import { validateStyle } from "../utils/validator.js";
 
 const AUTHORIZED_TOKENS = [
-  "brand-primary", 
-  "brand-secondary", 
-  "btn-bg-default", 
-  "btn-text-default", 
-  "hero-bg-default", 
-  "hero-text-default"
+  "brand-primary",
+  "brand-secondary",
+  "btn-bg-default",
+  "btn-text-default",
+  "hero-bg-default",
+  "hero-text-default",
 ];
 
-export const Page: Component = (props, children, style) => {
+export const Page: Component = (props: Record<string, unknown>, children, style) => {
   validateStyle("Page", style, AUTHORIZED_TOKENS);
   const globalStyles = getStyleVariables(style);
   const debug = props.debug === true;
-  
+
   return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-white">
@@ -47,7 +47,7 @@ export const Page: Component = (props, children, style) => {
       }
     </style>
 </head>
-<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ''}>
+<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
     <main>
         ${children.join("")}
     </main>

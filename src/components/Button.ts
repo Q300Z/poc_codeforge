@@ -1,21 +1,16 @@
-import { Component } from "../types.js";
-import { getStyleVariables } from "../utils/style.js";
-import { validateStyle } from "../utils/validator.js";
+import { createComponent } from "../utils/factory.js";
 
-const AUTHORIZED_TOKENS = ["btn-bg", "btn-text", "bg-color", "text-color"];
-
-export const Button: Component = (props, _, style) => {
-  validateStyle("Button", style, AUTHORIZED_TOKENS);
-  const inlineStyle = getStyleVariables(style);
-  
-  return `
-  <button 
-    type="button" 
-    style="${inlineStyle}"
-    class="btn-base"
-    ${props.ariaLabel ? `aria-label="${props.ariaLabel}"` : ""}
-  >
-    ${props.label || "Click me"}
-  </button>
-`;
-};
+export const Button = createComponent({
+  name: "Button",
+  authorizedTokens: ["btn-bg", "btn-text", "bg-color", "text-color"],
+  template: (props, _, styleVars, a11yAttrs) => `
+    <button 
+      type="button" 
+      style="${styleVars}"
+      class="btn-base"
+      ${a11yAttrs}
+    >
+      ${props.label || "Click me"}
+    </button>
+  `,
+});

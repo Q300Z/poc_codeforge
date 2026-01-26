@@ -10,5 +10,5 @@ export function render(node: Node): string {
 
   const childrenHTML = (node.children || []).map(render);
 
-  return component(node.props || {}, childrenHTML, node.style || {});
+  return component((node.props as Record<string, unknown>) || {}, childrenHTML, node.style || {});
 }
