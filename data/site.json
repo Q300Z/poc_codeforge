@@ -21,16 +21,30 @@
       "meta": {
         "title": "ForgeEngine",
         "links": [
-          { "label": "Showcase", "href": "index.html" },
-          { "label": "Layouts", "href": "layouts.html" },
-          { "label": "Contact", "href": "contact.html" }
-        ]
+          {
+            "label": "Showcase",
+            "href": "index.html"
+          },
+          {
+            "label": "Layouts",
+            "href": "layouts.html"
+          },
+          {
+            "label": "Contact",
+            "href": "contact.html"
+          }
+        ],
+        "createdAt": "2026-01-26T10:32:13.573Z",
+        "version": "1.0"
       }
     },
     "footer": {
       "id": "global-footer",
       "type": "Section",
-      "style": { "section-bg": "#111827", "section-py": "2rem" },
+      "style": {
+        "section-bg": "#111827",
+        "section-py": "2rem"
+      },
       "children": [
         {
           "id": "footer-cont",
@@ -39,8 +53,16 @@
             {
               "id": "footer-text",
               "type": "Hero",
-              "meta": { "title": "ForgeEngine POC", "subtitle": "© 2026" },
-              "style": { "hero-text": "#9ca3af", "hero-bg": "transparent" }
+              "meta": {
+                "title": "ForgeEngine POC",
+                "subtitle": "© 2026",
+                "createdAt": "2026-01-26T10:32:13.573Z",
+                "version": "1.0"
+              },
+              "style": {
+                "hero-text": "#9ca3af",
+                "hero-bg": "transparent"
+              }
             }
           ]
         }
@@ -57,7 +79,12 @@
           {
             "id": "hero-home",
             "type": "Hero",
-            "meta": { "title": "Bienvenue", "subtitle": "Découvrez nos différents types de layouts." }
+            "meta": {
+              "title": "Bienvenue",
+              "subtitle": "Découvrez nos différents types de layouts.",
+              "createdAt": "2026-01-26T10:32:13.573Z",
+              "version": "1.0"
+            }
           },
           {
             "id": "cta",
@@ -66,9 +93,22 @@
               {
                 "id": "s",
                 "type": "Stack",
-                "meta": { "align": "center" },
+                "meta": {
+                  "align": "center",
+                  "createdAt": "2026-01-26T10:32:13.573Z",
+                  "version": "1.0"
+                },
                 "children": [
-                  { "id": "b", "type": "Button", "meta": { "label": "Voir les Layouts", "action": "layouts.html" } }
+                  {
+                    "id": "b",
+                    "type": "Button",
+                    "meta": {
+                      "label": "Voir les Layouts",
+                      "action": "layouts.html",
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    }
+                  }
                 ]
               }
             ]
@@ -85,7 +125,12 @@
           {
             "id": "feat-hero",
             "type": "Hero",
-            "meta": { "title": "Galerie de Layouts", "subtitle": "Démonstration des capacités de placement Mobile-First." }
+            "meta": {
+              "title": "Galerie de Layouts",
+              "subtitle": "Démonstration des capacités de placement Mobile-First.",
+              "createdAt": "2026-01-26T10:32:13.573Z",
+              "version": "1.0"
+            }
           },
           {
             "id": "grid-demo",
@@ -95,15 +140,62 @@
                 "id": "c1",
                 "type": "Container",
                 "children": [
-                  { "id": "t1", "type": "Hero", "meta": { "title": "1. Grille Responsive (3 cols)", "subtitle": "S'empile sur mobile." }, "style": { "section-py": "1rem" } },
+                  {
+                    "id": "t1",
+                    "type": "Hero",
+                    "meta": {
+                      "title": "1. Grille Responsive (3 cols)",
+                      "subtitle": "S'empile sur mobile.",
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
+                    "style": {
+                      "section-py": "1rem"
+                    }
+                  },
                   {
                     "id": "grid",
                     "type": "Grid",
-                    "meta": { "cols": 3, "gap": 6 },
+                    "meta": {
+                      "cols": 3,
+                      "gap": 6,
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
                     "children": [
-                      { "id": "box1", "type": "Box", "style": { "bg-color": "#f87171" } },
-                      { "id": "box2", "type": "Box", "style": { "bg-color": "#60a5fa" } },
-                      { "id": "box3", "type": "Box", "style": { "bg-color": "#34d399" } }
+                      {
+                        "id": "box1",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#f87171"
+                        },
+                        "meta": {
+                          "createdAt": "2026-01-26T10:32:13.573Z",
+                          "version": "1.0"
+                        }
+                      },
+                      {
+                        "id": "box2",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#60a5fa"
+                        },
+                        "meta": {
+                          "createdAt": "2026-01-26T10:32:13.573Z",
+                          "version": "1.0"
+                        }
+                      },
+                      {
+                        "id": "box3",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#34d399"
+                        },
+                        "meta": {
+                          "createdAt": "2026-01-26T10:32:13.573Z",
+                          "version": "1.0"
+                        }
+                      }
                     ]
                   }
                 ]
@@ -113,43 +205,121 @@
           {
             "id": "stack-demo",
             "type": "Section",
-            "style": { "section-bg": "#f8fafc" },
+            "style": {
+              "section-bg": "#f8fafc"
+            },
             "children": [
               {
                 "id": "c2",
                 "type": "Container",
                 "children": [
-                  { "id": "t2", "type": "Hero", "meta": { "title": "2. Stacks", "subtitle": "Vertical vs Horizontal" }, "style": { "section-py": "1rem" } },
+                  {
+                    "id": "t2",
+                    "type": "Hero",
+                    "meta": {
+                      "title": "2. Stacks",
+                      "subtitle": "Vertical vs Horizontal",
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
+                    "style": {
+                      "section-py": "1rem"
+                    }
+                  },
                   {
                     "id": "stacks-grid",
                     "type": "Grid",
-                    "meta": { "cols": 2, "gap": 12 },
+                    "meta": {
+                      "cols": 2,
+                      "gap": 12,
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
                     "children": [
                       {
                         "id": "v-stack",
                         "type": "Stack",
-                        "meta": { "direction": "vertical", "gap": 4 },
+                        "meta": {
+                          "direction": "vertical",
+                          "gap": 4,
+                          "createdAt": "2026-01-26T10:32:13.573Z",
+                          "version": "1.0"
+                        },
                         "children": [
-                          { "id": "sv1", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } },
-                          { "id": "sv2", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } },
-                          { "id": "sv3", "type": "Box", "style": { "bg-color": "#818cf8", "height": "40px" } }
+                          {
+                            "id": "sv1",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#818cf8",
+                              "height": "40px"
+                            }
+                          },
+                          {
+                            "id": "sv2",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#818cf8",
+                              "height": "40px"
+                            }
+                          },
+                          {
+                            "id": "sv3",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#818cf8",
+                              "height": "40px"
+                            }
+                          }
                         ]
                       },
                       {
                         "id": "h-stack",
                         "type": "Stack",
-                        "meta": { "direction": "horizontal", "gap": 4 },
+                        "meta": {
+                          "direction": "horizontal",
+                          "gap": 4,
+                          "createdAt": "2026-01-26T10:32:13.573Z",
+                          "version": "1.0"
+                        },
                         "children": [
-                          { "id": "sh1", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } },
-                          { "id": "sh2", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } },
-                          { "id": "sh3", "type": "Box", "style": { "bg-color": "#fbbf24", "width": "60px", "height": "60px" } }
+                          {
+                            "id": "sh1",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#fbbf24",
+                              "width": "60px",
+                              "height": "60px"
+                            }
+                          },
+                          {
+                            "id": "sh2",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#fbbf24",
+                              "width": "60px",
+                              "height": "60px"
+                            }
+                          },
+                          {
+                            "id": "sh3",
+                            "type": "Box",
+                            "style": {
+                              "bg-color": "#fbbf24",
+                              "width": "60px",
+                              "height": "60px"
+                            }
+                          }
                         ]
                       }
                     ]
                   }
                 ]
               }
-            ]
+            ],
+            "meta": {
+              "createdAt": "2026-01-26T10:32:13.573Z",
+              "version": "1.0"
+            }
           },
           {
             "id": "overflow-demo",
@@ -159,17 +329,73 @@
                 "id": "c3",
                 "type": "Container",
                 "children": [
-                  { "id": "t3", "type": "Hero", "meta": { "title": "3. Gestion de l'Overflow", "subtitle": "Exemple d'une liste scrollable horizontalement (Stack + overflow-x)." }, "style": { "section-py": "1rem" } },
+                  {
+                    "id": "t3",
+                    "type": "Hero",
+                    "meta": {
+                      "title": "3. Gestion de l'Overflow",
+                      "subtitle": "Exemple d'une liste scrollable horizontalement (Stack + overflow-x).",
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
+                    "style": {
+                      "section-py": "1rem"
+                    }
+                  },
                   {
                     "id": "scroll-stack",
                     "type": "Stack",
-                    "meta": { "direction": "horizontal" },
-                    "style": { "overflow-x": "auto", "width": "100%", "stack-gap": "1.5rem" },
+                    "meta": {
+                      "direction": "horizontal",
+                      "createdAt": "2026-01-26T10:32:13.573Z",
+                      "version": "1.0"
+                    },
+                    "style": {
+                      "overflow-x": "auto",
+                      "width": "100%",
+                      "stack-gap": "1.5rem"
+                    },
                     "children": [
-                      { "id": "ob1", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
-                      { "id": "ob2", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
-                      { "id": "ob3", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } },
-                      { "id": "ob4", "type": "Box", "style": { "bg-color": "#ec4899", "width": "300px", "height": "150px", "flex-shrink": "0" } }
+                      {
+                        "id": "ob1",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#ec4899",
+                          "width": "300px",
+                          "height": "150px",
+                          "flex-shrink": "0"
+                        }
+                      },
+                      {
+                        "id": "ob2",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#ec4899",
+                          "width": "300px",
+                          "height": "150px",
+                          "flex-shrink": "0"
+                        }
+                      },
+                      {
+                        "id": "ob3",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#ec4899",
+                          "width": "300px",
+                          "height": "150px",
+                          "flex-shrink": "0"
+                        }
+                      },
+                      {
+                        "id": "ob4",
+                        "type": "Box",
+                        "style": {
+                          "bg-color": "#ec4899",
+                          "width": "300px",
+                          "height": "150px",
+                          "flex-shrink": "0"
+                        }
+                      }
                     ]
                   }
                 ]
@@ -185,7 +411,16 @@
         "id": "contact-page",
         "type": "Page",
         "children": [
-          { "id": "ch", "type": "Hero", "meta": { "title": "Contact", "subtitle": "Parlons ensemble." } }
+          {
+            "id": "ch",
+            "type": "Hero",
+            "meta": {
+              "title": "Contact",
+              "subtitle": "Parlons ensemble.",
+              "createdAt": "2026-01-26T10:32:13.573Z",
+              "version": "1.0"
+            }
+          }
         ]
       }
     }
