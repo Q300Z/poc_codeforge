@@ -7,6 +7,19 @@ export * from "./utils/style.js";
 export * from "./utils/validator.js";
 export * from "./utils/builder.js";
 
+// Export des composants, types et builders autonomes
+export * from "./components/AppBar.js";
+export * from "./components/Box.js";
+export * from "./components/Button.js";
+export * from "./components/Container.js";
+export * from "./components/Grid.js";
+export * from "./components/Hero.js";
+export * from "./components/Page.js";
+export * from "./components/Section.js";
+export * from "./components/Stack.js";
+export * from "./components/Text.js";
+export * from "./components/Title.js";
+
 import { build as viteBuild } from "vite";
 import path from "path";
 import fs from "fs";
@@ -66,7 +79,6 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
         rollupOptions: { input },
       },
     });
-    console.log(`\n✅ Site successfully generated in: ${absoluteOutDir}`);
   } finally {
     for (const file of tempFiles) {
       if (fs.existsSync(file)) fs.unlinkSync(file);

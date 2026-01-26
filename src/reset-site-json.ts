@@ -33,13 +33,13 @@ const header = new AppBarBuilder("global-nav")
 
 // 2. Footer Global
 const footer = new SectionBuilder("global-footer")
-  .withStyle({ "section-bg": "#111827", "section-py": 32 })
+  .withStyle({ "section-bg": "#111827", "section-py": 32 } as any)
   .addChild(
     new ContainerBuilder("footer-cont").addChild(
       new HeroBuilder("footer-text")
         .withTitle("CodeForge POC")
         .withSubtitle("© 2026")
-        .withStyle({ "hero-text": "#9ca3af", "hero-bg": "transparent" })
+        .withStyle({ "hero-text": "#9ca3af", "hero-bg": "transparent" } as any)
     )
   );
 
@@ -54,7 +54,7 @@ const site = new SiteBuilder("CodeForge Ultimate Showcase")
     "appbar-bg": "rgba(255, 255, 255, 0.8)",
     "hero-bg-default": "#ffffff",
     "section-py": 40,
-  })
+  } as any)
   .withHeader(header)
   .withFooter(footer);
 
@@ -92,14 +92,14 @@ const layoutsPage = new PageBuilder("layouts-page")
         new HeroBuilder("t1")
           .withTitle("1. Grille Responsive (3 cols)")
           .withSubtitle("S'empile sur mobile.")
-          .withStyle({ "section-py": 16 })
+          .withStyle({ "section-py": 16 } as any)
       ).addChild(
         new GridBuilder("features-grid")
           .withCols(3)
           .withGap(6)
-          .addChild(new BoxBuilder("box1").withStyle({ "bg-color": "#f87171" }))
-          .addChild(new BoxBuilder("box2").withStyle({ "bg-color": "#60a5fa" }))
-          .addChild(new BoxBuilder("box3").withStyle({ "bg-color": "#34d399" }))
+          .addChild(new BoxBuilder("box1").withStyle({ "bg-color": "#f87171" } as any))
+          .addChild(new BoxBuilder("box2").withStyle({ "bg-color": "#60a5fa" } as any))
+          .addChild(new BoxBuilder("box3").withStyle({ "bg-color": "#34d399" } as any))
       )
     )
   );
@@ -123,7 +123,7 @@ const canvasPage = new PageBuilder("canvas-page")
         width: 150,
         height: 150,
         "bg-color": "#818cf8"
-      })
+      } as any)
   )
   .addChild(
     new BoxBuilder("abs-box-2")
@@ -135,7 +135,7 @@ const canvasPage = new PageBuilder("canvas-page")
         height: 100,
         "bg-color": "#fbbf24",
         "z-index": 10
-      })
+      } as any)
   );
 
 site.addPage("canvas", canvasPage);

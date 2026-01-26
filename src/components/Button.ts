@@ -1,34 +1,36 @@
 import { createComponent } from "../utils/factory.js";
+import { NodeBuilder } from "../utils/builder.js";
+
+export interface ButtonMeta {
+  label: string;
+  action?: string;
+}
+
+export interface ButtonStyles {
+  "btn-bg"?: string;
+  "btn-text"?: string;
+  "bg-color"?: string;
+  "text-color"?: string;
+}
+
+export class ButtonBuilder extends NodeBuilder<ButtonMeta, ButtonStyles> {
+  constructor(id: string) { super(id, "Button"); }
+  withLabel(label: string): this { this.node.meta.label = label; return this; }
+  withAction(action: string): this { this.node.meta.action = action; return this; }
+}
 
 export const Button = createComponent({
   name: "Button",
   version: "1.3.0",
-  description: "Un composant interactif polyvalent servant de bouton ou de lien.",
-  metaSchema: {
-    label: "Le texte affiché sur le bouton.",
-    action: "URL de redirection ou code JavaScript.",
-  },
-  authorizedTokens: {
-    "btn-bg": "Couleur de fond spécifique au bouton.",
-    "btn-text": "Couleur du texte spécifique au bouton.",
-    "bg-color": "Variable CSS pour le fond (alias legacy).",
-    "text-color": "Variable CSS pour le texte (alias legacy).",
-  },
+  description: "Bouton ou lien interactif.",
+  metaSchema: { label: "Texte", action: "URL ou JS" },
+  authorizedTokens: ["btn-bg", "btn-text", "bg-color", "text-color"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
-    const action = (meta.action as string) || "";
-    const isLink =
-      action.startsWith("/") ||
-      action.startsWith("http") ||
-      action.startsWith("#") ||
-      action.startsWith("mailto:") ||
-      action.endsWith(".html");
+    const action = meta.action || "";
+    const isLink = action.startsWith("/") || action.startsWith("http") || action.endsWith(".html");
     const label = meta.label || "Click me";
 
-    if (isLink) {
-      return `<a href="${action}" style="${styleVars}" class="btn-base no-underline" ${a11yAttrs}>${label}</a>`;
-    }
-
-    const onclick = action ? `onclick="${action}"` : "";
-    return `<button type="button" style="${styleVars}" class="btn-base" ${a11yAttrs} ${onclick}>${label}</button>`;
+    if (isLink) return `<a href="${action}" style="${styleVars}" class="btn-base" ${a11yAttrs}>${label}</a>`;
+    return `<button type="button" style="${styleVars}" class="btn-base" ${a11yAttrs} onclick="${action}">${label}</button>`;
   },
 });

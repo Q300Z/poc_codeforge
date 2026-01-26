@@ -1,49 +1,37 @@
 import { createComponent } from "../utils/factory.js";
+import { NodeBuilder } from "../utils/builder.js";
+
+export interface GridMeta {
+  cols?: number;
+  gap?: number;
+}
+
+export interface GridStyles {
+  "grid-gap"?: string | number;
+  "grid-bg"?: string;
+}
+
+export class GridBuilder extends NodeBuilder<GridMeta, GridStyles> {
+  constructor(id: string) { super(id, "Grid"); }
+  withCols(cols: number): this { this.node.meta.cols = cols; return this; }
+  withGap(gap: number): this { this.node.meta.gap = gap; return this; }
+}
 
 const COLUMN_MAP: Record<number, string> = {
-  1: "md:grid-cols-1",
-  2: "md:grid-cols-2",
-  3: "md:grid-cols-3",
-  4: "md:grid-cols-4",
-  5: "md:grid-cols-5",
-  6: "md:grid-cols-6",
-  12: "md:grid-cols-12",
-};
-
-const GAP_MAP: Record<number, string> = {
-  0: "gap-0",
-  2: "gap-2",
-  4: "gap-4",
-  6: "gap-6",
-  8: "gap-8",
-  10: "gap-10",
-  12: "gap-12",
-  16: "gap-16",
+  1: "md:grid-cols-1", 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "md:grid-cols-4",
+  5: "md:grid-cols-5", 6: "md:grid-cols-6", 12: "md:grid-cols-12",
 };
 
 export const Grid = createComponent({
   name: "Grid",
   version: "1.1.0",
-  description: "Système de grille responsive Mobile-First utilisant CSS Grid.",
-  metaSchema: {
-    cols: "Nombre de colonnes sur desktop (1 à 12).",
-    gap: "Espacement entre les colonnes (0 à 16).",
-  },
-  authorizedTokens: {
-    "grid-gap": "Espacement personnalisé via CSS Variable.",
-    "grid-bg": "Couleur de fond de la grille.",
-  },
+  authorizedTokens: ["grid-gap", "grid-bg"],
   template: (meta: Record<string, any>, children, styleVars, a11yAttrs) => {
-    const cols = (meta.cols as number) || 2;
-    const gap = (meta.gap as number) || 8;
-
-    const colClass = COLUMN_MAP[cols] || "md:grid-cols-2";
-    const gapClass = GAP_MAP[gap] || "gap-8";
-
+    const colClass = COLUMN_MAP[meta.cols as number] || "md:grid-cols-2";
     return `
       <section 
         style="${styleVars}" 
-        class="grid grid-cols-1 ${colClass} ${gapClass} w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        class="grid grid-cols-1 ${colClass} gap-${meta.gap || 8} w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
         ${a11yAttrs}
       >
         ${children.join("")}
