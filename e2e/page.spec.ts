@@ -6,14 +6,15 @@ test.describe("Page de rendu JSON", () => {
   });
 
   test("devrait afficher le titre correct de l'application", async ({ page }) => {
-    await expect(page).toHaveTitle(/Site Industriel v3/);
+    await expect(page).toHaveTitle(/ForgeEngine Showcase/);
   });
 
   test("le menu mobile devrait s'ouvrir et se fermer", async ({ page, isMobile }) => {
     if (!isMobile) return;
 
-    const burger = page.locator("#mobile-menu-button");
-    const menu = page.locator("#mobile-menu");
+    // On cherche le bouton qui a un aria-label "Ouvrir le menu" (plus robuste)
+    const burger = page.getByRole("button", { name: /Ouvrir/i });
+    const menu = page.locator("[id^='menu-']"); // N'importe quel menu mobile
 
     await expect(menu).toBeHidden();
     await burger.click();
@@ -23,7 +24,7 @@ test.describe("Page de rendu JSON", () => {
   });
 
   test("le stack principal devrait être présent", async ({ page }) => {
-    const stack = page.locator("#cta-stack");
+    const stack = page.locator("#features-stack");
     await expect(stack).toBeVisible();
   });
 });

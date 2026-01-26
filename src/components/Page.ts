@@ -12,6 +12,7 @@ const AUTHORIZED_TOKENS = [
   "btn-text-default",
   "hero-bg-default",
   "hero-text-default",
+  "section-py",
   "position",
   "height",
   "width",

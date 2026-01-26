@@ -1,15 +1,18 @@
 {
   "meta": {
-    "appName": "Site Industriel v3",
-    "version": "3.1.0",
-    "createdAt": "2026-01-26T12:45:00.000Z",
-    "debug": true
+    "appName": "ForgeEngine Showcase",
+    "version": "3.2.0",
+    "createdAt": "2026-01-26T13:00:00.000Z"
   },
   "style": {
-    "brand-primary": "#4f46e5",
-    "brand-secondary": "#10b981",
+    "brand-primary": "#6366f1",
+    "brand-secondary": "#14b8a6",
     "btn-bg-default": "var(--brand-primary)",
-    "appbar-bg": "#ffffff"
+    "btn-text-default": "#ffffff",
+    "appbar-bg": "#ffffff",
+    "appbar-border": "#e5e7eb",
+    "hero-bg-default": "#f9fafb",
+    "section-py": "5rem"
   },
   "pages": [
     {
@@ -20,43 +23,119 @@
         "meta": { "debug": false },
         "children": [
           {
-            "id": "nav-1",
+            "id": "main-nav",
             "type": "AppBar",
-            "meta": { 
-              "title": "BuildForge",
+            "meta": {
+              "title": "ForgeEngine",
               "links": [
                 { "label": "Accueil", "href": "index.html" },
+                { "label": "Fonctionnalités", "href": "features.html" },
                 { "label": "Contact", "href": "contact.html" }
               ]
             }
           },
           {
-            "id": "hero-home",
+            "id": "welcome-hero",
             "type": "Hero",
-            "meta": { 
-              "title": "Moteur de Rendu v3", 
-              "subtitle": "Générez des sites entiers à partir d'une simple structure JSON." 
+            "meta": {
+              "title": "Le futur du No-Code est hybride",
+              "subtitle": "Générez des sites industriels, accessibles et performants à partir de simples contrats JSON.",
+              "version": "1.0.0"
+            },
+            "style": {
+              "hero-bg": "#EEF2FF",
+              "hero-text": "var(--brand-primary)"
             }
           },
           {
-            "id": "content-section",
+            "id": "features-preview",
             "type": "Section",
+            "style": { "section-bg": "#ffffff" },
             "children": [
               {
-                "id": "container",
+                "id": "features-cont",
                 "type": "Container",
                 "children": [
                   {
-                    "id": "cta-stack",
+                    "id": "features-stack",
                     "type": "Stack",
-                    "meta": { "direction": "vertical", "align": "center" },
+                    "meta": { "direction": "vertical", "align": "center", "gap": 10 },
                     "children": [
                       {
-                        "id": "btn-contact",
+                        "id": "features-grid",
+                        "type": "Grid",
+                        "meta": { "cols": 3, "gap": 8 },
+                        "children": [
+                          {
+                            "id": "card-1",
+                            "type": "Button",
+                            "meta": { "label": "⚡ Performance", "action": "alert('Vitesse maximale !')" }
+                          },
+                          {
+                            "id": "card-2",
+                            "type": "Button",
+                            "meta": { "label": "♿ Accessibilité", "action": "alert('WCAG Compliant')" }
+                          },
+                          {
+                            "id": "card-3",
+                            "type": "Button",
+                            "meta": { "label": "🎨 Design Tokens", "action": "alert('CSS Variables')" }
+                          }
+                        ]
+                      },
+                      {
+                        "id": "cta-main",
                         "type": "Button",
-                        "meta": { "label": "Nous contacter", "action": "contact.html" }
+                        "meta": { "label": "Découvrir toutes les features", "action": "features.html" },
+                        "style": { "btn-bg": "var(--brand-secondary)" }
                       }
                     ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "features",
+      "content": {
+        "id": "features-page",
+        "type": "Page",
+        "meta": { "debug": true },
+        "children": [
+          {
+            "id": "nav-feat",
+            "type": "AppBar",
+            "meta": { "title": "Features", "links": [{ "label": "Retour", "href": "index.html" }] }
+          },
+          {
+            "id": "feat-hero",
+            "type": "Hero",
+            "meta": { "title": "Capacités Techniques", "subtitle": "Sous le capot du moteur de rendu." }
+          },
+          {
+            "id": "absolute-demo-sec",
+            "type": "Section",
+            "style": { "section-bg": "#f3f4f6", "section-py": "10rem" },
+            "children": [
+              {
+                "id": "abs-cont",
+                "type": "Container",
+                "style": { "position": "relative", "height": "200px" },
+                "children": [
+                  {
+                    "id": "floating-btn",
+                    "type": "Button",
+                    "meta": { "label": "Position Absolue", "action": "console.log('I am floating')" },
+                    "style": {
+                      "position": "absolute",
+                      "top": "50px",
+                      "left": "20%",
+                      "btn-bg": "#e11d48",
+                      "width": "200px"
+                    }
                   }
                 ]
               }
@@ -70,40 +149,42 @@
       "content": {
         "id": "contact-page",
         "type": "Page",
-        "meta": { "debug": false },
         "children": [
           {
-            "id": "nav-2",
+            "id": "nav-contact",
             "type": "AppBar",
-            "meta": { 
-              "title": "BuildForge",
-              "links": [
-                { "label": "Accueil", "href": "index.html" },
-                { "label": "Contact", "href": "contact.html" }
-              ]
-            }
+            "meta": { "title": "Contact", "links": [{ "label": "Accueil", "href": "index.html" }] }
           },
           {
-            "id": "hero-contact",
+            "id": "contact-hero",
             "type": "Hero",
-            "meta": { 
-              "title": "Contactez-nous", 
-              "subtitle": "Nous sommes à votre écoute pour vos projets." 
-            }
+            "meta": { "title": "Parlons de votre projet", "subtitle": "Une équipe à votre écoute." }
           },
           {
-            "id": "form-section",
+            "id": "contact-stack-sec",
             "type": "Section",
             "children": [
               {
-                "id": "form-container",
+                "id": "contact-cont",
                 "type": "Container",
                 "children": [
                   {
-                    "id": "back-home",
-                    "type": "Button",
-                    "meta": { "label": "Retour à l'accueil", "action": "index.html" },
-                    "style": { "btn-bg": "#94a3b8" }
+                    "id": "contact-actions",
+                    "type": "Stack",
+                    "meta": { "direction": "horizontal", "justify": "center", "gap": 4 },
+                    "children": [
+                      {
+                        "id": "mail-btn",
+                        "type": "Button",
+                        "meta": { "label": "Envoyer un mail", "action": "mailto:hello@example.com" }
+                      },
+                      {
+                        "id": "home-back",
+                        "type": "Button",
+                        "meta": { "label": "Accueil", "action": "index.html" },
+                        "style": { "btn-bg": "#94a3b8" }
+                      }
+                    ]
                   }
                 ]
               }

@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:4173',
     trace: 'on-first-retry',
   },
   projects: [
@@ -22,8 +22,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
+    // Pour les tests E2E, on utilise la version BUILDÉE (plus stable)
+    command: 'npm run build:lib && node dist/cli.js data/site.json generated && npx vite preview --port 4173',
+    url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
   },
 });

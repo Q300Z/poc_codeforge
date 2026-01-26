@@ -20,6 +20,7 @@ export const Button = createComponent({
       action.startsWith("/") ||
       action.startsWith("http") ||
       action.startsWith("#") ||
+      action.startsWith("mailto:") ||
       action.endsWith(".html");
     const label = meta.label || "Click me";
 

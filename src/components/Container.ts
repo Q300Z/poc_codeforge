@@ -2,7 +2,7 @@ import { createComponent } from "../utils/factory.js";
 
 export const Container = createComponent({
   name: "Container",
-  authorizedTokens: ["container-width"],
+  authorizedTokens: ["container-width", "position", "height", "width", "left", "top"],
   template: (_meta, children, styleVars, a11yAttrs) => `
     <div 
       style="${styleVars}" 

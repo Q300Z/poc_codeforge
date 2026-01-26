@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Industriel v3</title>
+    <title>ForgeEngine Showcase</title>
     <style>
       .btn-base {
         padding: 0.5rem 1rem;
@@ -27,25 +27,27 @@
         outline: 1px dashed rgba(255, 0, 255, 0.3);
       }
     </style>
-  <link rel="stylesheet" crossorigin href="/assets/style-DgbPhZ08.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-CqFWNLUn.css">
 </head>
-<body class="h-full" style="--brand-primary: #4f46e5; --brand-secondary: #10b981; --btn-bg-default: var(--brand-primary); --appbar-bg: #ffffff;" >
+<body class="h-full" style="--brand-primary: #6366f1; --brand-secondary: #14b8a6; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: #ffffff; --appbar-border: #e5e7eb; --hero-bg-default: #f9fafb; --section-py: 5rem;" >
     <main>
         
     <nav 
       style="" 
       class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
-      id="nav-1" 
+      id="main-nav" 
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <span class="text-xl font-bold tracking-tight">BuildForge</span>
+            <span class="text-xl font-bold tracking-tight">ForgeEngine</span>
           </div>
           
           <div class="hidden md:flex items-center space-x-8">
             
               <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Accueil</a>
+            
+              <a href="features.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Fonctionnalités</a>
             
               <a href="contact.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
             
@@ -53,17 +55,17 @@
 
           <div class="flex items-center md:hidden">
             <button 
-              id="mobile-menu-button"
+              id="btn-main-nav"
               type="button" 
               class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               aria-expanded="false"
-              aria-controls="mobile-menu"
+              aria-controls="menu-main-nav"
             >
               <span class="sr-only">Ouvrir le menu</span>
-              <svg id="menu-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="icon-m-main-nav" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <svg id="close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="icon-c-main-nav" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -71,10 +73,12 @@
         </div>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+      <div id="menu-main-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           
             <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Accueil</a>
+          
+            <a href="features.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Fonctionnalités</a>
           
             <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Contact</a>
           
@@ -83,10 +87,10 @@
 
       <script>
         (function() {
-          const button = document.getElementById('mobile-menu-button');
-          const menu = document.getElementById('mobile-menu');
-          const menuIcon = document.getElementById('menu-icon');
-          const closeIcon = document.getElementById('close-icon');
+          const button = document.getElementById('btn-main-nav');
+          const menu = document.getElementById('menu-main-nav');
+          const menuIcon = document.getElementById('icon-m-main-nav');
+          const closeIcon = document.getElementById('icon-c-main-nav');
 
           if (button && menu) {
             button.addEventListener('click', () => {
@@ -103,44 +107,81 @@
     
     <section 
       class="hero-section" 
-      style=""
-      id="hero-home" 
+      style="--hero-bg: #EEF2FF; --hero-text: var(--brand-primary);"
+      id="welcome-hero" 
       aria-labelledby="hero-title"
     >
       <h1 id="hero-title" class="hero-title">
-        Moteur de Rendu v3
+        Le futur du No-Code est hybride
       </h1>
-      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Générez des sites entiers à partir d'une simple structure JSON.</p>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Générez des sites industriels, accessibles et performants à partir de simples contrats JSON.</p>
     </section>
   
     <section 
-      style="" 
+      style="--section-bg: #ffffff;" 
       class="section-pad bg-[var(--section-bg,transparent)]"
-      id="content-section" 
+      id="features-preview" 
     >
       
     <div 
       style="" 
       class="container-center"
-      id="container" 
+      id="features-cont" 
     >
       
       <div 
         style="" 
-        class="flex flex-col gap-6 items-center justify-start"
-        id="cta-stack" 
+        class="flex flex-col gap-10 items-center justify-start"
+        id="features-stack" 
+      >
+        
+      <section 
+        style="" 
+        class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="features-grid" 
       >
         
       <button 
         type="button" 
         style=""
         class="btn-base"
-        id="btn-contact" 
-        onclick="contact.html"
+        id="card-1" 
+        onclick="alert('Vitesse maximale !')"
       >
-        Nous contacter
+        ⚡ Performance
       </button>
     
+      <button 
+        type="button" 
+        style=""
+        class="btn-base"
+        id="card-2" 
+        onclick="alert('WCAG Compliant')"
+      >
+        ♿ Accessibilité
+      </button>
+    
+      <button 
+        type="button" 
+        style=""
+        class="btn-base"
+        id="card-3" 
+        onclick="alert('CSS Variables')"
+      >
+        🎨 Design Tokens
+      </button>
+    
+      </section>
+    
+        <a 
+          href="features.html"
+          style="--btn-bg: var(--brand-secondary);"
+          class="btn-base no-underline"
+          id="cta-main" 
+        >
+          Découvrir toutes les features
+        </a>
+      
       </div>
     
     </div>

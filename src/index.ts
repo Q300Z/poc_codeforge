@@ -33,6 +33,8 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
   const tempFiles: string[] = [];
 
   for (const page of siteData.pages) {
+    // On s'assure que meta existe
+    page.content.meta = page.content.meta || {};
     // On injecte les métadonnées globales dans chaque page si besoin
     page.content.meta.appName = siteData.meta.appName;
     

@@ -3,9 +3,13 @@ import { createComponent } from "../utils/factory.js";
 export const AppBar = createComponent({
   name: "AppBar",
   authorizedTokens: ["appbar-bg", "appbar-text", "appbar-border"],
-  template: (meta, _children, styleVars, a11yAttrs) => {
+  template: (meta, _children, styleVars, a11yAttrs, id) => {
     const title = meta.title || "My App";
     const links = (meta.links as { label: string; href: string }[]) || [];
+    const btnId = `btn-${id}`;
+    const menuId = `menu-${id}`;
+    const menuIconId = `icon-m-${id}`;
+    const closeIconId = `icon-c-${id}`;
 
     return `
     <nav 
@@ -31,17 +35,17 @@ export const AppBar = createComponent({
 
           <div class="flex items-center md:hidden">
             <button 
-              id="mobile-menu-button"
+              id="${btnId}"
               type="button" 
               class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               aria-expanded="false"
-              aria-controls="mobile-menu"
+              aria-controls="${menuId}"
             >
               <span class="sr-only">Ouvrir le menu</span>
-              <svg id="menu-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="${menuIconId}" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <svg id="close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg id="${closeIconId}" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -49,7 +53,7 @@ export const AppBar = createComponent({
         </div>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+      <div id="${menuId}" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           ${links
             .map(
@@ -63,10 +67,10 @@ export const AppBar = createComponent({
 
       <script>
         (function() {
-          const button = document.getElementById('mobile-menu-button');
-          const menu = document.getElementById('mobile-menu');
-          const menuIcon = document.getElementById('menu-icon');
-          const closeIcon = document.getElementById('close-icon');
+          const button = document.getElementById('${btnId}');
+          const menu = document.getElementById('${menuId}');
+          const menuIcon = document.getElementById('${menuIconId}');
+          const closeIcon = document.getElementById('${closeIconId}');
 
           if (button && menu) {
             button.addEventListener('click', () => {
