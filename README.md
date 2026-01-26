@@ -2,104 +2,76 @@
 
 ![Tests Status](https://github.com/Q300Z/poc_codeforge/actions/workflows/test.yml/badge.svg)
 
-Un moteur de rendu ultra-léger, performant et accessible, conçu pour transformer une structure déclarative JSON en une page web moderne. Ce projet implémente un **Design System piloté par les tokens** et une architecture **Mobile-First**.
+Un moteur de rendu industriel ultra-léger, performant et accessible. Il transforme une structure déclarative JSON en une page web moderne en utilisant la puissance native du navigateur (Cascade CSS, CSS Variables).
 
-## 🎯 Objectifs
+## 🌟 Points Forts
 
-- **Performance brute** : Pas de framework lourd, pas de runtime JS complexe. Le navigateur gère la cascade de styles.
-- **SOLID & KISS** : Une architecture propre où chaque composant est autonome et facile à comprendre.
-- **Accessibilité Native** : Gestion automatique des attributs ARIA et respect de la sémantique HTML.
-- **Design System Cascading** : Utilisation de variables CSS pour un theming flexible (White-label ready).
+- **Performance Maximale** : Pas de framework JS au runtime. Le rendu est statique et les styles sont résolus par le moteur CSS du navigateur.
+- **Design System par Tokens** : Architecture de thémisation complète basée sur l'héritage des variables CSS (White-label ready).
+- **Component Factory** : Une usine à composants qui gère automatiquement la validation, les styles et l'accessibilité.
+- **Mobile-First & Responsive** : Système de grille intelligent et composants interactifs (menu burger) sans dépendances.
+- **Développement Moderne** : Intégration Vite avec **Hot Module Replacement (HMR)** pour un feedback instantané.
+- **Qualité Certifiée** : Couverture de tests de 100% sur le cœur du moteur et les utilitaires.
 
 ## 🛠 Stack Technique
 
-- **Langage** : TypeScript (Strongly Typed, zero `any` policy)
-- **Styles** : Tailwind CSS + CSS Variables
-- **Moteur** : Node.js (ESM)
-- **Tests** : Vitest + JSDOM + Testing Library + Axe-core (A11y)
-- **Qualité** : ESLint + Prettier
+- **Langage** : TypeScript (Strict typing, zero `any`)
+- **Styles** : Tailwind CSS + CSS Custom Properties
+- **Build & Dev** : Vite + PostCSS
+- **Tests** : Vitest + JSDOM + Axe-core (Accessibilité)
+- **CI/CD** : GitHub Actions
 
 ---
 
-## 📖 Tutoriel : Ajouter un nouveau composant
+## 📖 Développement
 
-Grâce à la **Component Factory**, ajouter un composant se fait en quelques étapes simples.
+### Lancer le serveur de développement (HMR)
+Le serveur recharge automatiquement la page dès que vous modifiez le JSON ou un composant.
+```bash
+npm run dev
+```
 
-### 1. Créer le fichier du composant
-Créez un fichier dans `src/components/MonComposant.ts`.
+### Générer le bundle de production
+```bash
+npm run build
+```
 
-### 2. Définir le composant avec la Factory
-Utilisez `createComponent` pour bénéficier de la validation automatique et de l'accessibilité.
+---
 
+## 🧱 Architecture des Composants
+
+Tous les composants sont créés via la `Component Factory`. Cela garantit :
+1. **Validation** : Seuls les tokens de design autorisés sont acceptés.
+2. **Accessibilité** : Les attributs `aria-*`, `role` et `id` sont injectés automatiquement.
+3. **Styles** : Les variables CSS sont isolées par composant.
+
+### Exemple de création d'un composant
 ```typescript
-import { createComponent } from "../utils/factory.js";
-
-export const Alert = createComponent({
-  name: "Alert",
-  // 1. Définissez les tokens autorisés pour ce composant
-  authorizedTokens: ["alert-bg", "alert-text"],
-  
-  // 2. Définissez le template HTML
+export const MyComponent = createComponent({
+  name: "MyComponent",
+  authorizedTokens: ["my-bg", "my-text"],
   template: (props, children, styleVars, a11yAttrs) => `
-    <div 
-      role="alert" 
-      style="${styleVars}" 
-      class="p-4 rounded border bg-[var(--alert-bg,theme(colors.blue.50))] text-[var(--alert-text,theme(colors.blue.900))]"
-      ${a11yAttrs}
-    >
-      <strong class="font-bold">${props.title || "Info"} :</strong>
-      <span>${props.message}</span>
+    <div style="${styleVars}" class="bg-[var(--my-bg)]" ${a11yAttrs}>
+      ${props.content}
     </div>
-  `,
+  `
 });
 ```
 
-### 3. Enregistrer le composant
-Ajoutez-le au registre dans `src/index.ts` :
-
-```typescript
-import { Alert } from "./components/Alert.js";
-
-export function setupRegistry() {
-  registry.Page = Page;
-  registry.Hero = Hero;
-  registry.Button = Button;
-  registry.Alert = Alert; // <-- Ajoutez-le ici
-}
-```
-
-### 4. Utiliser le composant dans le JSON
-Vous pouvez maintenant l'utiliser dans `data/page.json` :
-
-```json
-{
-  "type": "Alert",
-  "props": {
-    "title": "Attention",
-    "message": "Ceci est une alerte personnalisée",
-    "id": "main-alert"
-  },
-  "style": {
-    "alert-bg": "#fef2f2",
-    "alert-text": "#991b1b"
-  }
-}
-```
-
 ---
 
-## 🚀 Lancer le projet
+## ♿ Accessibilité (A11y)
+
+Le projet intègre `vitest-axe` pour valider que chaque composant respecte les normes WCAG. Les composants interactifs (comme l'AppBar) gèrent nativement le focus et les états ARIA.
+
+## 🧪 Tests
 
 ```bash
-# Installer les dépendances
-npm install
-
-# Lancer la génération de la page
-npm start
-
-# Lancer les tests et vérifier la couverture
+# Lancer tous les tests
 npm test
-npm run lint
+
+# Vérifier la couverture
+npx vitest run --coverage
 ```
 
-La page générée sera disponible dans `output.html`.
+Le cœur du moteur (`renderer.ts`) et les utilitaires de style/validation sont maintenus à **100% de couverture**.

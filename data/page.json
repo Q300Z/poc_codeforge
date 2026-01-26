@@ -1,38 +1,52 @@
 {
   "type": "Page",
   "props": {
-    "title": "Design System Token Driven",
-    "debug": true
+    "title": "Navigation & Responsive",
+    "debug": false
   },
   "style": {
     "brand-primary": "#4f46e5",
-    "brand-secondary": "#10b981",
+    "appbar-bg": "#ffffff",
+    "appbar-text": "#1e293b",
     "btn-bg-default": "var(--brand-primary)",
     "hero-bg-default": "#f8fafc",
     "hero-text-default": "var(--brand-primary)"
   },
   "children": [
     {
+      "type": "AppBar",
+      "props": {
+        "title": "RenderEngine",
+        "links": [
+          { "label": "Accueil", "href": "#" },
+          { "label": "Fonctionnalités", "href": "#features" },
+          { "label": "Documentation", "href": "#docs" }
+        ]
+      }
+    },
+    {
       "type": "Hero",
       "props": {
-        "title": "Token Architecture",
-        "subtitle": "Séparation entre l'identité (tokens) et l'usage (defaults components)."
+        "title": "Composants Interactifs",
+        "subtitle": "Testez le menu burger en réduisant la largeur de votre navigateur."
       }
     },
     {
-      "type": "Button",
+      "type": "Grid",
       "props": {
-        "label": "Bouton Primaire"
-      }
-    },
-    {
-      "type": "Button",
-      "props": {
-        "label": "Bouton Secondaire"
+        "cols": 2,
+        "gap": 6
       },
-      "style": {
-        "btn-bg": "var(--brand-secondary)"
-      }
+      "children": [
+        {
+          "type": "Button",
+          "props": { "label": "Action 1" }
+        },
+        {
+          "type": "Button",
+          "props": { "label": "Action 2" }
+        }
+      ]
     }
   ]
 }

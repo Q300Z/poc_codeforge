@@ -5,6 +5,9 @@ import { validateStyle } from "../utils/validator.js";
 const AUTHORIZED_TOKENS = [
   "brand-primary",
   "brand-secondary",
+  "appbar-bg",
+  "appbar-text",
+  "appbar-border",
   "btn-bg-default",
   "btn-text-default",
   "hero-bg-default",

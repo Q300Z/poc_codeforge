@@ -11,11 +11,9 @@ describe("Component Factory", () => {
         `<div style="${styleVars}" ${a11yAttrs}></div>`,
     });
 
-    const html = TestComponent(
-      { id: "test-id", "aria-hidden": "true", role: "presentation" },
-      [],
-      { color: "red" }
-    );
+    const html = TestComponent({ id: "test-id", "aria-hidden": "true", role: "presentation" }, [], {
+      color: "red",
+    });
 
     expect(html).toContain('style="--color: red;"');
     expect(html).toContain('id="test-id"');
