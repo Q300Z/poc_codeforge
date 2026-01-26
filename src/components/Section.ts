@@ -2,15 +2,7 @@ import { createComponent } from "../utils/factory.js";
 
 export const Section = createComponent({
   name: "Section",
-  authorizedTokens: [
-    "section-bg",
-    "section-py",
-    "height",
-    "min-height",
-    "overflow",
-    "overflow-x",
-    "overflow-y",
-  ],
+  authorizedTokens: ["section-bg", "section-py"],
   template: (_meta, children, styleVars, a11yAttrs) => `
     <section 
       style="${styleVars}" 

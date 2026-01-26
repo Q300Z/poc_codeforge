@@ -10,7 +10,7 @@
     @apply flex-grow;
   }
 
-  /* Layout Classes */
+  /* Layout Classes avec Support Responsive via Variables */
   .section-pad {
     padding-top: var(--section-py, 4rem);
     padding-bottom: var(--section-py, 4rem);
@@ -19,6 +19,11 @@
     overflow: var(--overflow, visible);
     overflow-x: var(--overflow-x, var(--overflow, visible));
     overflow-y: var(--overflow-y, var(--overflow, visible));
+
+    @media (min-width: 768px) {
+      padding-top: var(--section-py-md, var(--section-py, 4rem));
+      padding-bottom: var(--section-py-md, var(--section-py, 4rem));
+    }
   }
 
   .container-center {
@@ -27,6 +32,10 @@
     position: var(--position, relative);
     height: var(--height, auto);
     overflow: var(--overflow, visible);
+
+    @media (min-width: 1024px) {
+      max-width: var(--container-width-lg, var(--container-width, 80rem));
+    }
   }
 
   /* Components */
@@ -34,6 +43,12 @@
     @apply inline-flex items-center justify-center px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
     background-color: var(--btn-bg, var(--btn-bg-default, theme(colors.blue.600)));
     color: var(--btn-text, var(--btn-text-default, white));
+    width: var(--width, auto);
+    height: var(--height, auto);
+
+    @media (min-width: 768px) {
+      width: var(--width-md, var(--width, auto));
+    }
   }
 
   .hero-section {

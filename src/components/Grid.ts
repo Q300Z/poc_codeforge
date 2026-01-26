@@ -23,7 +23,7 @@ const GAP_MAP: Record<number, string> = {
 
 export const Grid = createComponent({
   name: "Grid",
-  authorizedTokens: ["grid-gap", "grid-bg", "overflow", "overflow-x", "overflow-y"],
+  authorizedTokens: ["grid-gap", "grid-bg"],
   template: (meta, children, styleVars, a11yAttrs) => {
     const cols = (meta.cols as number) || 2;
     const gap = (meta.gap as number) || 8;

@@ -12,7 +12,8 @@
     "appbar-bg": "rgba(255, 255, 255, 0.8)",
     "appbar-border": "#f3f4f6",
     "hero-bg-default": "#ffffff",
-    "section-py": "4rem"
+    "section-py": 40,
+    "section-py-md": 100
   },
   "layout": {
     "header": {

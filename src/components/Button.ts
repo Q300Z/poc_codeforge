@@ -2,23 +2,14 @@ import { createComponent } from "../utils/factory.js";
 
 export const Button = createComponent({
   name: "Button",
-  authorizedTokens: [
-    "btn-bg",
-    "btn-text",
-    "bg-color",
-    "text-color",
-    "position",
-    "top",
-    "left",
-    "bottom",
-    "right",
-    "transform",
-    "width",
-    "height",
-  ],
+  description: "Un composant interactif polyvalent servant de bouton ou de lien.",
+  metaSchema: {
+    label: "Le texte affiché sur le bouton.",
+    action: "URL de redirection (ex: /home, http://...) ou code JavaScript (ex: alert('hi')).",
+  },
+  authorizedTokens: ["btn-bg", "btn-text", "bg-color", "text-color"],
   template: (meta, _, styleVars, a11yAttrs) => {
     const action = (meta.action as string) || "";
-    // Détection plus robuste : commence par /, http, # OU finit par .html
     const isLink =
       action.startsWith("/") ||
       action.startsWith("http") ||
@@ -28,29 +19,10 @@ export const Button = createComponent({
     const label = meta.label || "Click me";
 
     if (isLink) {
-      return `
-        <a 
-          href="${action}"
-          style="${styleVars}"
-          class="btn-base no-underline"
-          ${a11yAttrs}
-        >
-          ${label}
-        </a>
-      `;
+      return `<a href="${action}" style="${styleVars}" class="btn-base no-underline" ${a11yAttrs}>${label}</a>`;
     }
 
     const onclick = action ? `onclick="${action}"` : "";
-    return `
-      <button 
-        type="button" 
-        style="${styleVars}"
-        class="btn-base"
-        ${a11yAttrs}
-        ${onclick}
-      >
-        ${label}
-      </button>
-    `;
+    return `<button type="button" style="${styleVars}" class="btn-base" ${a11yAttrs} ${onclick}>${label}</button>`;
   },
 });

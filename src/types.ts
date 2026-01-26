@@ -2,7 +2,7 @@ export interface Node {
   id: string;
   type: string;
   meta: Record<string, unknown>;
-  style?: Record<string, string>;
+  style?: Record<string, string | number>;
   children?: Node[];
 }
 
@@ -17,7 +17,7 @@ export interface SiteNode {
     createdAt: string;
     [key: string]: unknown;
   };
-  style?: Record<string, string>;
+  style?: Record<string, string | number>;
   layout?: {
     header?: Node;
     footer?: Node;
@@ -32,6 +32,6 @@ export type ComponentHTML = string;
 export type Component = (
   meta: Record<string, unknown>,
   children: ComponentHTML[],
-  style?: Record<string, string>,
+  style?: Record<string, string | number>,
   id?: string
 ) => ComponentHTML;

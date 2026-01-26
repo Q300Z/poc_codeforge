@@ -2,6 +2,11 @@ import { createComponent } from "../utils/factory.js";
 
 export const Hero = createComponent({
   name: "Hero",
+  description: "Bandeau d'accueil d'une page avec un titre et un sous-titre.",
+  metaSchema: {
+    title: "Titre principal (H1).",
+    subtitle: "Paragraphe descriptif optionnel.",
+  },
   authorizedTokens: ["hero-bg", "hero-text", "hero-bg-default", "hero-text-default", "section-py"],
   template: (meta, _, styleVars, a11yAttrs) => `
     <section 

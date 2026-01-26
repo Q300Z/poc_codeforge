@@ -4,6 +4,8 @@ import { validateStyle } from "./validator.js";
 
 interface FactoryOptions {
   name: string;
+  description?: string; // Documentation du composant
+  metaSchema?: Record<string, string>; // Description des champs meta
   authorizedTokens: string[];
   template: (
     meta: Record<string, unknown>,
@@ -14,12 +16,34 @@ interface FactoryOptions {
   ) => string;
 }
 
-export function createComponent({ name, authorizedTokens, template }: FactoryOptions): Component {
-  return (meta, children, style, id = `gen-${Math.random().toString(36).slice(2, 9)}`) => {
+/**
+ * Interface étendue pour porter la documentation
+ */
+export interface DocumentedComponent extends Component {
+  doc?: {
+    name: string;
+    description: string;
+    metaSchema: Record<string, string>;
+    authorizedTokens: string[];
+  };
+}
+
+export function createComponent({
+  name,
+  description = "",
+  metaSchema = {},
+  authorizedTokens,
+  template,
+}: FactoryOptions): DocumentedComponent {
+  const component: DocumentedComponent = (
+    meta,
+    children,
+    style,
+    id = `gen-${Math.random().toString(36).slice(2, 9)}`
+  ) => {
     validateStyle(name, style, authorizedTokens);
     const styleVars = getStyleVariables(style);
 
-    // Extraction des aria-* restants dans meta
     const ariaAttrs = Object.entries(meta)
       .filter(([key]) => key.startsWith("aria-"))
       .map(([key, value]) => `${key}="${value}"`)
@@ -29,4 +53,14 @@ export function createComponent({ name, authorizedTokens, template }: FactoryOpt
 
     return template(meta, children, styleVars, a11yAttrs, id);
   };
+
+  // On attache la documentation à la fonction
+  component.doc = {
+    name,
+    description,
+    metaSchema,
+    authorizedTokens,
+  };
+
+  return component;
 }

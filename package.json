@@ -46,6 +46,7 @@
     "start": "node --loader ts-node/esm src/index.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "docs": "node --loader ts-node/esm src/gen-docs.ts",
     "lint": "eslint src/**/*.ts --fix"
   },
   "devDependencies": {

@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForgeEngine Ultimate Showcase</title>
+    <style>
+      .btn-base {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition-duration: 150ms;
+        background-color: var(--btn-bg, var(--btn-bg-default, #2563eb));
+        color: var(--btn-text, var(--btn-text-default, white));
+      }
+      .hero-section {
+        padding: 4rem 2rem;
+        text-align: center;
+        background-color: var(--hero-bg, var(--hero-bg-default, #f9fafb));
+      }
+      .hero-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--hero-text, var(--hero-text-default, #111827));
+      }
+      [data-debug-theme="true"] * {
+        outline: 1px dashed rgba(255, 0, 255, 0.3);
+      }
+    </style>
+  <link rel="stylesheet" crossorigin href="/assets/style-BopVvES-.css">
+</head>
+<body class="site-wrapper" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --appbar-border: #f3f4f6; --hero-bg-default: #ffffff; --section-py: 40px; --section-py-md: 100;" >
+    
+    <nav 
+      style="" 
+      class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
+      id="global-nav" 
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <span class="text-xl font-bold tracking-tight">ForgeEngine</span>
+          </div>
+          
+          <div class="hidden md:flex items-center space-x-8">
+            
+              <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Showcase</a>
+            
+              <a href="layouts.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Layouts</a>
+            
+              <a href="contact.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
+            
+          </div>
+
+          <div class="flex items-center md:hidden">
+            <button 
+              id="btn-global-nav"
+              type="button" 
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              aria-expanded="false"
+              aria-controls="menu-global-nav"
+            >
+              <span class="sr-only">Ouvrir le menu</span>
+              <svg id="icon-m-global-nav" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg id="icon-c-global-nav" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="menu-global-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Showcase</a>
+          
+            <a href="layouts.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Layouts</a>
+          
+            <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Contact</a>
+          
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          const button = document.getElementById('btn-global-nav');
+          const menu = document.getElementById('menu-global-nav');
+          const menuIcon = document.getElementById('icon-m-global-nav');
+          const closeIcon = document.getElementById('icon-c-global-nav');
+
+          if (button && menu) {
+            button.addEventListener('click', () => {
+              const expanded = button.getAttribute('aria-expanded') === 'true';
+              button.setAttribute('aria-expanded', !expanded);
+              menu.classList.toggle('hidden');
+              menuIcon.classList.toggle('hidden');
+              closeIcon.classList.toggle('hidden');
+            });
+          }
+        })();
+      </script>
+    </nav>
+    
+    
+    <main class="main-content">
+        
+    <section 
+      class="hero-section" 
+      style=""
+      id="feat-hero" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        Galerie de Layouts
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Démonstration des capacités de placement Mobile-First.</p>
+    </section>
+  
+    <section 
+      style="" 
+      class="section-pad bg-[var(--section-bg,transparent)]"
+      id="grid-demo" 
+    >
+      
+    <div 
+      style="" 
+      class="container-center"
+      id="c1" 
+    >
+      
+    <section 
+      class="hero-section" 
+      style="--section-py: 1rem;"
+      id="t1" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        1. Grille Responsive (3 cols)
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">S'empile sur mobile.</p>
+    </section>
+  
+      <section 
+        style="; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible));" 
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="grid" 
+      >
+        
+    <div 
+      style="--bg-color: #f87171;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="box1" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #60a5fa;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="box2" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #34d399;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="box3" 
+    ></div>
+  
+      </section>
+    
+    </div>
+  
+    </section>
+  
+    <section 
+      style="--section-bg: #f8fafc;" 
+      class="section-pad bg-[var(--section-bg,transparent)]"
+      id="stack-demo" 
+    >
+      
+    <div 
+      style="" 
+      class="container-center"
+      id="c2" 
+    >
+      
+    <section 
+      class="hero-section" 
+      style="--section-py: 1rem;"
+      id="t2" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        2. Stacks
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Vertical vs Horizontal</p>
+    </section>
+  
+      <section 
+        style="; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible));" 
+        class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="stacks-grid" 
+      >
+        
+      <div 
+        style="; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible)); width: var(--width, auto); height: var(--height, auto);" 
+        class="flex flex-col gap-4 items-start justify-start"
+        id="v-stack" 
+      >
+        
+    <div 
+      style="--bg-color: #818cf8; --height: 40px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sv1" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #818cf8; --height: 40px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sv2" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #818cf8; --height: 40px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sv3" 
+    ></div>
+  
+      </div>
+    
+      <div 
+        style="; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible)); width: var(--width, auto); height: var(--height, auto);" 
+        class="flex flex-row gap-4 items-start justify-start"
+        id="h-stack" 
+      >
+        
+    <div 
+      style="--bg-color: #fbbf24; --width: 60px; --height: 60px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sh1" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #fbbf24; --width: 60px; --height: 60px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sh2" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #fbbf24; --width: 60px; --height: 60px;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="sh3" 
+    ></div>
+  
+      </div>
+    
+      </section>
+    
+    </div>
+  
+    </section>
+  
+    <section 
+      style="" 
+      class="section-pad bg-[var(--section-bg,transparent)]"
+      id="overflow-demo" 
+    >
+      
+    <div 
+      style="" 
+      class="container-center"
+      id="c3" 
+    >
+      
+    <section 
+      class="hero-section" 
+      style="--section-py: 1rem;"
+      id="t3" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        3. Gestion de l'Overflow
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">Exemple d'une liste scrollable horizontalement (Stack + overflow-x).</p>
+    </section>
+  
+      <div 
+        style="--overflow-x: auto; --width: 100%; --stack-gap: 1.5rem;; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible)); width: var(--width, auto); height: var(--height, auto);" 
+        class="flex flex-row gap-6 items-start justify-start"
+        id="scroll-stack" 
+      >
+        
+    <div 
+      style="--bg-color: #ec4899; --width: 300px; --height: 150px; --flex-shrink: 0;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="ob1" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #ec4899; --width: 300px; --height: 150px; --flex-shrink: 0;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="ob2" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #ec4899; --width: 300px; --height: 150px; --flex-shrink: 0;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="ob3" 
+    ></div>
+  
+    <div 
+      style="--bg-color: #ec4899; --width: 300px; --height: 150px; --flex-shrink: 0;; flex-shrink: var(--flex-shrink, 1);" 
+      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
+      id="ob4" 
+    ></div>
+  
+      </div>
+    
+    </div>
+  
+    </section>
+  
+    </main>
+
+    <footer class="w-full">
+      
+    <section 
+      style="--section-bg: #111827; --section-py: 2rem;" 
+      class="section-pad bg-[var(--section-bg,transparent)]"
+      id="global-footer" 
+    >
+      
+    <div 
+      style="" 
+      class="container-center"
+      id="footer-cont" 
+    >
+      
+    <section 
+      class="hero-section" 
+      style="--hero-text: #9ca3af; --hero-bg: transparent;"
+      id="footer-text" 
+      aria-labelledby="hero-title"
+    >
+      <h1 id="hero-title" class="hero-title">
+        ForgeEngine POC
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">© 2026</p>
+    </section>
+  
+    </div>
+  
+    </section>
+  
+    </footer>
+</body>
+</html>

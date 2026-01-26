@@ -13,7 +13,7 @@ const GAP_MAP: Record<number, string> = {
 
 export const Stack = createComponent({
   name: "Stack",
-  authorizedTokens: ["stack-gap", "overflow", "overflow-x", "overflow-y", "width", "height"],
+  authorizedTokens: ["stack-gap"],
   template: (meta, children, styleVars, a11yAttrs) => {
     const direction = meta.direction === "horizontal" ? "flex-row" : "flex-col";
     const align = meta.align || "start";

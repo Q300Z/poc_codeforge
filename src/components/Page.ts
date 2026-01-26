@@ -13,9 +13,6 @@ const AUTHORIZED_TOKENS = [
   "hero-bg-default",
   "hero-text-default",
   "section-py",
-  "position",
-  "height",
-  "width",
 ];
 
 export const Page: Component = (meta, children, style) => {
