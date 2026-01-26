@@ -2,29 +2,19 @@
 
 **Version :** `1.3.0`
 
-Un composant interactif polyvalent servant de bouton ou de lien.
+Bouton ou lien interactif.
 
 ## 📥 Paramètres (meta)
 Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-| `label` | Le texte affiché sur le bouton. |
-| `action` | URL de redirection ou code JavaScript. |
-
-## 🎨 Design Tokens (style)
-Ces jetons sont spécifiques à ce composant.
-
-| Token | Description |
-| :--- | :--- |
-| `--btn-bg` | Couleur de fond spécifique au bouton. |
-| `--btn-text` | Couleur du texte spécifique au bouton. |
-| `--bg-color` | Variable CSS pour le fond (alias legacy). |
-| `--text-color` | Variable CSS pour le texte (alias legacy). |
+| `label` | Texte |
+| `action` | URL ou JS |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :
-`width`, `height`, `min-width`, `min-height`, `max-width`, `max-height`, `position`, `top`, `left`, `bottom`, `right`, `z-index`, `overflow`, `overflow-x`, `overflow-y`, `flex-shrink`, `flex-grow`, `transform`, `opacity`.
+`width`, `height`, `min-width`, `min-height`, `max-width`, `max-height`, `position`, `top`, `left`, `bottom`, `right`, `z-index`, `overflow`, `overflow-x`, `overflow-y`, `flex-shrink`, `flex-grow`, `transform`, `opacity`, `border-radius`.
 
 ## 📄 Exemple JSON
 ```json
