@@ -1,29 +1,25 @@
-# 🧱 Composant : Box
+# 🧱 Composant : Text
 
-**Version :** `1.1.0`
+**Version :** `1.0.0`
 
-Un composant de structure simple pour afficher des blocs de couleur ou servir de placeholder.
+Composant pour les blocs de texte et paragraphes.
 
 ## 📥 Paramètres (meta)
 Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-| `bg-color` | Couleur de fond (ex: #000, red, var(--token)). |
-| `width` | Largeur explicite. |
-| `height` | Hauteur explicite. |
-| `border-radius` | Rayon de bordure. |
+| `content` | Le contenu textuel. |
+| `tag` | Balise HTML à utiliser (p, span, div). Défaut : p. |
 
 ## 🎨 Design Tokens (style)
 Ces jetons sont spécifiques à ce composant.
 
 | Token | Description |
 | :--- | :--- |
-| `--bg-color` | Couleur de fond. |
-| `--width` | Largeur. |
-| `--height` | Hauteur. |
-| `--border-radius` | Rayon de bordure. |
-| `--flex-shrink` | Capacité à se rétrécir. |
+| `--font-size` | Taille de la police. |
+| `--text-color` | Couleur du texte. |
+| `--line-height` | Hauteur de ligne. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :
@@ -32,13 +28,11 @@ Ce composant supporte également tous les utilitaires de mise en page globaux :
 ## 📄 Exemple JSON
 ```json
 {
-  "id": "box-1",
-  "type": "Box",
+  "id": "text-1",
+  "type": "Text",
   "meta": {
-    "bg-color": "...",
-    "width": "...",
-    "height": "...",
-    "border-radius": "..."
+    "content": "...",
+    "tag": "..."
   },
   "style": {
     "width": "100%"

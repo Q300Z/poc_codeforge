@@ -40,9 +40,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:file": "VITE_JSON_PATH=$JSON_PATH vite",
     "build": "tsc && vite build",
     "build:lib": "tsc",
-    "clean": "rm -rf dist generated coverage test-dist-site test-multi-site test-output.html index.html docs.html",
+    "build:showcase": "node --loader ts-node/esm src/gen-showcase.ts",
+    "reset:site": "node --loader ts-node/esm src/reset-site-json.ts",
+    "clean": "rm -rf dist generated coverage test-dist-site test-multi-site test-output.html index.html docs.html layouts.html contact.html canvas.html",
     "start": "node --loader ts-node/esm src/index.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
@@ -52,7 +55,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.50.1",
-    "@release-it/conventional-changelog": "^10.0.4",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@tailwindcss/postcss": "^4.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

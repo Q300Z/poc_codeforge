@@ -29,7 +29,7 @@
     </style>
   <link rel="stylesheet" crossorigin href="/assets/style-BKVwETzT.css">
 </head>
-<body class="site-wrapper" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --hero-bg-default: #ffffff; --section-py: 40px;" >
+<body class="site-wrapper" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --hero-bg-default: #ffffff; --section-py: 40px; position: relative; height: 600px; overflow: hidden;" >
     
     <nav 
       style="" 
@@ -114,8 +114,8 @@
     <section 
       class="hero-section" 
       style=""
-      id="feat-hero" data-component-version="1.3.0"  
-      aria-labelledby="feat-hero-title"
+      id="canvas-hero" data-component-version="1.3.0"  
+      aria-labelledby="canvas-hero-title"
     >
       <div class="hero-content">
         
@@ -123,9 +123,9 @@
         style="--text-color: var(--hero-text, inherit);" 
         class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] font-bold leading-tight"
         style="font-size: var(--font-size, 2.8rem);"
-        id="feat-hero-title" data-component-version="1.1.0"  
+        id="canvas-hero-title" data-component-version="1.1.0"  
       >
-        Galerie de Layouts
+        Mode Canvas
       </h1>
     
         <div class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
@@ -133,86 +133,26 @@
         style="--text-color: inherit;" 
         class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.5)]"
         style="font-size: var(--font-size, 1rem);"
-        id="feat-hero-subtitle" data-component-version="1.0.0"  
+        id="canvas-hero-subtitle" data-component-version="1.0.0"  
       >
-        Mise en page fluide et typée via Builders.
+        Emplacements précis via coordonnées X et Y.
       </p>
     </div>
       </div>
     </section>
   
-    <section 
-      style="" 
-      class="section-pad bg-[var(--section-bg,transparent)]"
-      id="grid-demo" data-component-version="1.1.0"  
-    >
-      
     <div 
-      style="" 
-      class="container-center"
-      id="c1" data-component-version="1.1.0"  
-    >
-      
-    <section 
-      class="hero-section" 
-      style="--section-py: 16px;"
-      id="t1" data-component-version="1.3.0"  
-      aria-labelledby="t1-title"
-    >
-      <div class="hero-content">
-        
-      <h1 
-        style="--text-color: var(--hero-text, inherit);" 
-        class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] font-bold leading-tight"
-        style="font-size: var(--font-size, 2.8rem);"
-        id="t1-title" data-component-version="1.1.0"  
-      >
-        1. Grille Responsive (3 cols)
-      </h1>
-    
-        <div class="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
-      <p 
-        style="--text-color: inherit;" 
-        class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.5)]"
-        style="font-size: var(--font-size, 1rem);"
-        id="t1-subtitle" data-component-version="1.0.0"  
-      >
-        S'empile sur mobile.
-      </p>
-    </div>
-      </div>
-    </section>
-  
-      <section 
-        style="" 
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
-        id="features-grid" data-component-version="1.1.0"  
-      >
-        
-    <div 
-      style="--bg-color: #f87171;; flex-shrink: var(--flex-shrink, 1);" 
+      style="position: absolute; top: 250px; left: 50px; width: 150px; height: 150px; --bg-color: #818cf8;; flex-shrink: var(--flex-shrink, 1);" 
       class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
-      id="box1" data-component-version="1.1.0"  
+      id="abs-box-1" data-component-version="1.1.0"  
     ></div>
   
     <div 
-      style="--bg-color: #60a5fa;; flex-shrink: var(--flex-shrink, 1);" 
+      style="position: absolute; top: 300px; left: 150px; width: 100px; height: 100px; --bg-color: #fbbf24; z-index: 10;; flex-shrink: var(--flex-shrink, 1);" 
       class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
-      id="box2" data-component-version="1.1.0"  
+      id="abs-box-2" data-component-version="1.1.0"  
     ></div>
-  
-    <div 
-      style="--bg-color: #34d399;; flex-shrink: var(--flex-shrink, 1);" 
-      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
-      id="box3" data-component-version="1.1.0"  
-    ></div>
-  
-      </section>
-    
-    </div>
-  
-    </section>
-  
+  <button type="button" style="position: absolute; top: 450px; left: 50%; transform: translateX(-50%); --btn-bg: #e11d48;" class="btn-base" id="abs-btn" data-component-version="1.3.0"   >Bouton Flottant</button>
     </main>
 
     <footer class="w-full">

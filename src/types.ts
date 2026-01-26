@@ -1,9 +1,46 @@
-export interface Node {
+/**
+ * Propriétés de mise en page autorisées globalement
+ */
+export type LayoutProperty =
+  | "width"
+  | "height"
+  | "min-width"
+  | "min-height"
+  | "max-width"
+  | "max-height"
+  | "position"
+  | "top"
+  | "left"
+  | "bottom"
+  | "right"
+  | "z-index"
+  | "overflow"
+  | "overflow-x"
+  | "overflow-y"
+  | "flex-shrink"
+  | "flex-grow"
+  | "transform"
+  | "opacity"
+  | "border-radius";
+
+export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
+
+export type ResponsiveLayoutProps = {
+  [K in LayoutProperty as `${K}-${Breakpoint}`]?: string | number;
+};
+
+export type BaseStyles = Partial<Record<LayoutProperty, string | number>> & ResponsiveLayoutProps;
+
+export interface Node<TMeta = Record<string, any>, TStyle = Record<string, any>> {
   id: string;
   type: string;
-  meta: Record<string, unknown>;
-  style?: Record<string, string | number>;
-  children?: Node[];
+  meta: TMeta & {
+    version?: string;
+    createdAt?: string;
+    audioDescription?: string;
+  };
+  style?: TStyle & BaseStyles & Record<string, string | number>;
+  children?: Node<any, any>[];
 }
 
 export interface PageNode extends Node {
@@ -17,7 +54,7 @@ export interface SiteNode {
     createdAt: string;
     [key: string]: unknown;
   };
-  style?: Record<string, string | number>;
+  style?: BaseStyles & Record<string, string | number>;
   layout?: {
     header?: Node;
     footer?: Node;
@@ -28,10 +65,34 @@ export interface SiteNode {
   }[];
 }
 
+// Format Externe ScreenDraft (pour compatibilité)
+export interface ScreenDraftComponent {
+  id: string;
+  type: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  content?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  fontSize?: number;
+  [key: string]: unknown;
+}
+
+export interface ScreenDraftPage {
+  meta: {
+    appName: string;
+    createdAt: string;
+    version: string;
+  };
+  components: ScreenDraftComponent[];
+}
+
 export type ComponentHTML = string;
 export type Component = (
-  meta: Record<string, unknown>,
+  meta: Record<string, any>,
   children: ComponentHTML[],
-  style?: Record<string, string | number>,
+  style?: Record<string, any>,
   id?: string
 ) => ComponentHTML;

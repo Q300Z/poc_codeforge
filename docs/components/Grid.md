@@ -1,5 +1,7 @@
 # 🧱 Composant : Grid
 
+**Version :** `1.1.0`
+
 Système de grille responsive Mobile-First utilisant CSS Grid.
 
 ## 📥 Paramètres (meta)
@@ -7,8 +9,16 @@ Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-| `cols` | Nombre de colonnes sur desktop (1 à 12). 1 colonne par défaut sur mobile. |
-| `gap` | Espacement entre les colonnes (0, 2, 4, 6, 8, 10, 12, 16). |
+| `cols` | Nombre de colonnes sur desktop (1 à 12). |
+| `gap` | Espacement entre les colonnes (0 à 16). |
+
+## 🎨 Design Tokens (style)
+Ces jetons sont spécifiques à ce composant.
+
+| Token | Description |
+| :--- | :--- |
+| `--grid-gap` | Espacement personnalisé via CSS Variable. |
+| `--grid-bg` | Couleur de fond de la grille. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :

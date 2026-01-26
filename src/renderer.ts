@@ -1,7 +1,10 @@
 import { registry } from "./registry.js";
 import { Node } from "./types.js";
 
-export function render(node: Node): string {
+/**
+ * Moteur de rendu récursif principal
+ */
+export function render(node: Node<any>): string {
   const component = registry[node.type];
 
   if (!component) {

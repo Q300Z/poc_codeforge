@@ -16,14 +16,16 @@ export function generateComponentDocs(outputDir: string = "docs/components") {
   const components = Object.entries(registry) as [string, DocumentedComponent][];
   const componentLinks: string[] = [];
 
-  for (const [, comp] of components) {
+  for (const [_, comp] of components) {
     if (!comp.doc) continue;
 
-    const { name, description, metaSchema, authorizedTokens } = comp.doc;
+    const { name, version, description, metaSchema, authorizedTokens } = comp.doc;
     // Lien relatif vers le dossier components/
     componentLinks.push("- [" + name + "](./components/" + name + ".md)");
 
-    let markdown = "# 🧱 Composant : " + name + "\n\n" + description + "\n\n";
+    let markdown = "# 🧱 Composant : " + name + "\n\n";
+    markdown += "**Version :** `" + version + "`\n\n";
+    markdown += description + "\n\n";
 
     if (Object.keys(metaSchema).length > 0) {
       markdown += "## 📥 Paramètres (meta)\n";

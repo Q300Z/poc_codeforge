@@ -1,29 +1,25 @@
-# 🧱 Composant : Box
+# 🧱 Composant : Title
 
 **Version :** `1.1.0`
 
-Un composant de structure simple pour afficher des blocs de couleur ou servir de placeholder.
+Un composant de titre sémantique supportant les niveaux H1 à H6.
 
 ## 📥 Paramètres (meta)
 Ces champs doivent être placés dans l'objet `meta` du JSON.
 
 | Champ | Description |
 | :--- | :--- |
-| `bg-color` | Couleur de fond (ex: #000, red, var(--token)). |
-| `width` | Largeur explicite. |
-| `height` | Hauteur explicite. |
-| `border-radius` | Rayon de bordure. |
+| `content` | Le texte du titre. |
+| `level` | Niveau du titre (1 à 6). Défaut : 2. |
 
 ## 🎨 Design Tokens (style)
 Ces jetons sont spécifiques à ce composant.
 
 | Token | Description |
 | :--- | :--- |
-| `--bg-color` | Couleur de fond. |
-| `--width` | Largeur. |
-| `--height` | Hauteur. |
-| `--border-radius` | Rayon de bordure. |
-| `--flex-shrink` | Capacité à se rétrécir. |
+| `--font-size` | Taille de la police. |
+| `--text-color` | Couleur du texte. |
+| `--bg-color` | Couleur de fond du bloc. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :
@@ -32,13 +28,11 @@ Ce composant supporte également tous les utilitaires de mise en page globaux :
 ## 📄 Exemple JSON
 ```json
 {
-  "id": "box-1",
-  "type": "Box",
+  "id": "title-1",
+  "type": "Title",
   "meta": {
-    "bg-color": "...",
-    "width": "...",
-    "height": "...",
-    "border-radius": "..."
+    "content": "...",
+    "level": "..."
   },
   "style": {
     "width": "100%"

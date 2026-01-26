@@ -1,5 +1,7 @@
 # 🧱 Composant : Container
 
+**Version :** `1.1.0`
+
 Conteneur structurel qui centre son contenu avec une largeur maximale.
 
 ## 📥 Paramètres (meta)

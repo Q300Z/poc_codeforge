@@ -12,6 +12,8 @@ Bienvenue dans la documentation technique des composants de CodeForge.
 - [Page](./components/Page.md)
 - [Section](./components/Section.md)
 - [Stack](./components/Stack.md)
+- [Text](./components/Text.md)
+- [Title](./components/Title.md)
 
 ---
 *Généré automatiquement par CodeForge.*

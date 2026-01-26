@@ -1,5 +1,7 @@
 # 🧱 Composant : Button
 
+**Version :** `1.3.0`
+
 Un composant interactif polyvalent servant de bouton ou de lien.
 
 ## 📥 Paramètres (meta)
@@ -8,7 +10,7 @@ Ces champs doivent être placés dans l'objet `meta` du JSON.
 | Champ | Description |
 | :--- | :--- |
 | `label` | Le texte affiché sur le bouton. |
-| `action` | URL de redirection (ex: /home, http://...) ou code JavaScript (ex: alert('hi')). |
+| `action` | URL de redirection ou code JavaScript. |
 
 ## 🎨 Design Tokens (style)
 Ces jetons sont spécifiques à ce composant.

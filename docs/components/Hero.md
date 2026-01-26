@@ -1,5 +1,7 @@
 # 🧱 Composant : Hero
 
+**Version :** `1.2.0`
+
 Bandeau d'accueil d'une page avec un titre et un sous-titre.
 
 ## 📥 Paramètres (meta)

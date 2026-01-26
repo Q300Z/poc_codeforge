@@ -7,6 +7,8 @@ import { Hero } from "./components/Hero.js";
 import { Page } from "./components/Page.js";
 import { Section } from "./components/Section.js";
 import { Stack } from "./components/Stack.js";
+import { Text } from "./components/Text.js";
+import { Title } from "./components/Title.js";
 import { registry } from "./registry.js";
 
 export function setupRegistry() {
@@ -19,4 +21,6 @@ export function setupRegistry() {
   registry.Container = Container;
   registry.Stack = Stack;
   registry.Box = Box;
+  registry.Title = Title;
+  registry.Text = Text;
 }

@@ -5,6 +5,7 @@ export * from "./setup.js";
 export * from "./utils/factory.js";
 export * from "./utils/style.js";
 export * from "./utils/validator.js";
+export * from "./utils/builder.js";
 
 import { build as viteBuild } from "vite";
 import path from "path";
@@ -36,12 +37,15 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     page.content.meta.appName = siteData.meta.appName;
     page.content.style = { ...siteData.style, ...page.content.style };
 
-    // On pré-rend le header et le footer s'ils existent
-    if (siteData.layout?.header) {
-      page.content.meta.renderedHeader = render(siteData.layout.header);
-    }
-    if (siteData.layout?.footer) {
-      page.content.meta.renderedFooter = render(siteData.layout.footer);
+    const children = [];
+    if (siteData.layout?.header) children.push(siteData.layout.header);
+    if (page.content.children) children.push(...page.content.children);
+    if (siteData.layout?.footer) children.push(siteData.layout.footer);
+    page.content.children = children;
+
+    if (page.content.meta) {
+      if (siteData.layout?.header) page.content.meta.renderedHeader = render(siteData.layout.header);
+      if (siteData.layout?.footer) page.content.meta.renderedFooter = render(siteData.layout.footer);
     }
 
     const html = render(page.content);
@@ -59,12 +63,10 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
       build: {
         outDir: absoluteOutDir,
         emptyOutDir: true,
-        rollupOptions: {
-          input,
-        },
+        rollupOptions: { input },
       },
     });
-    console.log(`\n✅ Multi-page site successfully generated in: ${absoluteOutDir}`);
+    console.log(`\n✅ Site successfully generated in: ${absoluteOutDir}`);
   } finally {
     for (const file of tempFiles) {
       if (fs.existsSync(file)) fs.unlinkSync(file);

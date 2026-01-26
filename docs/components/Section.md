@@ -1,5 +1,7 @@
 # 🧱 Composant : Section
 
+**Version :** `1.1.0`
+
 Unité structurelle horizontale pleine largeur pour découper la page.
 
 ## 📥 Paramètres (meta)
@@ -9,6 +11,14 @@ Ces champs doivent être placés dans l'objet `meta` du JSON.
 | :--- | :--- |
 | `section-bg` | Couleur de fond de la section. |
 | `section-py` | Padding vertical de la section. |
+
+## 🎨 Design Tokens (style)
+Ces jetons sont spécifiques à ce composant.
+
+| Token | Description |
+| :--- | :--- |
+| `--section-bg` | Couleur de fond spécifique à cette section. |
+| `--section-py` | Padding vertical personnalisé. |
 
 ## 🏗️ Utilitaires de Layout
 Ce composant supporte également tous les utilitaires de mise en page globaux :

@@ -4,11 +4,12 @@ import { validateStyle } from "./validator.js";
 
 interface FactoryOptions {
   name: string;
+  version: string; // Version obligatoire pour chaque type de composant
   description?: string;
   metaSchema?: Record<string, string>;
   authorizedTokens: string[] | Record<string, string>;
   template: (
-    meta: Record<string, unknown>,
+    meta: Record<string, any>,
     children: ComponentHTML[],
     styleVars: string,
     a11yAttrs: string,
@@ -19,6 +20,7 @@ interface FactoryOptions {
 export interface DocumentedComponent extends Component {
   doc?: {
     name: string;
+    version: string;
     description: string;
     metaSchema: Record<string, string>;
     authorizedTokens: Record<string, string>;
@@ -27,17 +29,16 @@ export interface DocumentedComponent extends Component {
 
 export function createComponent({
   name,
+  version,
   description = "",
   metaSchema = {},
   authorizedTokens,
   template,
 }: FactoryOptions): DocumentedComponent {
-  // Toujours extraire les clés pour la validation
   const tokenKeys = Array.isArray(authorizedTokens)
     ? authorizedTokens
     : Object.keys(authorizedTokens);
 
-  // Filtrer les tokens pour la doc : on ne garde que ceux qui ont une description explicite
   const tokenDoc: Record<string, string> = {};
   if (!Array.isArray(authorizedTokens)) {
     for (const [token, desc] of Object.entries(authorizedTokens)) {
@@ -61,13 +62,17 @@ export function createComponent({
       .map(([key, value]) => `${key}="${value}"`)
       .join(" ");
 
-    const a11yAttrs = `id="${id}" ${ariaAttrs}`;
+    const audioDesc = meta.audioDescription ? `aria-label="${meta.audioDescription}"` : "";
+
+    // On injecte la version du composant dans les attributs HTML pour le debug/trace
+    const a11yAttrs = `id="${id}" data-component-version="${version}" ${audioDesc} ${ariaAttrs}`;
 
     return template(meta, children, styleVars, a11yAttrs, id);
   };
 
   component.doc = {
     name,
+    version,
     description,
     metaSchema,
     authorizedTokens: tokenDoc,

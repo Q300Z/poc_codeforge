@@ -26,4 +26,19 @@ test.describe("Navigation Multi-Page", () => {
     
     await expect(page).toHaveURL(/\/layouts.html$/);
   });
+
+  test("devrait naviguer vers la page canvas", async ({ page, isMobile }) => {
+    await page.goto("/");
+
+    if (isMobile) {
+      await page.getByRole("button", { name: /Ouvrir/i }).click();
+      await page.locator("[id^='menu-']").getByRole("link", { name: "Canvas" }).click();
+    } else {
+      await page.locator("nav").getByRole("link", { name: "Canvas" }).click();
+    }
+    
+    await expect(page).toHaveURL(/\/canvas.html$/);
+    // On utilise l'ID pour disambiguer les H1 (Hero vs Footer)
+    await expect(page.locator("#canvas-hero h1")).toContainText("Mode Canvas");
+  });
 });

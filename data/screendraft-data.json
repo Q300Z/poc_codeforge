@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "appName": "ScreenDraft",
+    "createdAt": "2026-01-26T13:27:57.887Z",
+    "version": "1.0"
+  },
+  "components": [
+    {
+      "id": "ae187734-48c8-4a54-8ffa-0f70c77c1cde",
+      "type": "title",
+      "x": 176.59375,
+      "y": 261.65625,
+      "width": 434,
+      "height": 424,
+      "content": "Bonjour",
+      "backgroundColor": "#954141",
+      "textColor": "#000000",
+      "fontSize": 38
+    },
+    {
+      "id": "1c948f32-47b4-43f2-a606-fcb1b5845695",
+      "type": "button",
+      "x": 187.84375,
+      "y": 581.84375,
+      "width": 150,
+      "height": 50,
+      "content": "Bouton",
+      "backgroundColor": "#3b82f6",
+      "textColor": "#ffffff",
+      "fontSize": 16
+    }
+  ]
+}

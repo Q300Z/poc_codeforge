@@ -28,7 +28,7 @@ export const LAYOUT_UTILITIES = [
  */
 export function validateStyle(
   componentName: string,
-  style: Record<string, string | number> | undefined,
+  style: Record<string, any> | undefined,
   authorizedKeys: string[]
 ): void {
   if (!style) return;

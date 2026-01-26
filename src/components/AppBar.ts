@@ -2,20 +2,19 @@ import { createComponent } from "../utils/factory.js";
 
 export const AppBar = createComponent({
   name: "AppBar",
+  version: "1.1.0",
   description: "Barre de navigation supérieure avec support du menu burger sur mobile.",
   metaSchema: {
     title: "Le titre de l'application affiché à gauche.",
     links: "Tableau d'objets { label: string, href: string } pour la navigation.",
   },
-  authorizedTokens: [
-    "appbar-bg",
-    "appbar-text",
-    "appbar-border",
-    "backdrop-filter",
-    "width",
-    "width-md",
-  ],
-  template: (meta, _children, styleVars, a11yAttrs, id) => {
+  authorizedTokens: {
+    "appbar-bg": "Couleur de fond globale de l'AppBar.",
+    "appbar-text": "Couleur de texte globale de l'AppBar.",
+    "appbar-border": "Couleur de bordure globale de l'AppBar.",
+    "backdrop-filter": "Effet de flou sur le fond.",
+  },
+  template: (meta: Record<string, any>, _children, styleVars, a11yAttrs, id) => {
     const title = meta.title || "My App";
     const links = (meta.links as { label: string; href: string }[]) || [];
     const btnId = `btn-${id}`;

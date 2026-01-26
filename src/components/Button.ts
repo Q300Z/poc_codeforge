@@ -2,10 +2,11 @@ import { createComponent } from "../utils/factory.js";
 
 export const Button = createComponent({
   name: "Button",
+  version: "1.3.0",
   description: "Un composant interactif polyvalent servant de bouton ou de lien.",
   metaSchema: {
     label: "Le texte affiché sur le bouton.",
-    action: "URL de redirection (ex: /home, http://...) ou code JavaScript (ex: alert('hi')).",
+    action: "URL de redirection ou code JavaScript.",
   },
   authorizedTokens: {
     "btn-bg": "Couleur de fond spécifique au bouton.",
@@ -13,7 +14,7 @@ export const Button = createComponent({
     "bg-color": "Variable CSS pour le fond (alias legacy).",
     "text-color": "Variable CSS pour le texte (alias legacy).",
   },
-  template: (meta, _, styleVars, a11yAttrs) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     const action = (meta.action as string) || "";
     const isLink =
       action.startsWith("/") ||

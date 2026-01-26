@@ -6,6 +6,7 @@ describe("Component Factory", () => {
   it("should inject style variables and a11y attributes into the template", () => {
     const TestComponent = createComponent({
       name: "Test",
+      version: "1.0.0",
       authorizedTokens: ["color"],
       template: (_props, _children, styleVars, a11yAttrs, _id) =>
         `<div style="${styleVars}" ${a11yAttrs}></div>`,
@@ -18,9 +19,22 @@ describe("Component Factory", () => {
     expect(html).toContain('aria-hidden="true"');
   });
 
+  it("should transform audioDescription meta into aria-label", () => {
+    const TestComponent = createComponent({
+      name: "Test",
+      version: "1.0.0",
+      authorizedTokens: [],
+      template: (_meta, _children, _styleVars, a11yAttrs) => `<div ${a11yAttrs}></div>`,
+    });
+
+    const html = TestComponent({ audioDescription: "Un bouton génial" }, [], {}, "test-id");
+    expect(html).toContain('aria-label="Un bouton génial"');
+  });
+
   it("should generate a random id if none is provided", () => {
     const TestComponent = createComponent({
       name: "Test",
+      version: "1.0.0",
       authorizedTokens: [],
       template: (_props, _children, _styleVars, _a11yAttrs, id) => id,
     });

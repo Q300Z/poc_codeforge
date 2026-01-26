@@ -15,6 +15,7 @@ const AUTHORIZED_TOKENS = {
 
 export const Page = createComponent({
   name: "Page",
+  version: "1.4.0",
   description:
     "Composant racine gérant le layout global, le thème et l'injection du header/footer.",
   metaSchema: {
@@ -22,7 +23,7 @@ export const Page = createComponent({
     debug: "Active le mode debug visuel (true/false).",
   },
   authorizedTokens: AUTHORIZED_TOKENS,
-  template: (meta, children, styleVars, _a11yAttrs, _id) => {
+  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id) => {
     const debug = meta.debug === true;
     const header = (meta.renderedHeader as string) || "";
     const footer = (meta.renderedFooter as string) || "";

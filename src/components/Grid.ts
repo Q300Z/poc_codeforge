@@ -23,13 +23,17 @@ const GAP_MAP: Record<number, string> = {
 
 export const Grid = createComponent({
   name: "Grid",
+  version: "1.1.0",
   description: "Système de grille responsive Mobile-First utilisant CSS Grid.",
   metaSchema: {
-    cols: "Nombre de colonnes sur desktop (1 à 12). 1 colonne par défaut sur mobile.",
-    gap: "Espacement entre les colonnes (0, 2, 4, 6, 8, 10, 12, 16).",
+    cols: "Nombre de colonnes sur desktop (1 à 12).",
+    gap: "Espacement entre les colonnes (0 à 16).",
   },
-  authorizedTokens: ["grid-gap", "grid-bg", "overflow", "overflow-x", "overflow-y"],
-  template: (meta, children, styleVars, a11yAttrs) => {
+  authorizedTokens: {
+    "grid-gap": "Espacement personnalisé via CSS Variable.",
+    "grid-bg": "Couleur de fond de la grille.",
+  },
+  template: (meta: Record<string, any>, children, styleVars, a11yAttrs) => {
     const cols = (meta.cols as number) || 2;
     const gap = (meta.gap as number) || 8;
 
@@ -38,7 +42,7 @@ export const Grid = createComponent({
 
     return `
       <section 
-        style="${styleVars}; overflow: var(--overflow, visible); overflow-x: var(--overflow-x, var(--overflow, visible)); overflow-y: var(--overflow-y, var(--overflow, visible));" 
+        style="${styleVars}" 
         class="grid grid-cols-1 ${colClass} ${gapClass} w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
         ${a11yAttrs}
       >

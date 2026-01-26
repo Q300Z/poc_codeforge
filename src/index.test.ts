@@ -21,6 +21,7 @@ describe("Integration - Multi-Page Library Build", () => {
     expect(fs.existsSync(path.join(testOutputDir, "index.html"))).toBe(true);
     expect(fs.existsSync(path.join(testOutputDir, "contact.html"))).toBe(true);
     expect(fs.existsSync(path.join(testOutputDir, "layouts.html"))).toBe(true);
+    expect(fs.existsSync(path.join(testOutputDir, "canvas.html"))).toBe(true);
     
     // Cleanup
     fs.rmSync(testOutputDir, { recursive: true, force: true });

@@ -1,5 +1,7 @@
 # 🧱 Composant : Page
 
+**Version :** `1.4.0`
+
 Composant racine gérant le layout global, le thème et l'injection du header/footer.
 
 ## 📥 Paramètres (meta)
