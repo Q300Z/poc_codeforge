@@ -6,31 +6,32 @@ interface FactoryOptions {
   name: string;
   authorizedTokens: string[];
   template: (
-    props: Record<string, unknown>,
+    meta: Record<string, unknown>,
     children: ComponentHTML[],
     styleVars: string,
-    a11yAttrs: string
+    a11yAttrs: string,
+    id: string
   ) => string;
 }
 
-/**
- * Factory pour créer des composants avec validation et styles automatiques
- */
 export function createComponent({ name, authorizedTokens, template }: FactoryOptions): Component {
-  return (props, children, style) => {
-    // 1. Validation automatique des tokens
+  return (
+    meta,
+    children,
+    style,
+    id = `gen-${Math.random().toString(36).slice(2, 9)}`
+  ) => {
     validateStyle(name, style, authorizedTokens);
-
-    // 2. Conversion automatique en variables CSS
     const styleVars = getStyleVariables(style);
 
-    // 3. Préparation des attributs d'accessibilité de base
-    const a11yAttrs = Object.entries(props)
-      .filter(([key]) => key.startsWith("aria-") || key === "role" || key === "id")
+    // Extraction des aria-* restants dans meta
+    const ariaAttrs = Object.entries(meta)
+      .filter(([key]) => key.startsWith("aria-"))
       .map(([key, value]) => `${key}="${value}"`)
       .join(" ");
 
-    // 4. Exécution du template spécifique au composant
-    return template(props, children, styleVars, a11yAttrs);
+    const a11yAttrs = `id="${id}" ${ariaAttrs}`;
+
+    return template(meta, children, styleVars, a11yAttrs, id);
   };
 }

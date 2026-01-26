@@ -1,5 +1,5 @@
-import { Node } from "./types.js";
 import { registry } from "./registry.js";
+import { Node } from "./types.js";
 
 export function render(node: Node): string {
   const component = registry[node.type];
@@ -10,5 +10,10 @@ export function render(node: Node): string {
 
   const childrenHTML = (node.children || []).map(render);
 
-  return component((node.props as Record<string, unknown>) || {}, childrenHTML, node.style || {});
+  return component(
+    node.meta || {},
+    childrenHTML,
+    node.style || {},
+    node.id
+  );
 }

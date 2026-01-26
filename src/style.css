@@ -1,26 +1,30 @@
 @import "tailwindcss";
 
 @layer components {
-  /* Button - Chain of Responsibility */
+  /* Layout Classes */
+  .section-pad {
+    padding-top: var(--section-py, 4rem);
+    padding-bottom: var(--section-py, 4rem);
+  }
+
+  .container-center {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: var(--container-width, 80rem);
+  }
+
+  /* Components */
   .btn-base {
-    @apply px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center;
     background-color: var(--btn-bg, var(--btn-bg-default, theme(colors.blue.600)));
     color: var(--btn-text, var(--btn-text-default, white));
   }
 
-  /* Hero - Chain of Responsibility */
   .hero-section {
-    @apply py-16 px-8 text-center sm:py-24 transition-all;
-    background-color: var(--hero-bg, var(--hero-bg-default, theme(colors.gray.50)));
+    @apply text-center transition-all;
   }
 
   .hero-title {
     @apply text-4xl font-extrabold tracking-tight sm:text-6xl;
     color: var(--hero-text, var(--hero-text-default, theme(colors.gray.900)));
-  }
-
-  /* Debug Mode */
-  [data-debug-theme="true"] * {
-    outline: 1px dashed rgba(255, 0, 255, 0.3);
   }
 }

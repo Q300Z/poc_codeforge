@@ -1,50 +1,79 @@
 {
-  "type": "Page",
-  "props": {
-    "title": "Navigation & Responsive",
-    "debug": false
+  "meta": {
+    "appName": "ScreenDraft",
+    "version": "2.1",
+    "createdAt": "2026-01-26T12:00:00.000Z"
   },
+  "id": "main-page",
+  "type": "Page",
   "style": {
     "brand-primary": "#4f46e5",
-    "appbar-bg": "#ffffff",
-    "appbar-text": "#1e293b",
-    "btn-bg-default": "var(--brand-primary)",
-    "hero-bg-default": "#f8fafc",
-    "hero-text-default": "var(--brand-primary)"
+    "btn-bg-default": "var(--brand-primary)"
   },
   "children": [
     {
+      "id": "nav",
       "type": "AppBar",
-      "props": {
-        "title": "RenderEngine",
-        "links": [
-          { "label": "Accueil", "href": "#" },
-          { "label": "Fonctionnalités", "href": "#features" },
-          { "label": "Documentation", "href": "#docs" }
-        ]
-      }
+      "meta": { "title": "Engine v2.1" }
     },
     {
-      "type": "Hero",
-      "props": {
-        "title": "Composants Interactifs",
-        "subtitle": "Testez le menu burger en réduisant la largeur de votre navigateur."
-      }
-    },
-    {
-      "type": "Grid",
-      "props": {
-        "cols": 2,
-        "gap": 6
-      },
+      "id": "hero-sec",
+      "type": "Section",
+      "style": { "section-bg": "#f8fafc" },
       "children": [
         {
-          "type": "Button",
-          "props": { "label": "Action 1" }
-        },
+          "id": "hero-cont",
+          "type": "Container",
+          "children": [
+            {
+              "id": "hero",
+              "type": "Hero",
+              "meta": {
+                "title": "Placement Intelligent",
+                "subtitle": "Utilisation de Sections, Containers et Stacks pour un layout robuste."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "body-sec",
+      "type": "Section",
+      "children": [
         {
-          "type": "Button",
-          "props": { "label": "Action 2" }
+          "id": "body-cont",
+          "type": "Container",
+          "children": [
+            {
+              "id": "main-stack",
+              "type": "Stack",
+              "meta": { "direction": "vertical", "align": "center" },
+              "style": { "stack-gap": "3rem" },
+              "children": [
+                {
+                  "id": "grid",
+                  "type": "Grid",
+                  "meta": { "cols": 3 },
+                    "children": [
+                    { "id": "b1", "type": "Button", "meta": { "label": "Card 1" } },
+                    { "id": "b2", "type": "Button", "meta": { "label": "Card 2" } },
+                    { "id": "b3", "type": "Button", "meta": { "label": "Card 3" } }
+                  ]
+                },
+                {
+                  "id": "footer-actions",
+                  "type": "Stack",
+                  "meta": { "direction": "horizontal", "justify": "center" },
+                  "style": { "stack-gap": "1rem" },
+                  "children": [
+                    { "id": "ba1", "type": "Button", "meta": { "label": "Annuler" }, "style": { "btn-bg": "#94a3b8" } },
+                    { "id": "ba2", "type": "Button", "meta": { "label": "Confirmer" } }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }

@@ -1,13 +1,25 @@
 export interface Node {
+  id: string;
   type: string;
-  props?: Record<string, unknown>;
+  meta: Record<string, unknown>; // Contient TOUT : version, createdAt ET contenu (label, title, etc.)
   style?: Record<string, string>;
   children?: Node[];
 }
 
+export interface PageNode extends Node {
+  type: "Page";
+  meta: {
+    appName: string;
+    version: string;
+    createdAt: string;
+    [key: string]: unknown;
+  };
+}
+
 export type ComponentHTML = string;
 export type Component = (
-  props: Record<string, unknown>,
+  meta: Record<string, unknown>,
   children: ComponentHTML[],
-  style?: Record<string, string>
+  style?: Record<string, string>,
+  id?: string
 ) => ComponentHTML;

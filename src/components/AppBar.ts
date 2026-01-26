@@ -3,9 +3,9 @@ import { createComponent } from "../utils/factory.js";
 export const AppBar = createComponent({
   name: "AppBar",
   authorizedTokens: ["appbar-bg", "appbar-text", "appbar-border"],
-  template: (props, _children, styleVars, a11yAttrs) => {
-    const title = props.title || "My App";
-    const links = (props.links as { label: string; href: string }[]) || [];
+  template: (meta, _children, styleVars, a11yAttrs) => {
+    const title = meta.title || "My App";
+    const links = (meta.links as { label: string; href: string }[]) || [];
 
     return `
     <nav 
@@ -19,7 +19,6 @@ export const AppBar = createComponent({
             <span class="text-xl font-bold tracking-tight">${title}</span>
           </div>
           
-          <!-- Desktop Menu -->
           <div class="hidden md:flex items-center space-x-8">
             ${links
               .map(
@@ -30,7 +29,6 @@ export const AppBar = createComponent({
               .join("")}
           </div>
 
-          <!-- Burger Button -->
           <div class="flex items-center md:hidden">
             <button 
               id="mobile-menu-button"
@@ -51,7 +49,6 @@ export const AppBar = createComponent({
         </div>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           ${links

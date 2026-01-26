@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 export function runGenerator(jsonPath: string, outputPath: string) {
   setupRegistry();
   const pageData = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  
   const html = render(pageData);
   fs.writeFileSync(outputPath, html);
   return html;
@@ -22,8 +23,8 @@ if (process.argv[1] === __filename) {
     const outputPath = path.join(__dirname, "../output.html");
     const html = runGenerator(jsonPath, outputPath);
     console.log("--- HTML GÉNÉRÉ ---");
-    // console.log(html);
-    console.log(`\nPage sauvegardée dans : ${outputPath}`);
+    console.log(`
+Page sauvegardée dans : ${outputPath}`);
   } catch (error) {
     console.error("Erreur lors du rendu :", error);
   }

@@ -12,21 +12,24 @@ const AUTHORIZED_TOKENS = [
   "btn-text-default",
   "hero-bg-default",
   "hero-text-default",
+  "position",
+  "height",
+  "width",
 ];
 
-export const Page: Component = (props: Record<string, unknown>, children, style) => {
+export const Page: Component = (meta, children, style) => {
   validateStyle("Page", style, AUTHORIZED_TOKENS);
   const globalStyles = getStyleVariables(style);
-  const debug = props.debug === true;
-
+  const debug = meta.debug === true;
+  
   return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${props.title || "Generated Page - POC"}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>${meta.appName || "Generated Page - POC"}</title>
+    <link rel="stylesheet" href="/src/style.css">
     <style>
       .btn-base {
         padding: 0.5rem 1rem;
@@ -50,7 +53,7 @@ export const Page: Component = (props: Record<string, unknown>, children, style)
       }
     </style>
 </head>
-<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ""}>
+<body class="h-full" style="${globalStyles}" ${debug ? 'data-debug-theme="true"' : ''}>
     <main>
         ${children.join("")}
     </main>
