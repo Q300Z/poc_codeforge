@@ -1,5 +1,10 @@
 /**
- * Propriétés de mise en page autorisées pour TOUS les composants de structure
+ * @file validator.ts
+ * @description Services de validation pour le respect du Design System.
+ */
+
+/**
+ * Liste des propriétés CSS natives gérées directement comme attributs style.
  */
 export const LAYOUT_UTILITIES = [
   "width",
@@ -21,36 +26,34 @@ export const LAYOUT_UTILITIES = [
   "flex-grow",
   "transform",
   "opacity",
+  "border-radius",
 ];
 
 /**
- * Utilitaire de validation local à chaque composant
+ * Valide que les clés de style fournies à un composant sont autorisées.
+ * Émet un avertissement dans la console si une clé est inconnue.
+ *
+ * @param {string} componentName - Nom du composant (pour le log).
+ * @param {Record<string, any>} style - Objet de style à valider.
+ * @param {string[]} authorizedTokens - Liste des Design Tokens propres au composant.
  */
 export function validateStyle(
   componentName: string,
   style: Record<string, any> | undefined,
-  authorizedKeys: string[]
+  authorizedTokens: string[]
 ): void {
   if (!style) return;
 
-  const keys = Object.keys(style);
-  const invalidKeys = keys.filter((key) => {
-    // 1. On nettoie la clé des suffixes responsives
-    const baseKey = key
-      .split("-")
-      .filter((part) => !["sm", "md", "lg", "xl", "2xl"].includes(part))
-      .join("-");
+  const allowedKeys = [...LAYOUT_UTILITIES, ...authorizedTokens];
 
-    // 2. On vérifie si c'est un utilitaire global OU un token spécifique au composant
-    const isGlobalUtility = LAYOUT_UTILITIES.includes(baseKey) || LAYOUT_UTILITIES.includes(key);
-    const isComponentToken = authorizedKeys.includes(baseKey) || authorizedKeys.includes(key);
+  Object.keys(style).forEach((key) => {
+    // On extrait la racine si c'est une variante responsive (ex: width-md -> width)
+    const baseKey = key.split("-")[0];
 
-    return !isGlobalUtility && !isComponentToken;
+    if (!allowedKeys.includes(key) && !allowedKeys.includes(baseKey)) {
+      console.warn(
+        `[Design System] ${componentName} warning: Utilisation de tokens non autorisés : ${key}`
+      );
+    }
   });
-
-  if (invalidKeys.length > 0) {
-    console.warn(
-      `[Design System] ${componentName} warning: Use of unauthorized tokens: ${invalidKeys.join(", ")}`
-    );
-  }
 }

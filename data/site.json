@@ -2,7 +2,7 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-26T15:58:34.812Z"
+    "createdAt": "2026-01-26T17:03:34.237Z"
   },
   "style": {
     "brand-primary": "#4f46e5",
@@ -19,7 +19,7 @@
       "type": "AppBar",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T15:58:34.812Z",
+        "createdAt": "2026-01-26T17:03:34.236Z",
         "title": "CodeForge",
         "links": [
           {
@@ -39,20 +39,18 @@
             "href": "contact.html"
           }
         ]
-      },
-      "style": {},
-      "children": []
+      }
     },
     "footer": {
       "id": "global-footer",
       "type": "Section",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T15:58:34.812Z"
+        "createdAt": "2026-01-26T17:03:34.237Z"
       },
       "style": {
         "section-bg": "#111827",
-        "section-py": 0
+        "section-py": 32
       },
       "children": [
         {
@@ -60,25 +58,47 @@
           "type": "Container",
           "meta": {
             "version": "1.0.0",
-            "createdAt": "2026-01-26T15:58:34.812Z"
+            "createdAt": "2026-01-26T17:03:34.237Z"
           },
-          "style": {},
           "children": [
             {
-              "id": "footer-text",
-              "type": "Hero",
+              "id": "footer-stack",
+              "type": "Stack",
               "meta": {
                 "version": "1.0.0",
-                "createdAt": "2026-01-26T15:58:34.812Z",
-                "title": "CodeForge POC",
-                "subtitle": "© 2026"
+                "createdAt": "2026-01-26T17:03:34.237Z",
+                "align": "center",
+                "gap": 4
               },
-              "style": {
-                "hero-text": "#9ca3af",
-                "hero-bg": "transparent",
-                "height": "10%"
-              },
-              "children": []
+              "children": [
+                {
+                  "id": "footer-title",
+                  "type": "Title",
+                  "meta": {
+                    "version": "1.0.0",
+                    "createdAt": "2026-01-26T17:03:34.237Z",
+                    "content": "CodeForge POC",
+                    "level": 3
+                  },
+                  "style": {
+                    "text-color": "#ffffff",
+                    "font-size": "1.25rem"
+                  }
+                },
+                {
+                  "id": "footer-copy",
+                  "type": "Text",
+                  "meta": {
+                    "version": "1.0.0",
+                    "createdAt": "2026-01-26T17:03:34.237Z",
+                    "content": "© 2026 - Le futur du rendu JSON."
+                  },
+                  "style": {
+                    "text-color": "#9ca3af",
+                    "font-size": "0.875rem"
+                  }
+                }
+              ]
             }
           ]
         }
@@ -93,53 +113,46 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:58:34.812Z"
+          "createdAt": "2026-01-26T17:03:34.237Z"
         },
-        "style": {},
         "children": [
           {
             "id": "hero-home",
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.812Z",
+              "createdAt": "2026-01-26T17:03:34.237Z",
               "title": "Bienvenue",
               "subtitle": "Découvrez la puissance des Builders typés."
-            },
-            "style": {},
-            "children": []
+            }
           },
           {
             "id": "cta",
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.812Z"
+              "createdAt": "2026-01-26T17:03:34.237Z"
             },
-            "style": {},
             "children": [
               {
                 "id": "s",
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:58:34.812Z",
+                  "createdAt": "2026-01-26T17:03:34.237Z",
                   "align": "center"
                 },
-                "style": {},
                 "children": [
                   {
                     "id": "b",
                     "type": "Button",
                     "meta": {
                       "version": "1.3.0",
-                      "createdAt": "2026-01-26T15:58:34.812Z",
+                      "createdAt": "2026-01-26T17:03:34.237Z",
                       "label": "Voir les Layouts",
                       "action": "layouts.html",
                       "audioDescription": "Naviguer vers la page layouts"
-                    },
-                    "style": {},
-                    "children": []
+                    }
                   }
                 ]
               }
@@ -155,102 +168,225 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:58:34.813Z"
+          "createdAt": "2026-01-26T17:03:34.238Z"
         },
-        "style": {},
         "children": [
           {
             "id": "feat-hero",
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z",
+              "createdAt": "2026-01-26T17:03:34.238Z",
               "title": "Galerie de Layouts",
               "subtitle": "Mise en page fluide et typée via Builders."
-            },
-            "style": {},
-            "children": []
+            }
           },
           {
             "id": "grid-demo",
             "type": "Section",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z"
+              "createdAt": "2026-01-26T17:03:34.238Z"
             },
-            "style": {},
             "children": [
               {
                 "id": "c1",
                 "type": "Container",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:58:34.813Z"
+                  "createdAt": "2026-01-26T17:03:34.238Z"
                 },
-                "style": {},
                 "children": [
                   {
                     "id": "t1",
-                    "type": "Hero",
+                    "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:58:34.813Z",
-                      "title": "1. Grille Responsive (3 cols)",
-                      "subtitle": "S'empile sur mobile."
-                    },
-                    "style": {
-                      "section-py": 16
-                    },
-                    "children": []
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "1. Grille Responsive (3 cols)"
+                    }
                   },
                   {
                     "id": "features-grid",
                     "type": "Grid",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:58:34.813Z",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
                       "cols": 3,
                       "gap": 6
                     },
-                    "style": {},
                     "children": [
                       {
                         "id": "box1",
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:58:34.813Z"
+                          "createdAt": "2026-01-26T17:03:34.238Z"
                         },
                         "style": {
                           "bg-color": "#f87171"
-                        },
-                        "children": []
+                        }
                       },
                       {
                         "id": "box2",
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:58:34.813Z"
+                          "createdAt": "2026-01-26T17:03:34.238Z"
                         },
                         "style": {
                           "bg-color": "#60a5fa"
-                        },
-                        "children": []
+                        }
                       },
                       {
                         "id": "box3",
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T15:58:34.813Z"
+                          "createdAt": "2026-01-26T17:03:34.238Z"
                         },
                         "style": {
                           "bg-color": "#34d399"
-                        },
-                        "children": []
+                        }
                       }
                     ]
+                  },
+                  {
+                    "id": "t2",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "2. Stack Vertical avec Espacement"
+                    }
+                  },
+                  {
+                    "id": "pstack",
+                    "type": "Stack",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "align": "center",
+                      "gap": 4
+                    },
+                    "children": [
+                      {
+                        "id": "pbox1",
+                        "type": "Box",
+                        "meta": {
+                          "version": "1.0.0",
+                          "createdAt": "2026-01-26T17:03:34.238Z"
+                        },
+                        "style": {
+                          "bg-color": "#fbbf24"
+                        }
+                      },
+                      {
+                        "id": "pbox2",
+                        "type": "Box",
+                        "meta": {
+                          "version": "1.0.0",
+                          "createdAt": "2026-01-26T17:03:34.238Z"
+                        },
+                        "style": {
+                          "bg-color": "#a78bfa"
+                        }
+                      },
+                      {
+                        "id": "pbox3",
+                        "type": "Box",
+                        "meta": {
+                          "version": "1.0.0",
+                          "createdAt": "2026-01-26T17:03:34.238Z"
+                        },
+                        "style": {
+                          "bg-color": "#f472b6"
+                        }
+                      },
+                      {
+                        "id": "pbox4",
+                        "type": "Box",
+                        "meta": {
+                          "version": "1.0.0",
+                          "createdAt": "2026-01-26T17:03:34.238Z"
+                        },
+                        "style": {
+                          "bg-color": "#34d399"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "t3",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "3. Différents Titres"
+                    }
+                  },
+                  {
+                    "id": "title-h1",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 1,
+                      "content": "Titre Niveau 1"
+                    }
+                  },
+                  {
+                    "id": "title-h2",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "Titre Niveau 2"
+                    }
+                  },
+                  {
+                    "id": "title-h3",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "Titre Niveau 3"
+                    }
+                  },
+                  {
+                    "id": "title-h4",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "Titre Niveau 4"
+                    }
+                  },
+                  {
+                    "id": "title-h5",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "Titre Niveau 5"
+                    }
+                  },
+                  {
+                    "id": "title-h6",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-26T17:03:34.238Z",
+                      "level": 2,
+                      "content": "Titre Niveau 6"
+                    }
                   }
                 ]
               }
@@ -266,11 +402,12 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:58:34.813Z"
+          "createdAt": "2026-01-26T17:03:34.239Z",
+          "debug": true
         },
         "style": {
           "position": "relative",
-          "height": "600px",
+          "height": 600,
           "overflow": "hidden"
         },
         "children": [
@@ -279,19 +416,17 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z",
+              "createdAt": "2026-01-26T17:03:34.239Z",
               "title": "Mode Canvas",
               "subtitle": "Emplacements précis via coordonnées X et Y."
-            },
-            "style": {},
-            "children": []
+            }
           },
           {
             "id": "abs-box-1",
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z"
+              "createdAt": "2026-01-26T17:03:34.239Z"
             },
             "style": {
               "position": "absolute",
@@ -300,15 +435,14 @@
               "width": 150,
               "height": 150,
               "bg-color": "#818cf8"
-            },
-            "children": []
+            }
           },
           {
             "id": "abs-box-2",
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z"
+              "createdAt": "2026-01-26T17:03:34.239Z"
             },
             "style": {
               "position": "absolute",
@@ -318,25 +452,7 @@
               "height": 100,
               "bg-color": "#fbbf24",
               "z-index": 10
-            },
-            "children": []
-          },
-          {
-            "id": "abs-btn",
-            "type": "Button",
-            "meta": {
-              "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z",
-              "label": "Bouton Flottant"
-            },
-            "style": {
-              "position": "absolute",
-              "top": 450,
-              "left": "50%",
-              "transform": "translateX(-50%)",
-              "btn-bg": "#e11d48"
-            },
-            "children": []
+            }
           }
         ]
       }
@@ -348,74 +464,63 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T15:58:34.813Z"
+          "createdAt": "2026-01-26T17:03:34.239Z"
         },
-        "style": {},
         "children": [
           {
             "id": "contact-hero",
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z",
+              "createdAt": "2026-01-26T17:03:34.239Z",
               "title": "Contact",
               "subtitle": "Parlons ensemble."
-            },
-            "style": {},
-            "children": []
+            }
           },
           {
             "id": "contact-content",
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T15:58:34.813Z"
+              "createdAt": "2026-01-26T17:03:34.239Z"
             },
-            "style": {},
             "children": [
               {
                 "id": "contact-stack",
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T15:58:34.813Z"
+                  "createdAt": "2026-01-26T17:03:34.239Z"
                 },
-                "style": {},
                 "children": [
                   {
                     "id": "contact-title",
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:58:34.813Z",
+                      "createdAt": "2026-01-26T17:03:34.239Z",
                       "content": "Envoyez-nous un message",
                       "level": 2
-                    },
-                    "style": {},
-                    "children": []
+                    }
                   },
                   {
                     "id": "contact-desc",
                     "type": "Text",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:58:34.813Z",
+                      "createdAt": "2026-01-26T17:03:34.239Z",
                       "content": "Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge."
-                    },
-                    "style": {},
-                    "children": []
+                    }
                   },
                   {
                     "id": "mail-btn",
                     "type": "Button",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T15:58:34.813Z",
+                      "createdAt": "2026-01-26T17:03:34.239Z",
                       "label": "Email",
                       "action": "mailto:hello@codeforge.dev"
-                    },
-                    "style": {},
-                    "children": []
+                    }
                   }
                 ]
               }

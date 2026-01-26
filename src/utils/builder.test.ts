@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-// Imports directs pour éviter les dépendances lourdes du point d'entrée index.ts lors des tests unitaires
-import { NodeBuilder, SiteBuilder } from "./builder.js";
 import { AppBarBuilder } from "../components/AppBar.js";
 import { ButtonBuilder } from "../components/Button.js";
+import { GridBuilder } from "../components/Grid.js";
 import { HeroBuilder } from "../components/Hero.js";
 import { PageBuilder } from "../components/Page.js";
-import { GridBuilder } from "../components/Grid.js";
 import { StackBuilder } from "../components/Stack.js";
+// Imports directs pour éviter les dépendances lourdes du point d'entrée index.ts lors des tests unitaires
+import { NodeBuilder, SiteBuilder } from "./builder.js";
 
 describe("Builders Pattern", () => {
   describe("NodeBuilder", () => {
@@ -20,10 +20,7 @@ describe("Builders Pattern", () => {
 
     it("should support custom version and createdAt", () => {
       const date = "2026-01-26T10:00:00Z";
-      const node = new NodeBuilder("id", "Type")
-        .withVersion("2.3.0")
-        .withCreatedAt(date)
-        .build();
+      const node = new NodeBuilder("id", "Type").withVersion("2.3.0").withCreatedAt(date).build();
       expect(node.meta.version).toBe("2.3.0");
       expect(node.meta.createdAt).toBe(date);
     });
@@ -55,7 +52,7 @@ describe("Builders Pattern", () => {
     it("should build a complete site structure", () => {
       const site = new SiteBuilder("App")
         .withVersion("2.0.0")
-        .withGlobalStyle({ "width": 100 } as any)
+        .withGlobalStyle({ width: 100 } as any)
         .addPage("index", new PageBuilder("home"))
         .build();
 

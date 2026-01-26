@@ -1,27 +1,56 @@
-import { createComponent } from "../utils/factory.js";
 import { NodeBuilder } from "../utils/builder.js";
+import { createComponent } from "../utils/factory.js";
 
+/** Interface des métadonnées pour le composant Grid. */
 export interface GridMeta {
+  /** Nombre de colonnes sur desktop (1-12). */
   cols?: number;
+  /** Espacement entre les cellules (0-16). */
   gap?: number;
 }
 
+/** Interface des Design Tokens pour le composant Grid. */
 export interface GridStyles {
+  /** Espacement personnalisé. */
   "grid-gap"?: string | number;
+  /** Couleur de fond du conteneur de grille. */
   "grid-bg"?: string;
 }
 
+/**
+ * @class GridBuilder
+ * @description Constructeur fluide pour le système de grille.
+ */
 export class GridBuilder extends NodeBuilder<GridMeta, GridStyles> {
-  constructor(id: string) { super(id, "Grid"); }
-  withCols(cols: number): this { this.node.meta.cols = cols; return this; }
-  withGap(gap: number): this { this.node.meta.gap = gap; return this; }
+  constructor(id: string) {
+    super(id, "Grid");
+  }
+  /** Définit le nombre de colonnes sur desktop. */
+  withCols(cols: number): this {
+    this.node.meta.cols = cols;
+    return this;
+  }
+  /** Définit l'espacement. */
+  withGap(gap: number): this {
+    this.node.meta.gap = gap;
+    return this;
+  }
 }
 
 const COLUMN_MAP: Record<number, string> = {
-  1: "md:grid-cols-1", 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "md:grid-cols-4",
-  5: "md:grid-cols-5", 6: "md:grid-cols-6", 12: "md:grid-cols-12",
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+  5: "md:grid-cols-5",
+  6: "md:grid-cols-6",
+  12: "md:grid-cols-12",
 };
 
+/**
+ * @constant Grid
+ * @description Système de grille responsive Mobile-First utilisant CSS Grid.
+ */
 export const Grid = createComponent({
   name: "Grid",
   version: "1.1.0",
@@ -35,7 +64,6 @@ export const Grid = createComponent({
         ${a11yAttrs}
       >
         ${children.join("")}
-      </section>
-    `;
+      </section>`;
   },
 });

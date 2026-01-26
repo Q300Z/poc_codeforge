@@ -43,7 +43,7 @@ describe("Renderer Engine", () => {
   });
 
   it("should throw an error for unknown components", () => {
-    const node: Node = { id: "1", type: "Unknown", meta: {} };
-    expect(() => render(node)).toThrow("Unknown component: Unknown");
+    const node: Node = { id: "1", type: "Unknown", meta: { version: "1", createdAt: "" } };
+    expect(() => render(node)).toThrow("[CodeForge Renderer] Type de composant inconnu : Unknown");
   });
 });

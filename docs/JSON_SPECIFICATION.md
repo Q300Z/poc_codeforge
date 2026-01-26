@@ -24,75 +24,169 @@ Chaque élément de la page suit cette structure :
 | :--- | :--- | :--- |
 | `id` | `string` | **OBLIGATOIRE**. Identifiant unique. |
 | `type` | `string` | **OBLIGATOIRE**. Nom du composant (ex: "Button", "Stack"). |
-| `meta` | `Object` | **OBLIGATOIRE**. Paramètres spécifiques et métadonnées obligatoires. |
-| `style` | `Object` | (Optionnel) Propriétés visuelles (Layout + Design Tokens). |
-| `children` | `Array` | (Optionnel) Enfants. |
+| `meta` | `Object` | **OBLIGATOIRE**. Paramètres spécifiques et métadonnées. |
+| `style` | `Object` | (Optionnel) Propriétés visuelles. **Omis si vide.** |
+| `children` | `Array` | (Optionnel) Enfants. **Omis si vide.** |
 
 #### Métadonnées OBLIGATOIRES dans `meta`
-Le non-respect de ces champs générera des erreurs dans la console :
 - `version` : Version du composant (ex: `"1.2.0"`).
-- `createdAt` : Date d'ajout du composant au format ISO (ex: `"2026-01-26T14:30:00Z"`).
-- `audioDescription` : (Conseillé) Description pour l'accessibilité.
+- `createdAt` : Date d'ajout du composant au format ISO.
+
+---
+
+## ♿ Accessibilité (A11y)
+
+CodeForge intègre l'accessibilité nativement. Ces clés dans `meta` sont traduites en attributs HTML standards :
+- `audioDescription` : Traduit en `aria-label`. Description lue par les lecteurs d'écran.
+- `ariaRole` : Traduit en `role`. Définit la fonction de l'élément (ex: "alert").
+- `ariaHidden` : Traduit en `aria-hidden="true"`. Pour cacher les éléments décoratifs.
 
 ---
 
 ## 🎨 Système de Style
 
 ### 1. Utilitaires de Layout (Disponibles partout)
-Ces propriétés s'appliquent directement en CSS sur la balise du composant.
-- **Dimensions** : `width`, `height`, `min-width`, `min-height`, `max-width`.
-- **Position** : `position` (ex: "absolute"), `top`, `left`, `right`, `bottom`, `z-index`.
-- **Comportement** : `overflow`, `overflow-x`, `overflow-y`, `flex-shrink`, `flex-grow`, `transform`, `opacity`.
+S'appliquent directement en tant que styles CSS natifs :
+- **Dimensions** : `width`, `height`, `min-width`, `min-height`, `max-width`, `max-height`.
+- **Position** : `position` (ex: "absolute"), `top`, `left`, `right`, `bottom`, `z-index`, `transform`.
+- **Comportement** : `overflow`, `overflow-x`, `overflow-y`, `flex-shrink`, `flex-grow`, `opacity`, `border-radius`.
 
 ### 2. Normalisation des Unités
-- **Nombres** : Traduits en `px` (ex: `"top": 250` -> `top: 250px;`).
-- **Chaînes** : Unités libres (ex: `"width": "50%"` -> `width: 50%;`).
+- **Nombres** : Ajout automatique de `px` (ex: `250` -> `250px`).
+- **Chaînes** : Unités libres (ex: `"50%"` ou `"2rem"`).
 
 ---
 
 ## 🧱 Schémas des Composants
 
-### AppBar
-Barre de navigation supérieure.
-- **meta.title** : Le titre de l'application.
-- **meta.links** : Tableau d'objets `{ label: string, href: string }`.
-
-### Hero
-Bandeau d'accueil sémantique (utilise Title et Text en interne).
-- **meta.title** : Texte du titre principal (H1).
-- **meta.subtitle** : Texte du paragraphe descriptif.
-
-### Title
-Titre sémantique H1 à H6.
-- **meta.content** : Le texte du titre.
-- **meta.level** : Niveau (1 à 6). Défaut : 1.
-
-### Text
-Bloc de texte ou paragraphe.
-- **meta.content** : Le texte.
-- **meta.tag** : Balise HTML (`p`, `span`, `div`). Défaut : `p`.
-
-### Button
-Élément interactif.
-- **meta.label** : Texte affiché.
-- **meta.action** : Lien ou Code JS.
-
----
-
-## 🔄 Exemple de Page Canvas
+### Page (Racine)
+Composant parent obligatoire pour chaque page.
+- **meta.appName** : Nom de l'application.
+- **meta.debug** : `true` pour activer le mode debug visuel.
 ```json
 {
-  "id": "canvas-page",
+  "id": "root-page",
   "type": "Page",
-  "meta": { "version": "1.4.0", "createdAt": "2026-01-26T10:00:00Z" },
-  "style": { "position": "relative", "height": 600, "overflow": "hidden" },
-  "children": [
-    {
-      "id": "abs-title",
-      "type": "Title",
-      "meta": { "content": "Position Libre", "version": "1.1.0", "createdAt": "2026-01-26T10:00:00Z" },
-      "style": { "position": "absolute", "top": 50, "left": 100 }
-    }
-  ]
+  "meta": {
+    "appName": "Mon Projet",
+    "debug": false,
+    "version": "1.4.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### AppBar (Navigation)
+- **meta.title** : Titre affiché.
+- **meta.links** : Liste de `{ "label": string, "href": string }`.
+```json
+{
+  "id": "nav",
+  "type": "AppBar",
+  "meta": {
+    "title": "CodeForge",
+    "links": [{ "label": "Contact", "href": "contact.html" }],
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Hero (Bannière)
+- **meta.title** : Titre principal.
+- **meta.subtitle** : Sous-titre.
+```json
+{
+  "id": "hero",
+  "type": "Hero",
+  "meta": {
+    "title": "Hello",
+    "subtitle": "World",
+    "version": "1.3.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Title (Titre)
+- **meta.content** : Texte.
+- **meta.level** : Niveau `1` (H1) à `6` (H6).
+```json
+{
+  "id": "t1",
+  "type": "Title",
+  "meta": {
+    "content": "Titre",
+    "level": 2,
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Text (Paragraphe)
+- **meta.content** : Texte.
+- **meta.tag** : Balise (`p`, `span`, `div`).
+```json
+{
+  "id": "txt1",
+  "type": "Text",
+  "meta": {
+    "content": "Texte de description.",
+    "tag": "p",
+    "version": "1.0.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Button (Bouton)
+- **meta.label** : Texte.
+- **meta.action** : URL ou JS.
+```json
+{
+  "id": "btn",
+  "type": "Button",
+  "meta": {
+    "label": "Clic ici",
+    "action": "/",
+    "audioDescription": "Retourner à l'accueil",
+    "version": "1.3.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Grid (Grille)
+- **meta.cols** : Colonnes desktop (1-12).
+- **meta.gap** : Espacement (0-16).
+```json
+{
+  "id": "g1",
+  "type": "Grid",
+  "meta": {
+    "cols": 3,
+    "gap": 8,
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Stack (Alignement)
+- **meta.direction** : `"vertical"` ou `"horizontal"`.
+- **meta.align** : `"start"`, `"center"`, `"end"`, `"stretch"`.
+- **meta.gap** : Espacement (0-16).
+```json
+{
+  "id": "s1",
+  "type": "Stack",
+  "meta": {
+    "direction": "horizontal",
+    "align": "center",
+    "gap": 4,
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
 }
 ```

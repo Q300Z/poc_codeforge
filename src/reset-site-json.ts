@@ -31,15 +31,25 @@ const header = new AppBarBuilder("global-nav")
     { label: "Contact", href: "contact.html" },
   ]);
 
-// 2. Footer Global
+// 2. Footer Global (RÉPARÉ : Utilise des composants atomiques au lieu d'un Hero)
 const footer = new SectionBuilder("global-footer")
-  .withStyle({ "section-bg": "#111827", "section-py": 32 } as any)
+  .withStyle({ "section-bg": "#111827", "section-py": 32 })
   .addChild(
     new ContainerBuilder("footer-cont").addChild(
-      new HeroBuilder("footer-text")
-        .withTitle("CodeForge POC")
-        .withSubtitle("© 2026")
-        .withStyle({ "hero-text": "#9ca3af", "hero-bg": "transparent" } as any)
+      new StackBuilder("footer-stack")
+        .withAlign("center")
+        .withGap(4)
+        .addChild(
+          new TitleBuilder("footer-title")
+            .withContent("CodeForge POC")
+            .withLevel(3)
+            .withStyle({ "text-color": "#ffffff", "font-size": "1.25rem" })
+        )
+        .addChild(
+          new TextBuilder("footer-copy")
+            .withContent("© 2026 - Le futur du rendu JSON.")
+            .withStyle({ "text-color": "#9ca3af", "font-size": "0.875rem" })
+        )
     )
   );
 
@@ -88,18 +98,46 @@ const layoutsPage = new PageBuilder("layouts-page")
   )
   .addChild(
     new SectionBuilder("grid-demo").addChild(
-      new ContainerBuilder("c1").addChild(
-        new HeroBuilder("t1")
-          .withTitle("1. Grille Responsive (3 cols)")
-          .withSubtitle("S'empile sur mobile.")
-          .withStyle({ "section-py": 16 } as any)
+      new ContainerBuilder("c1")
+      .addChild(
+        new TitleBuilder("t1")
+          .withLevel(2)
+          .withContent("1. Grille Responsive (3 cols)")
       ).addChild(
         new GridBuilder("features-grid")
           .withCols(3)
           .withGap(6)
-          .addChild(new BoxBuilder("box1").withStyle({ "bg-color": "#f87171" } as any))
-          .addChild(new BoxBuilder("box2").withStyle({ "bg-color": "#60a5fa" } as any))
-          .addChild(new BoxBuilder("box3").withStyle({ "bg-color": "#34d399" } as any))
+          .addChild(new BoxBuilder("box1").withStyle({ "bg-color": "#f87171" }))
+          .addChild(new BoxBuilder("box2").withStyle({ "bg-color": "#60a5fa" }))
+          .addChild(new BoxBuilder("box3").withStyle({ "bg-color": "#34d399" }))
+      ).addChild(
+        new TitleBuilder("t2")
+          .withLevel(2)
+          .withContent("2. Stack Vertical avec Espacement")
+      ).addChild(
+     new StackBuilder("pstack")
+          .withAlign("center")
+          .withGap(4)
+          .addChild(new BoxBuilder("pbox1").withStyle({ "bg-color": "#fbbf24" }))
+          .addChild(new BoxBuilder("pbox2").withStyle({ "bg-color": "#a78bfa" }))
+          .addChild(new BoxBuilder("pbox3").withStyle({ "bg-color": "#f472b6" }))
+          .addChild(new BoxBuilder("pbox4").withStyle({ "bg-color": "#34d399" }))
+      ).addChild(
+        new TitleBuilder("t3")
+          .withLevel(2)
+          .withContent("3. Différents Titres")
+      ).addChild(
+        new TitleBuilder("title-h1").withLevel(1).withContent("Titre Niveau 1")
+      ).addChild(
+        new TitleBuilder("title-h2").withLevel(2).withContent("Titre Niveau 2")
+      ).addChild(
+        new TitleBuilder("title-h3").withLevel(2).withContent("Titre Niveau 3")
+      ).addChild(
+        new TitleBuilder("title-h4").withLevel(2).withContent("Titre Niveau 4")
+      ).addChild(
+        new TitleBuilder("title-h5").withLevel(2).withContent("Titre Niveau 5")
+      ).addChild(
+        new TitleBuilder("title-h6").withLevel(2).withContent("Titre Niveau 6")
       )
     )
   );
@@ -108,6 +146,7 @@ site.addPage("layouts", layoutsPage);
 
 // 6. Page Canvas
 const canvasPage = new PageBuilder("canvas-page")
+  .withDebug() // Activation du mode debug visuel
   .withStyle({ position: "relative", height: 600, overflow: "hidden" })
   .addChild(
     new HeroBuilder("canvas-hero")
@@ -123,7 +162,7 @@ const canvasPage = new PageBuilder("canvas-page")
         width: 150,
         height: 150,
         "bg-color": "#818cf8"
-      } as any)
+      })
   )
   .addChild(
     new BoxBuilder("abs-box-2")
@@ -135,7 +174,7 @@ const canvasPage = new PageBuilder("canvas-page")
         height: 100,
         "bg-color": "#fbbf24",
         "z-index": 10
-      } as any)
+      })
   );
 
 site.addPage("canvas", canvasPage);
