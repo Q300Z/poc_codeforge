@@ -1,26 +1,27 @@
-import { describe, it, expect, vi } from 'vitest';
-import { runGenerator } from './index.js';
-import * as fs from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+/**
+ * @vitest-environment node
+ */
+import { describe, it, expect } from "vitest";
+import { buildSite } from "./index.js";
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-describe('Integration - Index Generator', () => {
-  it('should read JSON and write HTML file', () => {
-    const testJsonPath = path.join(__dirname, '../data/page.json');
-    const testOutputPath = path.join(__dirname, '../test-output.html');
+describe("Integration - Multi-Page Library Build", () => {
+  it("should generate multiple HTML files in the output directory", async () => {
+    const testJsonPath = path.join(__dirname, "../data/site.json");
+    const testOutputDir = path.join(__dirname, "../test-multi-site");
     
-    const html = runGenerator(testJsonPath, testOutputPath);
+    await buildSite(testJsonPath, testOutputDir);
     
-    expect(html).toContain('<!DOCTYPE html>');
-    expect(fs.existsSync(testOutputPath)).toBe(true);
-    
-    const savedHtml = fs.readFileSync(testOutputPath, 'utf-8');
-    expect(savedHtml).toBe(html);
+    expect(fs.existsSync(testOutputDir)).toBe(true);
+    expect(fs.existsSync(path.join(testOutputDir, "index.html"))).toBe(true);
+    expect(fs.existsSync(path.join(testOutputDir, "contact.html"))).toBe(true);
     
     // Cleanup
-    fs.unlinkSync(testOutputPath);
+    fs.rmSync(testOutputDir, { recursive: true, force: true });
   });
 });

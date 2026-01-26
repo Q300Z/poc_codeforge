@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "appName": "Site Industriel v3",
+    "version": "3.1.0",
+    "createdAt": "2026-01-26T12:45:00.000Z",
+    "debug": true
+  },
+  "style": {
+    "brand-primary": "#4f46e5",
+    "brand-secondary": "#10b981",
+    "btn-bg-default": "var(--brand-primary)",
+    "appbar-bg": "#ffffff"
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "content": {
+        "id": "home-page",
+        "type": "Page",
+        "meta": { "debug": false },
+        "children": [
+          {
+            "id": "nav-1",
+            "type": "AppBar",
+            "meta": { 
+              "title": "BuildForge",
+              "links": [
+                { "label": "Accueil", "href": "index.html" },
+                { "label": "Contact", "href": "contact.html" }
+              ]
+            }
+          },
+          {
+            "id": "hero-home",
+            "type": "Hero",
+            "meta": { 
+              "title": "Moteur de Rendu v3", 
+              "subtitle": "Générez des sites entiers à partir d'une simple structure JSON." 
+            }
+          },
+          {
+            "id": "content-section",
+            "type": "Section",
+            "children": [
+              {
+                "id": "container",
+                "type": "Container",
+                "children": [
+                  {
+                    "id": "cta-stack",
+                    "type": "Stack",
+                    "meta": { "direction": "vertical", "align": "center" },
+                    "children": [
+                      {
+                        "id": "btn-contact",
+                        "type": "Button",
+                        "meta": { "label": "Nous contacter", "action": "contact.html" }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "contact",
+      "content": {
+        "id": "contact-page",
+        "type": "Page",
+        "meta": { "debug": false },
+        "children": [
+          {
+            "id": "nav-2",
+            "type": "AppBar",
+            "meta": { 
+              "title": "BuildForge",
+              "links": [
+                { "label": "Accueil", "href": "index.html" },
+                { "label": "Contact", "href": "contact.html" }
+              ]
+            }
+          },
+          {
+            "id": "hero-contact",
+            "type": "Hero",
+            "meta": { 
+              "title": "Contactez-nous", 
+              "subtitle": "Nous sommes à votre écoute pour vos projets." 
+            }
+          },
+          {
+            "id": "form-section",
+            "type": "Section",
+            "children": [
+              {
+                "id": "form-container",
+                "type": "Container",
+                "children": [
+                  {
+                    "id": "back-home",
+                    "type": "Button",
+                    "meta": { "label": "Retour à l'accueil", "action": "index.html" },
+                    "style": { "btn-bg": "#94a3b8" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

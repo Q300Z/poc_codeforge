@@ -1,17 +1,27 @@
 {
   "name": "poc_render_engine",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "license": "ISC",
+  "description": "Industrial JSON to HTML Render Engine",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "render-engine": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "src/style.css"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run test && vite build",
+    "build": "tsc && vite build",
+    "build:lib": "tsc",
+    "clean": "rm -rf dist generated coverage test-dist-site test-multi-site test-output.html index.html docs.html",
     "start": "node --loader ts-node/esm src/index.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts --fix"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.0",

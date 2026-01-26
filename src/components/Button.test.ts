@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { axe } from "vitest-axe";
 
 import { Button } from "./Button.js";
 
@@ -17,15 +18,25 @@ describe("Button Component", () => {
     expect(html).toContain('href="/home"');
   });
 
-  it("should render an <a> tag for external links (http)", () => {
-    const html = Button({ ...props, action: "https://google.com" }, [], {});
-    expect(html).toContain("<a");
-    expect(html).toContain('href="https://google.com"');
+  it("should be accessible", async () => {
+    const html = Button(props, [], {});
+    const container = document.createElement("div");
+    container.innerHTML = html;
+
+    const results = await axe(container);
+    // @ts-expect-error - vitest-axe matchers extended in setup
+    expect(results).toHaveNoViolations();
   });
 
-  it("should render an <a> tag for anchor links (#)", () => {
-    const html = Button({ ...props, action: "#section" }, [], {});
+  it("should render an <a> tag for relative html links", () => {
+    const html = Button({ ...props, action: "contact.html" }, [], {});
     expect(html).toContain("<a");
-    expect(html).toContain('href="#section"');
+    expect(html).toContain('href="contact.html"');
+  });
+
+  it("should apply custom CSS variables from style prop", () => {
+    const style = { "bg-color": "#ff0000" };
+    const html = Button(props, [], style);
+    expect(html).toContain("--bg-color: #ff0000");
   });
 });

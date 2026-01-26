@@ -34,6 +34,7 @@ describe("Hero Component", () => {
     container.innerHTML = html;
 
     const results = await axe(container);
+    // @ts-expect-error - Vitest-axe matchers are extended in setup.ts
     expect(results).toHaveNoViolations();
   });
 });

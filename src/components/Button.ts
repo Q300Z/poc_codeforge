@@ -15,7 +15,12 @@ export const Button = createComponent({
   ],
   template: (meta, _, styleVars, a11yAttrs) => {
     const action = (meta.action as string) || "";
-    const isLink = action.startsWith("/") || action.startsWith("http") || action.startsWith("#");
+    // Détection plus robuste : commence par /, http, # OU finit par .html
+    const isLink =
+      action.startsWith("/") ||
+      action.startsWith("http") ||
+      action.startsWith("#") ||
+      action.endsWith(".html");
     const label = meta.label || "Click me";
 
     if (isLink) {
