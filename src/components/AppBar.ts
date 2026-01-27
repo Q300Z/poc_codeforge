@@ -100,7 +100,7 @@ export const AppBar = createComponent({
             <span class="text-xl font-bold tracking-tight">${title}</span>
           </div>
           <div class="hidden md:flex items-center space-x-8">
-            ${links.map((l) => `<a href="${l.href}" class="text-sm font-medium hover:text-blue-600 transition-colors">${l.label}</a>`).join("")}
+            ${links.map((l) => `<a href="${l.href}" class="text-sm font-medium underline hover:text-blue-600 transition-colors">${l.label}</a>`).join("")}
           </div>
           <div class="flex items-center md:hidden">
             <button 
@@ -120,7 +120,7 @@ export const AppBar = createComponent({
       </div>
       <div id="${menuId}" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          ${links.map((l) => `<a href="${l.href}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">${l.label}</a>`).join("")}
+          ${links.map((l) => `<a href="${l.href}" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">${l.label}</a>`).join("")}
         </div>
       </div>
       <script>

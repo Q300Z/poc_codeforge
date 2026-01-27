@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
@@ -94,11 +91,18 @@ export const Map = createComponent({
       : `<script type="module" src="${libUrl}"></script>`;
 
     return `
-<div class="map-wrapper flex-shrink-0" style="${styleVars}" ${a11yAttrs}>
-  <div id="${containerId}" style="width: 100%; height: 100%;"></div>
-</div>
-${inlineLib}
-<script type="module">
+  <div class="map-wrapper flex-shrink-0" style="${styleVars}" ${a11yAttrs}>
+    <style>
+      /* Force le soulignement des liens pour l'accessibilité (notamment l'attribution MapLibre) */
+      #${containerId} a {
+        text-decoration: underline !important;
+      }
+    </style>
+    <div id="${containerId}" style="width: 100%; height: 100%;"></div>
+  </div>
+  ${inlineLib}
+  <script type="module">
+  
   (function() {
     const container = document.getElementById('${containerId}');
     if (container && !container.shadowRoot) {
@@ -110,6 +114,11 @@ ${inlineLib}
       ${meta.controls ? `map.setAttribute('controls', '${meta.controls}');` : ""}
       ${meta.debug ? `map.setAttribute('debug', '');` : ""}
       shadow.appendChild(map);
+
+      // Fix accessibilité pour les liens dans le shadow DOM (attribution)
+      const style = document.createElement('style');
+      style.textContent = 'a { text-decoration: underline !important; }';
+      shadow.appendChild(style);
     }
   })();
 </script>

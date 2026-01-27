@@ -29,6 +29,11 @@
     line-height: 1.6;
   }
 
+  /* Règle d'accessibilité : les liens doivent être soulignés pour être distinguables sans la couleur */
+  a {
+    text-decoration: underline;
+  }
+
   /* Utility sr-only pour l'accessibilité */
   .sr-only {
     position: absolute;

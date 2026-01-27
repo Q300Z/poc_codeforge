@@ -1098,6 +1098,9 @@
     font-size: 1.125rem;
     line-height: 1.6;
   }
+  a {
+    text-decoration: underline;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -1578,7 +1581,7 @@
             <span class="text-xl font-bold tracking-tight">CodeForge</span>
           </div>
           <div class="hidden md:flex items-center space-x-8">
-            <a href="index.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Showcase</a><a href="layouts.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Layouts</a><a href="canvas.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Canvas</a><a href="media.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Media</a><a href="map.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Carte</a><a href="contact.html" class="text-sm font-medium hover:text-blue-600 transition-colors">Contact</a>
+            <a href="index.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Showcase</a><a href="layouts.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Layouts</a><a href="canvas.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Canvas</a><a href="media.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Media</a><a href="map.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Carte</a><a href="contact.html" class="text-sm font-medium underline hover:text-blue-600 transition-colors">Contact</a>
           </div>
           <div class="flex items-center md:hidden">
             <button 
@@ -1598,7 +1601,7 @@
       </div>
       <div id="menu-global-nav" class="hidden md:hidden border-t border-gray-100 bg-white">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Showcase</a><a href="layouts.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Layouts</a><a href="canvas.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Canvas</a><a href="media.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Media</a><a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Carte</a><a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 hover:text-blue-600">Contact</a>
+          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Showcase</a><a href="layouts.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Layouts</a><a href="canvas.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Canvas</a><a href="media.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Media</a><a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Carte</a><a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">Contact</a>
         </div>
       </div>
       <script>
@@ -1650,10 +1653,16 @@
         Carte Interactive Streaming
       </h2>
     
-<div class="map-wrapper flex-shrink-0" style="--map-height: 600px;" id="main-map" data-component-version="1.0.0" aria-label="Carte interactive des régions de France" role="region" >
-  <div id="map-container-main-map" style="width: 100%; height: 100%;"></div>
-</div>
-<script type="module">var __create = Object.create, __defProp = Object.defineProperty, __getOwnPropDesc = Object.getOwnPropertyDescriptor, __getOwnPropNames = Object.getOwnPropertyNames, __getProtoOf = Object.getPrototypeOf, __hasOwnProp = Object.prototype.hasOwnProperty, __commonJSMin = (e, t) => () => (t || e((t = { exports: {} }).exports, t), t.exports), __copyProps = (e, i, o, s) => {
+  <div class="map-wrapper flex-shrink-0" style="--map-height: 600px;" id="main-map" data-component-version="1.0.0" aria-label="Carte interactive des régions de France" role="region" >
+    <style>
+      /* Force le soulignement des liens pour l'accessibilité (notamment l'attribution MapLibre) */
+      #map-container-main-map a {
+        text-decoration: underline !important;
+      }
+    </style>
+    <div id="map-container-main-map" style="width: 100%; height: 100%;"></div>
+  </div>
+  <script type="module">var __create = Object.create, __defProp = Object.defineProperty, __getOwnPropDesc = Object.getOwnPropertyDescriptor, __getOwnPropNames = Object.getOwnPropertyNames, __getProtoOf = Object.getPrototypeOf, __hasOwnProp = Object.prototype.hasOwnProperty, __commonJSMin = (e, t) => () => (t || e((t = { exports: {} }).exports, t), t.exports), __copyProps = (e, i, o, s) => {
 	if (i && typeof i == "object" || typeof i == "function") for (var c = __getOwnPropNames(i), l = 0, u = c.length, d; l < u; l++) d = c[l], !__hasOwnProp.call(e, d) && d !== o && __defProp(e, d, {
 		get: ((e) => i[e]).bind(null, d),
 		enumerable: !(s = __getOwnPropDesc(i, d)) || s.enumerable
@@ -35179,7 +35188,8 @@ StreamingMap.registerControl("reset", () => new ResetViewControl()), customEleme
 });
 
 //# sourceMappingURL=streaming-map-nodraw.js.map</script>
-<script type="module">
+  <script type="module">
+  
   (function() {
     const container = document.getElementById('map-container-main-map');
     if (container && !container.shadowRoot) {
@@ -35191,6 +35201,11 @@ StreamingMap.registerControl("reset", () => new ResetViewControl()), customEleme
       map.setAttribute('controls', 'zoom,layers,info');
       
       shadow.appendChild(map);
+
+      // Fix accessibilité pour les liens dans le shadow DOM (attribution)
+      const style = document.createElement('style');
+      style.textContent = 'a { text-decoration: underline !important; }';
+      shadow.appendChild(style);
     }
   })();
 </script>
