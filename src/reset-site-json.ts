@@ -7,6 +7,7 @@ import {
   AppBarBuilder,
   BoxBuilder,
   ButtonBuilder,
+  CarouselBuilder,
   ContainerBuilder,
   GridBuilder,
   HeroBuilder,
@@ -134,13 +135,19 @@ const layoutsPage = new PageBuilder("layouts-page")
       ).addChild(
         new TitleBuilder("title-h2").withLevel(2).withContent("Titre Niveau 2")
       ).addChild(
-        new TitleBuilder("title-h3").withLevel(2).withContent("Titre Niveau 3")
+        new TitleBuilder("title-h3").withLevel(3).withContent("Titre Niveau 3")
       ).addChild(
-        new TitleBuilder("title-h4").withLevel(2).withContent("Titre Niveau 4")
+        new TitleBuilder("title-h4").withLevel(4).withContent("Titre Niveau 4")
       ).addChild(
-        new TitleBuilder("title-h5").withLevel(2).withContent("Titre Niveau 5")
+        new TitleBuilder("title-h5").withLevel(5).withContent("Titre Niveau 5")
       ).addChild(
-        new TitleBuilder("title-h6").withLevel(2).withContent("Titre Niveau 6")
+        new TitleBuilder("title-h6").withLevel(6).withContent("Titre Niveau 6")
+      ).addChild(new TitleBuilder("c1").withLevel(2).withContent("Courousel")).addChild(
+        new CarouselBuilder("sample-carousel")
+          .addItem("https://picsum.photos/seed/pic1/800/400", "Image Aléatoire 1", "Première image du carrousel")
+          .addItem("https://picsum.photos/seed/pic2/800/400", "Image Aléatoire 2", "Deuxième image du carrousel")
+          .addItem("https://picsum.photos/seed/pic3/800/400", "Image Aléatoire 3", "Troisième image du carrousel")
+          .withOptions(true, 4000)  
       )
     )
   );

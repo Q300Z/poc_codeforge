@@ -2,7 +2,7 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-26T20:58:50.283Z"
+    "createdAt": "2026-01-27T08:09:19.791Z"
   },
   "style": {
     "brand-primary": "#4f46e5",
@@ -19,7 +19,7 @@
       "type": "AppBar",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T20:58:50.282Z",
+        "createdAt": "2026-01-27T08:09:19.790Z",
         "title": "CodeForge",
         "links": [
           {
@@ -50,7 +50,7 @@
       "type": "Section",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-26T20:58:50.282Z"
+        "createdAt": "2026-01-27T08:09:19.790Z"
       },
       "style": {
         "section-bg": "#111827",
@@ -62,7 +62,7 @@
           "type": "Container",
           "meta": {
             "version": "1.0.0",
-            "createdAt": "2026-01-26T20:58:50.282Z"
+            "createdAt": "2026-01-27T08:09:19.791Z"
           },
           "children": [
             {
@@ -70,7 +70,7 @@
               "type": "Stack",
               "meta": {
                 "version": "1.0.0",
-                "createdAt": "2026-01-26T20:58:50.282Z",
+                "createdAt": "2026-01-27T08:09:19.791Z",
                 "align": "center",
                 "gap": 4
               },
@@ -80,7 +80,7 @@
                   "type": "Title",
                   "meta": {
                     "version": "1.0.0",
-                    "createdAt": "2026-01-26T20:58:50.282Z",
+                    "createdAt": "2026-01-27T08:09:19.791Z",
                     "content": "CodeForge POC",
                     "level": 3
                   },
@@ -94,7 +94,7 @@
                   "type": "Text",
                   "meta": {
                     "version": "1.0.0",
-                    "createdAt": "2026-01-26T20:58:50.283Z",
+                    "createdAt": "2026-01-27T08:09:19.791Z",
                     "content": "© 2026 - Le futur du rendu JSON."
                   },
                   "style": {
@@ -117,7 +117,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T20:58:50.283Z"
+          "createdAt": "2026-01-27T08:09:19.791Z"
         },
         "children": [
           {
@@ -125,7 +125,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.283Z",
+              "createdAt": "2026-01-27T08:09:19.791Z",
               "title": "Bienvenue",
               "subtitle": "Découvrez la puissance des Builders typés."
             }
@@ -135,7 +135,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.283Z"
+              "createdAt": "2026-01-27T08:09:19.791Z"
             },
             "children": [
               {
@@ -143,7 +143,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T20:58:50.283Z",
+                  "createdAt": "2026-01-27T08:09:19.791Z",
                   "align": "center"
                 },
                 "children": [
@@ -152,7 +152,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.3.0",
-                      "createdAt": "2026-01-26T20:58:50.283Z",
+                      "createdAt": "2026-01-27T08:09:19.791Z",
                       "label": "Voir les Layouts",
                       "action": "layouts.html",
                       "audioDescription": "Naviguer vers la page layouts"
@@ -172,7 +172,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T20:58:50.283Z"
+          "createdAt": "2026-01-27T08:09:19.792Z"
         },
         "children": [
           {
@@ -180,7 +180,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.283Z",
+              "createdAt": "2026-01-27T08:09:19.792Z",
               "title": "Galerie de Layouts",
               "subtitle": "Mise en page fluide et typée via Builders."
             }
@@ -190,7 +190,7 @@
             "type": "Section",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z"
+              "createdAt": "2026-01-27T08:09:19.792Z"
             },
             "children": [
               {
@@ -198,7 +198,7 @@
                 "type": "Container",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T20:58:50.284Z"
+                  "createdAt": "2026-01-27T08:09:19.792Z"
                 },
                 "children": [
                   {
@@ -206,7 +206,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "level": 2,
                       "content": "1. Grille Responsive (3 cols)"
                     }
@@ -216,7 +216,7 @@
                     "type": "Grid",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "cols": 3,
                       "gap": 6
                     },
@@ -226,7 +226,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#f87171"
@@ -237,7 +237,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#60a5fa"
@@ -248,7 +248,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#34d399"
@@ -261,7 +261,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "level": 2,
                       "content": "2. Stack Vertical avec Espacement"
                     }
@@ -271,7 +271,7 @@
                     "type": "Stack",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "align": "center",
                       "gap": 4
                     },
@@ -281,7 +281,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#fbbf24"
@@ -292,7 +292,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#a78bfa"
@@ -303,7 +303,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#f472b6"
@@ -314,7 +314,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-26T20:58:50.284Z"
+                          "createdAt": "2026-01-27T08:09:19.792Z"
                         },
                         "style": {
                           "bg-color": "#34d399"
@@ -327,7 +327,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "level": 2,
                       "content": "3. Différents Titres"
                     }
@@ -337,7 +337,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "level": 1,
                       "content": "Titre Niveau 1"
                     }
@@ -347,7 +347,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
                       "level": 2,
                       "content": "Titre Niveau 2"
                     }
@@ -357,8 +357,8 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
-                      "level": 2,
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "level": 3,
                       "content": "Titre Niveau 3"
                     }
                   },
@@ -367,8 +367,8 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
-                      "level": 2,
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "level": 4,
                       "content": "Titre Niveau 4"
                     }
                   },
@@ -377,8 +377,8 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
-                      "level": 2,
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "level": 5,
                       "content": "Titre Niveau 5"
                     }
                   },
@@ -387,9 +387,46 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.284Z",
-                      "level": 2,
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "level": 6,
                       "content": "Titre Niveau 6"
+                    }
+                  },
+                  {
+                    "id": "c1",
+                    "type": "Title",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "level": 2,
+                      "content": "Courousel"
+                    }
+                  },
+                  {
+                    "id": "sample-carousel",
+                    "type": "Carousel",
+                    "meta": {
+                      "version": "1.0.0",
+                      "createdAt": "2026-01-27T08:09:19.792Z",
+                      "items": [
+                        {
+                          "src": "https://picsum.photos/seed/pic1/800/400",
+                          "alt": "Image Aléatoire 1",
+                          "title": "Première image du carrousel"
+                        },
+                        {
+                          "src": "https://picsum.photos/seed/pic2/800/400",
+                          "alt": "Image Aléatoire 2",
+                          "title": "Deuxième image du carrousel"
+                        },
+                        {
+                          "src": "https://picsum.photos/seed/pic3/800/400",
+                          "alt": "Image Aléatoire 3",
+                          "title": "Troisième image du carrousel"
+                        }
+                      ],
+                      "autoPlay": true,
+                      "interval": 4000
                     }
                   }
                 ]
@@ -406,7 +443,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T20:58:50.284Z",
+          "createdAt": "2026-01-27T08:09:19.793Z",
           "debug": true
         },
         "style": {
@@ -420,7 +457,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "title": "Mode Canvas",
               "subtitle": "Emplacements précis via coordonnées X et Y."
             }
@@ -430,7 +467,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z"
+              "createdAt": "2026-01-27T08:09:19.793Z"
             },
             "style": {
               "position": "absolute",
@@ -446,7 +483,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z"
+              "createdAt": "2026-01-27T08:09:19.793Z"
             },
             "style": {
               "position": "absolute",
@@ -463,7 +500,7 @@
             "type": "Title",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "content": "Placement Libre",
               "level": 3
             },
@@ -479,7 +516,7 @@
             "type": "Text",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "content": "Ce texte est positionné dynamiquement via des coordonnées CSS absolues."
             },
             "style": {
@@ -495,7 +532,7 @@
             "type": "Button",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.284Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "label": "Action Flottante",
               "action": "alert('Cliqué !')"
             },
@@ -511,7 +548,7 @@
             "type": "Image",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "src": "https://picsum.photos/seed/canvas/300/200",
               "alt": "Image flottante"
             },
@@ -529,7 +566,7 @@
             "type": "Video",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "src": "https://www.w3schools.com/html/mov_bbb.mp4",
               "controls": true,
               "muted": true,
@@ -555,7 +592,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T20:58:50.285Z"
+          "createdAt": "2026-01-27T08:09:19.793Z"
         },
         "children": [
           {
@@ -563,7 +600,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "title": "Composants Média",
               "subtitle": "Intégrez des images et des vidéos de manière accessible."
             }
@@ -573,7 +610,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z"
+              "createdAt": "2026-01-27T08:09:19.793Z"
             },
             "children": [
               {
@@ -581,7 +618,7 @@
                 "type": "Grid",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T20:58:50.285Z",
+                  "createdAt": "2026-01-27T08:09:19.793Z",
                   "cols": 2,
                   "gap": 8
                 },
@@ -591,7 +628,7 @@
                     "type": "Image",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.285Z",
+                      "createdAt": "2026-01-27T08:09:19.793Z",
                       "src": "https://picsum.photos/seed/codeforge/800/600",
                       "alt": "Une image de démonstration générée aléatoirement",
                       "audioDescription": "Image décorative montrant la puissance du rendu visuel"
@@ -605,7 +642,7 @@
                     "type": "Video",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.285Z",
+                      "createdAt": "2026-01-27T08:09:19.793Z",
                       "src": "https://www.w3schools.com/html/mov_bbb.mp4",
                       "poster": "https://picsum.photos/seed/video-poster/800/600",
                       "controls": true,
@@ -630,7 +667,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-26T20:58:50.285Z"
+          "createdAt": "2026-01-27T08:09:19.793Z"
         },
         "children": [
           {
@@ -638,7 +675,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z",
+              "createdAt": "2026-01-27T08:09:19.793Z",
               "title": "Contact",
               "subtitle": "Parlons ensemble."
             }
@@ -648,7 +685,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-26T20:58:50.285Z"
+              "createdAt": "2026-01-27T08:09:19.793Z"
             },
             "children": [
               {
@@ -656,7 +693,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-26T20:58:50.285Z"
+                  "createdAt": "2026-01-27T08:09:19.793Z"
                 },
                 "children": [
                   {
@@ -664,7 +701,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.285Z",
+                      "createdAt": "2026-01-27T08:09:19.793Z",
                       "content": "Envoyez-nous un message",
                       "level": 2
                     }
@@ -674,7 +711,7 @@
                     "type": "Text",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.285Z",
+                      "createdAt": "2026-01-27T08:09:19.793Z",
                       "content": "Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge."
                     }
                   },
@@ -683,7 +720,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-26T20:58:50.285Z",
+                      "createdAt": "2026-01-27T08:09:19.793Z",
                       "label": "Email",
                       "action": "mailto:hello@codeforge.dev"
                     }

@@ -1,6 +1,7 @@
 import { AppBar } from "./components/AppBar.js";
 import { Box } from "./components/Box.js";
 import { Button } from "./components/Button.js";
+import { Carousel } from "./components/Carousel.js";
 import { Container } from "./components/Container.js";
 import { Grid } from "./components/Grid.js";
 import { Hero } from "./components/Hero.js";
@@ -18,6 +19,7 @@ export function setupRegistry() {
   registry.AppBar = AppBar;
   registry.Hero = Hero;
   registry.Button = Button;
+  registry.Carousel = Carousel;
   registry.Grid = Grid;
   registry.Section = Section;
   registry.Container = Container;

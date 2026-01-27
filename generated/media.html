@@ -7,7 +7,7 @@
     <title>CodeForge Ultimate Showcase</title>
   <link rel="stylesheet" crossorigin href="/assets/style-BV2SYiX1.css">
 </head>
-<body class="site-wrapper h-full" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --hero-bg-default: #ffffff; --section-py: 40px; position: relative; height: 600px; overflow: hidden;" data-debug-theme="true">
+<body class="site-wrapper h-full" style="--brand-primary: #4f46e5; --brand-secondary: #06b6d4; --btn-bg-default: var(--brand-primary); --btn-text-default: #ffffff; --appbar-bg: rgba(255, 255, 255, 0.8); --hero-bg-default: #ffffff; --section-py: 40px;" >
     <header>
     <nav 
       style="" 
@@ -58,75 +58,58 @@
       </script>
     </nav></header>
     <main class="main-content">
-    <section class="hero-section" style="" id="canvas-hero" data-component-version="1.0.0"  >
+    <section class="hero-section" style="" id="media-hero" data-component-version="1.0.0"  >
       <div class="hero-content">
         
       <h1 
         style="--text-color: var(--hero-text, inherit); font-size: var(--font-size, clamp(2.25rem, 5vw + 1rem, 3.75rem)); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
         class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] tracking-tight leading-tight m-0"
-        id="canvas-hero-title" data-component-version="1.1.0"  
+        id="media-hero-title" data-component-version="1.1.0"  
       >
-        Mode Canvas
+        Composants Média
       </h1>
     
         <div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">
       <p 
         style="" 
         class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
-        id="canvas-hero-subtitle" data-component-version="1.0.0"  
+        id="media-hero-subtitle" data-component-version="1.0.0"  
       >
-        Emplacements précis via coordonnées X et Y.
+        Intégrez des images et des vidéos de manière accessible.
       </p>
     </div>
       </div>
     </section>
-    <div 
-      style="position: absolute; top: 250px; left: 50px; width: 150px; height: 150px; --bg-color: #818cf8;" 
-      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
-      id="abs-box-1" data-component-version="1.0.0"  
-    ></div>
-  
-    <div 
-      style="position: absolute; top: 300px; left: 150px; width: 100px; height: 100px; --bg-color: #fbbf24; z-index: 10;" 
-      class="bg-[var(--bg-color,#e5e7eb)] w-[var(--width,100%)] h-[var(--height,100px)] rounded-[var(--border-radius,0.5rem)]"
-      id="abs-box-2" data-component-version="1.0.0"  
-    ></div>
-  
-      <h3 
-        style="position: absolute; top: 220px; right: 100px; --text-color: #1e1b4b; font-size: var(--font-size, clamp(1.5rem, 3vw + 1rem, 2.25rem)); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
-        class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] tracking-tight leading-tight m-0"
-        id="abs-title" data-component-version="1.0.0"  
+    <div style="" class="container-center" id="media-container" data-component-version="1.0.0"  >
+      
+      <section 
+        style="" 
+        class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="media-grid" data-component-version="1.0.0"  
       >
-        Placement Libre
-      </h3>
-    
-      <p 
-        style="position: absolute; bottom: 50px; left: 50px; max-width: 300px; --text-color: #4338ca;" 
-        class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
-        id="abs-text" data-component-version="1.0.0"  
-      >
-        Ce texte est positionné dynamiquement via des coordonnées CSS absolues.
-      </p>
-    <button type="button" style="position: absolute; top: 400px; right: 50px; z-index: 20;" class="btn-base" id="abs-btn" data-component-version="1.0.0"   onclick="alert('Cliqué !')">Action Flottante</button>
+        
       <img 
-        src="https://picsum.photos/seed/canvas/300/200" 
-        alt="Image flottante" 
-        style="position: absolute; top: 50px; right: 50px; width: 200px; border-radius: 20px; z-index: 5; object-fit: var(--object-fit, cover);" 
+        src="https://picsum.photos/seed/codeforge/800/600" 
+        alt="Une image de démonstration générée aléatoirement" 
+        style="border-radius: 12px; object-fit: var(--object-fit, cover);" 
         class="w-full h-auto block rounded-[var(--border-radius,0)]"
-        id="abs-img" data-component-version="1.0.0"  
+        id="demo-image" data-component-version="1.0.0" aria-label="Image décorative montrant la puissance du rendu visuel" 
       />
     
       <video 
         src="https://www.w3schools.com/html/mov_bbb.mp4" 
-        
-        controls autoplay loop muted
-        style="position: absolute; bottom: 20px; right: 20px; width: 250px; border-radius: 10px; z-index: 15;" 
+        poster="https://picsum.photos/seed/video-poster/800/600"
+        controls   
+        style="border-radius: 12px;" 
         class="w-full h-auto block rounded-[var(--border-radius,0)]"
-        id="abs-video" data-component-version="1.0.0"  
+        id="demo-video" data-component-version="1.0.0" aria-label="Vidéo de démonstration Big Buck Bunny" 
       >
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
-    </main>
+    
+      </section>
+    </div>
+  </main>
     <footer class="w-full">
     <section style="--section-bg: #111827; --section-py: 32px;" class="section-pad bg-[var(--section-bg,transparent)]" id="global-footer" data-component-version="1.0.0"  >
       

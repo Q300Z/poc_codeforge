@@ -34,7 +34,7 @@ describe("Hero Component", () => {
     expect(section).toHaveStyle("--hero-text: #fff");
   });
 
-  it("should be accessible", async ({ page }) => {
+  it("should be accessible", async () => {
     const html = Hero(meta, [], {}, "hero-1");
     const container = document.createElement("main");
     container.innerHTML = html;

@@ -11,6 +11,7 @@ export * from "./utils/builder.js";
 export * from "./components/AppBar.js";
 export * from "./components/Box.js";
 export * from "./components/Button.js";
+export * from "./components/Carousel.js";
 export * from "./components/Container.js";
 export * from "./components/Grid.js";
 export * from "./components/Hero.js";

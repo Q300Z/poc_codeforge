@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import { AppBarBuilder } from "../components/AppBar.js";
 import { ButtonBuilder } from "../components/Button.js";
 import { GridBuilder } from "../components/Grid.js";
-import { HeroBuilder } from "../components/Hero.js";
 import { PageBuilder } from "../components/Page.js";
 import { StackBuilder } from "../components/Stack.js";
 // Imports directs pour éviter les dépendances lourdes du point d'entrée index.ts lors des tests unitaires

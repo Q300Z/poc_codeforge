@@ -61,8 +61,14 @@ S'appliquent directement en tant que styles CSS natifs :
 
 ### Page (Racine)
 Composant parent obligatoire pour chaque page.
-- **meta.appName** : Nom de l'application.
-- **meta.debug** : `true` pour activer le mode debug visuel.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `appName` | `string` | Oui | Nom de l'application (balise `<title>`). |
+| `debug` | `boolean` | Non | Active les contours en pointillés (debug visuel). |
+
+**Exemple**
 ```json
 {
   "id": "root-page",
@@ -77,15 +83,28 @@ Composant parent obligatoire pour chaque page.
 ```
 
 ### AppBar (Navigation)
-- **meta.title** : Titre affiché.
-- **meta.links** : Liste de `{ "label": string, "href": string }`.
+Barre de navigation supérieure (Sticky) avec support mobile.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Non | Titre affiché à gauche (Défaut: "My App"). |
+| `links` | `Array` | Non | Liste de liens `{ label: string, href: string }`. |
+
+**Tokens de Style**
+`appbar-bg`, `appbar-text`, `appbar-border`, `backdrop-filter`.
+
+**Exemple**
 ```json
 {
   "id": "nav",
   "type": "AppBar",
   "meta": {
     "title": "CodeForge",
-    "links": [{ "label": "Contact", "href": "contact.html" }],
+    "links": [
+      { "label": "Accueil", "href": "/" },
+      { "label": "Contact", "href": "contact.html" }
+    ],
     "version": "1.1.0",
     "createdAt": "2026-01-26T14:00:00Z"
   }
@@ -93,46 +112,84 @@ Composant parent obligatoire pour chaque page.
 ```
 
 ### Hero (Bannière)
-- **meta.title** : Titre principal.
-- **meta.subtitle** : Sous-titre.
+Bandeau d'accueil sémantique à fort impact.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Oui | Titre principal (H1). |
+| `subtitle` | `string` | Non | Sous-titre descriptif. |
+
+**Tokens de Style**
+`hero-bg`, `hero-text`, `section-py`.
+
+**Exemple**
 ```json
 {
   "id": "hero",
   "type": "Hero",
   "meta": {
-    "title": "Hello",
-    "subtitle": "World",
+    "title": "Bienvenue",
+    "subtitle": "Découvrez notre solution.",
     "version": "1.3.0",
     "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "hero-bg": "#f3f4f6",
+    "section-py": 80
   }
 }
 ```
 
 ### Title (Titre)
-- **meta.content** : Texte.
-- **meta.level** : Niveau `1` (H1) à `6` (H6).
+Composant de titre sémantique (H1-H6) avec tailles responsives.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `content` | `string` | Oui | Le texte du titre (si pas d'enfants). |
+| `level` | `number` | Non | Niveau sémantique 1 à 6 (Défaut: 1). |
+
+**Tokens de Style**
+`font-size`, `text-color`, `bg-color`, `font-weight`, `text-align`.
+
+**Exemple**
 ```json
 {
   "id": "t1",
   "type": "Title",
   "meta": {
-    "content": "Titre",
+    "content": "Mon Titre",
     "level": 2,
-    "version": "1.1.0",
+    "version": "1.2.0",
     "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "text-align": "center",
+    "text-color": "#1f2937"
   }
 }
 ```
 
 ### Text (Paragraphe)
-- **meta.content** : Texte.
-- **meta.tag** : Balise (`p`, `span`, `div`).
+Bloc de texte courant.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `content` | `string` | Oui | Le contenu textuel. |
+| `tag` | `string` | Non | Balise : "p", "span" ou "div" (Défaut: "p"). |
+
+**Tokens de Style**
+`font-size`, `text-color`, `line-height`.
+
+**Exemple**
 ```json
 {
   "id": "txt1",
   "type": "Text",
   "meta": {
-    "content": "Texte de description.",
+    "content": "Ceci est un paragraphe de description.",
     "tag": "p",
     "version": "1.0.0",
     "createdAt": "2026-01-26T14:00:00Z"
@@ -141,45 +198,142 @@ Composant parent obligatoire pour chaque page.
 ```
 
 ### Button (Bouton)
-- **meta.label** : Texte.
-- **meta.action** : URL ou JS.
+Élément interactif (lien ou bouton).
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `label` | `string` | Oui | Texte du bouton. |
+| `action` | `string` | Non | URL (lien) ou script JS (onclick). |
+
+**Tokens de Style**
+`btn-bg`, `btn-text`, `bg-color` (legacy), `text-color` (legacy).
+
+**Exemple**
 ```json
 {
   "id": "btn",
   "type": "Button",
   "meta": {
-    "label": "Clic ici",
-    "action": "/",
-    "audioDescription": "Retourner à l'accueil",
-    "version": "1.3.0",
+    "label": "En savoir plus",
+    "action": "/about",
+    "audioDescription": "Naviguer vers la page À propos",
+    "version": "1.2.0",
     "createdAt": "2026-01-26T14:00:00Z"
   }
 }
 ```
 
-### Grid (Grille)
-- **meta.cols** : Colonnes desktop (1-12).
-- **meta.gap** : Espacement (0-16).
+### Box (Bloc générique)
+Div simple pour la structure ou le background.
+
+**Tokens de Style**
+`bg-color`, `width`, `height`, `border-radius`, `flex-shrink`.
+
+**Exemple**
 ```json
 {
-  "id": "g1",
+  "id": "box1",
+  "type": "Box",
+  "meta": {
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "width": 100,
+    "height": 100,
+    "bg-color": "#ff0000"
+  }
+}
+```
+
+### Container (Conteneur centré)
+Bloc centré horizontalement avec largeur max.
+
+**Tokens de Style**
+`container-width`.
+
+**Exemple**
+```json
+{
+  "id": "cont1",
+  "type": "Container",
+  "meta": {
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "children": []
+}
+```
+
+### Section (Section pleine page)
+Bloc structurel pour découper verticalement la page.
+
+**Tokens de Style**
+`section-bg`, `section-py`.
+
+**Exemple**
+```json
+{
+  "id": "sect1",
+  "type": "Section",
+  "meta": {
+    "version": "1.1.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "section-bg": "#ffffff",
+    "section-py": 60
+  },
+  "children": []
+}
+```
+
+### Grid (Grille Responsive)
+Système de colonnes CSS Grid.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `cols` | `number` | Non | Colonnes desktop (1-12, défaut 2). |
+| `gap` | `number` | Non | Espacement Tailwind 0-16 (Défaut: 8). |
+
+**Tokens de Style**
+`grid-gap`, `grid-bg`.
+
+**Exemple**
+```json
+{
+  "id": "grid1",
   "type": "Grid",
   "meta": {
     "cols": 3,
-    "gap": 8,
+    "gap": 6,
     "version": "1.1.0",
     "createdAt": "2026-01-26T14:00:00Z"
-  }
+  },
+  "children": []
 }
 ```
 
-### Stack (Alignement)
-- **meta.direction** : `"vertical"` ou `"horizontal"`.
-- **meta.align** : `"start"`, `"center"`, `"end"`, `"stretch"`.
-- **meta.gap** : Espacement (0-16).
+### Stack (Flexbox)
+Alignement vertical ou horizontal d'éléments.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `direction` | `string` | Non | "vertical" ou "horizontal" (Défaut: vertical). |
+| `align` | `string` | Non | Cross-axis: "start", "center", "end", "stretch". |
+| `justify` | `string` | Non | Main-axis: "start", "center", "end", "between". |
+| `gap` | `number` | Non | Espacement Tailwind 0-16 (Défaut: 6). |
+
+**Tokens de Style**
+`stack-gap`.
+
+**Exemple**
 ```json
 {
-  "id": "s1",
+  "id": "stack1",
   "type": "Stack",
   "meta": {
     "direction": "horizontal",
@@ -187,6 +341,102 @@ Composant parent obligatoire pour chaque page.
     "gap": 4,
     "version": "1.1.0",
     "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "children": []
+}
+```
+
+### Image
+Affichage d'image optimisé.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `src` | `string` | Oui | URL de l'image. |
+| `alt` | `string` | Oui | Texte alternatif (Accessibilité). |
+
+**Tokens de Style**
+`border-radius`, `object-fit`.
+
+**Exemple**
+```json
+{
+  "id": "img1",
+  "type": "Image",
+  "meta": {
+    "src": "https://example.com/photo.jpg",
+    "alt": "Description de l'image",
+    "version": "1.0.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "border-radius": "8px"
+  }
+}
+```
+
+### Video
+Lecteur vidéo HTML5.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `src` | `string` | Oui | URL de la vidéo. |
+| `poster` | `string` | Non | Image de couverture. |
+| `controls` | `boolean` | Non | Affiche les contrôles (Défaut: true). |
+| `autoplay` | `boolean` | Non | Lecture auto (Défaut: false). |
+| `loop` | `boolean` | Non | Boucle (Défaut: false). |
+| `muted` | `boolean` | Non | Muet (Défaut: false). |
+
+**Tokens de Style**
+`border-radius`.
+
+**Exemple**
+```json
+{
+  "id": "vid1",
+  "type": "Video",
+  "meta": {
+    "src": "video.mp4",
+    "controls": true,
+    "muted": true,
+    "version": "1.0.0",
+    "createdAt": "2026-01-26T14:00:00Z"
+  }
+}
+```
+
+### Carousel
+Carrousel d'images interactif.
+
+**Définition des props (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `items` | `Array` | Oui | Liste d'objets `{ src, alt, title }`. |
+| `autoPlay` | `boolean` | Non | Défilement auto (Défaut: false). |
+| `interval` | `number` | Non | Temps en ms (Défaut: 5000). |
+
+**Tokens de Style**
+`height`, `carousel-color`, `border-radius`.
+
+**Exemple**
+```json
+{
+  "id": "car1",
+  "type": "Carousel",
+  "meta": {
+    "items": [
+      { "src": "img1.jpg", "alt": "Slide 1", "title": "Titre 1" },
+      { "src": "img2.jpg", "alt": "Slide 2" }
+    ],
+    "autoPlay": true,
+    "interval": 3000,
+    "version": "1.0.1",
+    "createdAt": "2026-01-26T14:00:00Z"
+  },
+  "style": {
+    "height": "400px",
+    "carousel-color": "#ffffff"
   }
 }
 ```

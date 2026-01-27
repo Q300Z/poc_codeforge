@@ -3,7 +3,7 @@ import { createComponent } from "../utils/factory.js";
 
 /** Interface des métadonnées pour le composant Title. */
 export interface TitleMeta {
-  /** Le texte du titre. */
+  /** Le texte du titre (fallback si pas d'enfants). */
   content: string;
   /** Niveau sémantique (1=H1, 2=H2, ..., 6=H6). Défaut : 1. */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -17,6 +17,10 @@ export interface TitleStyles {
   "text-color"?: string;
   /** Couleur de fond du bloc de titre. */
   "bg-color"?: string;
+  /** Poids de la police. */
+  "font-weight"?: string | number;
+  /** Alignement du texte. */
+  "text-align"?: "left" | "center" | "right" | "justify";
 }
 
 /**
@@ -37,6 +41,16 @@ export class TitleBuilder extends NodeBuilder<TitleMeta, TitleStyles> {
     this.node.meta.level = level;
     return this;
   }
+  /** Définit l'alignement du texte. */
+  withAlign(align: TitleStyles["text-align"]): this {
+    this.node.style = { ...this.node.style, "text-align": align };
+    return this;
+  }
+  /** Définit le poids de la police. */
+  withWeight(weight: TitleStyles["font-weight"]): this {
+    this.node.style = { ...this.node.style, "font-weight": weight };
+    return this;
+  }
 }
 
 /**
@@ -46,21 +60,34 @@ export class TitleBuilder extends NodeBuilder<TitleMeta, TitleStyles> {
  */
 export const Title = createComponent({
   name: "Title",
-  version: "1.1.0",
-  authorizedTokens: ["font-size", "text-color", "bg-color"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
+  version: "1.2.0",
+  authorizedTokens: ["font-size", "text-color", "bg-color", "font-weight", "text-align"],
+  template: (meta: Record<string, any>, children: string[], styleVars, a11yAttrs) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);
     const tag = `h${level}`;
-    const defaultSizes = ["3.75rem", "3rem", "2.25rem", "1.875rem", "1.5rem", "1.25rem"];
-    const defaultSize = defaultSizes[level - 1];
+
+    // Tailles fluides avec clamp(min, val, max) pour la réactivité sans classes
+    const responsiveSizes = [
+      "clamp(2.25rem, 5vw + 1rem, 3.75rem)", // H1
+      "clamp(1.875rem, 4vw + 1rem, 3rem)", // H2
+      "clamp(1.5rem, 3vw + 1rem, 2.25rem)", // H3
+      "clamp(1.25rem, 2vw + 1rem, 1.875rem)", // H4
+      "clamp(1.125rem, 1.5vw + 1rem, 1.5rem)", // H5
+      "clamp(1rem, 1vw + 1rem, 1.25rem)", // H6
+    ];
+
+    const defaultSize = responsiveSizes[level - 1];
+
+    // Priorité aux enfants, sinon fallback sur meta.content
+    const finalContent = children && children.length > 0 ? children.join("") : meta.content || "";
 
     return `
       <${tag} 
-        style="${styleVars} font-size: var(--font-size, ${defaultSize}); font-weight: 800;" 
+        style="${styleVars} font-size: var(--font-size, ${defaultSize}); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
         class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >
-        ${meta.content || ""}
+        ${finalContent}
       </${tag}>
     `;
   },
