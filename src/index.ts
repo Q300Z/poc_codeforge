@@ -31,13 +31,10 @@ import { setupRegistry } from "./setup.js";
 import { render } from "./renderer.js";
 import { SiteNode } from "./types.js";
 import { ScreenDraftAdapter, ScreenDraftData } from "./adapter/screendraft.js";
+import { isScreenDraft } from "./utils/detection.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-function isScreenDraft(data: any): data is ScreenDraftData {
-  return Array.isArray(data.components) && !data.pages;
-}
 
 export async function buildSite(jsonPath: string, outDir: string = "generated") {
   setupRegistry();
