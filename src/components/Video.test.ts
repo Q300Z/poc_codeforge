@@ -20,4 +20,21 @@ describe("Video Component", () => {
     expect(html).toContain("autoplay");
     expect(html).toContain("muted");
   });
+
+  it("should handle playsinline and preload", () => {
+    const html = Video({ ...meta, playsinline: true, preload: "none" }, [], {}, "vid-mobile");
+    expect(html).toContain("playsinline");
+    expect(html).toContain('preload="none"');
+  });
+
+  it("should render explicit width and height", () => {
+    const html = Video({ ...meta, width: 1920, height: 1080 }, [], {}, "vid-size");
+    expect(html).toContain('width="1920"');
+    expect(html).toContain('height="1080"');
+  });
+
+  it("should apply object-fit style", () => {
+    const html = Video(meta, [], { "object-fit": "contain" }, "vid-fit");
+    expect(html).toContain("object-fit: contain");
+  });
 });
