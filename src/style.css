@@ -41,7 +41,7 @@
     padding-top: var(--section-py, 4rem);
     padding-bottom: var(--section-py, 4rem);
     
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       padding-top: var(--section-py-md, var(--section-py, 6rem));
       padding-bottom: var(--section-py-md, var(--section-py, 6rem));
     }
@@ -49,12 +49,14 @@
 
   .container-center {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
+
     max-width: var(--container-width, 80rem);
   }
 
   /* Hero Component - Modern UI */
   .hero-section {
     @apply relative overflow-hidden transition-all duration-500 ease-in-out;
+
     background: var(--hero-bg, linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%));
     padding-top: var(--section-py, 6rem);
     padding-bottom: var(--section-py, 6rem);
@@ -62,10 +64,11 @@
     
     &::before {
       content: "";
+
       @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-50;
     }
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       padding-top: var(--section-py-md, var(--section-py, 10rem));
       padding-bottom: var(--section-py-md, var(--section-py, 10rem));
     }
@@ -77,31 +80,28 @@
 
   .hero-subtitle-wrapper {
     @apply mt-8;
+
     color: theme(colors.gray.600);
   }
 
   /* Debug Mode */
   [data-debug-theme="true"] * {
-    outline: 1px dashed rgba(255, 0, 255, 0.3);
+    outline: 1px dashed rgb(255 0 255 / 30%);
     outline-offset: -1px;
   }
 
     /* Button Component */
 
     .btn-base {
-
       @apply inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold tracking-tight;
 
       background-color: var(--btn-bg, var(--btn-bg-default, #2563eb));
-
       color: var(--btn-text, var(--btn-text-default, white));
-
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
 
       
 
       &:hover {
-
         @apply filter brightness-110 shadow-lg;
 
       }
