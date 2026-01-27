@@ -30,9 +30,14 @@ import { fileURLToPath } from "url";
 import { setupRegistry } from "./setup.js";
 import { render } from "./renderer.js";
 import { SiteNode } from "./types.js";
+import { ScreenDraftAdapter, ScreenDraftData } from "./adapter/screendraft.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+function isScreenDraft(data: any): data is ScreenDraftData {
+  return Array.isArray(data.components) && !data.pages;
+}
 
 export async function buildSite(jsonPath: string, outDir: string = "generated") {
   setupRegistry();
@@ -43,7 +48,16 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     throw new Error(`JSON file not found: ${absoluteJsonPath}`);
   }
 
-  const siteData: SiteNode = JSON.parse(fs.readFileSync(absoluteJsonPath, "utf-8"));
+  const rawData = fs.readFileSync(absoluteJsonPath, "utf-8");
+  const jsonContent = JSON.parse(rawData);
+  let siteData: SiteNode;
+
+  if (isScreenDraft(jsonContent)) {
+    console.log("ℹ️ Format ScreenDraft détecté. Transformation automatique...");
+    siteData = ScreenDraftAdapter.transform(jsonContent);
+  } else {
+    siteData = jsonContent;
+  }
   
   const input: Record<string, string> = {};
   const tempFiles: string[] = [];
