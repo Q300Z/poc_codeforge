@@ -1,5 +1,19 @@
 # Changelog
 
+# [1.3.0](https://github.com/Q300Z/poc_codeforge/compare/v1.2.0...v1.3.0) (2026-01-27)
+
+
+### Bug Fixes
+
+* **ci:** ensure library is built before generating showcase in E2E tests ([fe2694b](https://github.com/Q300Z/poc_codeforge/commit/fe2694bb15bad8be5277f35f66f503604ac79284))
+
+
+### Features
+
+* add Image and Video components with full A11y and TSDoc support ([fab6b5d](https://github.com/Q300Z/poc_codeforge/commit/fab6b5d4e2fffb87efc66cbd72087e40376ad591))
+* **cli:** add watch mode and help, improve TSDoc support, and enrich showcase ([a923ee6](https://github.com/Q300Z/poc_codeforge/commit/a923ee66df62ef9fea49ee97bc6279bf9439628a))
+* **components:** enhance Title and Carousel components, update JSON specification ([9c8504e](https://github.com/Q300Z/poc_codeforge/commit/9c8504ed9c403a907840afa7d6ca9bd1473595a8))
+
 # [1.2.0](https://github.com/Q300Z/poc_codeforge/compare/v1.1.0...v1.2.0) (2026-01-26)
 
 
