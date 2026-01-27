@@ -1,5 +1,22 @@
 # Changelog
 
+# [1.5.0](https://github.com/Q300Z/poc_codeforge/compare/v1.4.0...v1.5.0) (2026-01-27)
+
+
+### Bug Fixes
+
+* **cli:** implement robust CSS inlining and cleanup ([f59e54c](https://github.com/Q300Z/poc_codeforge/commit/f59e54cc75ad411aa4e9fa26605fa75317c08f2a))
+
+
+### Features
+
+* **adapter:** implement ScreenDraft importer and enhance test coverage ([ed1901b](https://github.com/Q300Z/poc_codeforge/commit/ed1901b891f475aa01e5a0826000efe75ca7ab7f))
+* **adapter:** map ScreenDraft navbar to AppBar ([feafc97](https://github.com/Q300Z/poc_codeforge/commit/feafc975c887160f7293850ffa50925adc206573))
+* add Map component with ScreenDraft support and layout isolation ([16a4510](https://github.com/Q300Z/poc_codeforge/commit/16a4510d8735a1d0751f6cac2d2b08c2fa00c280)), closes [hi#performance](https://github.com/hi/issues/performance)
+* **cli:** add --inline option to embed CSS in HTML ([7acaeda](https://github.com/Q300Z/poc_codeforge/commit/7acaedad7ab276c437e02ed493c9be207f796657))
+* **cli:** auto-detect ScreenDraft format and clean up warnings ([239fc3c](https://github.com/Q300Z/poc_codeforge/commit/239fc3c1e3fc58047c53eacf2bdf04daee403d6c))
+* implement Form components and improve ScreenDraft adapter ([209916a](https://github.com/Q300Z/poc_codeforge/commit/209916a45f5cb07884d144f0c0ba91cdec0f3638))
+
 # [1.4.0](https://github.com/Q300Z/poc_codeforge/compare/v1.3.0...v1.4.0) (2026-01-27)
 
 
