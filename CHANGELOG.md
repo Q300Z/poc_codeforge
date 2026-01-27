@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.6.0](https://github.com/Q300Z/poc_codeforge/compare/v1.5.0...v1.6.0) (2026-01-27)
+
+
+### Features
+
+* add Table and Select components with tests and integration ([9f88ddd](https://github.com/Q300Z/poc_codeforge/commit/9f88ddd66767fb920dda4fd0b9b7c12552f70b78))
+
 # [1.5.0](https://github.com/Q300Z/poc_codeforge/compare/v1.4.0...v1.5.0) (2026-01-27)
 
 
