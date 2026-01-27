@@ -1,3 +1,4 @@
+import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -12,9 +13,9 @@ export interface GridMeta {
 /** Interface des Design Tokens pour le composant Grid. */
 export interface GridStyles {
   /** Espacement personnalisé. */
-  "grid-gap"?: string | number;
+  "grid-gap"?: CSSLength;
   /** Couleur de fond du conteneur de grille. */
-  "grid-bg"?: string;
+  "grid-bg"?: CSSColor;
 }
 
 /**

@@ -35,6 +35,10 @@ export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
 export type ResponsiveLayoutProps = { [K in LayoutProperty as `${K}-${Breakpoint}`]?: string | number };
 export type BaseStyles = Partial<Record<LayoutProperty, string | number>> & ResponsiveLayoutProps;
 
+/** Types pour la sécurité du typage des styles */
+export type CSSColor = string; // "#FFF", "rgba(...)", "var(--brand)"
+export type CSSLength = number | string; // 100, "100px", "50%"
+
 /**
  * Structure de base d'un élément CodeForge.
  * @template TMeta Métadonnées spécifiques.

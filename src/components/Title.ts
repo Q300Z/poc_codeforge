@@ -1,3 +1,4 @@
+import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -12,13 +13,13 @@ export interface TitleMeta {
 /** Interface des Design Tokens pour le composant Title. */
 export interface TitleStyles {
   /** Taille de police personnalisée. */
-  "font-size"?: string | number;
+  "font-size"?: CSSLength;
   /** Couleur du texte. */
-  "text-color"?: string;
+  "title-text"?: CSSColor;
   /** Couleur de fond du bloc de titre. */
-  "bg-color"?: string;
+  "title-bg"?: CSSColor;
   /** Poids de la police. */
-  "font-weight"?: string | number;
+  "font-weight"?: number | string;
   /** Alignement du texte. */
   "text-align"?: "left" | "center" | "right" | "justify";
 }
@@ -61,7 +62,7 @@ export class TitleBuilder extends NodeBuilder<TitleMeta, TitleStyles> {
 export const Title = createComponent({
   name: "Title",
   version: "1.2.0",
-  authorizedTokens: ["font-size", "text-color", "bg-color", "font-weight", "text-align"],
+  authorizedTokens: ["font-size", "title-text", "title-bg", "font-weight", "text-align"],
   template: (meta: Record<string, any>, children: string[], styleVars, a11yAttrs) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);
     const tag = `h${level}`;
@@ -84,7 +85,7 @@ export const Title = createComponent({
     return `
       <${tag} 
         style="${styleVars} font-size: var(--font-size, ${defaultSize}); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
-        class="text-[var(--text-color,inherit)] bg-[var(--bg-color,transparent)] tracking-tight leading-tight m-0"
+        class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >
         ${finalContent}

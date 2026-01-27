@@ -1,3 +1,4 @@
+import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 import { Text } from "./Text.js";
@@ -14,11 +15,11 @@ export interface HeroMeta {
 /** Interface des Design Tokens pour le composant Hero. */
 export interface HeroStyles {
   /** Couleur ou dégradé de fond de la section. */
-  "hero-bg"?: string;
+  "hero-bg"?: CSSColor;
   /** Couleur du texte du titre. */
-  "hero-text"?: string;
+  "hero-text"?: CSSColor;
   /** Padding vertical (hauteur) du bandeau. */
-  "section-py"?: string | number;
+  "section-py"?: CSSLength;
 }
 
 /**

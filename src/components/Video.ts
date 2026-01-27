@@ -27,8 +27,6 @@ export interface VideoMeta {
 
 /** Interface des Design Tokens pour le composant Video. */
 export interface VideoStyles {
-  /** Rayon de courbure des angles. */
-  "border-radius"?: string | number;
   /** Mode de redimensionnement (cover, contain, etc.). */
   "object-fit"?: "cover" | "contain" | "fill" | "none";
 }
@@ -91,7 +89,7 @@ export const Video = createComponent({
     width: { type: "number", description: "Largeur native" },
     height: { type: "number", description: "Hauteur native" },
   },
-  authorizedTokens: ["border-radius", "object-fit"],
+  authorizedTokens: ["object-fit"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     if (!meta.src) return "<!-- Vidéo manquante -->";
 

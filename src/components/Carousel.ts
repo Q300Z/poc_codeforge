@@ -1,3 +1,4 @@
+import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -13,12 +14,8 @@ export interface CarouselMeta {
 
 /** Interface des Design Tokens pour le composant Carousel. */
 export interface CarouselStyles {
-  /** Hauteur du carrousel. */
-  height?: string | number;
   /** Couleur des flèches et indicateurs. */
-  "carousel-color"?: string;
-  /** Arrondi du conteneur. */
-  "border-radius"?: string | number;
+  "carousel-color"?: CSSColor;
 }
 
 /**
@@ -70,9 +67,7 @@ export const Carousel = createComponent({
     },
   },
   authorizedTokens: {
-    height: "Hauteur du carrousel",
     "carousel-color": "Couleur des éléments de contrôle",
-    "border-radius": "Arrondi des angles",
   },
   examples: [
     {

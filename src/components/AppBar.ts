@@ -1,3 +1,4 @@
+import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -12,11 +13,11 @@ export interface AppBarMeta {
 /** Interface des Design Tokens pour le composant AppBar. */
 export interface AppBarStyles {
   /** Couleur de fond de la barre. */
-  "appbar-bg"?: string;
+  "appbar-bg"?: CSSColor;
   /** Couleur de texte des liens. */
-  "appbar-text"?: string;
+  "appbar-text"?: CSSColor;
   /** Couleur de la bordure inférieure. */
-  "appbar-border"?: string;
+  "appbar-border"?: CSSColor;
   /** Effet de flou sur le fond (ex: blur(10px)). */
   "backdrop-filter"?: string;
 }

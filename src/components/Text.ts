@@ -1,3 +1,4 @@
+import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -12,11 +13,11 @@ export interface TextMeta {
 /** Interface des Design Tokens pour le composant Text. */
 export interface TextStyles {
   /** Taille de police personnalisée. */
-  "font-size"?: string | number;
+  "font-size"?: CSSLength;
   /** Couleur du texte. */
-  "text-color"?: string;
+  "text-color"?: CSSColor;
   /** Hauteur de ligne (multiplicateur ou unité). */
-  "line-height"?: string | number;
+  "line-height"?: number | string;
 }
 
 /**

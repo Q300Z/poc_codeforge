@@ -1,3 +1,4 @@
+import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -16,7 +17,7 @@ export interface StackMeta {
 /** Interface des Design Tokens pour le composant Stack. */
 export interface StackStyles {
   /** Espacement personnalisé via variable CSS. */
-  "stack-gap"?: string | number;
+  "stack-gap"?: CSSLength;
 }
 
 /**

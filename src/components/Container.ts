@@ -1,10 +1,11 @@
+import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
 /** Interface des Design Tokens pour le composant Container. */
 export interface ContainerStyles {
   /** Largeur maximale du conteneur (ex: 1200, "80rem"). */
-  "container-width"?: string | number;
+  "container-width"?: CSSLength;
 }
 
 /**

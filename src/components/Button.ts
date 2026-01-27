@@ -1,3 +1,4 @@
+import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
@@ -12,13 +13,13 @@ export interface ButtonMeta {
 /** Interface des Design Tokens pour le composant Button. */
 export interface ButtonStyles {
   /** Couleur de fond spécifique. */
-  "btn-bg"?: string;
+  "btn-bg"?: CSSColor;
   /** Couleur de texte spécifique. */
-  "btn-text"?: string;
+  "btn-text"?: CSSColor;
   /** Alias legacy pour le fond. */
-  "bg-color"?: string;
+  "bg-color"?: CSSColor;
   /** Alias legacy pour le texte. */
-  "text-color"?: string;
+  "text-color"?: CSSColor;
 }
 
 /**
@@ -72,6 +73,8 @@ export const Button = createComponent({
     },
   },
   authorizedTokens: {
+    "btn-bg": "Couleur de fond",
+    "btn-text": "Couleur du texte",
     "btn-bg-default": "Couleur de fond par défaut",
     "btn-text-default": "Couleur du texte par défaut",
     "btn-radius": "Arrondi des angles",

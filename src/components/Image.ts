@@ -21,8 +21,6 @@ export interface ImageMeta {
 
 /** Interface des Design Tokens pour le composant Image. */
 export interface ImageStyles {
-  /** Rayon de courbure des angles. */
-  "border-radius"?: string | number;
   /** Mode de redimensionnement (cover, contain, etc.). */
   "object-fit"?: "cover" | "contain" | "fill" | "none";
 }
@@ -87,7 +85,7 @@ export const Image = createComponent({
     srcset: { type: "string", description: "Sources responsives" },
     sizes: { type: "string", description: "Tailles d'affichage" },
   },
-  authorizedTokens: ["border-radius", "object-fit"],
+  authorizedTokens: ["object-fit"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     if (!meta.src) return "<!-- Image manquante -->";
 

@@ -1,12 +1,13 @@
+import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
 /** Interface des Design Tokens pour le composant Section. */
 export interface SectionStyles {
   /** Couleur de fond de la section. */
-  "section-bg"?: string;
+  "section-bg"?: CSSColor;
   /** Padding vertical (marge interne). */
-  "section-py"?: string | number;
+  "section-py"?: CSSLength;
 }
 
 /**

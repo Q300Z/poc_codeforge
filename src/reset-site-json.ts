@@ -47,7 +47,7 @@ const footer = new SectionBuilder("global-footer")
           new TitleBuilder("footer-title")
             .withContent("CodeForge POC")
             .withLevel(3)
-            .withStyle({ "text-color": "#ffffff", "font-size": "1.25rem" })
+            .withStyle({ "title-text": "#ffffff", "font-size": "1.25rem" })
         )
         .addChild(
           new TextBuilder("footer-copy")
@@ -111,9 +111,9 @@ const layoutsPage = new PageBuilder("layouts-page")
         new GridBuilder("features-grid")
           .withCols(3)
           .withGap(6)
-          .addChild(new BoxBuilder("box1").withStyle({ "bg-color": "#f87171" }))
-          .addChild(new BoxBuilder("box2").withStyle({ "bg-color": "#60a5fa" }))
-          .addChild(new BoxBuilder("box3").withStyle({ "bg-color": "#34d399" }))
+          .addChild(new BoxBuilder("box1").withStyle({ "box-bg": "#f87171" }))
+          .addChild(new BoxBuilder("box2").withStyle({ "box-bg": "#60a5fa" }))
+          .addChild(new BoxBuilder("box3").withStyle({ "box-bg": "#34d399" }))
       ).addChild(
         new TitleBuilder("t2")
           .withLevel(2)
@@ -122,10 +122,10 @@ const layoutsPage = new PageBuilder("layouts-page")
      new StackBuilder("pstack")
           .withAlign("center")
           .withGap(4)
-          .addChild(new BoxBuilder("pbox1").withStyle({ "bg-color": "#fbbf24" }))
-          .addChild(new BoxBuilder("pbox2").withStyle({ "bg-color": "#a78bfa" }))
-          .addChild(new BoxBuilder("pbox3").withStyle({ "bg-color": "#f472b6" }))
-          .addChild(new BoxBuilder("pbox4").withStyle({ "bg-color": "#34d399" }))
+          .addChild(new BoxBuilder("pbox1").withStyle({ "box-bg": "#fbbf24" }))
+          .addChild(new BoxBuilder("pbox2").withStyle({ "box-bg": "#a78bfa" }))
+          .addChild(new BoxBuilder("pbox3").withStyle({ "box-bg": "#f472b6" }))
+          .addChild(new BoxBuilder("pbox4").withStyle({ "box-bg": "#34d399" }))
       ).addChild(
         new TitleBuilder("t3")
           .withLevel(2)
@@ -171,7 +171,7 @@ const canvasPage = new PageBuilder("canvas-page")
         left: 50,
         width: 150,
         height: 150,
-        "bg-color": "#818cf8"
+        "box-bg": "#818cf8"
       })
   )
   .addChild(
@@ -182,7 +182,7 @@ const canvasPage = new PageBuilder("canvas-page")
         left: 150,
         width: 100,
         height: 100,
-        "bg-color": "#fbbf24",
+        "box-bg": "#fbbf24",
         "z-index": 10
       })
   )
@@ -194,7 +194,7 @@ const canvasPage = new PageBuilder("canvas-page")
         position: "absolute",
         top: 220,
         right: 100,
-        "text-color": "#1e1b4b"
+        "title-text": "#1e1b4b"
       })
   )
   .addChild(
