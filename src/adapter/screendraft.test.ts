@@ -68,6 +68,18 @@ describe("ScreenDraftAdapter", () => {
         textColor: "#fff",
       },
       {
+        id: "nav-1",
+        type: "navbar",
+        x: 0,
+        y: 0,
+        width: 800,
+        height: 60,
+        navbarLogoText: "TestLogo",
+        navbarLinks: [{ label: "Home", href: "/home" }],
+        backgroundColor: "black",
+        textColor: "white",
+      },
+      {
         id: "map-1",
         type: "map",
         x: 0,
@@ -147,6 +159,19 @@ describe("ScreenDraftAdapter", () => {
     expect(carousel.meta.interval).toBe(2000);
     expect(carousel.meta.items).toHaveLength(2);
     expect(carousel.style["carousel-color"]).toBe("#fff");
+  });
+
+  it("should transform Navbar component", () => {
+    const site = ScreenDraftAdapter.transform(mockData);
+    const page = site.pages[0].content;
+    const nav = page.children.find((c: any) => c.id === "nav-1");
+
+    expect(nav).toBeDefined();
+    expect(nav.type).toBe("AppBar");
+    expect(nav.meta.title).toBe("TestLogo");
+    expect(nav.meta.links).toHaveLength(1);
+    expect(nav.style["appbar-bg"]).toBe("black");
+    expect(nav.style["appbar-text"]).toBe("white");
   });
 
   it("should transform Map component", () => {

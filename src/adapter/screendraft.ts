@@ -1,3 +1,4 @@
+import { AppBarBuilder } from "../components/AppBar.js";
 import { ButtonBuilder } from "../components/Button.js";
 import { CarouselBuilder } from "../components/Carousel.js";
 import { ImageBuilder } from "../components/Image.js";
@@ -146,6 +147,17 @@ export class ScreenDraftAdapter {
         builder = carousel;
         break;
       }
+
+      case "navbar":
+        builder = new AppBarBuilder(comp.id)
+          .withTitle(comp.navbarLogoText || "My App")
+          .withLinks(comp.navbarLinks || [])
+          .withStyle({
+            ...commonStyle,
+            "appbar-bg": comp.backgroundColor,
+            "appbar-text": comp.textColor,
+          });
+        break;
 
       case "map":
         builder = new MapBuilder(comp.id).withStyle({
