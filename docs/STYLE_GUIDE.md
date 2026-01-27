@@ -19,8 +19,8 @@ Ces propriétés sont définies dans `LAYOUT_UTILITIES` et sont disponibles pour
 **Positionnement :**
 - `position` (`absolute`, `relative`, `fixed`, `sticky`)
 - `top`, `left`, `bottom`, `right`
-- `x` (alias pour `left`, idéal pour le mode Canvas)
-- `y` (alias pour `top`, idéal pour le mode Canvas)
+- `x` (alias pour `left`, idéal pour le mode Canvas / positionnement absolu)
+- `y` (alias pour `top`, idéal pour le mode Canvas / positionnement absolu)
 - `z-index`
 - `transform`
 
@@ -57,7 +57,8 @@ Chaque propriété peut être suffixée par un breakpoint pour s'appliquer uniqu
 "style": {
   "width": "100%",        // Mobile : 100%
   "width-md": "50%",      // Tablette : 50%
-  "width-lg": "300px"     // Desktop : 300px fixe
+  "width-lg": "300px",    // Desktop : 300px fixe
+  "x-md": 50              // Tablette : position x à 50px
 }
 ```
 
@@ -67,36 +68,37 @@ Chaque propriété peut être suffixée par un breakpoint pour s'appliquer uniqu
 
 Chaque composant peut exposer des propriétés de style spécifiques, appelées "Design Tokens". Contrairement aux utilitaires de layout, ces tokens sont injectés sous forme de **Variables CSS** (`--token-name`) dans le style de l'élément racine du composant.
 
-Le composant utilise ensuite ces variables dans son template (souvent avec une valeur par défaut).
-
-### Convention de Nommage
-Les tokens suivent la convention `[composant]-[propriété]`.
+### Tableau des Tokens par Composant
 
 | Composant | Tokens Disponibles | Description |
 | :--- | :--- | :--- |
+| **AppBar** | `appbar-bg`, `appbar-text`, `appbar-border`, `backdrop-filter` | Thème de la navigation. |
 | **Box** | `box-bg` | Couleur de fond. |
-| **Title** | `title-text`, `title-bg` | Couleur du texte et du fond. |
-| **Button** | `btn-bg`, `btn-text` | Couleur de fond et du texte. |
-| **AppBar** | `appbar-bg`, `appbar-text`, `appbar-border` | Thème de la barre de navigation. |
-| **Hero** | `hero-bg`, `hero-text` | Thème du bandeau. |
-| **Text** | `text-color`, `font-size` | Couleur et taille (générique). |
-| **Grid** | `grid-bg`, `grid-gap` | Fond et espacement de grille. |
+| **Button** | `btn-bg`, `btn-text`, `btn-radius`, `font-size` | Style du bouton. |
+| **Carousel** | `carousel-color` | Couleur des flèches et indicateurs. |
+| **Grid** | `grid-bg`, `grid-gap` | Fond et espacement. |
+| **Hero** | `hero-bg`, `hero-text`, `section-py` | Thème du bandeau. |
+| **Image** | `object-fit` | Mode de redimensionnement (`cover`, `contain`). |
 | **Section** | `section-bg`, `section-py` | Fond et padding vertical. |
+| **Text** | `text-color`, `font-size`, `line-height` | Typographie courante. |
+| **Title** | `title-text`, `title-bg`, `font-size`, `font-weight`, `text-align` | Style des titres. |
+| **Video** | `object-fit` | Mode de redimensionnement. |
 
 ### Types de Valeurs (`CSSColor` / `CSSLength`)
-Le système encourage un typage fort (documentation) :
-- `CSSColor` : Chaîne hexadécimale, rgb, ou variable (`var(--brand)`).
-- `CSSLength` : Nombre (px) ou chaîne avec unité (`rem`, `%`).
+Le système encourage un typage fort :
+- `CSSColor` : `#FFF`, `rgba(...)`, ou variables `var(--brand)`.
+- `CSSLength` : Nombres (px) ou chaînes (`rem`, `%`, `vh`).
 
 **Exemple JSON (Button) :**
 ```json
 "style": {
-  "btn-bg": "#ff0000",
+  "btn-bg": "#4f46e5",
   "btn-text": "white",
-  "border-radius": 8  // Layout utility (BaseStyle)
+  "font-size": "1.2rem",
+  "border-radius": 12  // Layout utility
 }
 ```
-*Génère :* `style="--btn-bg: #ff0000; --btn-text: white; border-radius: 8px;"`
+*Génère :* `style="--btn-bg: #4f46e5; --btn-text: white; --font-size: 1.2rem; border-radius: 12px;"`
 
 ---
 
