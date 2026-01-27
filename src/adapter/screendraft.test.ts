@@ -68,12 +68,12 @@ describe("ScreenDraftAdapter", () => {
         textColor: "#fff",
       },
       {
-        id: "unknown-1",
-        type: "map", // Unsupported
+        id: "map-1",
+        type: "map",
         x: 0,
         y: 0,
-        width: 0,
-        height: 0,
+        width: 600,
+        height: 400,
       },
     ],
   };
@@ -149,10 +149,14 @@ describe("ScreenDraftAdapter", () => {
     expect(carousel.style["carousel-color"]).toBe("#fff");
   });
 
-  it("should ignore unsupported components", () => {
+  it("should transform Map component", () => {
     const site = ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
-    const map = page.children.find((c: any) => c.id === "unknown-1");
-    expect(map).toBeUndefined();
+    const map = page.children.find((c: any) => c.id === "map-1");
+
+    expect(map).toBeDefined();
+    expect(map.type).toBe("Map");
+    expect(map.style.width).toBe(600);
+    expect(map.style["map-height"]).toBe(400);
   });
 });

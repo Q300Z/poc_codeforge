@@ -215,6 +215,32 @@ Affichage d'image simple.
 }
 ```
 
+### Map
+Carte interactive haute performance (Streaming Map).
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `src` | `string` | Non | URL du fichier GeoJSON (supporte le streaming). |
+| `tileUrl` | `string` | Non | URL du fond de carte (tiles raster). |
+| `controls` | `string` | Non | Liste des contrôles (ex: `zoom,layers,reset`). |
+| `debug` | `boolean` | Non | Affiche un overlay de performance (FPS, mémoire). |
+
+**Exemple**
+```json
+{
+  "id": "map-1",
+  "type": "Map",
+  "meta": {
+    "src": "https://api.com/villes.geojson",
+    "controls": "zoom,layers,info",
+    "audioDescription": "Carte des points d'intérêt",
+    "ariaRole": "region"
+  },
+  "style": { "map-height": "600px" }
+}
+```
+
 ### Video
 Lecteur vidéo HTML5 accessible.
 

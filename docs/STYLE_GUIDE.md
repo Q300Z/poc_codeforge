@@ -79,6 +79,7 @@ Chaque composant peut exposer des propriétés de style spécifiques, appelées 
 | **Grid** | `grid-bg`, `grid-gap` | Fond et espacement. |
 | **Hero** | `hero-bg`, `hero-text`, `section-py` | Thème du bandeau. |
 | **Image** | `object-fit` | Mode de redimensionnement (`cover`, `contain`). |
+| **Map** | `map-height` | Hauteur de la carte interactive. |
 | **Section** | `section-bg`, `section-py` | Fond et padding vertical. |
 | **Text** | `text-color`, `font-size`, `line-height` | Typographie courante. |
 | **Title** | `title-text`, `title-bg`, `font-size`, `font-weight`, `text-align` | Style des titres. |

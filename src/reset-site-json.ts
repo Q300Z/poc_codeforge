@@ -12,6 +12,7 @@ import {
   GridBuilder,
   HeroBuilder,
   ImageBuilder,
+  MapBuilder,
   PageBuilder,
   SectionBuilder,
   SiteBuilder,
@@ -32,6 +33,7 @@ const header = new AppBarBuilder("global-nav")
     { label: "Layouts", href: "layouts.html" },
     { label: "Canvas", href: "canvas.html" },
     { label: "Media", href: "media.html" },
+    { label: "Carte", href: "map.html" },
     { label: "Contact", href: "contact.html" },
   ]);
 
@@ -230,7 +232,17 @@ const canvasPage = new PageBuilder("canvas-page")
         width: 250,
         "border-radius": "10px",
       })
-  );
+  ).addChild(
+    new MapBuilder("abs-map")
+      .withSrc("https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson")
+      .withControls("zoom,info")
+      .withAbsolutePosition(100, 400, undefined, undefined, 0)
+      .withStyle({
+        width: 300,
+        height: 200,
+        "border-radius": "12px",
+      })
+  )
 
 site.addPage("canvas", canvasPage);
 
@@ -292,6 +304,36 @@ const contactPage = new PageBuilder("contact-page")
   );
 
 site.addPage("contact", contactPage);
+
+// 8. Page Carte
+const mapPage = new PageBuilder("map-page")
+  .addChild(
+    new HeroBuilder("map-hero")
+      .withTitle("Exploration Géographique")
+      .withSubtitle("Visualisez des données massives en temps réel.")
+  )
+  .addChild(
+    new SectionBuilder("map-container-sect").addChild(
+      new ContainerBuilder("map-cont")
+        .addChild(
+          new TitleBuilder("map-title")
+            .withContent("Carte Interactive Streaming")
+            .withLevel(2)
+        )
+        .addChild(
+          new MapBuilder("main-map")
+            .withSrc("https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson")
+            .withControls("zoom,layers,info")
+            .withAudioDescription("Carte interactive des régions de France")
+            .withStyle({
+              "map-height": "600px"
+            })
+            .withRole("region")
+        )
+    )
+  );
+
+site.addPage("map", mapPage);
 
 const showcaseSite = site.build();
 const jsonPath = path.resolve(__dirname, "../data/site.json");

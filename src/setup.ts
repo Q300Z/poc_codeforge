@@ -6,6 +6,7 @@ import { Container } from "./components/Container.js";
 import { Grid } from "./components/Grid.js";
 import { Hero } from "./components/Hero.js";
 import { Image } from "./components/Image.js";
+import { Map } from "./components/Map.js";
 import { Page } from "./components/Page.js";
 import { Section } from "./components/Section.js";
 import { Stack } from "./components/Stack.js";
@@ -21,6 +22,7 @@ export function setupRegistry() {
   registry.Button = Button;
   registry.Carousel = Carousel;
   registry.Grid = Grid;
+  registry.Map = Map;
   registry.Section = Section;
   registry.Container = Container;
   registry.Stack = Stack;

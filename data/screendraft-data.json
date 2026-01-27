@@ -1,88 +1,64 @@
 {
   "meta": {
     "appName": "ScreenDraft",
-    "createdAt": "2026-01-27T09:40:13.065Z",
+    "createdAt": "2026-01-27T12:15:17.778Z",
     "version": "1.0"
   },
   "components": [
     {
+      "id": "11353247-427b-498d-9ec8-02398d55005e",
       "type": "title",
-      "x": 50,
-      "y": 60,
-      "width": 700,
-      "height": 60,
-      "content": "Bienvenue sur notre plateforme",
+      "x": 39.68429455360348,
+      "y": 55.63389066733178,
+      "width": 728,
+      "height": 30,
+      "content": "Titre",
       "backgroundColor": "transparent",
-      "textColor": "#581c87",
-      "fontSize": 36,
-      "id": "c1b726ab-36ea-44be-bd29-4206cbad0307"
+      "textColor": "#000000",
+      "fontSize": 24
     },
     {
+      "id": "70d2bf33-75ef-400e-a03f-aa48c709978b",
+      "type": "button",
+      "x": 39.54531717151248,
+      "y": 517.6870495236327,
+      "width": 726,
+      "height": 30,
+      "content": "Bouton",
+      "backgroundColor": "#3b82f6",
+      "textColor": "#ffffff",
+      "fontSize": 16
+    },
+    {
+      "id": "e455643d-7318-4d53-96fc-2f0cef7c5543",
       "type": "text",
-      "x": 50,
-      "y": 140,
-      "width": 500,
-      "height": 80,
-      "content": "Découvrez une nouvelle façon de créer vos pages web. Simple, rapide et intuitif. Commencez dès maintenant et donnez vie à vos idées.",
+      "x": 38.50628662109375,
+      "y": 87.84893798828125,
+      "width": 281,
+      "height": 30,
+      "content": "Paragraphe de texte.",
       "backgroundColor": "transparent",
-      "textColor": "#7e22ce",
-      "fontSize": 16,
-      "id": "a103f739-c54a-4f6d-a3e0-34fd7b0f0302"
+      "textColor": "#000000",
+      "fontSize": 14
     },
     {
-      "type": "button",
-      "x": 50,
-      "y": 250,
-      "width": 200,
-      "height": 50,
-      "content": "Commencer",
-      "backgroundColor": "#a855f7",
-      "textColor": "#ffffff",
-      "fontSize": 18,
-      "id": "e0a724e2-21d3-4e65-bf52-8692e7e157a2"
-    },
-    {
-      "type": "button",
-      "x": 270,
-      "y": 250,
-      "width": 180,
-      "height": 50,
-      "content": "En savoir plus",
-      "backgroundColor": "#a855f7",
-      "textColor": "#ffffff",
-      "fontSize": 16,
-      "id": "1137f791-2958-412c-b201-9801926e81b7"
-    },
-    {
+      "id": "c2b8e62f-6612-42b9-973e-2317afb513e8",
       "type": "image",
-      "x": 50,
-      "y": 340,
-      "width": 700,
-      "height": 350,
-      "content": "Hero image",
+      "x": 38.84661865234375,
+      "y": 127.75326538085938,
+      "width": 280,
+      "height": 31,
+      "content": "Image",
       "backgroundColor": "transparent",
       "textColor": "#000000",
       "fontSize": 14,
-      "imageSrc": "/images/placeholder-1.png",
-      "id": "adef7fdb-a5c9-4443-9711-e8f7b50a5e7d"
+      "imageSrc": "/images/placeholder-1.png"
     },
     {
-      "type": "text",
-      "x": 50,
-      "y": 730,
-      "width": 700,
-      "height": 40,
-      "content": "Rejoint par plus de 10 000 utilisateurs dans le monde entier.",
-      "backgroundColor": "transparent",
-      "textColor": "#7e22ce",
-      "fontSize": 14,
-      "id": "0620e8e9-a98d-4688-9510-cc02fa07743d"
-    },
-    {
-      "id": "4ec2629a-5108-425e-ad49-c1be5d1bf888",
+      "id": "1a976b8b-5813-4b57-b9a0-d36e41935735",
       "type": "video",
-      "x": 38.98089832771922,
-      "y": 803.421037509249,
+      "x": 439.61175537109375,
+      "y": 92.90289306640625,
       "width": 320,
       "height": 180,
       "content": "Vidéo YouTube",
@@ -92,12 +68,12 @@
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
-      "id": "ca6405ab-5b1d-41cf-9dcd-52cbfb8dae2b",
+      "id": "fcd5fc4b-8f2d-4503-b939-d972d4cb5e21",
       "type": "map",
-      "x": 549.2775639572396,
-      "y": 143.8077195380783,
-      "width": 209,
-      "height": 173,
+      "x": 24.16094970703125,
+      "y": 188.07080078125,
+      "width": 392,
+      "height": 129,
       "content": "Carte",
       "backgroundColor": "transparent",
       "textColor": "#000000",
@@ -107,22 +83,15 @@
         "lat": 48.8566
       },
       "mapZoom": 12,
-      "mapMarkers": [
-        {
-          "id": "c882afc5-3b59-490c-9a4e-6ebf5135799c",
-          "lng": 2.354689089965291,
-          "lat": 48.85857647909802,
-          "name": "test"
-        }
-      ]
+      "mapMarkers": []
     },
     {
-      "id": "62025e8f-6ad6-4054-85e9-16feb5c1a96a",
+      "id": "43e5c1bd-c58a-4f20-98a6-fda40b006c78",
       "type": "carousel",
-      "x": 601.5674644193944,
-      "y": 804.8831865315983,
-      "width": 202,
-      "height": 120,
+      "x": 38.32210053110063,
+      "y": 326.8615649734916,
+      "width": 267,
+      "height": 165,
       "content": "Carousel",
       "backgroundColor": "transparent",
       "textColor": "#000000",
@@ -148,31 +117,61 @@
       "carouselInterval": 3000
     },
     {
-      "id": "e3903524-f41d-4e4d-b2e7-d00f5dca06bd",
+      "id": "6757408b-3c82-476d-9886-f8cb75ec4da9",
+      "type": "navbar",
+      "x": -3.798639257464325,
+      "y": 0.16994259055390515,
+      "width": 800,
+      "height": 56,
+      "content": "Navbar",
+      "backgroundColor": "#1f2937",
+      "textColor": "#ffffff",
+      "fontSize": 14,
+      "navbarLogoText": "MonSite",
+      "navbarLinks": [
+        {
+          "id": "1",
+          "label": "Accueil",
+          "href": "#"
+        },
+        {
+          "id": "2",
+          "label": "À propos",
+          "href": "#"
+        },
+        {
+          "id": "3",
+          "label": "Contact",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "id": "3161d95c-9389-4898-a635-77f31888beaf",
       "type": "form",
-      "x": 365.2247181841923,
-      "y": 779.6722157087833,
-      "width": 162,
-      "height": 136,
+      "x": 44.24415792003102,
+      "y": 567.7453100122904,
+      "width": 400,
+      "height": 350,
       "content": "Formulaire",
       "backgroundColor": "#f9fafb",
       "textColor": "#374151",
       "fontSize": 14,
       "formFields": [
         {
-          "id": "8db05f50-f610-4cc5-85f4-810c927bc692",
+          "id": "731ecb76-40f2-4383-8a54-3a1fafee5181",
           "label": "Nom",
           "type": "text",
           "placeholder": "Votre nom"
         },
         {
-          "id": "535319d5-167e-4911-bed8-f2d0be70eaf3",
+          "id": "51a8c74d-89c1-482f-a89a-bcad1536c73f",
           "label": "Email",
           "type": "email",
           "placeholder": "votre@email.com"
         },
         {
-          "id": "a6dd82ca-2b87-4ac2-adfc-df22a2a2c492",
+          "id": "ed59e304-6aea-4fba-9220-2abdc1fbe139",
           "label": "Message",
           "type": "textarea",
           "placeholder": "Votre message..."

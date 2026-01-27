@@ -1,6 +1,7 @@
 import { ButtonBuilder } from "../components/Button.js";
 import { CarouselBuilder } from "../components/Carousel.js";
 import { ImageBuilder } from "../components/Image.js";
+import { MapBuilder } from "../components/Map.js";
 import { PageBuilder } from "../components/Page.js";
 import { TextBuilder } from "../components/Text.js";
 import { TitleBuilder } from "../components/Title.js";
@@ -145,6 +146,17 @@ export class ScreenDraftAdapter {
         builder = carousel;
         break;
       }
+
+      case "map":
+        builder = new MapBuilder(comp.id).withStyle({
+          ...commonStyle,
+          "map-height": comp.height,
+        });
+        // Si ScreenDraft fournit une source GeoJSON (extension possible)
+        if (comp.mapSrc) {
+          (builder as MapBuilder).withSrc(comp.mapSrc);
+        }
+        break;
 
       default:
         console.warn(`[Adapter] Type de composant non supporté ou ignoré : ${comp.type}`);

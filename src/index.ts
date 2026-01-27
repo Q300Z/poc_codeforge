@@ -16,6 +16,7 @@ export * from "./components/Container.js";
 export * from "./components/Grid.js";
 export * from "./components/Hero.js";
 export * from "./components/Image.js";
+export * from "./components/Map.js";
 export * from "./components/Page.js";
 export * from "./components/Section.js";
 export * from "./components/Stack.js";
@@ -80,6 +81,17 @@ export async function buildSite(
     const tempDir = path.resolve(process.cwd(), ".codeforge_tmp");
     if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 
+    // Copie de libs dans le dossier temporaire pour que Vite puisse le résoudre
+    const tempLibsDir = path.join(tempDir, "libs");
+    const libsSrc = path.resolve(process.cwd(), "libs");
+    if (fs.existsSync(libsSrc)) {
+      if (!fs.existsSync(tempLibsDir)) fs.mkdirSync(tempLibsDir, { recursive: true });
+      const files = fs.readdirSync(libsSrc);
+      for (const file of files) {
+        fs.copyFileSync(path.join(libsSrc, file), path.join(tempLibsDir, file));
+      }
+    }
+
     const filePath = path.join(tempDir, fileName);
     fs.writeFileSync(filePath, html);
     
@@ -102,32 +114,45 @@ export async function buildSite(
         emptyOutDir: true,
         rollupOptions: { input },
       },
+      logLevel: "warn",
     });
 
     if (options.inlineCss) {
       const assetsDir = path.join(absoluteOutDir, "assets");
       if (fs.existsSync(assetsDir)) {
         const cssFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith(".css"));
-        let cssContent = "";
+        const jsFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith(".js"));
         
+        let cssContent = "";
         for (const file of cssFiles) {
           cssContent += fs.readFileSync(path.join(assetsDir, file), "utf-8");
         }
 
-        if (cssContent) {
-          for (const page of siteData.pages) {
-            const htmlPath = path.join(absoluteOutDir, `${page.slug}.html`);
-            if (fs.existsSync(htmlPath)) {
-              let html = fs.readFileSync(htmlPath, "utf-8");
-              // Retire les liens CSS générés par Vite
+        for (const page of siteData.pages) {
+          const htmlPath = path.join(absoluteOutDir, `${page.slug}.html`);
+          if (fs.existsSync(htmlPath)) {
+            let html = fs.readFileSync(htmlPath, "utf-8");
+            
+            // 1. Inlining CSS
+            if (cssContent) {
               html = html.replace(/<link[^>]*rel="stylesheet"[^>]*>/g, "");
-              // Injecte le style dans le head
               html = html.replace("</head>", `<style>${cssContent}</style></head>`);
-              fs.writeFileSync(htmlPath, html);
             }
+
+            // 2. Inlining JS
+            for (const jsFile of jsFiles) {
+              // Regex plus souple pour capturer les balises générées par Vite
+              const scriptRegex = new RegExp(`<script[^>]*src="[^"]*\\/assets\\/${jsFile.replace(".", "\\.")}"[^>]*><\\/script>`, "g");
+              if (scriptRegex.test(html)) {
+                const jsContent = fs.readFileSync(path.join(assetsDir, jsFile), "utf-8");
+                html = html.replace(scriptRegex, `<script type="module">${jsContent}</script>`);
+              }
+            }
+
+            fs.writeFileSync(htmlPath, html);
           }
         }
-        // Cleanup assets directory as everything is inlined
+        // Nettoyage final du dossier assets
         fs.rmSync(assetsDir, { recursive: true, force: true });
       }
     }

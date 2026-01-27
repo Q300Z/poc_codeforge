@@ -69,9 +69,9 @@ export const Page = createComponent({
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body class="site-wrapper h-full" style="${styleVars}" ${meta.debug ? 'data-debug-theme="true"' : ""}>
-    <header>${meta.renderedHeader || ""}</header>
-    <main class="main-content">${children.join("")}</main>
-    <footer class="w-full">${meta.renderedFooter || ""}</footer>
+    <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
+    <main class="main-content w-full max-w-none">${children.join("")}</main>
+    <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>
 </body>
 </html>`;
   },

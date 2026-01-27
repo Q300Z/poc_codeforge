@@ -2,6 +2,23 @@
 
 /* Configuration de base pour écraser le Preflight */
 @layer base {
+  html {
+    @apply max-w-full overflow-x-hidden;
+    
+    box-sizing: border-box;
+    
+    /* Empêche le saut de mise en page quand le scroll apparaît */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply min-h-full;
+  }
+
+  *, ::before, ::after {
+    box-sizing: inherit;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
     line-height: 1.2;
@@ -29,11 +46,11 @@
 @layer components {
   /* Sticky Footer Layout */
   .site-wrapper {
-    @apply flex flex-col min-h-[100vh];
+    @apply flex flex-col min-h-[100vh] w-full;
   }
 
   .main-content {
-    @apply flex-grow;
+    @apply flex-grow w-full min-w-0;
   }
 
   /* Layout Classes */
@@ -106,6 +123,14 @@
 
       }
 
+    }
+
+    /* Map Component */
+    .map-wrapper {
+      @apply relative block w-full max-w-full overflow-hidden rounded-2xl shadow-inner;
+      
+      background-color: theme(colors.gray.100);
+      height: var(--map-height, 500px);
     }
 
   }
