@@ -57,24 +57,299 @@ Ces propriétés sont directement mappées vers des styles CSS `px` ou natifs :
 ## 🧱 Schémas des Composants
 
 ### Page (Racine)
+Composant racine de chaque page générée.
+
+**Propriétés Spécifiques (`meta`)**
 | Propriété | Type | Requis | Description |
 | :--- | :--- | :--- | :--- |
 | `appName` | `string` | Oui | Nom de l'application (balise `<title>`). |
-| `debug` | `boolean` | Non | Active les contours en pointillés (debug visuel). |
+| `debug` | `boolean` | Non | Active les contours en pointillés pour le débogage visuel. |
 
-### Button (Bouton)
+**Exemple**
+```json
+{
+  "id": "home-page",
+  "type": "Page",
+  "meta": {
+    "appName": "Mon Portfolio",
+    "debug": true,
+    "version": "1.0.0",
+    "createdAt": "2026-01-27T10:00:00Z"
+  }
+}
+```
+
+### AppBar (Navigation)
+Barre de navigation fixe en haut de page.
+
+**Propriétés Spécifiques (`meta`)**
 | Propriété | Type | Requis | Description |
 | :--- | :--- | :--- | :--- |
-| `label` | `string` | Oui | Texte du bouton. |
-| `action` | `string` | Non | URL (lien) ou script JS (onclick). |
+| `title` | `string` | Non | Titre affiché à gauche (Logo textuel). |
+| `links` | `Array<{label, href}>` | Non | Liens de navigation. |
 
-**Tokens :** `btn-bg`, `btn-text`, `font-size`, `btn-radius`.
+**Exemple**
+```json
+{
+  "id": "nav",
+  "type": "AppBar",
+  "meta": {
+    "title": "CodeForge",
+    "links": [
+      { "label": "Accueil", "href": "/" },
+      { "label": "Services", "href": "/services" }
+    ]
+  },
+  "style": { "appbar-bg": "#ffffff" }
+}
+```
+
+### Hero (Bannière)
+Section d'introduction avec titre et sous-titre.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Oui | Titre principal (H1). |
+| `subtitle` | `string` | Non | Sous-titre ou slogan. |
+
+**Exemple**
+```json
+{
+  "id": "hero-1",
+  "type": "Hero",
+  "meta": {
+    "title": "Bienvenue",
+    "subtitle": "Créez des interfaces rapidement."
+  },
+  "style": { "hero-bg": "#f3f4f6", "hero-text": "#111827" }
+}
+```
+
+### Title (Titre)
+Titre sémantique (H1-H6).
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `content` | `string` | Oui | Texte du titre. |
+| `level` | `number` | Non | Niveau hiérarchique (1 à 6). Défaut : 1. |
+
+**Exemple**
+```json
+{
+  "id": "t1",
+  "type": "Title",
+  "meta": {
+    "content": "Nos Services",
+    "level": 2
+  },
+  "style": { "title-text": "#2563eb", "text-align": "center" }
+}
+```
+
+### Text (Paragraphe)
+Bloc de texte simple.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `content` | `string` | Oui | Contenu textuel. |
+| `tag` | `string` | Non | Balise HTML (`p`, `span`, `div`). Défaut : `p`. |
+
+**Exemple**
+```json
+{
+  "id": "txt-1",
+  "type": "Text",
+  "meta": {
+    "content": "Lorem ipsum dolor sit amet.",
+    "tag": "p"
+  },
+  "style": { "font-size": "1.1rem", "text-color": "#4b5563" }
+}
+```
+
+### Button (Bouton)
+Élément interactif (lien ou action).
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `label` | `string` | Oui | Libellé du bouton. |
+| `action` | `string` | Non | URL ou script JS. |
+
+**Exemple**
+```json
+{
+  "id": "btn-cta",
+  "type": "Button",
+  "meta": {
+    "label": "Contactez-nous",
+    "action": "/contact",
+    "audioDescription": "Aller à la page contact"
+  },
+  "style": { "btn-bg": "#dc2626", "btn-text": "#ffffff", "font-size": "18px" }
+}
+```
+
+### Image
+Affichage d'image simple.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `src` | `string` | Oui | URL de l'image. |
+| `alt` | `string` | Oui | Texte alternatif pour l'accessibilité. |
+
+**Exemple**
+```json
+{
+  "id": "img-1",
+  "type": "Image",
+  "meta": {
+    "src": "/assets/photo.jpg",
+    "alt": "Photo de l'équipe"
+  },
+  "style": { "border-radius": "8px", "object-fit": "cover" }
+}
+```
 
 ### Video
+Lecteur vidéo HTML5 accessible.
+
+**Propriétés Spécifiques (`meta`)**
 | Propriété | Type | Requis | Description |
 | :--- | :--- | :--- | :--- |
 | `src` | `string` | Oui | URL de la vidéo. |
-| `tracks` | `Array` | Non | Liste des pistes de texte `{ src, kind, label, srclang }`. |
+| `poster` | `string` | Non | Image d'aperçu. |
+| `controls` | `boolean` | Non | Affiche les contrôles (Défaut: true). |
+| `autoplay` | `boolean` | Non | Lecture automatique (Défaut: false). |
+| `muted` | `boolean` | Non | Coupe le son (Requis pour autoplay). |
+| `loop` | `boolean` | Non | Lecture en boucle. |
+| `tracks` | `Array` | Non | Sous-titres : `{ src, kind, label, srclang }`. |
+
+**Exemple**
+```json
+{
+  "id": "vid-1",
+  "type": "Video",
+  "meta": {
+    "src": "presentation.mp4",
+    "controls": true,
+    "tracks": [
+      { "kind": "captions", "src": "subs.vtt", "label": "Français", "srclang": "fr" }
+    ]
+  },
+  "style": { "width": "100%", "border-radius": "12px" }
+}
+```
+
+### Carousel
+Diaporama d'images.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `items` | `Array` | Oui | Liste : `{ src, alt, title }`. |
+| `autoPlay` | `boolean` | Non | Défilement automatique (Défaut: false). |
+| `interval` | `number` | Non | Temps en ms entre chaque slide (Défaut: 5000). |
+
+**Exemple**
+```json
+{
+  "id": "slider",
+  "type": "Carousel",
+  "meta": {
+    "autoPlay": true,
+    "interval": 3000,
+    "items": [
+      { "src": "slide1.jpg", "alt": "Vue 1" },
+      { "src": "slide2.jpg", "alt": "Vue 2" }
+    ]
+  },
+  "style": { "height": "400px", "carousel-color": "#ffffff" }
+}
+```
+
+### Box (Conteneur Générique)
+Div simple pour le style ou le positionnement. Pas de props spécifiques.
+
+**Exemple**
+```json
+{
+  "id": "box-1",
+  "type": "Box",
+  "meta": {},
+  "style": { "width": "100px", "height": "100px", "box-bg": "red" }
+}
+```
+
+### Container (Conteneur Centré)
+Conteneur avec largeur maximale et marges automatiques. Pas de props spécifiques.
+
+**Exemple**
+```json
+{
+  "id": "cont-1",
+  "type": "Container",
+  "meta": {},
+  "children": []
+}
+```
+
+### Section (Section)
+Bloc sémantique de haut niveau avec padding vertical. Pas de props spécifiques.
+
+**Exemple**
+```json
+{
+  "id": "sect-1",
+  "type": "Section",
+  "meta": {},
+  "style": { "section-bg": "#fafafa", "section-py": "60px" }
+}
+```
+
+### Grid (Grille)
+Mise en page en grille.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `cols` | `number` | Non | Nombre de colonnes (Défaut: 2). |
+| `gap` | `number` | Non | Espacement entre les éléments (Défaut: 8). |
+
+**Exemple**
+```json
+{
+  "id": "grid-1",
+  "type": "Grid",
+  "meta": { "cols": 3, "gap": 4 },
+  "children": []
+}
+```
+
+### Stack (Flex)
+Mise en page flexible linéaire.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `direction` | `string` | Non | `vertical` ou `horizontal`. |
+| `align` | `string` | Non | Alignement transversal (`center`, `start`, ...). |
+| `justify` | `string` | Non | Alignement principal (`between`, `center`, ...). |
+| `gap` | `number` | Non | Espacement. |
+
+**Exemple**
+```json
+{
+  "id": "stack-1",
+  "type": "Stack",
+  "meta": { "direction": "horizontal", "align": "center", "gap": 4 },
+  "children": []
+}
+```
 
 ---
 
