@@ -43,7 +43,7 @@
     "dev:file": "VITE_JSON_PATH=$JSON_PATH vite",
     "build": "npm run build:lib && npm run build:showcase",
     "build:lib": "vite build --config vite.config.lib.ts",
-    "build:showcase": "node dist/cli.js data/site.json generated",
+    "build:showcase": "node dist/cli.js -i data/site.json generated",
     "reset:site": "node dist/reset-site-json.js",
     "clean": "rm -rf dist generated coverage",
     "test": "vitest run",

@@ -23,7 +23,7 @@ export * from "./components/Text.js";
 export * from "./components/Title.js";
 export * from "./components/Video.js";
 
-import { build as viteBuild, PluginOption } from "vite";
+import { build as viteBuild } from "vite";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -32,7 +32,6 @@ import { render } from "./renderer.js";
 import { SiteNode } from "./types.js";
 import { ScreenDraftAdapter } from "./adapter/screendraft.js";
 import { isScreenDraft } from "./utils/detection.js";
-import { viteSingleFile } from "vite-plugin-singlefile";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -88,11 +87,6 @@ export async function buildSite(
     tempFiles.push(tempDir); // On stocke le dossier pour le supprimer à la fin
   }
 
-  const plugins: PluginOption[] = [];
-  if (options.inlineCss) {
-    plugins.push(viteSingleFile());
-  }
-
   try {
     await viteBuild({
       configFile: false,
@@ -103,13 +97,41 @@ export async function buildSite(
           "/src": path.resolve(process.cwd(), "src"),
         },
       },
-      plugins,
       build: {
         outDir: absoluteOutDir,
         emptyOutDir: true,
         rollupOptions: { input },
       },
     });
+
+    if (options.inlineCss) {
+      const assetsDir = path.join(absoluteOutDir, "assets");
+      if (fs.existsSync(assetsDir)) {
+        const cssFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith(".css"));
+        let cssContent = "";
+        
+        for (const file of cssFiles) {
+          cssContent += fs.readFileSync(path.join(assetsDir, file), "utf-8");
+        }
+
+        if (cssContent) {
+          for (const page of siteData.pages) {
+            const htmlPath = path.join(absoluteOutDir, `${page.slug}.html`);
+            if (fs.existsSync(htmlPath)) {
+              let html = fs.readFileSync(htmlPath, "utf-8");
+              // Retire les liens CSS générés par Vite
+              html = html.replace(/<link[^>]*rel="stylesheet"[^>]*>/g, "");
+              // Injecte le style dans le head
+              html = html.replace("</head>", `<style>${cssContent}</style></head>`);
+              fs.writeFileSync(htmlPath, html);
+            }
+          }
+        }
+        // Cleanup assets directory as everything is inlined
+        fs.rmSync(assetsDir, { recursive: true, force: true });
+      }
+    }
+
   } finally {
     // Nettoyage récursif du dossier temporaire
     for (const dir of [...new Set(tempFiles)]) {

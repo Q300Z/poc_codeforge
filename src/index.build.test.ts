@@ -12,7 +12,7 @@ vi.mock("./setup.js", () => ({
   setupRegistry: vi.fn(),
 }));
 vi.mock("./renderer.js", () => ({
-  render: vi.fn(() => "<html></html>"),
+  render: vi.fn(() => '<html><head><link rel="stylesheet" href="./assets/style.css"></head><body></body></html>'),
 }));
 
 describe("buildSite", () => {
@@ -21,6 +21,7 @@ describe("buildSite", () => {
   let writeFileSyncSpy: any;
   let mkdirSyncSpy: any;
   let rmSyncSpy: any;
+  let readdirSyncSpy: any;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -33,6 +34,7 @@ describe("buildSite", () => {
     writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
     mkdirSyncSpy = vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
     rmSyncSpy = vi.spyOn(fs, "rmSync").mockImplementation(() => {});
+    readdirSyncSpy = vi.spyOn(fs, "readdirSync");
   });
 
   afterEach(() => {
@@ -59,19 +61,37 @@ describe("buildSite", () => {
     expect(viteBuild).toHaveBeenCalled();
   });
 
-  it("should use viteSingleFile plugin when inlineCss is true", async () => {
+  it("should inline CSS when inlineCss option is true", async () => {
+    const htmlContent = '<html><head><link rel="stylesheet" href="./assets/style.css"></head><body></body></html>';
+    const cssContent = '.body { color: red; }';
+
     existsSyncSpy.mockReturnValue(true);
-    readFileSyncSpy.mockReturnValue(JSON.stringify({
-      meta: { appName: "Test" },
-      style: {},
-      pages: [{ slug: "index", content: {} }]
-    }));
+    // Mock sequence of reads: site.json -> style.css -> index.html
+    readFileSyncSpy.mockImplementation((p: string) => {
+        if (p.endsWith("site.json")) return JSON.stringify({
+            meta: { appName: "Test" },
+            style: {},
+            pages: [{ slug: "index", content: {} }]
+        });
+        if (p.endsWith(".css")) return cssContent;
+        if (p.endsWith(".html")) return htmlContent;
+        return "";
+    });
+    
+    readdirSyncSpy.mockReturnValue(["style.css"]);
 
     await buildSite("site.json", "dist", { inlineCss: true });
 
-    expect(viteBuild).toHaveBeenCalledWith(expect.objectContaining({
-      plugins: expect.arrayContaining([expect.anything()])
-    }));
+    // Verify index.html was written with inlined styles
+    expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        expect.stringContaining("index.html"),
+        expect.stringContaining(`<style>${cssContent}</style>`)
+    );
+    expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        expect.stringContaining("index.html"),
+        expect.not.stringContaining('<link')
+    );
+    expect(rmSyncSpy).toHaveBeenCalledWith(expect.stringContaining("assets"), expect.anything());
   });
 
   it("should detect ScreenDraft format and transform it", async () => {
