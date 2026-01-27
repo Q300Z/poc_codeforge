@@ -1,5 +1,14 @@
 # Changelog
 
+# [1.4.0](https://github.com/Q300Z/poc_codeforge/compare/v1.3.0...v1.4.0) (2026-01-27)
+
+
+### Features
+
+* **image:** enhance Image component with performance and responsive features ([353c46b](https://github.com/Q300Z/poc_codeforge/commit/353c46bcfe30b7469e2923d760b9da2a317d4a7b))
+* **style:** support X/Y coordinates and add comprehensive style guide ([5c56ace](https://github.com/Q300Z/poc_codeforge/commit/5c56ace62eaf08aee841a1f11207c0eaa7460cf0))
+* **video:** enhance Video component with performance and mobile optimization ([4544b5a](https://github.com/Q300Z/poc_codeforge/commit/4544b5a020ecc50b18a65a911f8a7ccc77a7c90c))
+
 # [1.3.0](https://github.com/Q300Z/poc_codeforge/compare/v1.2.0...v1.3.0) (2026-01-27)
 
 
