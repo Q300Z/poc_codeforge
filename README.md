@@ -3,7 +3,17 @@
 ![Tests Status](https://github.com/Q300Z/poc_codeforge/actions/workflows/test.yml/badge.svg)
 
 ## 🎯 Objectif
-CodeForge est une bibliothèque minimaliste dont la mission est de **traduire une structure de données JSON en code HTML sémantique et accessible.** Elle agit comme une couche de projection pure qui transforme un arbre déclaratif (le "Quoi") en un document web structuré (le "Comment"), en utilisant la puissance native du navigateur (Cascade CSS et Variables CSS).
+CodeForge est une bibliothèque robuste dont la mission est de **traduire une structure de données JSON en code HTML sémantique et accessible.** Elle agit comme une couche de projection pure qui transforme un arbre déclaratif (le "Quoi") en un document web structuré (le "Comment"), en utilisant la puissance native du navigateur (Cascade CSS et Variables CSS).
+
+---
+
+## ✨ Fonctionnalités Clés
+
+- **🔌 Adaptateur Intelligent** : Détecte et transforme automatiquement les formats tiers (ex: **ScreenDraft**) en structure native CodeForge.
+- **🎨 Système de Style Hybride** : Supporte les Design Tokens (via CSS Variables) et les propriétés de mise en page natives (`width`, `height`, `z-index`, etc.).
+- **📍 Positionnement Absolu** : Support natif des coordonnées `x` et `y` pour un rendu de type "Canvas".
+- **♿ Accessibilité (A11y) Native** : Injection automatique des rôles ARIA, descriptions audio et gestion des balises sémantiques.
+- **📦 Sortie Autonome** : Option pour injecter le CSS directement dans le HTML (`--inline`) pour des fichiers 100% portables.
 
 ---
 
@@ -15,52 +25,36 @@ npm install @q300z/codeforge
 ```
 
 ### En tant que bibliothèque (Lib)
-Vous pouvez intégrer CodeForge dans n'importe quel projet Node.js pour transformer des données en fragments ou sites complets.
-
-#### 1. Traduction directe (String HTML)
-```typescript
-import { render, setupRegistry, Node } from "@q300z/codeforge";
-
-// Initialisation du dictionnaire de composants
-setupRegistry();
-
-const myNode: Node = {
-  id: "hero-1",
-  type: "Hero",
-  meta: { title: "Bienvenue" }
-};
-
-const html = render(myNode);
-```
-
-#### 2. Génération de site (SSG)
-Pour générer un dossier complet avec HTML optimisé et CSS Tailwind compilé.
+#### 1. Génération de site (SSG)
 ```typescript
 import { buildSite } from "@q300z/codeforge";
 
-// Prend un JSON de site et génère le dossier /generated
-await buildSite("./structure.json", "./generated");
+// Génère un site complet avec CSS inline
+await buildSite("./structure.json", "./dist", { inlineCss: true });
+```
+
+#### 2. Utilisation des Builders (Design Pattern)
+```typescript
+import { SiteBuilder, PageBuilder, HeroBuilder, ButtonBuilder } from "@q300z/codeforge";
+
+const site = new SiteBuilder("Mon App")
+  .addPage("index", new PageBuilder("home")
+    .addChild(new HeroBuilder("h1").withTitle("Hello World"))
+    .addChild(new ButtonBuilder("b1").withLabel("Cliquez-ici").withXY(50, 100))
+  )
+  .build();
 ```
 
 ### En tant qu'outil (CLI)
-Idéal pour les scripts de build ou l'automatisation.
 ```bash
+# Utilisation standard
 npx codeforge ./data/site.json ./generated
-```
 
----
+# Avec auto-détection ScreenDraft et CSS inline
+npx codeforge ./data/screendraft.json ./dist --inline
 
-## 💻 Développement
-
-### Prérequis
-- **Node.js** : version 25 ou supérieure.
-- **NPM** : version 9 ou supérieure.
-
-### Installation locale
-```bash
-git clone https://github.com/Q300Z/poc_codeforge.git
-cd poc_render_engine
-npm install
+# Mode surveillance (Watch)
+npx codeforge ./data/site.json ./generated --watch
 ```
 
 ---
@@ -69,46 +63,38 @@ npm install
 
 | Commande | Description |
 | :--- | :--- |
-| `npm run dev` | Lance le serveur de dev avec Hot-Reload (observe `data/site.json`). |
-| `npm run build:lib` | Compile la bibliothèque TypeScript dans le dossier `dist/`. |
-| `npm run clean` | Supprime les builds, les dossiers générés et les rapports. |
-| `npm run lint` | Vérifie et corrige automatiquement le style du code. |
+| `npm run dev` | Lance le build lib + génération + serveur Vite. |
+| `npm run build` | Compile la lib et génère le showcase complet. |
+| `npm run lint` | Vérifie le code TypeScript (ESLint) et CSS (Stylelint). |
+| `npm run test:a11y` | Lance l'audit d'accessibilité automatisé avec **pa11y-ci**. |
+| `npm run test:screendraft` | Teste le pipeline complet d'import ScreenDraft → Rendu. |
 
 ---
 
-## 🧱 Ajout d'un composant
+## 🧪 Qualité & Tests
 
-Le traducteur est extensible. Vous pouvez ajouter vos propres règles de traduction.
-
-```typescript
-import { createComponent, registry } from "@q300z/forge-engine";
-
-export const CustomBox = createComponent({
-  name: "CustomBox",
-  authorizedTokens: ["bg-color"],
-  template: (meta, children, styleVars, a11yAttrs, id) => `
-    <div id="${id}" style="${styleVars}" class="p-4" ${a11yAttrs}>
-      ${meta.content}
-      ${children.join("")}
-    </div>
-  `,
-});
-
-// Enregistrement dans le dictionnaire
-registry.CustomBox = CustomBox;
-```
-
----
-
-## 🧪 Tests
+Le projet suit des standards de qualité industriels :
+- **Tests Unitaires** : Couverture globale > 80% (Composants > 95%).
+- **Tests E2E** : Validation des scénarios de navigation et du rendu visuel avec Playwright.
+- **Accessibilité** : Validation WCAG 2.0 AA sur toutes les pages générées.
+- **Style CSS** : Validation et formatage automatique via Stylelint.
 
 ```bash
-# Tests unitaires et couverture (Cœur à 100%)
-npm test
-npx vitest run --coverage
-
-# Tests End-to-End (Playwright)
-npm run test:e2e
+npm test              # Tests unitaires
+npm run test:e2e      # Tests Playwright
+npm run test:a11y     # Audit Accessibilité
 ```
 
-> **Note :** Le fichier `data/site.json` est utilisé par les tests E2E. Sa modification peut nécessiter une mise à jour des fichiers dans `e2e/`.
+---
+
+## 🏗 Architecture (SOLID)
+
+CodeForge est construit sur des principes modulaires :
+1. **Registry** : Dictionnaire centralisé des composants.
+2. **Factory** : Création typée et sécurisée de nouveaux composants.
+3. **Builders** : Interface fluide pour construire des structures JSON sans erreurs.
+4. **Adapters** : Couche de compatibilité pour les sources de données externes.
+
+---
+
+> **Note :** Le fichier `data/site.json` sert de référence pour les tests. Toute modification majeure doit être répercutée dans les tests E2E.
