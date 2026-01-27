@@ -170,6 +170,7 @@ export class NodeBuilder<TMeta = Record<string, any>, TStyle = Record<string, an
  */
 export class SiteBuilder {
   private site: SiteNode;
+  private debug: boolean = false;
 
   constructor(appName: string) {
     this.site = {
@@ -188,9 +189,7 @@ export class SiteBuilder {
 
   /** Active le mode debug visuel sur tout le site. */
   withDebug(enabled: boolean = true): this {
-    this.site.pages.forEach((p) => {
-      if (p.content?.meta) p.content.meta.debug = enabled;
-    });
+    this.debug = enabled;
     return this;
   }
 
@@ -228,6 +227,11 @@ export class SiteBuilder {
    * @returns {SiteNode} Le site complet sans propriétés vides.
    */
   build(): SiteNode {
+    if (this.debug) {
+      this.site.pages.forEach((p) => {
+        if (p.content?.meta) p.content.meta.debug = true;
+      });
+    }
     return cleanObject(this.site) as SiteNode;
   }
 }

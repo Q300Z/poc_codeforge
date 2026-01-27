@@ -50,6 +50,8 @@
     "test:e2e": "playwright test",
     "test:a11y": "pa11y-ci",
     "lint:css": "stylelint src/**/*.css",
+    "import:screendraft": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node src/demo-adapter.ts",
+    "test:screendraft": "npm run import:screendraft && node dist/cli.js data/site-from-screendraft.json dist-screendraft",
     "demo": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node examples/demo.ts",
     "release": "release-it",
     "lint": "eslint src/**/*.ts --fix"

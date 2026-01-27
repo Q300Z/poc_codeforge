@@ -27,7 +27,7 @@ export interface A11yMeta {
 /** Propriétés de mise en page native. */
 export type LayoutProperty =
   | "width" | "height" | "min-width" | "min-height" | "max-width" | "max-height"
-  | "position" | "top" | "left" | "bottom" | "right" | "z-index"
+  | "position" | "top" | "left" | "bottom" | "right" | "x" | "y" | "z-index"
   | "overflow" | "overflow-x" | "overflow-y" | "flex-shrink" | "flex-grow"
   | "transform" | "opacity" | "border-radius";
 

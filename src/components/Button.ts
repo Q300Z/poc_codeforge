@@ -78,6 +78,7 @@ export const Button = createComponent({
     "btn-bg-default": "Couleur de fond par défaut",
     "btn-text-default": "Couleur du texte par défaut",
     "btn-radius": "Arrondi des angles",
+    "font-size": "Taille de police",
   },
   examples: [
     {

@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "appName": "ScreenDraft",
+    "createdAt": "2026-01-27T09:40:13.065Z",
+    "version": "1.0"
+  },
+  "components": [
+    {
+      "type": "title",
+      "x": 50,
+      "y": 60,
+      "width": 700,
+      "height": 60,
+      "content": "Bienvenue sur notre plateforme",
+      "backgroundColor": "transparent",
+      "textColor": "#581c87",
+      "fontSize": 36,
+      "id": "c1b726ab-36ea-44be-bd29-4206cbad0307"
+    },
+    {
+      "type": "text",
+      "x": 50,
+      "y": 140,
+      "width": 500,
+      "height": 80,
+      "content": "Découvrez une nouvelle façon de créer vos pages web. Simple, rapide et intuitif. Commencez dès maintenant et donnez vie à vos idées.",
+      "backgroundColor": "transparent",
+      "textColor": "#7e22ce",
+      "fontSize": 16,
+      "id": "a103f739-c54a-4f6d-a3e0-34fd7b0f0302"
+    },
+    {
+      "type": "button",
+      "x": 50,
+      "y": 250,
+      "width": 200,
+      "height": 50,
+      "content": "Commencer",
+      "backgroundColor": "#a855f7",
+      "textColor": "#ffffff",
+      "fontSize": 18,
+      "id": "e0a724e2-21d3-4e65-bf52-8692e7e157a2"
+    },
+    {
+      "type": "button",
+      "x": 270,
+      "y": 250,
+      "width": 180,
+      "height": 50,
+      "content": "En savoir plus",
+      "backgroundColor": "#a855f7",
+      "textColor": "#ffffff",
+      "fontSize": 16,
+      "id": "1137f791-2958-412c-b201-9801926e81b7"
+    },
+    {
+      "type": "image",
+      "x": 50,
+      "y": 340,
+      "width": 700,
+      "height": 350,
+      "content": "Hero image",
+      "backgroundColor": "transparent",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "imageSrc": "/images/placeholder-1.png",
+      "id": "adef7fdb-a5c9-4443-9711-e8f7b50a5e7d"
+    },
+    {
+      "type": "text",
+      "x": 50,
+      "y": 730,
+      "width": 700,
+      "height": 40,
+      "content": "Rejoint par plus de 10 000 utilisateurs dans le monde entier.",
+      "backgroundColor": "transparent",
+      "textColor": "#7e22ce",
+      "fontSize": 14,
+      "id": "0620e8e9-a98d-4688-9510-cc02fa07743d"
+    },
+    {
+      "id": "4ec2629a-5108-425e-ad49-c1be5d1bf888",
+      "type": "video",
+      "x": 38.98089832771922,
+      "y": 803.421037509249,
+      "width": 320,
+      "height": 180,
+      "content": "Vidéo YouTube",
+      "backgroundColor": "transparent",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "ca6405ab-5b1d-41cf-9dcd-52cbfb8dae2b",
+      "type": "map",
+      "x": 549.2775639572396,
+      "y": 143.8077195380783,
+      "width": 209,
+      "height": 173,
+      "content": "Carte",
+      "backgroundColor": "transparent",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "mapCenter": {
+        "lng": 2.3522,
+        "lat": 48.8566
+      },
+      "mapZoom": 12,
+      "mapMarkers": [
+        {
+          "id": "c882afc5-3b59-490c-9a4e-6ebf5135799c",
+          "lng": 2.354689089965291,
+          "lat": 48.85857647909802,
+          "name": "test"
+        }
+      ]
+    },
+    {
+      "id": "62025e8f-6ad6-4054-85e9-16feb5c1a96a",
+      "type": "carousel",
+      "x": 601.5674644193944,
+      "y": 804.8831865315983,
+      "width": 202,
+      "height": 120,
+      "content": "Carousel",
+      "backgroundColor": "transparent",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "carouselImages": [
+        {
+          "id": "1",
+          "src": "/images/placeholder-1.png",
+          "alt": "Image 1"
+        },
+        {
+          "id": "2",
+          "src": "/images/placeholder-2.png",
+          "alt": "Image 2"
+        },
+        {
+          "id": "3",
+          "src": "/images/placeholder-3.png",
+          "alt": "Image 3"
+        }
+      ],
+      "carouselAutoPlay": true,
+      "carouselInterval": 3000
+    },
+    {
+      "id": "e3903524-f41d-4e4d-b2e7-d00f5dca06bd",
+      "type": "form",
+      "x": 365.2247181841923,
+      "y": 779.6722157087833,
+      "width": 162,
+      "height": 136,
+      "content": "Formulaire",
+      "backgroundColor": "#f9fafb",
+      "textColor": "#374151",
+      "fontSize": 14,
+      "formFields": [
+        {
+          "id": "8db05f50-f610-4cc5-85f4-810c927bc692",
+          "label": "Nom",
+          "type": "text",
+          "placeholder": "Votre nom"
+        },
+        {
+          "id": "535319d5-167e-4911-bed8-f2d0be70eaf3",
+          "label": "Email",
+          "type": "email",
+          "placeholder": "votre@email.com"
+        },
+        {
+          "id": "a6dd82ca-2b87-4ac2-adfc-df22a2a2c492",
+          "label": "Message",
+          "type": "textarea",
+          "placeholder": "Votre message..."
+        }
+      ],
+      "formButtonText": "Envoyer"
+    }
+  ]
+}
