@@ -311,6 +311,90 @@ Div simple pour le style ou le positionnement. Pas de props spécifiques.
 }
 ```
 
+### Table (Tableau)
+Tableau de données sémantique.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `headers` | `Array<string>` | Oui | Liste des libellés d'en-tête. |
+| `rows` | `Array<Array<string>>` | Oui | Matrice de données (lignes et colonnes). |
+| `caption` | `string` | Non | Légende du tableau pour l'accessibilité. |
+
+**Exemple**
+```json
+{
+  "id": "table-1",
+  "type": "Table",
+  "meta": {
+    "headers": ["Produit", "Prix"],
+    "rows": [
+      ["Pomme", "1.50€"],
+      ["Banane", "2.00€"]
+    ],
+    "caption": "Liste des prix"
+  },
+  "style": { "table-header-bg": "#f3f4f6" }
+}
+```
+
+### Select (Liste déroulante)
+Champ de formulaire pour sélectionner une option.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `label` | `string` | Oui | Libellé du champ. |
+| `name` | `string` | Oui | Nom du champ (attribut name). |
+| `options` | `Array<{label, value}>` | Oui | Liste des options. |
+| `value` | `string` | Non | Valeur sélectionnée par défaut. |
+| `placeholder` | `string` | Non | Option vide affichée par défaut. |
+
+**Exemple**
+```json
+{
+  "id": "select-country",
+  "type": "Select",
+  "meta": {
+    "label": "Pays",
+    "name": "country",
+    "options": [
+      { "label": "France", "value": "fr" },
+      { "label": "Belgique", "value": "be" }
+    ],
+    "placeholder": "Choisissez un pays"
+  },
+  "style": { "select-border": "#d1d5db" }
+}
+```
+
+### Textarea (Zone de texte)
+Champ de saisie multi-lignes.
+
+**Propriétés Spécifiques (`meta`)**
+| Propriété | Type | Requis | Description |
+| :--- | :--- | :--- | :--- |
+| `label` | `string` | Oui | Libellé du champ. |
+| `name` | `string` | Oui | Nom du champ. |
+| `placeholder` | `string` | Non | Texte d'aide. |
+| `rows` | `number` | Non | Nombre de lignes. Défaut : 4. |
+| `value` | `string` | Non | Valeur par défaut. |
+
+**Exemple**
+```json
+{
+  "id": "text-msg",
+  "type": "Textarea",
+  "meta": {
+    "label": "Votre message",
+    "name": "message",
+    "placeholder": "Écrivez ici...",
+    "rows": 6
+  },
+  "style": { "textarea-border": "#d1d5db", "textarea-radius": 8 }
+}
+```
+
 ### Container (Conteneur Centré)
 Conteneur avec largeur maximale et marges automatiques. Pas de props spécifiques.
 

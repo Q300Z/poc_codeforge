@@ -11,8 +11,11 @@ import { Image } from "./components/Image.js";
 import { Map } from "./components/Map.js";
 import { Page } from "./components/Page.js";
 import { Section } from "./components/Section.js";
+import { Select } from "./components/Select.js";
 import { Stack } from "./components/Stack.js";
+import { Table } from "./components/Table.js";
 import { Text } from "./components/Text.js";
+import { Textarea } from "./components/Textarea.js";
 import { Title } from "./components/Title.js";
 import { Video } from "./components/Video.js";
 import { registry } from "./registry.js";
@@ -25,8 +28,10 @@ export function setupRegistry() {
   registry.Carousel = Carousel;
   registry.Form = Form;
   registry.FormField = FormField;
+  registry.Select = Select;
+  registry.Textarea = Textarea;
   registry.Grid = Grid;
-  registry.Map = Map;
+  registry.Table = Table;
   registry.Section = Section;
   registry.Container = Container;
   registry.Stack = Stack;
@@ -35,4 +40,5 @@ export function setupRegistry() {
   registry.Text = Text;
   registry.Image = Image;
   registry.Video = Video;
+  registry.Map = Map;
 }

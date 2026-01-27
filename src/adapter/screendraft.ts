@@ -6,7 +6,10 @@ import { FormFieldBuilder } from "../components/FormField.js";
 import { ImageBuilder } from "../components/Image.js";
 import { MapBuilder } from "../components/Map.js";
 import { PageBuilder } from "../components/Page.js";
+import { SelectBuilder } from "../components/Select.js";
+import { TableBuilder } from "../components/Table.js";
 import { TextBuilder } from "../components/Text.js";
+import { TextareaBuilder } from "../components/Textarea.js";
 import { TitleBuilder } from "../components/Title.js";
 import { VideoBuilder } from "../components/Video.js";
 import { SiteNode } from "../types.js";
@@ -23,7 +26,19 @@ interface ScreenDraftMeta {
 
 interface ScreenDraftComponent {
   id: string;
-  type: "title" | "text" | "button" | "image" | "video" | "map" | "carousel" | "form" | "navbar";
+  type:
+    | "title"
+    | "text"
+    | "button"
+    | "image"
+    | "video"
+    | "map"
+    | "carousel"
+    | "form"
+    | "navbar"
+    | "table"
+    | "select"
+    | "textarea";
   x: number;
   y: number;
   width: number;
@@ -38,6 +53,14 @@ interface ScreenDraftComponent {
   carouselImages?: { id: string; src: string; alt: string }[];
   carouselAutoPlay?: boolean;
   carouselInterval?: number;
+  // Table
+  tableData?: string[][];
+  // Select
+  selectOptions?: string[];
+  selectPlaceholder?: string;
+  // Textarea
+  textareaPlaceholder?: string;
+  textareaRows?: number;
   // Map et Form (non supportés nativement pour l'instant -> ignorés ou placeholders)
   [key: string]: any;
 }
@@ -81,7 +104,7 @@ export class ScreenDraftAdapter {
       "z-index": 1, // Par défaut pour le canvas
     };
 
-    const isTextBased = ["title", "text", "button"].includes(comp.type);
+    const isTextBased = ["title", "text", "button", "select", "textarea"].includes(comp.type);
     if (comp.fontSize && isTextBased) {
       commonStyle["font-size"] = comp.fontSize;
     }
@@ -195,6 +218,60 @@ export class ScreenDraftAdapter {
           });
         }
         builder = form;
+        break;
+      }
+
+      case "table": {
+        const tableData = comp.tableData || [];
+        const headers = tableData.length > 0 ? tableData[0] : [];
+        const rows = tableData.length > 1 ? tableData.slice(1) : [];
+        builder = new TableBuilder(comp.id)
+          .withHeaders(headers)
+          .withRows(rows)
+          .withCaption(comp.content || "Tableau")
+          .withStyle({
+            ...commonStyle,
+            "table-header-bg": comp.backgroundColor,
+            "table-header-text": comp.textColor,
+          });
+        break;
+      }
+
+      case "select": {
+        const options = (comp.selectOptions || []).map((opt) => ({
+          label: opt,
+          value: opt.toLowerCase().replace(/\s+/g, "-"),
+        }));
+        builder = new SelectBuilder(comp.id)
+          .withLabel(comp.content || "Sélectionnez")
+          .withName(`select-${comp.id}`)
+          .withOptions(options)
+          .withStyle({
+            ...commonStyle,
+            "select-bg": comp.backgroundColor,
+            "select-text": comp.textColor,
+          });
+        if (comp.selectPlaceholder) {
+          builder.withMeta({ placeholder: comp.selectPlaceholder } as any);
+        }
+        break;
+      }
+
+      case "textarea": {
+        builder = new TextareaBuilder(comp.id)
+          .withLabel(comp.content || "Message")
+          .withName(`textarea-${comp.id}`)
+          .withStyle({
+            ...commonStyle,
+            "textarea-bg": comp.backgroundColor,
+            "textarea-text": comp.textColor,
+          });
+        if (comp.textareaPlaceholder) {
+          builder.withMeta({ placeholder: comp.textareaPlaceholder } as any);
+        }
+        if (comp.textareaRows) {
+          builder.withMeta({ rows: comp.textareaRows } as any);
+        }
         break;
       }
 

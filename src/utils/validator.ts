@@ -29,6 +29,7 @@ export const LAYOUT_UTILITIES = [
   "transform",
   "opacity",
   "border-radius",
+  "border",
 ];
 
 /**

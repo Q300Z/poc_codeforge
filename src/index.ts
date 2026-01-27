@@ -21,8 +21,11 @@ export * from "./components/Image.js";
 export * from "./components/Map.js";
 export * from "./components/Page.js";
 export * from "./components/Section.js";
+export * from "./components/Select.js";
 export * from "./components/Stack.js";
+export * from "./components/Table.js";
 export * from "./components/Text.js";
+export * from "./components/Textarea.js";
 export * from "./components/Title.js";
 export * from "./components/Video.js";
 

@@ -17,9 +17,12 @@ import {
   MapBuilder,
   PageBuilder,
   SectionBuilder,
+  SelectBuilder,
   SiteBuilder,
   StackBuilder,
+  TableBuilder,
   TextBuilder,
+  TextareaBuilder,
   TitleBuilder,
   VideoBuilder,
 } from "./index.js";
@@ -153,6 +156,34 @@ const layoutsPage = new PageBuilder("layouts-page")
           .addItem(Placeholder.landscape("large", "Slide 2"), "Image Aléatoire 2", "Deuxième image du carrousel")
           .addItem(Placeholder.landscape("large", "Slide 3"), "Image Aléatoire 3", "Troisième image du carrousel")
           .withOptions(true, 4000)  
+      ).addChild(
+        new TitleBuilder("t4")
+          .withLevel(2)
+          .withContent("4. Données et Formulaires")
+      ).addChild(
+        new TableBuilder("demo-table")
+          .withCaption("Comparatif des abonnements")
+          .withHeaders(["Plan", "Prix", "Fonctionnalités"])
+          .withRows([
+            ["Gratuit", "0€", "Rendu basique, 1 site"],
+            ["Pro", "19€", "Vitesse max, Sites illimités"],
+            ["Entreprise", "Sur devis", "Support 24/7, SLA"]
+          ])
+          .withStyle({ "table-header-bg": "#4f46e5", "table-header-text": "#ffffff", "table-row-even-bg": "#f9fafb" })
+      ).addChild(
+        new StackBuilder("select-stack")
+          .withDirection("horizontal")
+          .withGap(4)
+          .addChild(
+            new SelectBuilder("demo-select")
+              .withLabel("Choisir un thème")
+              .withOptions([
+                { label: "Clair", value: "light" },
+                { label: "Sombre", value: "dark" },
+                { label: "Système", value: "system" }
+              ])
+              .withStyle({ width: 250 })
+          )
       )
     )
   );
@@ -303,11 +334,30 @@ const contactPage = new PageBuilder("contact-page")
       ).addChild(
         new ButtonBuilder("mail-btn").withLabel("Email").withAction("mailto:hello@codeforge.dev")
       ).addChild(
-        new FormBuilder("contact-form")
-          .withButtonText("Envoyer le message")
-          .addChild(new FormFieldBuilder("f-name").withLabel("Nom complet").withPlaceholder("Jean Dupont").withRequired())
-          .addChild(new FormFieldBuilder("f-email").withLabel("Email").withType("email").withPlaceholder("jean@exemple.com").withRequired())
-          .addChild(new FormFieldBuilder("f-msg").withLabel("Message").withType("textarea").withPlaceholder("Comment pouvons-nous vous aider ?"))
+        new SectionBuilder("form-section").addChild(
+          new StackBuilder("form-stack")
+            .withGap(6)
+            .addChild(
+              new SelectBuilder("subject-select")
+                .withLabel("Sujet de votre demande")
+                .withOptions([
+                  { label: "Support Technique", value: "support" },
+                  { label: "Ventes", value: "sales" },
+                  { label: "Partenariat", value: "partner" }
+                ])
+            )
+            .addChild(
+              new TextareaBuilder("message-area")
+                .withLabel("Votre Message")
+                .withPlaceholder("Dites-nous tout...")
+                .withRows(6)
+            )
+            .addChild(
+              new ButtonBuilder("submit-btn")
+                .withLabel("Envoyer le formulaire")
+                .withAction("alert('Message envoyé !')")
+            )
+        )
       )
     )
   );

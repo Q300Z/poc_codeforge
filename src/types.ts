@@ -29,7 +29,7 @@ export type LayoutProperty =
   | "width" | "height" | "min-width" | "min-height" | "max-width" | "max-height"
   | "position" | "top" | "left" | "bottom" | "right" | "x" | "y" | "z-index"
   | "overflow" | "overflow-x" | "overflow-y" | "flex-shrink" | "flex-grow"
-  | "transform" | "opacity" | "border-radius";
+  | "transform" | "opacity" | "border-radius" | "border";
 
 export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
 export type ResponsiveLayoutProps = { [K in LayoutProperty as `${K}-${Breakpoint}`]?: string | number };

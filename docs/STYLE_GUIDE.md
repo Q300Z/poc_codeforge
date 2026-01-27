@@ -31,6 +31,7 @@ Ces propriétés sont définies dans `LAYOUT_UTILITIES` et sont disponibles pour
 **Visuel :**
 - `opacity`
 - `border-radius`
+- `border`
 - `overflow`, `overflow-x`, `overflow-y`
 
 ### Unités et Normalisation
@@ -81,7 +82,10 @@ Chaque composant peut exposer des propriétés de style spécifiques, appelées 
 | **Image** | `object-fit` | Mode de redimensionnement (`cover`, `contain`). |
 | **Map** | `map-height` | Hauteur de la carte interactive. |
 | **Section** | `section-bg`, `section-py` | Fond et padding vertical. |
+| **Select** | `select-bg`, `select-text`, `select-border`, `select-radius` | Style de la liste déroulante. |
+| **Table** | `table-border`, `table-header-bg`, `table-header-text`, `table-row-even-bg` | Style du tableau de données. |
 | **Text** | `text-color`, `font-size`, `line-height` | Typographie courante. |
+| **Textarea** | `textarea-bg`, `textarea-text`, `textarea-border`, `textarea-radius` | Style de la zone de saisie. |
 | **Title** | `title-text`, `title-bg`, `font-size`, `font-weight`, `text-align` | Style des titres. |
 | **Video** | `object-fit` | Mode de redimensionnement. |
 

@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "appName": "ScreenDraft",
+    "createdAt": "2026-01-27T13:56:06.395Z",
+    "version": "1.0"
+  },
+  "components": [
+    {
+      "type": "title",
+      "x": 50,
+      "y": 50,
+      "width": 700,
+      "height": 60,
+      "content": "Nous contacter",
+      "backgroundColor": "transparent",
+      "textColor": "#111827",
+      "fontSize": 32,
+      "id": "a2fd3b52-47d0-4470-ac37-e8d0091d9833"
+    },
+    {
+      "type": "text",
+      "x": 50,
+      "y": 130,
+      "width": 350,
+      "height": 120,
+      "content": "Adresse : 12 Rue de la Paix, 75002 Paris\nTéléphone : +33 1 23 45 67 89\nEmail : contact@exemple.fr\nHoraires : Lun-Ven 9h-18h",
+      "backgroundColor": "#f9fafb",
+      "textColor": "#374151",
+      "fontSize": 14,
+      "id": "3dfe78de-0a08-4a0c-b5e7-62502d255fab"
+    },
+    {
+      "type": "button",
+      "x": 50,
+      "y": 280,
+      "width": 350,
+      "height": 50,
+      "content": "Envoyer un message",
+      "backgroundColor": "#059669",
+      "textColor": "#ffffff",
+      "fontSize": 16,
+      "id": "b05947e9-a452-43bc-ba48-2bbcfd324ea3"
+    },
+    {
+      "id": "1c4959d1-02df-4dd8-8329-363e393a21e1",
+      "type": "form",
+      "x": 46,
+      "y": 525.90625,
+      "width": 400,
+      "height": 350,
+      "content": "Formulaire",
+      "backgroundColor": "#f9fafb",
+      "textColor": "#374151",
+      "fontSize": 14,
+      "formFields": [
+        {
+          "id": "30ed5f0e-fd72-4a51-8faf-8ac3b028b15f",
+          "label": "Nom",
+          "type": "text",
+          "placeholder": "Votre nom"
+        },
+        {
+          "id": "7127d423-6d47-4f34-80da-eb45a95e895e",
+          "label": "Email",
+          "type": "email",
+          "placeholder": "votre@email.com"
+        },
+        {
+          "id": "69b696f9-8fd4-4cb6-8190-04fa37bbb4cc",
+          "label": "Message",
+          "type": "textarea",
+          "placeholder": "Votre message..."
+        }
+      ],
+      "formButtonText": "Envoyer"
+    },
+    {
+      "id": "e6b45009-7f36-445b-84da-db7772aacf06",
+      "type": "table",
+      "x": 56.625,
+      "y": 336.96875,
+      "width": 730,
+      "height": 182,
+      "content": "Tableau",
+      "backgroundColor": "#ffffff",
+      "textColor": "#32373c",
+      "fontSize": 13,
+      "tableRows": 2,
+      "tableCols": 8,
+      "tableData": [
+        [
+          "En-tête 1",
+          "En-tête 2",
+          "En-tête 3",
+          "En-tête 4",
+          "En-tête 5",
+          "En-tête 6",
+          "En-tête 7",
+          "En-tête 8"
+        ],
+        [
+          "Cellule",
+          "Cellule",
+          "Cellule",
+          "Cellule",
+          "Cellule",
+          "Cellule",
+          "Cellule",
+          "Cellule"
+        ]
+      ]
+    },
+    {
+      "id": "d89d2d38-5d65-49d7-b39f-91edfd4c3c83",
+      "type": "select",
+      "x": 548.0625,
+      "y": 551.8125,
+      "width": 238,
+      "height": 98,
+      "content": "Liste déroulante",
+      "backgroundColor": "#ffffff",
+      "textColor": "#32373c",
+      "fontSize": 14,
+      "selectPlaceholder": "Choisir une option",
+      "selectOptions": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4",
+        "Option 5",
+        "Option 6"
+      ],
+      "audioDescription": ""
+    }
+  ]
+}

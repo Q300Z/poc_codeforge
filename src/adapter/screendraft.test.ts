@@ -104,6 +104,34 @@ describe("ScreenDraftAdapter", () => {
         width: 600,
         height: 400,
       },
+      {
+        id: "tab-1",
+        type: "table",
+        x: 10,
+        y: 10,
+        width: 500,
+        height: 200,
+        content: "My Table",
+        tableData: [
+          ["H1", "H2"],
+          ["V1", "V2"],
+        ],
+        backgroundColor: "grey",
+        textColor: "black",
+      },
+      {
+        id: "sel-1",
+        type: "select",
+        x: 10,
+        y: 220,
+        width: 200,
+        height: 50,
+        content: "Choose",
+        selectOptions: ["A", "B"],
+        selectPlaceholder: "Pick",
+        backgroundColor: "white",
+        textColor: "blue",
+      },
     ],
   };
 
@@ -213,6 +241,35 @@ describe("ScreenDraftAdapter", () => {
     expect(map.type).toBe("Map");
     expect(map.style.width).toBe(600);
     expect(map.style["map-height"]).toBe(400);
+  });
+
+  it("should transform Table component", () => {
+    const site = ScreenDraftAdapter.transform(mockData);
+    const page = site.pages[0].content;
+    const table = page.children.find((c: any) => c.id === "tab-1");
+
+    expect(table).toBeDefined();
+    expect(table.type).toBe("Table");
+    expect(table.meta.headers).toEqual(["H1", "H2"]);
+    expect(table.meta.rows).toEqual([["V1", "V2"]]);
+    expect(table.meta.caption).toBe("My Table");
+    expect(table.style["table-header-bg"]).toBe("grey");
+    expect(table.style["table-header-text"]).toBe("black");
+  });
+
+  it("should transform Select component", () => {
+    const site = ScreenDraftAdapter.transform(mockData);
+    const page = site.pages[0].content;
+    const select = page.children.find((c: any) => c.id === "sel-1");
+
+    expect(select).toBeDefined();
+    expect(select.type).toBe("Select");
+    expect(select.meta.label).toBe("Choose");
+    expect(select.meta.placeholder).toBe("Pick");
+    expect(select.meta.options).toHaveLength(2);
+    expect(select.meta.options[0]).toEqual({ label: "A", value: "a" });
+    expect(select.style["select-bg"]).toBe("white");
+    expect(select.style["select-text"]).toBe("blue");
   });
 
   describe("HTML Generation", () => {

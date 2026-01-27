@@ -61,7 +61,9 @@ try {
     cachedLibContent = fs.readFileSync(libPath, "utf-8");
   }
 } catch (_) {
-  console.error("[CodeForge Map] Impossible de charger la bibliothèque libs/streaming-map-nodraw.js");
+  console.error(
+    "[CodeForge Map] Impossible de charger la bibliothèque libs/streaming-map-nodraw.js"
+  );
 }
 
 /**
