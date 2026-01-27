@@ -1,6 +1,15 @@
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
+/** Interface pour les pistes de texte (sous-titres, légendes). */
+export interface VideoTrack {
+  src: string;
+  kind?: "subtitles" | "captions" | "descriptions" | "chapters" | "metadata";
+  srclang?: string;
+  label?: string;
+  default?: boolean;
+}
+
 /** Interface des métadonnées pour le composant Video. */
 export interface VideoMeta {
   /** URL de la source vidéo. */
@@ -23,6 +32,8 @@ export interface VideoMeta {
   width?: number;
   /** Hauteur native. */
   height?: number;
+  /** Pistes de sous-titres ou légendes. */
+  tracks?: VideoTrack[];
 }
 
 /** Interface des Design Tokens pour le composant Video. */
@@ -55,6 +66,12 @@ export class VideoBuilder extends NodeBuilder<VideoMeta, VideoStyles> {
     this.node.meta.height = height;
     return this;
   }
+  /** Ajoute une piste de sous-titres. */
+  addTrack(track: VideoTrack): this {
+    if (!this.node.meta.tracks) this.node.meta.tracks = [];
+    this.node.meta.tracks.push(track);
+    return this;
+  }
   /** Configure les options de lecture. */
   withOptions(opts: {
     controls?: boolean;
@@ -75,7 +92,7 @@ export class VideoBuilder extends NodeBuilder<VideoMeta, VideoStyles> {
  */
 export const Video = createComponent({
   name: "Video",
-  version: "1.1.0",
+  version: "1.2.0",
   description: "Lecteur vidéo HTML5 accessible et performant.",
   metaSchema: {
     src: { type: "string", description: "URL de la vidéo", required: true },
@@ -88,6 +105,7 @@ export const Video = createComponent({
     preload: { type: "enum", options: ["auto", "metadata", "none"], description: "Préchargement" },
     width: { type: "number", description: "Largeur native" },
     height: { type: "number", description: "Hauteur native" },
+    tracks: { type: "array", description: "Pistes de sous-titres" },
   },
   authorizedTokens: ["object-fit"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
@@ -103,6 +121,16 @@ export const Video = createComponent({
     const width = meta.width ? `width="${meta.width}"` : "";
     const height = meta.height ? `height="${meta.height}"` : "";
 
+    const tracksHTML = ((meta.tracks as VideoTrack[]) || [])
+      .map((t) => {
+        const kind = t.kind || "captions";
+        const srclang = t.srclang ? `srclang="${t.srclang}"` : "";
+        const label = t.label ? `label="${t.label}"` : "";
+        const def = t.default ? "default" : "";
+        return `<track kind="${kind}" src="${t.src}" ${srclang} ${label} ${def} />`;
+      })
+      .join("");
+
     return `
       <video 
         src="${meta.src}" 
@@ -113,6 +141,7 @@ export const Video = createComponent({
         class="w-full h-auto block rounded-[var(--border-radius,0)]"
         ${a11yAttrs}
       >
+        ${tracksHTML}
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
     `;

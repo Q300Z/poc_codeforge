@@ -142,7 +142,7 @@ const layoutsPage = new PageBuilder("layouts-page")
         new TitleBuilder("title-h5").withLevel(5).withContent("Titre Niveau 5")
       ).addChild(
         new TitleBuilder("title-h6").withLevel(6).withContent("Titre Niveau 6")
-      ).addChild(new TitleBuilder("c1").withLevel(2).withContent("Courousel")).addChild(
+      ).addChild(new TitleBuilder("carousel-title").withLevel(2).withContent("Courousel")).addChild(
         new CarouselBuilder("sample-carousel")
           .addItem("https://picsum.photos/seed/pic1/800/400", "Image Aléatoire 1", "Première image du carrousel")
           .addItem("https://picsum.photos/seed/pic2/800/400", "Image Aléatoire 2", "Deuxième image du carrousel")
@@ -219,6 +219,12 @@ const canvasPage = new PageBuilder("canvas-page")
     new VideoBuilder("abs-video")
       .withSrc("https://www.w3schools.com/html/mov_bbb.mp4")
       .withOptions({ controls: true, muted: true, autoplay: true, loop: true })
+      .addTrack({
+        kind: "captions",
+        src: "captions_en.vtt",
+        srclang: "en",
+        label: "English"
+      })
       .withAbsolutePosition(undefined, undefined, 20, 20, 15)
       .withStyle({
         width: 250,
@@ -252,6 +258,12 @@ const mediaPage = new PageBuilder("media-page")
             .withSrc("https://www.w3schools.com/html/mov_bbb.mp4")
             .withPoster("https://picsum.photos/seed/video-poster/800/600")
             .withOptions({ controls: true, autoplay: false })
+            .addTrack({
+              kind: "captions",
+              src: "captions_fr.vtt",
+              srclang: "fr",
+              label: "Français"
+            })
             .withAudioDescription("Vidéo de démonstration Big Buck Bunny")
             .withStyle({ "border-radius": "12px" })
         )
