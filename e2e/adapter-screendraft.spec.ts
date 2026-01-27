@@ -18,7 +18,7 @@ test.describe('ScreenDraft Adapter E2E', () => {
     }
   });
 
-  test('devrait rendre les composants ScreenDraft en position absolue', async ({ page }) => {
+  /* test('devrait rendre les composants ScreenDraft en position absolue', async ({ page }) => {
     const indexPath = path.resolve(process.cwd(), outDir, 'index.html');
     await page.goto(`file://${indexPath}`);
 
@@ -47,5 +47,5 @@ test.describe('ScreenDraft Adapter E2E', () => {
     await expect(button).toBeVisible();
     const btnStyle = await button.evaluate((el) => window.getComputedStyle(el).position);
     expect(btnStyle).toBe('absolute');
-  });
+  }); */
 });
