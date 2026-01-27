@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.7.0](https://github.com/Q300Z/poc_codeforge/compare/v1.6.1...v1.7.0) (2026-01-27)
+
+
+### Features
+
+* make static generation the default and standalone ([e5658d5](https://github.com/Q300Z/poc_codeforge/commit/e5658d5a09775c2a0b360ccf2ac9ed846d01911c))
+
 ## [1.6.1](https://github.com/Q300Z/poc_codeforge/compare/v1.6.0...v1.6.1) (2026-01-27)
 
 # [1.6.0](https://github.com/Q300Z/poc_codeforge/compare/v1.5.0...v1.6.0) (2026-01-27)
