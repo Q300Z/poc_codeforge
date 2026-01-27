@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { runCli, printHelp } from "./cli.js";
+import { runCli } from "./cli.js";
 import * as index from "./index.js";
 import fs from "fs";
 
@@ -36,22 +36,22 @@ describe("CLI", () => {
 
   it("should run buildSite with correct arguments", async () => {
     await runCli(["data.json", "output"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "output", { inlineCss: false });
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "output", { inline: false });
   });
 
   it("should handle --inline flag", async () => {
     await runCli(["data.json", "--inline"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: true });
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-static", { inline: true });
   });
 
   it("should handle -i flag", async () => {
     await runCli(["data.json", "-i"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: true });
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-static", { inline: true });
   });
 
   it("should use default output directory if not provided", async () => {
     await runCli(["data.json"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: false });
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-static", { inline: false });
   });
 
   it("should handle watch mode", async () => {
@@ -67,11 +67,11 @@ describe("CLI", () => {
 
   it("should fail watch mode if file does not exist", async () => {
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
-    // process.exit needs to be mocked or we catch the exit behavior
     const exitSpy = vi.spyOn(process, "exit").mockImplementation((code) => { throw new Error(`Exit ${code}`); });
 
     await expect(runCli(["data.json", "-w"])).rejects.toThrow("Exit 1");
     expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining("Impossible de surveiller"));
+    exitSpy.mockRestore();
   });
 
   it("should log error if build fails", async () => {

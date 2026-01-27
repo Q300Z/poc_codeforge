@@ -2,7 +2,7 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-27T14:08:46.894Z"
+    "createdAt": "2026-01-27T14:32:46.087Z"
   },
   "style": {
     "brand-primary": "#4f46e5",
@@ -19,7 +19,7 @@
       "type": "AppBar",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-27T14:08:46.893Z",
+        "createdAt": "2026-01-27T14:32:46.086Z",
         "title": "CodeForge",
         "links": [
           {
@@ -54,7 +54,7 @@
       "type": "Section",
       "meta": {
         "version": "1.0.0",
-        "createdAt": "2026-01-27T14:08:46.893Z"
+        "createdAt": "2026-01-27T14:32:46.087Z"
       },
       "style": {
         "section-bg": "#111827",
@@ -66,7 +66,7 @@
           "type": "Container",
           "meta": {
             "version": "1.0.0",
-            "createdAt": "2026-01-27T14:08:46.893Z"
+            "createdAt": "2026-01-27T14:32:46.087Z"
           },
           "children": [
             {
@@ -74,7 +74,7 @@
               "type": "Stack",
               "meta": {
                 "version": "1.0.0",
-                "createdAt": "2026-01-27T14:08:46.893Z",
+                "createdAt": "2026-01-27T14:32:46.087Z",
                 "align": "center",
                 "gap": 4
               },
@@ -84,7 +84,7 @@
                   "type": "Title",
                   "meta": {
                     "version": "1.0.0",
-                    "createdAt": "2026-01-27T14:08:46.893Z",
+                    "createdAt": "2026-01-27T14:32:46.087Z",
                     "content": "CodeForge POC",
                     "level": 3
                   },
@@ -98,7 +98,7 @@
                   "type": "Text",
                   "meta": {
                     "version": "1.0.0",
-                    "createdAt": "2026-01-27T14:08:46.894Z",
+                    "createdAt": "2026-01-27T14:32:46.087Z",
                     "content": "© 2026 - Le futur du rendu JSON."
                   },
                   "style": {
@@ -121,7 +121,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.894Z"
+          "createdAt": "2026-01-27T14:32:46.088Z"
         },
         "children": [
           {
@@ -129,7 +129,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.894Z",
+              "createdAt": "2026-01-27T14:32:46.088Z",
               "title": "Bienvenue",
               "subtitle": "Découvrez la puissance des Builders typés."
             }
@@ -139,7 +139,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.894Z"
+              "createdAt": "2026-01-27T14:32:46.088Z"
             },
             "children": [
               {
@@ -147,7 +147,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-27T14:08:46.894Z",
+                  "createdAt": "2026-01-27T14:32:46.088Z",
                   "align": "center"
                 },
                 "children": [
@@ -156,7 +156,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.3.0",
-                      "createdAt": "2026-01-27T14:08:46.894Z",
+                      "createdAt": "2026-01-27T14:32:46.088Z",
                       "label": "Voir les Layouts",
                       "action": "layouts.html",
                       "audioDescription": "Naviguer vers la page layouts"
@@ -176,7 +176,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.895Z"
+          "createdAt": "2026-01-27T14:32:46.088Z"
         },
         "children": [
           {
@@ -184,7 +184,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.895Z",
+              "createdAt": "2026-01-27T14:32:46.088Z",
               "title": "Galerie de Layouts",
               "subtitle": "Mise en page fluide et typée via Builders."
             }
@@ -194,7 +194,7 @@
             "type": "Section",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.895Z"
+              "createdAt": "2026-01-27T14:32:46.088Z"
             },
             "children": [
               {
@@ -202,7 +202,7 @@
                 "type": "Container",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-27T14:08:46.895Z"
+                  "createdAt": "2026-01-27T14:32:46.088Z"
                 },
                 "children": [
                   {
@@ -210,7 +210,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.088Z",
                       "level": 2,
                       "content": "1. Grille Responsive (3 cols)"
                     }
@@ -220,7 +220,7 @@
                     "type": "Grid",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.088Z",
                       "cols": 3,
                       "gap": 6
                     },
@@ -230,7 +230,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#f87171"
@@ -241,7 +241,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#60a5fa"
@@ -252,7 +252,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#34d399"
@@ -265,7 +265,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.088Z",
                       "level": 2,
                       "content": "2. Stack Vertical avec Espacement"
                     }
@@ -275,7 +275,7 @@
                     "type": "Stack",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.088Z",
                       "align": "center",
                       "gap": 4
                     },
@@ -285,7 +285,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#fbbf24"
@@ -296,7 +296,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#a78bfa"
@@ -307,7 +307,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.088Z"
                         },
                         "style": {
                           "box-bg": "#f472b6"
@@ -318,7 +318,7 @@
                         "type": "Box",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z"
+                          "createdAt": "2026-01-27T14:32:46.089Z"
                         },
                         "style": {
                           "box-bg": "#34d399"
@@ -331,7 +331,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.089Z",
                       "level": 2,
                       "content": "3. Différents Titres"
                     }
@@ -341,7 +341,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.089Z",
                       "level": 1,
                       "content": "Titre Niveau 1"
                     }
@@ -351,7 +351,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.089Z",
                       "level": 2,
                       "content": "Titre Niveau 2"
                     }
@@ -361,7 +361,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.089Z",
                       "level": 3,
                       "content": "Titre Niveau 3"
                     }
@@ -371,7 +371,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.091Z",
                       "level": 4,
                       "content": "Titre Niveau 4"
                     }
@@ -381,7 +381,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.091Z",
                       "level": 5,
                       "content": "Titre Niveau 5"
                     }
@@ -391,7 +391,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.091Z",
                       "level": 6,
                       "content": "Titre Niveau 6"
                     }
@@ -401,7 +401,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.091Z",
                       "level": 2,
                       "content": "Courousel"
                     }
@@ -411,7 +411,7 @@
                     "type": "Carousel",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.091Z",
                       "items": [
                         {
                           "src": "https://placehold.net/800x600.png?text=Slide%201",
@@ -438,7 +438,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.092Z",
                       "level": 2,
                       "content": "4. Données et Formulaires"
                     }
@@ -448,7 +448,7 @@
                     "type": "Table",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.092Z",
                       "caption": "Comparatif des abonnements",
                       "headers": [
                         "Plan",
@@ -484,7 +484,7 @@
                     "type": "Stack",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.895Z",
+                      "createdAt": "2026-01-27T14:32:46.093Z",
                       "direction": "horizontal",
                       "gap": 4
                     },
@@ -494,7 +494,7 @@
                         "type": "Select",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.895Z",
+                          "createdAt": "2026-01-27T14:32:46.093Z",
                           "label": "Choisir un thème",
                           "options": [
                             {
@@ -531,7 +531,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.896Z",
+          "createdAt": "2026-01-27T14:32:46.094Z",
           "debug": true
         },
         "style": {
@@ -545,7 +545,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "title": "Mode Canvas",
               "subtitle": "Emplacements précis via coordonnées X et Y."
             }
@@ -555,7 +555,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z"
+              "createdAt": "2026-01-27T14:32:46.094Z"
             },
             "style": {
               "position": "absolute",
@@ -571,7 +571,7 @@
             "type": "Box",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z"
+              "createdAt": "2026-01-27T14:32:46.094Z"
             },
             "style": {
               "position": "absolute",
@@ -588,7 +588,7 @@
             "type": "Title",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "content": "Placement Libre",
               "level": 3
             },
@@ -604,7 +604,7 @@
             "type": "Text",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "content": "Ce texte est positionné dynamiquement via des coordonnées CSS absolues."
             },
             "style": {
@@ -620,7 +620,7 @@
             "type": "Button",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "label": "Action Flottante",
               "action": "alert('Cliqué !')"
             },
@@ -636,7 +636,7 @@
             "type": "Image",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.896Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "src": "https://placehold.net/600x400.png?text=Canvas%20Landscape",
               "alt": "Image flottante"
             },
@@ -654,7 +654,7 @@
             "type": "Video",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "src": "https://www.w3schools.com/html/mov_bbb.mp4",
               "controls": true,
               "muted": true,
@@ -683,7 +683,7 @@
             "type": "Map",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "src": "https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson",
               "controls": "zoom,info"
             },
@@ -707,7 +707,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.897Z"
+          "createdAt": "2026-01-27T14:32:46.094Z"
         },
         "children": [
           {
@@ -715,7 +715,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "title": "Composants Média",
               "subtitle": "Intégrez des images et des vidéos de manière accessible."
             }
@@ -725,7 +725,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z"
+              "createdAt": "2026-01-27T14:32:46.094Z"
             },
             "children": [
               {
@@ -733,7 +733,7 @@
                 "type": "Grid",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-27T14:08:46.897Z",
+                  "createdAt": "2026-01-27T14:32:46.094Z",
                   "cols": 2,
                   "gap": 8
                 },
@@ -743,7 +743,7 @@
                     "type": "Image",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.094Z",
                       "src": "https://placehold.net/800x600.png?text=Media%20Showcase",
                       "alt": "Une image de démonstration générée aléatoirement",
                       "audioDescription": "Image décorative montrant la puissance du rendu visuel"
@@ -757,7 +757,7 @@
                     "type": "Video",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.094Z",
                       "src": "https://www.w3schools.com/html/mov_bbb.mp4",
                       "poster": "https://picsum.photos/seed/video-poster/800/600",
                       "controls": true,
@@ -790,7 +790,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.897Z"
+          "createdAt": "2026-01-27T14:32:46.094Z"
         },
         "children": [
           {
@@ -798,7 +798,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z",
+              "createdAt": "2026-01-27T14:32:46.094Z",
               "title": "Contact",
               "subtitle": "Parlons ensemble."
             }
@@ -808,7 +808,7 @@
             "type": "Container",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z"
+              "createdAt": "2026-01-27T14:32:46.094Z"
             },
             "children": [
               {
@@ -816,7 +816,7 @@
                 "type": "Stack",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-27T14:08:46.897Z"
+                  "createdAt": "2026-01-27T14:32:46.094Z"
                 },
                 "children": [
                   {
@@ -824,7 +824,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.094Z",
                       "content": "Envoyez-nous un message",
                       "level": 2
                     }
@@ -834,7 +834,7 @@
                     "type": "Text",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.094Z",
                       "content": "Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge."
                     }
                   },
@@ -843,7 +843,7 @@
                     "type": "Button",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.094Z",
                       "label": "Email",
                       "action": "mailto:hello@codeforge.dev"
                     }
@@ -853,7 +853,7 @@
                     "type": "Section",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z"
+                      "createdAt": "2026-01-27T14:32:46.095Z"
                     },
                     "children": [
                       {
@@ -861,7 +861,7 @@
                         "type": "Stack",
                         "meta": {
                           "version": "1.0.0",
-                          "createdAt": "2026-01-27T14:08:46.897Z",
+                          "createdAt": "2026-01-27T14:32:46.095Z",
                           "gap": 6
                         },
                         "children": [
@@ -870,7 +870,7 @@
                             "type": "Select",
                             "meta": {
                               "version": "1.0.0",
-                              "createdAt": "2026-01-27T14:08:46.897Z",
+                              "createdAt": "2026-01-27T14:32:46.095Z",
                               "label": "Sujet de votre demande",
                               "options": [
                                 {
@@ -893,7 +893,7 @@
                             "type": "Textarea",
                             "meta": {
                               "version": "1.0.0",
-                              "createdAt": "2026-01-27T14:08:46.897Z",
+                              "createdAt": "2026-01-27T14:32:46.095Z",
                               "label": "Votre Message",
                               "placeholder": "Dites-nous tout...",
                               "rows": 6
@@ -904,7 +904,7 @@
                             "type": "Button",
                             "meta": {
                               "version": "1.0.0",
-                              "createdAt": "2026-01-27T14:08:46.897Z",
+                              "createdAt": "2026-01-27T14:32:46.095Z",
                               "label": "Envoyer le formulaire",
                               "action": "alert('Message envoyé !')"
                             }
@@ -927,7 +927,7 @@
         "type": "Page",
         "meta": {
           "version": "1.0.0",
-          "createdAt": "2026-01-27T14:08:46.897Z"
+          "createdAt": "2026-01-27T14:32:46.095Z"
         },
         "children": [
           {
@@ -935,7 +935,7 @@
             "type": "Hero",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z",
+              "createdAt": "2026-01-27T14:32:46.095Z",
               "title": "Exploration Géographique",
               "subtitle": "Visualisez des données massives en temps réel."
             }
@@ -945,7 +945,7 @@
             "type": "Section",
             "meta": {
               "version": "1.0.0",
-              "createdAt": "2026-01-27T14:08:46.897Z"
+              "createdAt": "2026-01-27T14:32:46.095Z"
             },
             "children": [
               {
@@ -953,7 +953,7 @@
                 "type": "Container",
                 "meta": {
                   "version": "1.0.0",
-                  "createdAt": "2026-01-27T14:08:46.897Z"
+                  "createdAt": "2026-01-27T14:32:46.095Z"
                 },
                 "children": [
                   {
@@ -961,7 +961,7 @@
                     "type": "Title",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.095Z",
                       "content": "Carte Interactive Streaming",
                       "level": 2
                     }
@@ -971,7 +971,7 @@
                     "type": "Map",
                     "meta": {
                       "version": "1.0.0",
-                      "createdAt": "2026-01-27T14:08:46.897Z",
+                      "createdAt": "2026-01-27T14:32:46.095Z",
                       "src": "https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson",
                       "controls": "zoom,layers,info",
                       "audioDescription": "Carte interactive des régions de France",

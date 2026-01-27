@@ -59,6 +59,10 @@ export const Page = createComponent({
     "section-py",
   ],
   template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id) => {
+    const cssPath = meta.cssPath || "style.css";
+    const inlineCss = meta.inlineCss ? `<style>${meta.inlineCss}</style>` : "";
+    const cssLink = meta.inlineCss ? "" : `<link rel="stylesheet" href="${cssPath}">`;
+
     return `
 <!DOCTYPE html>
 <html lang="fr" class="h-full">
@@ -66,7 +70,8 @@ export const Page = createComponent({
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${meta.appName || "Generated Page"}</title>
-    <link rel="stylesheet" href="/src/style.css">
+    ${cssLink}
+    ${inlineCss}
 </head>
 <body class="site-wrapper h-full" style="${styleVars}" ${meta.debug ? 'data-debug-theme="true"' : ""}>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>

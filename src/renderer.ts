@@ -20,7 +20,7 @@ export function render(node: Node<any, any>): string {
     throw new Error(`[CodeForge Renderer] Type de composant inconnu : ${node.type}`);
   }
 
-  // Traitement récursif des enfants
+  // Traitement récursive des enfants
   const childrenHTML = (node.children || []).map(render);
 
   // Appel du template du composant

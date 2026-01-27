@@ -123,21 +123,15 @@ export const Select = createComponent({
       ? `<option value="" disabled ${!meta.value ? "selected" : ""}>${meta.placeholder}</option>`
       : "";
 
-        const optionsHtml = options
+    const optionsHtml = options
 
-          .map(
+      .map((opt: SelectOption) => {
+        const selected = meta.value === opt.value ? " selected" : "";
 
-            (opt: SelectOption) => {
+        return `<option value="${opt.value}"${selected}>${opt.label}</option>`;
+      })
 
-              const selected = meta.value === opt.value ? " selected" : "";
-
-              return `<option value="${opt.value}"${selected}>${opt.label}</option>`;
-
-            }
-
-          )
-
-          .join("");
+      .join("");
 
     return `
       <div class="select-container" style="${styleVars}" ${a11yAttrs}>

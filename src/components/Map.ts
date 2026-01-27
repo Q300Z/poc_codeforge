@@ -53,26 +53,13 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
   }
 }
 
-// Chargement de la bibliothèque en mémoire une seule fois (Performance)
-let cachedLibContent = "";
-try {
-  const libPath = path.resolve(process.cwd(), "libs/streaming-map-nodraw.js");
-  if (fs.existsSync(libPath)) {
-    cachedLibContent = fs.readFileSync(libPath, "utf-8");
-  }
-} catch (_) {
-  console.error(
-    "[CodeForge Map] Impossible de charger la bibliothèque libs/streaming-map-nodraw.js"
-  );
-}
-
 /**
  * @constant Map
  * @description Composant de carte interactive utilisant streaming-map.
  */
 export const Map = createComponent({
   name: "Map",
-  version: "1.0.0",
+  version: "1.1.0",
   description: "Carte interactive haute performance capable de charger des GeoJSON massifs.",
   metaSchema: {
     src: {
@@ -91,20 +78,27 @@ export const Map = createComponent({
       type: "boolean",
       description: "Affiche un overlay de performance",
     },
+    libUrl: {
+      type: "string",
+      description: "URL de la bibliothèque streaming-map (défaut: ./libs/streaming-map-nodraw.js)",
+    },
   },
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
   template: (meta, _children, styleVars, a11yAttrs, id) => {
     const containerId = `map-container-${id}`;
+    const libUrl = meta.libUrl || "./libs/streaming-map-nodraw.js";
+    const inlineLib = meta.mapLibContent
+      ? `<script type="module">${meta.mapLibContent}</script>`
+      : `<script type="module" src="${libUrl}"></script>`;
 
     return `
 <div class="map-wrapper flex-shrink-0" style="${styleVars}" ${a11yAttrs}>
   <div id="${containerId}" style="width: 100%; height: 100%;"></div>
 </div>
+${inlineLib}
 <script type="module">
-  ${cachedLibContent}
-  
   (function() {
     const container = document.getElementById('${containerId}');
     if (container && !container.shadowRoot) {

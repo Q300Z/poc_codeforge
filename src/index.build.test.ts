@@ -2,17 +2,13 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { buildSite } from "./index.js";
 import fs from "fs";
 import path from "path";
-import { build as viteBuild } from "vite";
 
 // Mock dependencies
-vi.mock("vite", () => ({
-  build: vi.fn(),
-}));
 vi.mock("./setup.js", () => ({
   setupRegistry: vi.fn(),
 }));
 vi.mock("./renderer.js", () => ({
-  render: vi.fn(() => '<html><head><link rel="stylesheet" href="./assets/style.css"></head><body></body></html>'),
+  render: vi.fn(() => '<html><head><link rel="stylesheet" href="./style.css"></head><body></body></html>'),
 }));
 
 describe("buildSite", () => {
@@ -20,8 +16,9 @@ describe("buildSite", () => {
   let readFileSyncSpy: any;
   let writeFileSyncSpy: any;
   let mkdirSyncSpy: any;
-  let rmSyncSpy: any;
   let readdirSyncSpy: any;
+  let lstatSyncSpy: any;
+  let copyFileSyncSpy: any;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -30,18 +27,30 @@ describe("buildSite", () => {
     
     // Spying on fs methods
     existsSyncSpy = vi.spyOn(fs, "existsSync").mockImplementation((p: string) => {
-        if (p.includes("libs")) return true;
-        return true;
+        if (p.includes("libs") || p.includes("images") || p.endsWith("site.json") || p.endsWith(".css") || p.endsWith(".js")) return true;
+        return false;
     });
-    readFileSyncSpy = vi.spyOn(fs, "readFileSync");
+    readFileSyncSpy = vi.spyOn(fs, "readFileSync").mockImplementation((p: string) => {
+        if (p.endsWith("site.json")) return JSON.stringify({
+            meta: { appName: "Test" },
+            style: {},
+            pages: [{ slug: "index", content: {} }]
+        });
+        if (p.endsWith(".css")) return "body { color: red; }";
+        if (p.endsWith(".js")) return "console.log('lib');";
+        return "";
+    });
     writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
     mkdirSyncSpy = vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
-    rmSyncSpy = vi.spyOn(fs, "rmSync").mockImplementation(() => {});
     readdirSyncSpy = vi.spyOn(fs, "readdirSync").mockImplementation((p: string) => {
-        if (p.includes("libs")) return ["streaming-map-nodraw.js"];
+        if (p.includes("libs")) return ["lib.js"];
+        if (p.includes("images")) return ["img.png"];
         return [];
     });
-    vi.spyOn(fs, "copyFileSync").mockImplementation(() => {});
+    lstatSyncSpy = vi.spyOn(fs, "lstatSync").mockImplementation(() => ({
+        isDirectory: () => false
+    } as any));
+    copyFileSyncSpy = vi.spyOn(fs, "copyFileSync").mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -53,89 +62,38 @@ describe("buildSite", () => {
     await expect(buildSite("missing.json")).rejects.toThrow("JSON file not found");
   });
 
-  it("should parse CodeForge JSON and run Vite build", async () => {
-    readFileSyncSpy.mockReturnValue(JSON.stringify({
-      meta: { appName: "Test" },
-      style: {},
-      pages: [{ slug: "index", content: {} }]
-    }));
-
+  it("should generate static HTML and copy assets", async () => {
     await buildSite("site.json", "dist");
 
-    expect(readFileSyncSpy).toHaveBeenCalled();
-    expect(writeFileSyncSpy).toHaveBeenCalled(); // Writes html
-    expect(viteBuild).toHaveBeenCalled();
+    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("site.json"), "utf-8");
+    expect(writeFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("index.html"), expect.any(String));
+    expect(copyFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("style.css"), expect.stringContaining("dist/style.css"));
+    expect(copyFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("lib.js"), expect.stringContaining("dist/libs/lib.js"));
   });
 
-  it("should inline CSS and JS when inlineCss option is true", async () => {
-    const htmlContent = '<html><head><link rel="stylesheet" href="/assets/style.css"></head><body><script src="/assets/map.js"></script></body></html>';
-    const cssContent = '.body { color: red; }';
-    const jsContent = 'console.log("map loaded");';
+  it("should inline CSS and JS when inline option is true", async () => {
+    await buildSite("site.json", "dist", { inline: true });
 
-    // Mock sequence of reads: site.json -> style.css -> map.js -> index.html
-    readFileSyncSpy.mockImplementation((p: string) => {
-        if (p.endsWith("site.json")) return JSON.stringify({
-            meta: { appName: "Test" },
-            style: {},
-            pages: [{ slug: "index", content: {} }]
-        });
-        if (p.endsWith(".css")) return cssContent;
-        if (p.endsWith(".js") && p.includes("assets")) return jsContent;
-        if (p.endsWith(".html")) return htmlContent;
-        return "";
-    });
-    
-    readdirSyncSpy.mockImplementation((p: string) => {
-        if (p.includes("assets")) return ["style.css", "map.js"];
-        if (p.includes("libs")) return ["lib.js"];
-        return [];
-    });
-
-    await buildSite("site.json", "dist", { inlineCss: true });
-
-    // Verify index.html was written with inlined styles
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-        expect.stringContaining("index.html"),
-        expect.stringContaining(`<style>${cssContent}</style>`)
-    );
-    // Verify index.html was written with inlined scripts
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-        expect.stringContaining("index.html"),
-        expect.stringContaining(`<script type="module">${jsContent}</script>`)
-    );
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-        expect.stringContaining("index.html"),
-        expect.not.stringContaining('<link')
-    );
-    expect(rmSyncSpy).toHaveBeenCalledWith(expect.stringContaining("assets"), expect.anything());
+    // In static mode, the renderer is called. We verify that writeFileSync is called.
+    // The actual inlining logic depends on the renderer receiving mapLibContent and inlineCss
+    expect(writeFileSyncSpy).toHaveBeenCalled();
+    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("style.css"), "utf-8");
+    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("streaming-map-nodraw.js"), "utf-8");
   });
 
   it("should detect ScreenDraft format and transform it", async () => {
-    existsSyncSpy.mockReturnValue(true);
-    readFileSyncSpy.mockReturnValue(JSON.stringify({
-      meta: { appName: "SD" },
-      components: [] // ScreenDraft format
-    }));
-
-    // Spy on console to check detection message
-    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    readFileSyncSpy.mockImplementation((p: string) => {
+        if (p.endsWith("sd.json")) return JSON.stringify({
+            meta: { appName: "SD" },
+            components: [] // ScreenDraft format
+        });
+        return "";
+    });
+    existsSyncSpy.mockImplementation((p: string) => p.endsWith("sd.json") || p.includes("libs") || p.includes("images"));
 
     await buildSite("sd.json", "dist");
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Format ScreenDraft détecté"));
-    expect(viteBuild).toHaveBeenCalled();
-  });
-
-  it("should clean up temp files", async () => {
-    existsSyncSpy.mockReturnValue(true);
-    readFileSyncSpy.mockReturnValue(JSON.stringify({
-      meta: { appName: "Test" },
-      style: {},
-      pages: [{ slug: "cleanup", content: {} }]
-    }));
-
-    await buildSite("site.json");
-
-    expect(rmSyncSpy).toHaveBeenCalledWith(expect.stringContaining(".codeforge_tmp"), { recursive: true, force: true });
+    // Success if no error thrown and writeFileSync called
+    expect(writeFileSyncSpy).toHaveBeenCalled();
   });
 });

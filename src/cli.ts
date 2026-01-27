@@ -5,19 +5,20 @@ import path from "path";
 
 export function printHelp() {
   console.log(`
-🧱 CodeForge CLI - Moteur de rendu JSON → HTML
+🧱 CodeForge CLI - Générateur de Site Statique
 
 Usage:
   codeforge <json-path> [output-dir] [options]
 
 Options:
   -w, --watch    Relance le build automatiquement à chaque modification du JSON
-  -i, --inline   Injecte le CSS directement dans les fichiers HTML
+  -i, --inline   Injecte le CSS directement dans les fichiers HTML (mode autonome)
   -h, --help     Affiche cette aide
   -v, --version  Affiche la version
 
 Exemple:
-  codeforge data/site.json dist-site --watch --inline
+  codeforge data/site.json dist-static
+  codeforge data/site.json dist-static --inline
 `);
 }
 
@@ -38,13 +39,14 @@ export async function runCli(args: string[]) {
   }
 
   const jsonPath = filteredArgs[0];
-  const outDir = filteredArgs[1] || "dist-site";
+  const outDir = filteredArgs[1] || "dist-static";
   const absoluteJsonPath = path.resolve(process.cwd(), jsonPath);
 
   const runBuild = async () => {
     console.log(`\n[${new Date().toLocaleTimeString()}] 📦 Build en cours : ${jsonPath} -> ${outDir}...`);
     try {
-      await buildSite(jsonPath, outDir, { inlineCss: isInline });
+      const { buildSite } = await import("./index.js");
+      await buildSite(jsonPath, outDir, { inline: isInline });
       console.log("✨ Build réussi !");
     } catch (error) {
       console.error("❌ Build failed:", error instanceof Error ? error.message : error);

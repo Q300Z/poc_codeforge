@@ -29,7 +29,6 @@ export * from "./components/Textarea.js";
 export * from "./components/Title.js";
 export * from "./components/Video.js";
 
-import { build as viteBuild } from "vite";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -42,10 +41,14 @@ import { isScreenDraft } from "./utils/detection.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+/**
+ * Génère un site statique de manière autonome.
+ * Utilise des chemins relatifs et copie les assets bruts.
+ */
 export async function buildSite(
   jsonPath: string, 
-  outDir: string = "generated", 
-  options: { inlineCss?: boolean } = {}
+  outDir: string = "dist-static",
+  options: { inline?: boolean } = {}
 ) {
   setupRegistry();
   const absoluteJsonPath = path.resolve(process.cwd(), jsonPath);
@@ -60,18 +63,59 @@ export async function buildSite(
   let siteData: SiteNode;
 
   if (isScreenDraft(jsonContent)) {
-    console.log("ℹ️ Format ScreenDraft détecté. Transformation automatique...");
     siteData = ScreenDraftAdapter.transform(jsonContent);
   } else {
     siteData = jsonContent;
   }
-  
-  const input: Record<string, string> = {};
-  const tempFiles: string[] = [];
 
+  if (!fs.existsSync(absoluteOutDir)) fs.mkdirSync(absoluteOutDir, { recursive: true });
+
+  // 1. Gestion des dossiers d'assets indispensables (libs, images)
+  const foldersToCopy = ["libs", "images"];
+  for (const folder of foldersToCopy) {
+    const src = path.resolve(process.cwd(), folder);
+    if (fs.existsSync(src)) {
+      copyFolderSync(src, path.join(absoluteOutDir, folder));
+    }
+  }
+
+  // 2. Gestion du style CSS (Copie ou Lecture pour Inlining)
+  const distCss = path.resolve(__dirname, "style.css");
+  const srcCss = path.resolve(process.cwd(), "src/style.css");
+  const cssSrc = fs.existsSync(distCss) ? distCss : srcCss;
+
+  let cssContent = "";
+  if (fs.existsSync(cssSrc)) {
+    if (options.inline) {
+      cssContent = fs.readFileSync(cssSrc, "utf-8");
+    } else {
+      fs.copyFileSync(cssSrc, path.join(absoluteOutDir, "style.css"));
+    }
+  }
+
+  // 3. Gestion du JS (Lecture pour Inlining si demandé)
+  let mapLibContent = "";
+  if (options.inline) {
+    const distMapLib = path.resolve(__dirname, "libs/streaming-map-nodraw.js");
+    const srcMapLib = path.resolve(process.cwd(), "libs/streaming-map-nodraw.js");
+    const mapLibSrc = fs.existsSync(distMapLib) ? distMapLib : srcMapLib;
+    if (fs.existsSync(mapLibSrc)) {
+      mapLibContent = fs.readFileSync(mapLibSrc, "utf-8");
+    }
+  }
+
+  // 4. Rendu des pages
   for (const page of siteData.pages) {
     page.content.meta = page.content.meta || {};
     page.content.meta.appName = siteData.meta.appName;
+    page.content.meta.cssPath = "./style.css";
+    
+    // Injection du CSS et JS en ligne si demandé
+    if (options.inline) {
+      page.content.meta.inlineCss = cssContent;
+      page.content.meta.mapLibContent = mapLibContent;
+    }
+    
     page.content.style = { ...siteData.style, ...page.content.style };
 
     if (page.content.meta) {
@@ -79,104 +123,40 @@ export async function buildSite(
       if (siteData.layout?.footer) page.content.meta.renderedFooter = render(siteData.layout.footer);
     }
 
-    const html = render(page.content);
-    const fileName = `${page.slug}.html`;
-    
-    // Création d'un dossier temporaire pour le build
-    const tempDir = path.resolve(process.cwd(), ".codeforge_tmp");
-    if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
-
-    // Copie de libs dans le dossier temporaire pour que Vite puisse le résoudre
-    const tempLibsDir = path.join(tempDir, "libs");
-    const libsSrc = path.resolve(process.cwd(), "libs");
-    if (fs.existsSync(libsSrc)) {
-      if (!fs.existsSync(tempLibsDir)) fs.mkdirSync(tempLibsDir, { recursive: true });
-      const files = fs.readdirSync(libsSrc);
-      for (const file of files) {
-        fs.copyFileSync(path.join(libsSrc, file), path.join(tempLibsDir, file));
-      }
-    }
-
-    const filePath = path.join(tempDir, fileName);
-    fs.writeFileSync(filePath, html);
-    
-    input[page.slug] = filePath;
-    tempFiles.push(tempDir); // On stocke le dossier pour le supprimer à la fin
-  }
-
-  try {
-    await viteBuild({
-      configFile: false,
-      root: path.resolve(process.cwd(), ".codeforge_tmp"),
-      // On aide Vite à trouver les assets (style.css) qui sont à la racine du projet
-      resolve: {
-        alias: {
-          "/src": path.resolve(process.cwd(), "src"),
-        },
-      },
-      build: {
-        outDir: absoluteOutDir,
-        emptyOutDir: true,
-        rollupOptions: { input },
-      },
-      logLevel: "warn",
+    // Propagation récursive des métadonnées globales aux enfants
+    propagateMeta(page.content, { 
+      mapLibContent: options.inline ? mapLibContent : undefined 
     });
 
-    // Copie du dossier images vers la sortie s'il existe à la racine (APRES le build Vite)
-    const imagesSrc = path.resolve(process.cwd(), "images");
-    const imagesDest = path.join(absoluteOutDir, "images");
-    if (fs.existsSync(imagesSrc)) {
-      if (!fs.existsSync(imagesDest)) fs.mkdirSync(imagesDest, { recursive: true });
-      const imgFiles = fs.readdirSync(imagesSrc);
-      for (const file of imgFiles) {
-        fs.copyFileSync(path.join(imagesSrc, file), path.join(imagesDest, file));
-      }
-    }
+    const html = render(page.content);
+    fs.writeFileSync(path.join(absoluteOutDir, `${page.slug}.html`), html);
+  }
+}
 
-    if (options.inlineCss) {
-      const assetsDir = path.join(absoluteOutDir, "assets");
-      if (fs.existsSync(assetsDir)) {
-        const cssFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith(".css"));
-        const jsFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith(".js"));
-        
-        let cssContent = "";
-        for (const file of cssFiles) {
-          cssContent += fs.readFileSync(path.join(assetsDir, file), "utf-8");
-        }
-
-        for (const page of siteData.pages) {
-          const htmlPath = path.join(absoluteOutDir, `${page.slug}.html`);
-          if (fs.existsSync(htmlPath)) {
-            let html = fs.readFileSync(htmlPath, "utf-8");
-            
-            // 1. Inlining CSS
-            if (cssContent) {
-              html = html.replace(/<link[^>]*rel="stylesheet"[^>]*>/g, "");
-              html = html.replace("</head>", `<style>${cssContent}</style></head>`);
-            }
-
-            // 2. Inlining JS
-            for (const jsFile of jsFiles) {
-              // Regex plus souple pour capturer les balises générées par Vite
-              const scriptRegex = new RegExp(`<script[^>]*src="[^"]*\\/assets\\/${jsFile.replace(".", "\\.")}"[^>]*><\\/script>`, "g");
-              if (scriptRegex.test(html)) {
-                const jsContent = fs.readFileSync(path.join(assetsDir, jsFile), "utf-8");
-                html = html.replace(scriptRegex, `<script type="module">${jsContent}</script>`);
-              }
-            }
-
-            fs.writeFileSync(htmlPath, html);
-          }
-        }
-        // Nettoyage final du dossier assets
-        fs.rmSync(assetsDir, { recursive: true, force: true });
-      }
-    }
-
-  } finally {
-    // Nettoyage récursif du dossier temporaire
-    for (const dir of [...new Set(tempFiles)]) {
-      if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true, force: true });
+/**
+ * Propage récursivement des métadonnées à tous les enfants d'un nœud.
+ */
+function propagateMeta(node: any, metaToPass: Record<string, any>) {
+  node.meta = { ...node.meta, ...metaToPass };
+  if (node.children && Array.isArray(node.children)) {
+    for (const child of node.children) {
+      propagateMeta(child, metaToPass);
     }
   }
+}
+
+/**
+ * Utilitaire de copie récursive de dossier.
+ */
+function copyFolderSync(from: string, to: string) {
+  if (!fs.existsSync(to)) fs.mkdirSync(to, { recursive: true });
+  fs.readdirSync(from).forEach(element => {
+    const srcPath = path.join(from, element);
+    const destPath = path.join(to, element);
+    if (fs.lstatSync(srcPath).isDirectory()) {
+      copyFolderSync(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
 }
