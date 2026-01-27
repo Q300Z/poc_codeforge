@@ -23,20 +23,25 @@ export * from "./components/Text.js";
 export * from "./components/Title.js";
 export * from "./components/Video.js";
 
-import { build as viteBuild } from "vite";
+import { build as viteBuild, PluginOption } from "vite";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { setupRegistry } from "./setup.js";
 import { render } from "./renderer.js";
 import { SiteNode } from "./types.js";
-import { ScreenDraftAdapter, ScreenDraftData } from "./adapter/screendraft.js";
+import { ScreenDraftAdapter } from "./adapter/screendraft.js";
 import { isScreenDraft } from "./utils/detection.js";
+import { viteSingleFile } from "vite-plugin-singlefile";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function buildSite(jsonPath: string, outDir: string = "generated") {
+export async function buildSite(
+  jsonPath: string, 
+  outDir: string = "generated", 
+  options: { inlineCss?: boolean } = {}
+) {
   setupRegistry();
   const absoluteJsonPath = path.resolve(process.cwd(), jsonPath);
   const absoluteOutDir = path.resolve(process.cwd(), outDir);
@@ -83,6 +88,11 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
     tempFiles.push(tempDir); // On stocke le dossier pour le supprimer à la fin
   }
 
+  const plugins: PluginOption[] = [];
+  if (options.inlineCss) {
+    plugins.push(viteSingleFile());
+  }
+
   try {
     await viteBuild({
       configFile: false,
@@ -93,6 +103,7 @@ export async function buildSite(jsonPath: string, outDir: string = "generated") 
           "/src": path.resolve(process.cwd(), "src"),
         },
       },
+      plugins,
       build: {
         outDir: absoluteOutDir,
         emptyOutDir: true,

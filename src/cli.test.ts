@@ -36,12 +36,22 @@ describe("CLI", () => {
 
   it("should run buildSite with correct arguments", async () => {
     await runCli(["data.json", "output"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "output");
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "output", { inlineCss: false });
+  });
+
+  it("should handle --inline flag", async () => {
+    await runCli(["data.json", "--inline"]);
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: true });
+  });
+
+  it("should handle -i flag", async () => {
+    await runCli(["data.json", "-i"]);
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: true });
   });
 
   it("should use default output directory if not provided", async () => {
     await runCli(["data.json"]);
-    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site");
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-site", { inlineCss: false });
   });
 
   it("should handle watch mode", async () => {

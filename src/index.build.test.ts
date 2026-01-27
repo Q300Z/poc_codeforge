@@ -59,6 +59,21 @@ describe("buildSite", () => {
     expect(viteBuild).toHaveBeenCalled();
   });
 
+  it("should use viteSingleFile plugin when inlineCss is true", async () => {
+    existsSyncSpy.mockReturnValue(true);
+    readFileSyncSpy.mockReturnValue(JSON.stringify({
+      meta: { appName: "Test" },
+      style: {},
+      pages: [{ slug: "index", content: {} }]
+    }));
+
+    await buildSite("site.json", "dist", { inlineCss: true });
+
+    expect(viteBuild).toHaveBeenCalledWith(expect.objectContaining({
+      plugins: expect.arrayContaining([expect.anything()])
+    }));
+  });
+
   it("should detect ScreenDraft format and transform it", async () => {
     existsSyncSpy.mockReturnValue(true);
     readFileSyncSpy.mockReturnValue(JSON.stringify({

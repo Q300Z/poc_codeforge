@@ -84,6 +84,7 @@
     "typescript-eslint": "^8.53.1",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-singlefile": "^2.3.0",
     "vitest": "^4.0.18",
     "vitest-axe": "^0.1.0"
   }

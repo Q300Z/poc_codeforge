@@ -12,11 +12,12 @@ Usage:
 
 Options:
   -w, --watch    Relance le build automatiquement à chaque modification du JSON
+  -i, --inline   Injecte le CSS directement dans les fichiers HTML
   -h, --help     Affiche cette aide
   -v, --version  Affiche la version
 
 Exemple:
-  codeforge data/site.json dist-site --watch
+  codeforge data/site.json dist-site --watch --inline
 `);
 }
 
@@ -28,7 +29,8 @@ export async function runCli(args: string[]) {
 
   // Extraction des options
   const isWatch = args.includes("-w") || args.includes("--watch");
-  const filteredArgs = args.filter(a => !["-w", "--watch", "-h", "--help"].includes(a));
+  const isInline = args.includes("-i") || args.includes("--inline");
+  const filteredArgs = args.filter(a => !["-w", "--watch", "-i", "--inline", "-h", "--help"].includes(a));
 
   if (filteredArgs.length < 1) {
     printHelp();
@@ -42,7 +44,7 @@ export async function runCli(args: string[]) {
   const runBuild = async () => {
     console.log(`\n[${new Date().toLocaleTimeString()}] 📦 Build en cours : ${jsonPath} -> ${outDir}...`);
     try {
-      await buildSite(jsonPath, outDir);
+      await buildSite(jsonPath, outDir, { inlineCss: isInline });
       console.log("✨ Build réussi !");
     } catch (error) {
       console.error("❌ Build failed:", error instanceof Error ? error.message : error);
