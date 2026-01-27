@@ -3,7 +3,7 @@ import { buildSite } from "./index.js";
 import fs from "fs";
 import path from "path";
 
-function printHelp() {
+export function printHelp() {
   console.log(`
 🧱 CodeForge CLI - Moteur de rendu JSON → HTML
 
@@ -20,12 +20,10 @@ Exemple:
 `);
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-  
+export async function runCli(args: string[]) {
   if (args.includes("-h") || args.includes("--help")) {
     printHelp();
-    process.exit(0);
+    return;
   }
 
   // Extraction des options
@@ -34,7 +32,7 @@ async function main() {
 
   if (filteredArgs.length < 1) {
     printHelp();
-    process.exit(1);
+    throw new Error("Missing arguments");
   }
 
   const jsonPath = filteredArgs[0];
@@ -72,4 +70,8 @@ async function main() {
   }
 }
 
-main();
+// Execution seulement si appelé directement (pas importé)
+import { fileURLToPath } from "url";
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  runCli(process.argv.slice(2)).catch(() => process.exit(1));
+}

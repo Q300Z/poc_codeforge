@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
+
 import { isScreenDraft } from "./detection.js";
 
 describe("Auto-detection Logic", () => {
   it("should detect ScreenDraft format", () => {
     const screenDraftData = {
       meta: { appName: "Test" },
-      components: [{ type: "button", id: "1" }]
+      components: [{ type: "button", id: "1" }],
     };
     expect(isScreenDraft(screenDraftData)).toBe(true);
   });
@@ -13,7 +14,7 @@ describe("Auto-detection Logic", () => {
   it("should NOT detect CodeForge format as ScreenDraft", () => {
     const codeForgeData = {
       meta: { appName: "Test" },
-      pages: [{ slug: "index", content: {} }]
+      pages: [{ slug: "index", content: {} }],
     };
     expect(isScreenDraft(codeForgeData)).toBe(false);
   });
