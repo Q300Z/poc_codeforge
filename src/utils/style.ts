@@ -14,6 +14,8 @@ const PX_PROPERTIES = [
   "left",
   "bottom",
   "right",
+  "x",
+  "y",
   "gap",
   "stack-gap",
   "section-py",
@@ -35,6 +37,14 @@ function normalizeValue(key: string, value: string | number): string {
 }
 
 /**
+ * Mappe les propriétés CodeForge vers les propriétés CSS standards
+ */
+const PROPERTY_MAP: Record<string, string> = {
+  x: "left",
+  y: "top",
+};
+
+/**
  * Transforme un objet de style en une chaîne d'attributs style HTML.
  * - Les propriétés de Layout (top, left, etc.) sont appliquées directement.
  * - Les Design Tokens et variantes responsives sont appliqués comme variables CSS.
@@ -44,15 +54,18 @@ export function getStyleVariables(style?: Record<string, any>): string {
 
   return Object.entries(style)
     .map(([key, value]) => {
-      const normalized = normalizeValue(key, value);
+      const normalizedValue = normalizeValue(key, value);
+
+      // Mapping des alias (x -> left, y -> top)
+      const cssKey = PROPERTY_MAP[key] || key;
 
       // Si c'est une propriété de layout pure (sans suffixe comme -md)
-      if (LAYOUT_UTILITIES.includes(key)) {
-        return `${key}: ${normalized};`;
+      if (LAYOUT_UTILITIES.includes(key) || LAYOUT_UTILITIES.includes(cssKey)) {
+        return `${cssKey}: ${normalizedValue};`;
       }
 
       // Sinon, c'est un token ou une variante responsive -> Variable CSS
-      return `--${key}: ${normalized};`;
+      return `--${key}: ${normalizedValue};`;
     })
     .join(" ");
 }

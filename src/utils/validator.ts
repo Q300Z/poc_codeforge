@@ -18,6 +18,8 @@ export const LAYOUT_UTILITIES = [
   "left",
   "bottom",
   "right",
+  "x", // Alias pour left
+  "y", // Alias pour top
   "z-index",
   "overflow",
   "overflow-x",

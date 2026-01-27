@@ -165,10 +165,8 @@ const canvasPage = new PageBuilder("canvas-page")
   )
   .addChild(
     new BoxBuilder("abs-box-1")
+      .withXY(50, 250) // x=50, y=250
       .withStyle({
-        position: "absolute",
-        top: 250,
-        left: 50,
         width: 150,
         height: 150,
         "box-bg": "#818cf8"
@@ -176,34 +174,27 @@ const canvasPage = new PageBuilder("canvas-page")
   )
   .addChild(
     new BoxBuilder("abs-box-2")
+      .withXY(150, 300, 10) // x=150, y=300, z=10
       .withStyle({
-        position: "absolute",
-        top: 300,
-        left: 150,
         width: 100,
         height: 100,
         "box-bg": "#fbbf24",
-        "z-index": 10
       })
   )
   .addChild(
     new TitleBuilder("abs-title")
       .withContent("Placement Libre")
       .withLevel(3)
+      .withAbsolutePosition(220, undefined, 100) // y=220, x=Calculé (right: 100)
       .withStyle({
-        position: "absolute",
-        top: 220,
-        right: 100,
         "title-text": "#1e1b4b"
       })
   )
   .addChild(
     new TextBuilder("abs-text")
       .withContent("Ce texte est positionné dynamiquement via des coordonnées CSS absolues.")
+      .withAbsolutePosition(undefined, 50, undefined, 50) // x=50, bottom=50
       .withStyle({
-        position: "absolute",
-        bottom: 50,
-        left: 50,
         "max-width": "300px",
         "text-color": "#4338ca"
       })
@@ -212,37 +203,26 @@ const canvasPage = new PageBuilder("canvas-page")
     new ButtonBuilder("abs-btn")
       .withLabel("Action Flottante")
       .withAction("alert('Cliqué !')")
-      .withStyle({
-        position: "absolute",
-        top: 400,
-        right: 50,
-        "z-index": 20
-      })
+      .withAbsolutePosition(400, undefined, 50, undefined, 20) // y=400, right=50
   )
   .addChild(
     new ImageBuilder("abs-img")
       .withSrc("https://picsum.photos/seed/canvas/300/200")
       .withAlt("Image flottante")
+      .withAbsolutePosition(50, undefined, 50, undefined, 5)
       .withStyle({
-        position: "absolute",
-        top: 50,
-        right: 50,
         width: 200,
         "border-radius": "20px",
-        "z-index": 5
       })
   )
   .addChild(
     new VideoBuilder("abs-video")
       .withSrc("https://www.w3schools.com/html/mov_bbb.mp4")
       .withOptions({ controls: true, muted: true, autoplay: true, loop: true })
+      .withAbsolutePosition(undefined, undefined, 20, 20, 15)
       .withStyle({
-        position: "absolute",
-        bottom: 20,
-        right: 20,
         width: 250,
         "border-radius": "10px",
-        "z-index": 15
       })
   );
 

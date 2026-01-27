@@ -45,15 +45,9 @@ CodeForge intègre l'accessibilité nativement. Ces clés dans `meta` sont tradu
 
 ## 🎨 Système de Style
 
-### 1. Utilitaires de Layout (Disponibles partout)
-S'appliquent directement en tant que styles CSS natifs :
-- **Dimensions** : `width`, `height`, `min-width`, `min-height`, `max-width`, `max-height`.
-- **Position** : `position` (ex: "absolute"), `top`, `left`, `right`, `bottom`, `z-index`, `transform`.
-- **Comportement** : `overflow`, `overflow-x`, `overflow-y`, `flex-shrink`, `flex-grow`, `opacity`, `border-radius`.
+CodeForge dispose d'un système de style avancé combinant des utilitaires de layout natifs (responsives) et des Design Tokens spécifiques aux composants.
 
-### 2. Normalisation des Unités
-- **Nombres** : Ajout automatique de `px` (ex: `250` -> `250px`).
-- **Chaînes** : Unités libres (ex: `"50%"` ou `"2rem"`).
+👉 **[Consulter le Guide de Style Complet (STYLE_GUIDE.md)](./STYLE_GUIDE.md)**
 
 ---
 
@@ -151,7 +145,7 @@ Composant de titre sémantique (H1-H6) avec tailles responsives.
 | `level` | `number` | Non | Niveau sémantique 1 à 6 (Défaut: 1). |
 
 **Tokens de Style**
-`font-size`, `text-color`, `bg-color`, `font-weight`, `text-align`.
+`font-size`, `title-text`, `title-bg`, `font-weight`, `text-align`.
 
 **Exemple**
 ```json
@@ -166,7 +160,7 @@ Composant de titre sémantique (H1-H6) avec tailles responsives.
   },
   "style": {
     "text-align": "center",
-    "text-color": "#1f2937"
+    "title-text": "#1f2937"
   }
 }
 ```
@@ -207,7 +201,7 @@ Bloc de texte courant.
 | `action` | `string` | Non | URL (lien) ou script JS (onclick). |
 
 **Tokens de Style**
-`btn-bg`, `btn-text`, `bg-color` (legacy), `text-color` (legacy).
+`btn-bg`, `btn-text`.
 
 **Exemple**
 ```json
@@ -228,7 +222,7 @@ Bloc de texte courant.
 Div simple pour la structure ou le background.
 
 **Tokens de Style**
-`bg-color`, `width`, `height`, `border-radius`, `flex-shrink`.
+`box-bg`.
 
 **Exemple**
 ```json
@@ -242,7 +236,7 @@ Div simple pour la structure ou le background.
   "style": {
     "width": 100,
     "height": 100,
-    "bg-color": "#ff0000"
+    "box-bg": "#ff0000"
   }
 }
 ```
@@ -356,7 +350,7 @@ Affichage d'image optimisé.
 | `alt` | `string` | Oui | Texte alternatif (Accessibilité). |
 
 **Tokens de Style**
-`border-radius`, `object-fit`.
+`object-fit`.
 
 **Exemple**
 ```json
@@ -389,7 +383,7 @@ Lecteur vidéo HTML5.
 | `muted` | `boolean` | Non | Muet (Défaut: false). |
 
 **Tokens de Style**
-`border-radius`.
+`object-fit`.
 
 **Exemple**
 ```json
@@ -417,7 +411,7 @@ Carrousel d'images interactif.
 | `interval` | `number` | Non | Temps en ms (Défaut: 5000). |
 
 **Tokens de Style**
-`height`, `carousel-color`, `border-radius`.
+`carousel-color`.
 
 **Exemple**
 ```json

@@ -87,7 +87,7 @@ export const Hero = createComponent({
         createdAt: meta.createdAt,
       },
       [],
-      { "text-color": "var(--hero-text, inherit)" },
+      { "title-text": "var(--hero-text, inherit)" },
       `${id}-title`
     );
 

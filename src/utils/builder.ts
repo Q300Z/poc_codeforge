@@ -73,6 +73,50 @@ export class NodeBuilder<TMeta = Record<string, any>, TStyle = Record<string, an
     return this;
   }
 
+  /**
+   * Helper pour le positionnement absolu.
+   * @param top Position top (px ou string)
+   * @param left Position left (px ou string)
+   * @param right Position right (px ou string)
+   * @param bottom Position bottom (px ou string)
+   * @param zIndex Z-Index
+   */
+  withAbsolutePosition(
+    top?: number | string,
+    left?: number | string,
+    right?: number | string,
+    bottom?: number | string,
+    zIndex?: number
+  ): this {
+    this.node.style = {
+      ...this.node.style,
+      position: "absolute",
+      top,
+      left,
+      right,
+      bottom,
+      "z-index": zIndex,
+    };
+    return this;
+  }
+
+  /**
+   * Helper pour le positionnement par coordonnées X, Y.
+   * @param x Position horizontale (équivalent à left)
+   * @param y Position verticale (équivalent à top)
+   * @param zIndex Z-Index
+   */
+  withXY(x: number | string, y: number | string, zIndex?: number): this {
+    this.node.style = {
+      ...this.node.style,
+      position: "absolute",
+      x,
+      y,
+      "z-index": zIndex,
+    };
+    return this;
+  }
+
   /** Définit la version de l'instance. */
   withVersion(version: string): this {
     this.node.meta.version = version;
