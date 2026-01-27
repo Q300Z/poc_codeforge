@@ -20,6 +20,7 @@ const PX_PROPERTIES = [
   "stack-gap",
   "section-py",
   "border-radius",
+  "font-size",
 ];
 
 /**
@@ -53,8 +54,14 @@ export function getStyleVariables(style?: Record<string, any>): string {
   if (!style) return "";
 
   return Object.entries(style)
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
     .map(([key, value]) => {
-      const normalizedValue = normalizeValue(key, value);
+      let normalizedValue = normalizeValue(key, value);
+
+      // Sécurité : on retire un éventuel point-virgule à la fin de la valeur pour éviter les doubles ;;
+      if (typeof normalizedValue === "string" && normalizedValue.endsWith(";")) {
+        normalizedValue = normalizedValue.slice(0, -1);
+      }
 
       // Mapping des alias (x -> left, y -> top)
       const cssKey = PROPERTY_MAP[key] || key;
@@ -67,5 +74,6 @@ export function getStyleVariables(style?: Record<string, any>): string {
       // Sinon, c'est un token ou une variante responsive -> Variable CSS
       return `--${key}: ${normalizedValue};`;
     })
-    .join(" ");
+    .join(" ")
+    .trim();
 }

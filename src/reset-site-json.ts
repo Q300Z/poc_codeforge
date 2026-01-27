@@ -9,6 +9,8 @@ import {
   ButtonBuilder,
   CarouselBuilder,
   ContainerBuilder,
+  FormBuilder,
+  FormFieldBuilder,
   GridBuilder,
   HeroBuilder,
   ImageBuilder,
@@ -21,6 +23,7 @@ import {
   TitleBuilder,
   VideoBuilder,
 } from "./index.js";
+import { Placeholder } from "./utils/placeholder.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -146,9 +149,9 @@ const layoutsPage = new PageBuilder("layouts-page")
         new TitleBuilder("title-h6").withLevel(6).withContent("Titre Niveau 6")
       ).addChild(new TitleBuilder("carousel-title").withLevel(2).withContent("Courousel")).addChild(
         new CarouselBuilder("sample-carousel")
-          .addItem("https://picsum.photos/seed/pic1/800/400", "Image Aléatoire 1", "Première image du carrousel")
-          .addItem("https://picsum.photos/seed/pic2/800/400", "Image Aléatoire 2", "Deuxième image du carrousel")
-          .addItem("https://picsum.photos/seed/pic3/800/400", "Image Aléatoire 3", "Troisième image du carrousel")
+          .addItem(Placeholder.landscape("large", "Slide 1"), "Image Aléatoire 1", "Première image du carrousel")
+          .addItem(Placeholder.landscape("large", "Slide 2"), "Image Aléatoire 2", "Deuxième image du carrousel")
+          .addItem(Placeholder.landscape("large", "Slide 3"), "Image Aléatoire 3", "Troisième image du carrousel")
           .withOptions(true, 4000)  
       )
     )
@@ -209,7 +212,7 @@ const canvasPage = new PageBuilder("canvas-page")
   )
   .addChild(
     new ImageBuilder("abs-img")
-      .withSrc("https://picsum.photos/seed/canvas/300/200")
+      .withSrc(Placeholder.landscape("small", "Canvas Landscape"))
       .withAlt("Image flottante")
       .withAbsolutePosition(50, undefined, 50, undefined, 5)
       .withStyle({
@@ -260,7 +263,7 @@ const mediaPage = new PageBuilder("media-page")
         .withGap(8)
         .addChild(
           new ImageBuilder("demo-image")
-            .withSrc("https://picsum.photos/seed/codeforge/800/600")
+            .withSrc(Placeholder.landscape("large", "Media Showcase"))
             .withAlt("Une image de démonstration générée aléatoirement")
             .withAudioDescription("Image décorative montrant la puissance du rendu visuel")
             .withStyle({ "border-radius": "12px" })
@@ -299,6 +302,12 @@ const contactPage = new PageBuilder("contact-page")
         new TextBuilder("contact-desc").withContent("Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge.")
       ).addChild(
         new ButtonBuilder("mail-btn").withLabel("Email").withAction("mailto:hello@codeforge.dev")
+      ).addChild(
+        new FormBuilder("contact-form")
+          .withButtonText("Envoyer le message")
+          .addChild(new FormFieldBuilder("f-name").withLabel("Nom complet").withPlaceholder("Jean Dupont").withRequired())
+          .addChild(new FormFieldBuilder("f-email").withLabel("Email").withType("email").withPlaceholder("jean@exemple.com").withRequired())
+          .addChild(new FormFieldBuilder("f-msg").withLabel("Message").withType("textarea").withPlaceholder("Comment pouvons-nous vous aider ?"))
       )
     )
   );

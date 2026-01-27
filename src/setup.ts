@@ -3,6 +3,8 @@ import { Box } from "./components/Box.js";
 import { Button } from "./components/Button.js";
 import { Carousel } from "./components/Carousel.js";
 import { Container } from "./components/Container.js";
+import { Form } from "./components/Form.js";
+import { FormField } from "./components/FormField.js";
 import { Grid } from "./components/Grid.js";
 import { Hero } from "./components/Hero.js";
 import { Image } from "./components/Image.js";
@@ -21,6 +23,8 @@ export function setupRegistry() {
   registry.Hero = Hero;
   registry.Button = Button;
   registry.Carousel = Carousel;
+  registry.Form = Form;
+  registry.FormField = FormField;
   registry.Grid = Grid;
   registry.Map = Map;
   registry.Section = Section;

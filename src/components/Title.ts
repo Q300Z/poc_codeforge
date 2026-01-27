@@ -84,7 +84,7 @@ export const Title = createComponent({
 
     return `
       <${tag} 
-        style="${styleVars} font-size: var(--font-size, ${defaultSize}); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
+        style="${styleVars}${styleVars.endsWith(";") ? "" : ";"} font-size: var(--font-size, ${defaultSize}); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
         class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >

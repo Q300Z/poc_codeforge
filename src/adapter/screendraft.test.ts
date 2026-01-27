@@ -1,8 +1,14 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
+import { render } from "../renderer.js";
+import { setupRegistry } from "../setup.js";
 import { ScreenDraftAdapter, ScreenDraftData } from "./screendraft.js";
 
 describe("ScreenDraftAdapter", () => {
+  beforeEach(() => {
+    setupRegistry();
+  });
+
   const mockData: ScreenDraftData = {
     meta: {
       appName: "TestApp",
@@ -80,6 +86,17 @@ describe("ScreenDraftAdapter", () => {
         textColor: "white",
       },
       {
+        id: "form-1",
+        type: "form",
+        x: 0,
+        y: 0,
+        width: 400,
+        height: 300,
+        formButtonText: "Send Us",
+        backgroundColor: "#fff",
+        formFields: [{ id: "field-1", label: "Name", type: "text", placeholder: "Name" }],
+      },
+      {
         id: "map-1",
         type: "map",
         x: 0,
@@ -132,7 +149,7 @@ describe("ScreenDraftAdapter", () => {
 
     expect(img).toBeDefined();
     expect(img.type).toBe("Image");
-    expect(img.meta.src).toBe("pic.jpg");
+    expect(img.meta.src).toBe("https://placehold.net/500x300.png");
     expect(img.meta.alt).toBe("Alt Text");
     expect(img.style["object-fit"]).toBe("cover");
   });
@@ -174,6 +191,19 @@ describe("ScreenDraftAdapter", () => {
     expect(nav.style["appbar-text"]).toBe("white");
   });
 
+  it("should transform Form component", () => {
+    const site = ScreenDraftAdapter.transform(mockData);
+    const page = site.pages[0].content;
+    const form = page.children.find((c: any) => c.id === "form-1");
+
+    expect(form).toBeDefined();
+    expect(form.type).toBe("Form");
+    expect(form.meta.buttonText).toBe("Send Us");
+    expect(form.children).toHaveLength(1);
+    expect(form.children[0].type).toBe("FormField");
+    expect(form.children[0].meta.label).toBe("Name");
+  });
+
   it("should transform Map component", () => {
     const site = ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
@@ -183,5 +213,30 @@ describe("ScreenDraftAdapter", () => {
     expect(map.type).toBe("Map");
     expect(map.style.width).toBe(600);
     expect(map.style["map-height"]).toBe(400);
+  });
+
+  describe("HTML Generation", () => {
+    it("should render full HTML correctly from ScreenDraft data", () => {
+      const site = ScreenDraftAdapter.transform(mockData);
+      const html = render(site.pages[0].content);
+
+      // Verify basic structure
+      expect(html).toContain("<!DOCTYPE html>");
+
+      // Verify Title
+      expect(html).toContain("Hello");
+
+      // Verify Form and Fields
+      expect(html).toContain("<form");
+      expect(html).toContain("Send Us");
+      expect(html).toContain('type="text"');
+
+      // Verify Navbar (AppBar)
+      expect(html).toContain("<nav");
+      expect(html).toContain("TestLogo");
+
+      // Verify Map
+      expect(html).toContain("const shadow = container.attachShadow({mode: 'open'});");
+    });
   });
 });

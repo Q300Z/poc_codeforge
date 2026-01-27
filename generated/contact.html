@@ -59,30 +59,78 @@
       </script>
     </nav></header>
     <main class="main-content w-full max-w-none">
-    <section class="hero-section" style="" id="hero-home" data-component-version="1.0.0"  >
+    <section class="hero-section" style="" id="contact-hero" data-component-version="1.0.0"  >
       <div class="hero-content">
         
       <h1 
         style="--title-text: var(--hero-text, inherit); font-size: var(--font-size, clamp(2.25rem, 5vw + 1rem, 3.75rem)); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
         class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
-        id="hero-home-title" data-component-version="1.1.0"  
+        id="contact-hero-title" data-component-version="1.1.0"  
       >
-        Bienvenue
+        Contact
       </h1>
     
         <div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">
       <p 
         style="" 
         class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
-        id="hero-home-subtitle" data-component-version="1.0.0"  
+        id="contact-hero-subtitle" data-component-version="1.0.0"  
       >
-        Découvrez la puissance des Builders typés.
+        Parlons ensemble.
       </p>
     </div>
       </div>
     </section>
-    <div style="" class="container-center" id="cta" data-component-version="1.0.0"  >
-      <div style="" class="flex flex-col gap-6" id="s" data-component-version="1.0.0"  ><a href="layouts.html" style="" class="btn-base" id="b" data-component-version="1.3.0" aria-label="Naviguer vers la page layouts" >Voir les Layouts</a></div>
+    <div style="" class="container-center" id="contact-content" data-component-version="1.0.0"  >
+      <div style="" class="flex flex-col gap-6" id="contact-stack" data-component-version="1.0.0"  >
+      <h2 
+        style="; font-size: var(--font-size, clamp(1.875rem, 4vw + 1rem, 3rem)); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
+        class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
+        id="contact-title" data-component-version="1.0.0"  
+      >
+        Envoyez-nous un message
+      </h2>
+    
+      <p 
+        style="" 
+        class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
+        id="contact-desc" data-component-version="1.0.0"  
+      >
+        Notre équipe est disponible 7j/7 pour répondre à vos questions sur CodeForge.
+      </p>
+    <button type="button" style="" class="btn-base" id="mail-btn" data-component-version="1.0.0"   onclick="mailto:hello@codeforge.dev">Email</button>
+<form action="#" method="POST" class="form-base p-8 space-y-6 rounded-2xl shadow-sm bg-[var(--form-bg,white)]" style="" id="contact-form" data-component-version="1.0.0"  >
+  <div class="form-fields space-y-4">
+    
+<div class="field-wrapper space-y-2" style="" id="f-name" data-component-version="1.0.0"  >
+  <label for="input-f-name" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))]">
+    Nom complet <span class="text-red-500">*</span>
+  </label>
+  <input id="input-f-name" type="text" class="block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" placeholder="Jean Dupont" required />
+</div>
+    
+<div class="field-wrapper space-y-2" style="" id="f-email" data-component-version="1.0.0"  >
+  <label for="input-f-email" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))]">
+    Email <span class="text-red-500">*</span>
+  </label>
+  <input id="input-f-email" type="email" class="block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all" placeholder="jean@exemple.com" required />
+</div>
+    
+<div class="field-wrapper space-y-2" style="" id="f-msg" data-component-version="1.0.0"  >
+  <label for="input-f-msg" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))]">
+    Message
+  </label>
+  <textarea id="input-f-msg" class="block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[120px]" placeholder="Comment pouvons-nous vous aider ?" ></textarea>
+</div>
+    
+  </div>
+  <div class="form-actions pt-4">
+    <button type="submit" class="w-full btn-base" style="--btn-bg: var(--form-btn-bg, theme(colors.blue.600))">
+      Envoyer le message
+    </button>
+  </div>
+</form>
+    </div>
     </div>
   </main>
     <footer class="w-full max-w-none">

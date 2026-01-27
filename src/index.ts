@@ -13,6 +13,8 @@ export * from "./components/Box.js";
 export * from "./components/Button.js";
 export * from "./components/Carousel.js";
 export * from "./components/Container.js";
+export * from "./components/Form.js";
+export * from "./components/FormField.js";
 export * from "./components/Grid.js";
 export * from "./components/Hero.js";
 export * from "./components/Image.js";
@@ -116,6 +118,17 @@ export async function buildSite(
       },
       logLevel: "warn",
     });
+
+    // Copie du dossier images vers la sortie s'il existe à la racine (APRES le build Vite)
+    const imagesSrc = path.resolve(process.cwd(), "images");
+    const imagesDest = path.join(absoluteOutDir, "images");
+    if (fs.existsSync(imagesSrc)) {
+      if (!fs.existsSync(imagesDest)) fs.mkdirSync(imagesDest, { recursive: true });
+      const imgFiles = fs.readdirSync(imagesSrc);
+      for (const file of imgFiles) {
+        fs.copyFileSync(path.join(imagesSrc, file), path.join(imagesDest, file));
+      }
+    }
 
     if (options.inlineCss) {
       const assetsDir = path.join(absoluteOutDir, "assets");

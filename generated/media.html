@@ -59,30 +59,61 @@
       </script>
     </nav></header>
     <main class="main-content w-full max-w-none">
-    <section class="hero-section" style="" id="hero-home" data-component-version="1.0.0"  >
+    <section class="hero-section" style="" id="media-hero" data-component-version="1.0.0"  >
       <div class="hero-content">
         
       <h1 
         style="--title-text: var(--hero-text, inherit); font-size: var(--font-size, clamp(2.25rem, 5vw + 1rem, 3.75rem)); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
         class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
-        id="hero-home-title" data-component-version="1.1.0"  
+        id="media-hero-title" data-component-version="1.1.0"  
       >
-        Bienvenue
+        Composants Média
       </h1>
     
         <div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">
       <p 
         style="" 
         class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
-        id="hero-home-subtitle" data-component-version="1.0.0"  
+        id="media-hero-subtitle" data-component-version="1.0.0"  
       >
-        Découvrez la puissance des Builders typés.
+        Intégrez des images et des vidéos de manière accessible.
       </p>
     </div>
       </div>
     </section>
-    <div style="" class="container-center" id="cta" data-component-version="1.0.0"  >
-      <div style="" class="flex flex-col gap-6" id="s" data-component-version="1.0.0"  ><a href="layouts.html" style="" class="btn-base" id="b" data-component-version="1.3.0" aria-label="Naviguer vers la page layouts" >Voir les Layouts</a></div>
+    <div style="" class="container-center" id="media-container" data-component-version="1.0.0"  >
+      
+      <section 
+        style="" 
+        class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
+        id="media-grid" data-component-version="1.0.0"  
+      >
+        
+      <img 
+        src="https://placehold.net/800x600.png?text=Media%20Showcase" 
+        alt="Une image de démonstration générée aléatoirement" 
+         
+        loading="lazy"
+         
+        style="border-radius: 12px; object-fit: var(--object-fit, cover);" 
+        class="w-full h-auto block rounded-[var(--border-radius,0)]"
+        id="demo-image" data-component-version="1.0.0" aria-label="Image décorative montrant la puissance du rendu visuel" 
+      />
+    
+      <video 
+        src="https://www.w3schools.com/html/mov_bbb.mp4" 
+        poster="https://picsum.photos/seed/video-poster/800/600"
+        controls    
+          
+        style="border-radius: 12px; object-fit: var(--object-fit, cover);" 
+        class="w-full h-auto block rounded-[var(--border-radius,0)]"
+        id="demo-video" data-component-version="1.0.0" aria-label="Vidéo de démonstration Big Buck Bunny" 
+      >
+        <track kind="captions" src="captions_fr.vtt" srclang="fr" label="Français"  />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    
+      </section>
     </div>
   </main>
     <footer class="w-full max-w-none">

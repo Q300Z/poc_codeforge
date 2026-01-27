@@ -61,10 +61,12 @@ describe("Map Component", () => {
       expect(html).toContain("--map-height: 600px");
     });
 
-    it("should include the library import in the module script", () => {
+    it("should include the library content in the module script", () => {
       const html = Map(meta, [], {}, "map-1");
       expect(html).toContain('<script type="module">');
-      expect(html).toContain('import "/libs/streaming-map-nodraw.js";');
+      // On vérifie une portion du code injecté (par exemple l'immédiate function)
+      expect(html).toContain("(function() {");
+      expect(html).toContain("const shadow = container.attachShadow({mode: 'open'});");
     });
   });
 

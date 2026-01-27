@@ -46,9 +46,15 @@ describe("Title Component", () => {
     // No, createComponent calls our template. The template adds the hardcoded var mapping.
     // The `styleVars` argument contains the input values.
 
-    // To verify that values are effectively passed, we rely on the renderer mechanism which is tested elsewhere.
-    // Here we verify the template structure supports them.
     expect(html).toContain("var(--text-align");
     expect(html).toContain("var(--font-weight");
+  });
+
+  it("should handle absolute positioning", () => {
+    const style = { position: "absolute", x: 50, y: 100 };
+    const html = Title(meta, [], style, "title-abs");
+    expect(html).toContain("position: absolute;");
+    expect(html).toContain("left: 50px;");
+    expect(html).toContain("top: 100px;");
   });
 });

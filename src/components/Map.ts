@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
@@ -50,6 +53,17 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
   }
 }
 
+// Chargement de la bibliothèque en mémoire une seule fois (Performance)
+let cachedLibContent = "";
+try {
+  const libPath = path.resolve(process.cwd(), "libs/streaming-map-nodraw.js");
+  if (fs.existsSync(libPath)) {
+    cachedLibContent = fs.readFileSync(libPath, "utf-8");
+  }
+} catch (_) {
+  console.error("[CodeForge Map] Impossible de charger la bibliothèque libs/streaming-map-nodraw.js");
+}
+
 /**
  * @constant Map
  * @description Composant de carte interactive utilisant streaming-map.
@@ -87,18 +101,21 @@ export const Map = createComponent({
   <div id="${containerId}" style="width: 100%; height: 100%;"></div>
 </div>
 <script type="module">
-  import "/libs/streaming-map-nodraw.js";
-  const container = document.getElementById('${containerId}');
-  if (container && !container.shadowRoot) {
-    const shadow = container.attachShadow({mode: 'open'});
-    const map = document.createElement('streaming-map');
-    map.setAttribute('style', 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;');
-    ${meta.src ? `map.setAttribute('src', '${meta.src}');` : ""}
-    ${meta.tileUrl ? `map.setAttribute('tile-url', '${meta.tileUrl}');` : ""}
-    ${meta.controls ? `map.setAttribute('controls', '${meta.controls}');` : ""}
-    ${meta.debug ? `map.setAttribute('debug', '');` : ""}
-    shadow.appendChild(map);
-  }
+  ${cachedLibContent}
+  
+  (function() {
+    const container = document.getElementById('${containerId}');
+    if (container && !container.shadowRoot) {
+      const shadow = container.attachShadow({mode: 'open'});
+      const map = document.createElement('streaming-map');
+      map.setAttribute('style', 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;');
+      ${meta.src ? `map.setAttribute('src', '${meta.src}');` : ""}
+      ${meta.tileUrl ? `map.setAttribute('tile-url', '${meta.tileUrl}');` : ""}
+      ${meta.controls ? `map.setAttribute('controls', '${meta.controls}');` : ""}
+      ${meta.debug ? `map.setAttribute('debug', '');` : ""}
+      shadow.appendChild(map);
+    }
+  })();
 </script>
     `;
   },

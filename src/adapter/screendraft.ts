@@ -1,6 +1,8 @@
 import { AppBarBuilder } from "../components/AppBar.js";
 import { ButtonBuilder } from "../components/Button.js";
 import { CarouselBuilder } from "../components/Carousel.js";
+import { FormBuilder } from "../components/Form.js";
+import { FormFieldBuilder } from "../components/FormField.js";
 import { ImageBuilder } from "../components/Image.js";
 import { MapBuilder } from "../components/Map.js";
 import { PageBuilder } from "../components/Page.js";
@@ -9,6 +11,7 @@ import { TitleBuilder } from "../components/Title.js";
 import { VideoBuilder } from "../components/Video.js";
 import { SiteNode } from "../types.js";
 import { NodeBuilder, SiteBuilder } from "../utils/builder.js";
+import { Placeholder } from "../utils/placeholder.js";
 
 // --- Types ScreenDraft (Source) ---
 
@@ -20,7 +23,7 @@ interface ScreenDraftMeta {
 
 interface ScreenDraftComponent {
   id: string;
-  type: "title" | "text" | "button" | "image" | "video" | "map" | "carousel" | "form";
+  type: "title" | "text" | "button" | "image" | "video" | "map" | "carousel" | "form" | "navbar";
   x: number;
   y: number;
   width: number;
@@ -74,6 +77,7 @@ export class ScreenDraftAdapter {
       y: comp.y,
       width: comp.width,
       height: comp.height,
+      position: "absolute",
       "z-index": 1, // Par défaut pour le canvas
     };
 
@@ -113,7 +117,7 @@ export class ScreenDraftAdapter {
 
       case "image":
         builder = new ImageBuilder(comp.id)
-          .withSrc(comp.imageSrc || "")
+          .withSrc(Placeholder.custom(comp.width || 400, comp.height || 300))
           .withAlt(comp.content || "Image")
           .withStyle({
             ...commonStyle,
@@ -140,8 +144,10 @@ export class ScreenDraftAdapter {
           });
 
         if (comp.carouselImages) {
-          comp.carouselImages.forEach((img) => {
-            carousel.addItem(img.src, img.alt);
+          const w = comp.width || 800;
+          const h = comp.height || 400;
+          comp.carouselImages.forEach((img, index) => {
+            carousel.addItem(Placeholder.custom(w, h, { text: `Slide ${index + 1}` }), img.alt);
           });
         }
         builder = carousel;
@@ -169,6 +175,28 @@ export class ScreenDraftAdapter {
           (builder as MapBuilder).withSrc(comp.mapSrc);
         }
         break;
+
+      case "form": {
+        const form = new FormBuilder(comp.id)
+          .withButtonText(comp.formButtonText || "Envoyer")
+          .withStyle({
+            ...commonStyle,
+            "form-bg": comp.backgroundColor,
+          });
+
+        if (comp.formFields) {
+          comp.formFields.forEach((field: any) => {
+            form.addChild(
+              new FormFieldBuilder(field.id)
+                .withLabel(field.label)
+                .withType(field.type)
+                .withPlaceholder(field.placeholder)
+            );
+          });
+        }
+        builder = form;
+        break;
+      }
 
       default:
         console.warn(`[Adapter] Type de composant non supporté ou ignoré : ${comp.type}`);
