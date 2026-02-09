@@ -79,6 +79,7 @@
     "pa11y-ci": "^4.0.1",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
+    "puppeteer": "^24.37.2",
     "release-it": "^19.2.4",
     "stylelint": "^17.1.1",
     "stylelint-config-standard": "^40.0.0",
