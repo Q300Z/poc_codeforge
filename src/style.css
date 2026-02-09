@@ -146,6 +146,13 @@
   @layer utilities {
     :root {
       --box-bg: #e5e7eb;
+      --dark-box-bg: #1f2937;
+      --appbar-bg: #ffffff;
+      --dark-appbar-bg: #111827;
+      --appbar-text: #111827;
+      --dark-appbar-text: #f9fafb;
+      --appbar-border: #e5e7eb;
+      --dark-appbar-border: #1f2937;
     }
 
     @media (width >= 768px) {

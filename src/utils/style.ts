@@ -154,8 +154,13 @@ function hslToHex(h: number, s: number, l: number): string {
  */
 export function autoDarkColor(hex: string, isBackground: boolean = false): string {
   if (!hex.startsWith("#")) {
+    const lower = hex.toLowerCase().trim();
+    if (lower === "white") return isBackground ? "#1a1a1a" : "#ffffff";
+    if (lower === "black") return isBackground ? "#ffffff" : "#f9fafb";
+    if (lower === "transparent") return "transparent";
+
     // Gestion simplifiée du rgba(255,255,255,...) pour les fonds
-    if (isBackground && hex.includes("255, 255, 255")) {
+    if (isBackground && lower.includes("255, 255, 255")) {
       return hex.replace(/255, 255, 255/g, "31, 41, 55"); // Vers un gris foncé (gray-800)
     }
     return hex;
