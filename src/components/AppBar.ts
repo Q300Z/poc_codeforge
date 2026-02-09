@@ -98,12 +98,12 @@ export const AppBar = createComponent({
     const btnId = `btn-${id}`;
     const menuId = `menu-${id}`;
 
-    const combinedStyle = `border-color:var(--appbar-border,#e5e7eb);background-color:var(--appbar-bg,white);color:var(--appbar-text,#111827);${styleVars}${styleVarsDark}`;
+    const combinedStyle = `${styleVars}${styleVarsDark}`;
 
     return `
     <nav 
       ${getStyleAttr(combinedStyle)} 
-      class="sticky top-0 z-50 w-full border-b dark:bg-[var(--dark-appbar-bg,#111827)] dark:text-[var(--dark-appbar-text,#f9fafb)] dark:border-[var(--dark-appbar-border,#1f2937)]"
+      class="sticky top-0 z-50 w-full border-b bg-[var(--appbar-bg,white)] text-[var(--appbar-text,#111827)] border-[var(--appbar-border,#e5e7eb)] dark:bg-[var(--dark-appbar-bg,#111827)] dark:text-[var(--dark-appbar-text,#f9fafb)] dark:border-[var(--dark-appbar-border,#1f2937)]"
       ${a11yAttrs}
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

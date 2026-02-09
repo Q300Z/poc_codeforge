@@ -120,7 +120,7 @@ export const Hero = createComponent({
 
     return `
     <section 
-      class="hero-section dark:bg-[var(--dark-hero-bg,linear-gradient(135deg,#111827_0%,#1f2937_100%))]" 
+      class="hero-section bg-[var(--hero-bg,linear-gradient(135deg,#f9fafb_0%,#f3f4f6_100%))] dark:bg-[var(--dark-hero-bg,linear-gradient(135deg,#111827_0%,#1f2937_100%))]" 
       ${getStyleAttr(combinedStyle)} 
       ${a11yAttrs}
     >

@@ -53,46 +53,39 @@ export const Text = createComponent({
   description:
     "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
-  template: (
-    meta: Record<string, any>,
-    _,
-    styleVars,
-    a11yAttrs,
-    _id,
-    getStyleAttr,
-    styleVarsDark
-  ) => {
-    const tag = meta.tag || "p";
-
-    // 1. Validation du contraste Mode Clair
-    let colorStyle = "color:var(--text-color,inherit);";
-    if (meta.parentBg && styleVars.includes("--text-color:")) {
-      const match = styleVars.match(/--text-color:([^;]+);/);
-      if (match) {
-        const validatedColor = validateContrast(match[1], meta.parentBg, "Text", _id);
-        colorStyle = `color:${validatedColor};`;
+    template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+      const tag = meta.tag || "p";
+  
+      // 1. Validation du contraste Mode Clair
+      let colorVar = "--text-color:inherit;";
+      if (meta.parentBg && styleVars.includes("--text-color:")) {
+        const match = styleVars.match(/--text-color:([^;]+);/);
+        if (match) {
+          const validatedColor = validateContrast(match[1], meta.parentBg, "Text", _id);
+          colorVar = `--text-color:${validatedColor};`;
+        }
       }
-    }
-
-    // 2. Validation du contraste Mode Sombre
-    let colorStyleDark = "";
-    if (styleVarsDark.includes("--dark-text-color:")) {
-      const match = styleVarsDark.match(/--dark-text-color:([^;]+);/);
-      if (match) {
-        const darkBg = meta.parentBgDark || "#111827"; // Fallback bg sombre
-        const validatedColor = validateContrast(match[1], darkBg, "Text (Dark)", _id);
-        colorStyleDark = `--dark-text-color:${validatedColor};`;
+  
+      // 2. Validation du contraste Mode Sombre
+      let colorVarDark = "";
+      if (styleVarsDark.includes("--dark-text-color:")) {
+        const match = styleVarsDark.match(/--dark-text-color:([^;]+);/);
+        if (match) {
+          const darkBg = meta.parentBgDark || "#111827"; // Fallback bg sombre
+          const validatedColor = validateContrast(match[1], darkBg, "Text (Dark)", _id);
+          colorVarDark = `--dark-text-color:${validatedColor};`;
+        }
       }
-    }
-
-    return `
-      <${tag} 
-        ${getStyleAttr(styleVars + styleVarsDark + colorStyle + colorStyleDark)} 
-        class="leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)] dark:text-[var(--dark-text-color,inherit)]"
-        ${a11yAttrs}
-      >
-        ${meta.content || ""}
-      </${tag}>
-    `;
-  },
+  
+      return `
+        <${tag} 
+          ${getStyleAttr(styleVars + styleVarsDark + colorVar + colorVarDark)} 
+          class="leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)] text-[var(--text-color)] dark:text-[var(--dark-text-color)]"
+          ${a11yAttrs}
+        >
+          ${meta.content || ""}
+        </${tag}>
+      `;
+    },
+  
 });

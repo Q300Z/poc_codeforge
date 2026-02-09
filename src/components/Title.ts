@@ -100,30 +100,30 @@ export const Title = createComponent({
     const extraStyles = `font-size:var(--font-size,${defaultSize});font-weight:var(--font-weight,800);text-align:var(--text-align,left);`;
 
     // 1. Validation du contraste Mode Clair
-    let colorStyle = "color:var(--title-text,inherit);";
+    let colorVar = "--title-text:inherit;";
     if (meta.parentBg && styleVars.includes("--title-text:")) {
       const match = styleVars.match(/--title-text:([^;]+);/);
       if (match) {
         const validatedColor = validateContrast(match[1], meta.parentBg, "Title", _id);
-        colorStyle = `color:${validatedColor};`;
+        colorVar = `--title-text:${validatedColor};`;
       }
     }
 
     // 2. Validation du contraste Mode Sombre
-    let colorStyleDark = "";
+    let colorVarDark = "";
     if (styleVarsDark.includes("--dark-title-text:")) {
       const match = styleVarsDark.match(/--dark-title-text:([^;]+);/);
       if (match) {
         const darkBg = meta.parentBgDark || "#111827";
         const validatedColor = validateContrast(match[1], darkBg, "Title (Dark)", _id);
-        colorStyleDark = `--dark-title-text:${validatedColor};`;
+        colorVarDark = `--dark-title-text:${validatedColor};`;
       }
     }
 
     return `
       <${tag} 
-        ${getStyleAttr(styleVars + styleVarsDark + extraStyles + colorStyle + colorStyleDark)} 
-        class="bg-[var(--title-bg,transparent)] dark:bg-[var(--dark-title-bg,transparent)] tracking-tight leading-tight m-0 dark:text-[var(--dark-title-text,inherit)]"
+        ${getStyleAttr(styleVars + styleVarsDark + extraStyles + colorVar + colorVarDark)} 
+        class="bg-[var(--title-bg,transparent)] dark:bg-[var(--dark-title-bg,transparent)] text-[var(--title-text)] dark:text-[var(--dark-title-text)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >
         ${finalContent}

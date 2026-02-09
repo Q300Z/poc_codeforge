@@ -31,11 +31,11 @@ export const Section = createComponent({
     "Unité structurelle horizontale pleine largeur utilisée pour découper la page en blocs thématiques.",
   authorizedTokens: ["section-bg", "section-py"],
   template: (_meta, children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
-    const combinedStyle = `background-color:var(--section-bg,transparent);${styleVars}${styleVarsDark}`;
+    const combinedStyle = `${styleVars}${styleVarsDark}`;
     return `
     <section 
       ${getStyleAttr(combinedStyle)} 
-      class="section-pad dark:bg-[var(--dark-section-bg,transparent)]" 
+      class="section-pad bg-[var(--section-bg,transparent)] dark:bg-[var(--dark-section-bg,transparent)]" 
       ${a11yAttrs}
     >
       ${children.join("")}
