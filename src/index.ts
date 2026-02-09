@@ -54,6 +54,12 @@ export async function buildSite(
   const absoluteJsonPath = path.resolve(process.cwd(), jsonPath);
   const absoluteOutDir = path.resolve(process.cwd(), outDir);
   
+  // Nettoyage du dossier de sortie pour garantir l'autonomie du build
+  if (fs.existsSync(absoluteOutDir)) {
+    fs.rmSync(absoluteOutDir, { recursive: true, force: true });
+  }
+  fs.mkdirSync(absoluteOutDir, { recursive: true });
+
   if (!fs.existsSync(absoluteJsonPath)) {
     throw new Error(`JSON file not found: ${absoluteJsonPath}`);
   }
@@ -68,10 +74,9 @@ export async function buildSite(
     siteData = jsonContent;
   }
 
-  if (!fs.existsSync(absoluteOutDir)) fs.mkdirSync(absoluteOutDir, { recursive: true });
-
-  // 1. Gestion des dossiers d'assets indispensables (libs, images)
-  const foldersToCopy = ["libs", "images"];
+  // 1. Gestion des dossiers d'assets (libs, images)
+  // On ne copie 'libs' que si on n'est PAS en mode inline
+  const foldersToCopy = options.inline ? ["images"] : ["libs", "images"];
   for (const folder of foldersToCopy) {
     const src = path.resolve(process.cwd(), folder);
     if (fs.existsSync(src)) {
@@ -93,14 +98,18 @@ export async function buildSite(
     }
   }
 
-  // 3. Gestion du JS (Lecture pour Inlining si demandé)
-  let mapLibContent = "";
+  // 3. Gestion du JS et CSS des bibliothèques (Lecture pour Inlining si demandé)
+  let mapLibJsContent = "";
+  let mapLibCssContent = "";
   if (options.inline) {
-    const distMapLib = path.resolve(__dirname, "libs/streaming-map-nodraw.js");
-    const srcMapLib = path.resolve(process.cwd(), "libs/streaming-map-nodraw.js");
-    const mapLibSrc = fs.existsSync(distMapLib) ? distMapLib : srcMapLib;
-    if (fs.existsSync(mapLibSrc)) {
-      mapLibContent = fs.readFileSync(mapLibSrc, "utf-8");
+    const jsSrc = path.resolve(process.cwd(), "libs/leaflet.js");
+    const cssSrc = path.resolve(process.cwd(), "libs/leaflet.css");
+    
+    if (fs.existsSync(jsSrc)) {
+      mapLibJsContent = fs.readFileSync(jsSrc, "utf-8");
+    }
+    if (fs.existsSync(cssSrc)) {
+      mapLibCssContent = fs.readFileSync(cssSrc, "utf-8");
     }
   }
 
@@ -113,7 +122,8 @@ export async function buildSite(
     // Injection du CSS et JS en ligne si demandé
     if (options.inline) {
       page.content.meta.inlineCss = cssContent;
-      page.content.meta.mapLibContent = mapLibContent;
+      page.content.meta.mapLibJsContent = mapLibJsContent;
+      page.content.meta.mapLibCssContent = mapLibCssContent;
     }
     
     page.content.style = { ...siteData.style, ...page.content.style };
@@ -125,7 +135,8 @@ export async function buildSite(
 
     // Propagation récursive des métadonnées globales aux enfants
     propagateMeta(page.content, { 
-      mapLibContent: options.inline ? mapLibContent : undefined 
+      mapLibJsContent: options.inline ? mapLibJsContent : undefined,
+      mapLibCssContent: options.inline ? mapLibCssContent : undefined 
     });
 
     const html = render(page.content);

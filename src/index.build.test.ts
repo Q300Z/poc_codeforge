@@ -78,7 +78,8 @@ describe("buildSite", () => {
     // The actual inlining logic depends on the renderer receiving mapLibContent and inlineCss
     expect(writeFileSyncSpy).toHaveBeenCalled();
     expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("style.css"), "utf-8");
-    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("streaming-map-nodraw.js"), "utf-8");
+    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("leaflet.js"), "utf-8");
+    expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("leaflet.css"), "utf-8");
   });
 
   it("should detect ScreenDraft format and transform it", async () => {
