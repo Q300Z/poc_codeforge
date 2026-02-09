@@ -3,26 +3,55 @@ node_modules/
 .npm/
 
 # Build
+
 dist/
+
 build/
+
 generated/
+
+generated_inline/
+
 test-inline/
+
 dist-screendraft/
+
 dist-inline-test/
 
+
+
 # Tests
+
 coverage/
+
 .vitest-results/
+
 playwright-report/
+
 test-results/
 
+examples/generated_*/
+
+
+
 # OS files
+
 .DS_Store
+
 Thumbs.db
 
+
+
 # Project specific
+
 output.html
+
 test-output.html
+
 *.log
+
 data/site-from-screendraft.json
+
 pnpm-workspace.yaml
+
+examples/profile_*
