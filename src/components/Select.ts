@@ -147,8 +147,7 @@ export const Select = createComponent({
           }
           .select-base {
             padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-            background-color: var(--select-bg, #ffffff); color: var(--select-text, #111827);
-          .dark select { background-color: var(--dark-select-bg, #1f2937); color: var(--dark-select-text, #f9fafb); border-color: var(--dark-select-border, #374151); }
+            background-color: var(--select-bg, #ffffff);
             color: var(--select-text, #111827);
             border: 1px solid var(--select-border, #d1d5db);
             border-radius: var(--select-radius, 0.375rem);
@@ -159,6 +158,12 @@ export const Select = createComponent({
             background-position: right 0.5rem center;
             background-repeat: no-repeat;
             background-size: 1.5em 1.5em;
+          }
+          .dark .select-label { color: var(--dark-select-text, #f9fafb); }
+          .dark .select-base { 
+            background-color: var(--dark-select-bg, #1f2937); 
+            color: var(--dark-select-text, #f9fafb); 
+            border-color: var(--dark-select-border, #374151); 
           }
         </style>
         <label for="${selectId}" class="select-label">${meta.label}</label>

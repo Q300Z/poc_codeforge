@@ -103,8 +103,7 @@ export const Textarea = createComponent({
           }
           .textarea-base {
             padding: 0.5rem 0.75rem;
-            background-color: var(--textarea-bg, #ffffff); color: var(--textarea-text, #111827);
-          .dark textarea { background-color: var(--dark-textarea-bg, #1f2937); color: var(--dark-textarea-text, #f9fafb); border-color: var(--dark-textarea-border, #374151); }
+            background-color: var(--textarea-bg, #ffffff);
             color: var(--textarea-text, #111827);
             border: 1px solid var(--textarea-border, #d1d5db);
             border-radius: var(--textarea-radius, 0.375rem);
@@ -112,6 +111,12 @@ export const Textarea = createComponent({
             line-height: 1.25rem;
             min-height: 100px;
             resize: vertical;
+          }
+          .dark .textarea-label { color: var(--dark-textarea-text, #f9fafb); }
+          .dark .textarea-base { 
+            background-color: var(--dark-textarea-bg, #1f2937); 
+            color: var(--dark-textarea-text, #f9fafb); 
+            border-color: var(--dark-textarea-border, #374151); 
           }
         </style>
         <label for="${textareaId}" class="textarea-label">${meta.label}</label>
