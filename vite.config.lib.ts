@@ -17,7 +17,7 @@ export default defineConfig({
       fileName: (format, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
-      external: ["fs", "path", "url", "vite"],
+      external: ["fs", "path", "url", "vite", "purgecss"],
     },
     outDir: "dist",
     emptyOutDir: true,

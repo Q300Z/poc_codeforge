@@ -108,7 +108,7 @@ export const Video = createComponent({
     tracks: { type: "array", description: "Pistes de sous-titres" },
   },
   authorizedTokens: ["object-fit"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr) => {
     if (!meta.src) return "<!-- Vidéo manquante -->";
 
     const controls = meta.controls !== false ? "controls" : "";
@@ -137,7 +137,7 @@ export const Video = createComponent({
         ${poster}
         ${controls} ${autoplay} ${loop} ${muted} ${playsinline}
         ${preload} ${width} ${height}
-        style="${styleVars} object-fit: var(--object-fit, cover);" 
+        ${getStyleAttr(styleVars + "object-fit:var(--object-fit,cover);")} 
         class="w-full h-auto block rounded-[var(--border-radius,0)]"
         ${a11yAttrs}
       >

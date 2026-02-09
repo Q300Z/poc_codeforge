@@ -13,6 +13,7 @@ Usage:
 Options:
   -w, --watch    Relance le build automatiquement à chaque modification du JSON
   -i, --inline   Injecte le CSS directement dans les fichiers HTML (mode autonome)
+  --no-minify    Désactive la minification du HTML
   -h, --help     Affiche cette aide
   -v, --version  Affiche la version
 
@@ -31,7 +32,8 @@ export async function runCli(args: string[]) {
   // Extraction des options
   const isWatch = args.includes("-w") || args.includes("--watch");
   const isInline = args.includes("-i") || args.includes("--inline");
-  const filteredArgs = args.filter(a => !["-w", "--watch", "-i", "--inline", "-h", "--help"].includes(a));
+  const isNoMinify = args.includes("--no-minify");
+  const filteredArgs = args.filter(a => !["-w", "--watch", "-i", "--inline", "--no-minify", "-h", "--help"].includes(a));
 
   if (filteredArgs.length < 1) {
     printHelp();
@@ -46,7 +48,7 @@ export async function runCli(args: string[]) {
     console.log(`\n[${new Date().toLocaleTimeString()}] 📦 Build en cours : ${jsonPath} -> ${outDir}...`);
     try {
       const { buildSite } = await import("./index.js");
-      await buildSite(jsonPath, outDir, { inline: isInline });
+      await buildSite(jsonPath, outDir, { inline: isInline, minify: !isNoMinify });
       console.log("✨ Build réussi !");
     } catch (error) {
       console.error("❌ Build failed:", error instanceof Error ? error.message : error);

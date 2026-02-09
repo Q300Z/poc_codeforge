@@ -28,9 +28,9 @@ export const Box = createComponent({
   description:
     "Un bloc de structure simple qui hérite des styles de base (layout, dimensions, etc.).",
   authorizedTokens: ["box-bg"],
-  template: (_meta, _children, styleVars, a11yAttrs) => `
+  template: (_meta, _children, styleVars, a11yAttrs, _id, getStyleAttr) => `
     <div 
-      style="${styleVars}" 
+      ${getStyleAttr(styleVars)} 
       class="bg-[var(--box-bg,#e5e7eb)] min-h-[100px]"
       ${a11yAttrs}
     ></div>

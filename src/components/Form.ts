@@ -62,13 +62,13 @@ export const Form = createComponent({
     "form-bg": "Couleur de fond",
     "form-btn-bg": "Couleur du bouton",
   },
-  template: (meta, children, styleVars, a11yAttrs) => {
+  template: (meta, children, styleVars, a11yAttrs, _id, getStyleAttr) => {
     const buttonText = meta.buttonText || "Envoyer";
     const action = meta.action || "#";
     const method = meta.method || "POST";
 
     return `
-<form action="${action}" method="${method}" class="form-base p-8 space-y-6 rounded-2xl shadow-sm bg-[var(--form-bg,white)]" style="${styleVars}" ${a11yAttrs}>
+<form action="${action}" method="${method}" class="form-base p-8 space-y-6 rounded-2xl shadow-sm bg-[var(--form-bg,white)]" ${getStyleAttr(styleVars)} ${a11yAttrs}>
   <div class="form-fields space-y-4">
     ${children.join("")}
   </div>

@@ -34,6 +34,6 @@ describe("Table Component", () => {
   it("should apply custom CSS variables", () => {
     const style = { "table-header-bg": "#f0f0f0" };
     const html = Table(meta, [], style, "table-1");
-    expect(html).toContain("--table-header-bg: #f0f0f0");
+    expect(html).toContain("--table-header-bg:#f0f0f0");
   });
 });

@@ -11,26 +11,9 @@ describe("Map Component", () => {
   };
 
   describe("Template Rendering", () => {
-    it("should render a container and Leaflet assets", () => {
+    it("should render a container", () => {
       const html = Map(meta, [], {}, "map-1");
       expect(html).toContain('id="map-container-map-1"');
-      expect(html).toContain('href="./libs/leaflet.css"');
-      expect(html).toContain('src="./libs/leaflet.js"');
-    });
-
-    it("should render inline assets if provided in meta", () => {
-      const html = Map(
-        {
-          ...meta,
-          mapLibJsContent: "console.log('inline-js')",
-          mapLibCssContent: ".inline-css { color: red; }",
-        },
-        [],
-        {},
-        "map-1"
-      );
-      expect(html).toContain("<script>console.log('inline-js')</script>");
-      expect(html).toContain("<style>.inline-css { color: red; }</style>");
     });
 
     it("should render with custom view coordinates", () => {
@@ -46,12 +29,13 @@ describe("Map Component", () => {
         "map-1"
       );
 
-      expect(html).toContain("setView([48.8566, 2.3522], 12)");
+      expect(html).toContain("CodeForge.initMap");
+      expect(html).toContain("48.8566, 2.3522, 12");
     });
 
     it("should handle optional controls", () => {
       const html = Map({ ...meta, controls: "scale" }, [], {}, "map-1");
-      expect(html).toContain("L.control.scale()");
+      expect(html).toContain("'scale'");
     });
 
     it("should be accessible", async () => {
@@ -76,7 +60,7 @@ describe("Map Component", () => {
     it("should apply custom CSS variables from style prop", () => {
       const style = { "map-height": "600px" };
       const html = Map(meta, [], style, "map-1");
-      expect(html).toContain("--map-height: 600px");
+      expect(html).toContain("--map-height:600px");
     });
 
     it("should render markers in the script", () => {
@@ -89,9 +73,7 @@ describe("Map Component", () => {
         {},
         "map-1"
       );
-      expect(html).toContain('const markers = [{"lat":48.8,"lng":2.3,"name":"Paris"}]');
-      expect(html).toContain("L.marker([m.lat, m.lng])");
-      expect(html).toContain("marker.bindPopup(m.name)");
+      expect(html).toContain('[{"lat":48.8,"lng":2.3,"name":"Paris"}]');
     });
   });
 

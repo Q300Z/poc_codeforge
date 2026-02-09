@@ -86,7 +86,7 @@ export const Image = createComponent({
     sizes: { type: "string", description: "Tailles d'affichage" },
   },
   authorizedTokens: ["object-fit"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr) => {
     if (!meta.src) return "<!-- Image manquante -->";
 
     const loading = meta.loading || "lazy";
@@ -102,7 +102,7 @@ export const Image = createComponent({
         ${width} ${height}
         loading="${loading}"
         ${srcset} ${sizes}
-        style="${styleVars} object-fit: var(--object-fit, cover);" 
+        ${getStyleAttr(styleVars + "object-fit:var(--object-fit,cover);")} 
         class="w-full h-auto block rounded-[var(--border-radius,0)]"
         ${a11yAttrs}
       />

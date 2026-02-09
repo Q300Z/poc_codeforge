@@ -67,7 +67,8 @@ describe("buildSite", () => {
 
     expect(readFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("site.json"), "utf-8");
     expect(writeFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("index.html"), expect.any(String));
-    expect(copyFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("style.css"), expect.stringContaining("dist/style.css"));
+    // Le CSS est maintenant écrit via writeFileSync dans buildSite
+    expect(writeFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("style.css"), expect.any(String));
     expect(copyFileSyncSpy).toHaveBeenCalledWith(expect.stringContaining("lib.js"), expect.stringContaining("dist/libs/lib.js"));
   });
 

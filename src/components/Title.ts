@@ -65,7 +65,14 @@ export const Title = createComponent({
   description:
     "Titre sémantique (H1-H6) avec hiérarchie visuelle fluide et support de l'accessibilité native.",
   authorizedTokens: ["font-size", "title-text", "title-bg", "font-weight", "text-align"],
-  template: (meta: Record<string, any>, children: string[], styleVars, a11yAttrs) => {
+  template: (
+    meta: Record<string, any>,
+    children: string[],
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr
+  ) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);
     const tag = `h${level}`;
 
@@ -84,9 +91,11 @@ export const Title = createComponent({
     // Priorité aux enfants, sinon fallback sur meta.content
     const finalContent = children && children.length > 0 ? children.join("") : meta.content || "";
 
+    const extraStyles = `font-size:var(--font-size,${defaultSize});font-weight:var(--font-weight,800);text-align:var(--text-align,left);`;
+
     return `
       <${tag} 
-        style="${styleVars}${styleVars.endsWith(";") ? "" : ";"} font-size: var(--font-size, ${defaultSize}); font-weight: var(--font-weight, 800); text-align: var(--text-align, left);" 
+        ${getStyleAttr(styleVars + extraStyles)} 
         class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >

@@ -310,8 +310,9 @@ describe("ScreenDraftAdapter", () => {
       expect(html).toContain("TestLogo");
 
       // Verify Map
-      expect(html).toContain("L.map('map-container-map-1')");
-      expect(html).toContain("L.tileLayer");
+      expect(html).toContain("CodeForge.initMap");
+      expect(html).toContain("map-container-map-1");
+      expect(html).toContain("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
     });
   });
 });

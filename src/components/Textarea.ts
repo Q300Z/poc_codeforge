@@ -84,13 +84,13 @@ export const Textarea = createComponent({
     "textarea-border": "Couleur de la bordure",
     "textarea-radius": "Arrondi des angles",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
     const textareaId = `${id}-textarea`;
     const rows = meta.rows || 4;
     const value = meta.value || "";
 
     return `
-      <div class="textarea-container" style="${styleVars}" ${a11yAttrs}>
+      <div class="textarea-container" ${getStyleAttr(styleVars)} ${a11yAttrs}>
         <style>
           .textarea-container {
             display: flex;

@@ -87,7 +87,7 @@ export const FormField = createComponent({
     "field-radius": "Arrondi",
     "font-size": "Taille de police",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
     const type = meta.type || "text";
     const label = meta.label || "";
     const placeholder = meta.placeholder || "";
@@ -103,7 +103,7 @@ export const FormField = createComponent({
         : `<input id="${inputId}" type="${type}" class="${commonClasses}" placeholder="${placeholder}" ${required} />`;
 
     return `
-<div class="field-wrapper space-y-2" style="${styleVars}" ${a11yAttrs}>
+<div class="field-wrapper space-y-2" ${getStyleAttr(styleVars)} ${a11yAttrs}>
   <label for="${inputId}" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))]">
     ${label}${meta.required ? ' <span class="text-red-500">*</span>' : ""}
   </label>

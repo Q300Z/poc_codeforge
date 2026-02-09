@@ -19,7 +19,8 @@ describe("Image Component", () => {
 
   it("should apply object-fit style", () => {
     const html = Image(meta, [], { "object-fit": "contain" }, "img-1");
-    expect(html).toContain("object-fit: contain");
+    expect(html).toContain("--object-fit:contain;");
+    expect(html).toContain("object-fit:var(--object-fit,cover);");
   });
 
   it("should render explicit width and height", () => {

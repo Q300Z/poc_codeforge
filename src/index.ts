@@ -33,30 +33,30 @@ export * from "./components/Video.js";
 
 import path from "path";
 import fs from "fs";
-import { fileURLToPath } from "url";
 import { setupRegistry } from "./setup.js";
 import { render } from "./renderer.js";
 import { SiteNode } from "./types.js";
 import { ScreenDraftAdapter } from "./adapter/screendraft.js";
 import { isScreenDraft } from "./utils/detection.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { minifyHTML } from "./utils/html.js";
+import { PurgeCSS } from "purgecss";
+import { renderState } from "./utils/state.js";
 
 /**
  * Génère un site statique de manière autonome.
- * Utilise des chemins relatifs et copie les assets bruts.
  */
 export async function buildSite(
   jsonPath: string, 
   outDir: string = "dist-static",
-  options: { inline?: boolean } = {}
+  options: { inline?: boolean; minify?: boolean } = { minify: true }
 ) {
   setupRegistry();
   const absoluteJsonPath = path.resolve(process.cwd(), jsonPath);
   const absoluteOutDir = path.resolve(process.cwd(), outDir);
   
-  // Nettoyage du dossier de sortie pour garantir l'autonomie du build
+  const isMinify = options.minify !== false;
+  
+  // Nettoyage du dossier de sortie
   if (fs.existsSync(absoluteOutDir)) {
     fs.rmSync(absoluteOutDir, { recursive: true, force: true });
   }
@@ -76,8 +76,7 @@ export async function buildSite(
     siteData = jsonContent;
   }
 
-  // 1. Gestion des dossiers d'assets (libs, images)
-  // On ne copie 'libs' que si on n'est PAS en mode inline
+  // 1. Assets
   const foldersToCopy = options.inline ? ["images"] : ["libs", "images"];
   for (const folder of foldersToCopy) {
     const src = path.resolve(process.cwd(), folder);
@@ -86,62 +85,75 @@ export async function buildSite(
     }
   }
 
-  // 2. Gestion du style CSS (Copie ou Lecture pour Inlining)
-  const distCss = path.resolve(__dirname, "style.css");
+  // 2. CSS
   const srcCss = path.resolve(process.cwd(), "src/style.css");
+  const distCss = path.resolve(process.cwd(), "dist/style.css");
   const cssSrc = fs.existsSync(distCss) ? distCss : srcCss;
 
-  let cssContent = "";
+  let globalCssContent = "";
   if (fs.existsSync(cssSrc)) {
-    if (options.inline) {
-      cssContent = fs.readFileSync(cssSrc, "utf-8");
-    } else {
-      fs.copyFileSync(cssSrc, path.join(absoluteOutDir, "style.css"));
+    globalCssContent = fs.readFileSync(cssSrc, "utf-8");
+    if (!options.inline) {
+      fs.writeFileSync(path.join(absoluteOutDir, "style.css"), globalCssContent);
     }
   }
 
-  // 3. Gestion du JS et CSS des bibliothèques (Lecture pour Inlining si demandé)
+  // 3. Libs (Inlining)
   let mapLibJsContent = "";
   let mapLibCssContent = "";
   if (options.inline) {
     const jsSrc = path.resolve(process.cwd(), "libs/leaflet.js");
     const cssSrc = path.resolve(process.cwd(), "libs/leaflet.css");
     
-    if (fs.existsSync(jsSrc)) {
-      mapLibJsContent = fs.readFileSync(jsSrc, "utf-8");
-    }
-    if (fs.existsSync(cssSrc)) {
-      mapLibCssContent = fs.readFileSync(cssSrc, "utf-8");
-    }
+    if (fs.existsSync(jsSrc)) mapLibJsContent = fs.readFileSync(jsSrc, "utf-8");
+    if (fs.existsSync(cssSrc)) mapLibCssContent = fs.readFileSync(cssSrc, "utf-8");
   }
 
-  // 4. Rendu des pages
+  // 4. Rendu
   for (const page of siteData.pages) {
-    page.content.meta = page.content.meta || {};
-    page.content.meta.appName = siteData.meta.appName;
-    page.content.meta.cssPath = "./style.css";
+    renderState.clear();
+    // On clone le contenu pour ne pas polluer les autres pages
+    const pageContent = JSON.parse(JSON.stringify(page.content));
     
-    // Injection du CSS et JS en ligne si demandé
-    if (options.inline) {
-      page.content.meta.inlineCss = cssContent;
-      page.content.meta.mapLibJsContent = mapLibJsContent;
-      page.content.meta.mapLibCssContent = mapLibCssContent;
-    }
+    pageContent.meta = {
+      ...pageContent.meta,
+      appName: siteData.meta.appName,
+      cssPath: "./style.css",
+      ...(options.inline ? {
+        mapLibJsContent,
+        mapLibCssContent
+      } : {})
+    };
     
-    page.content.style = { ...siteData.style, ...page.content.style };
+    pageContent.style = { ...siteData.style, ...pageContent.style };
 
-    if (page.content.meta) {
-      if (siteData.layout?.header) page.content.meta.renderedHeader = render(siteData.layout.header);
-      if (siteData.layout?.footer) page.content.meta.renderedFooter = render(siteData.layout.footer);
-    }
+    if (siteData.layout?.header) pageContent.meta.renderedHeader = render(siteData.layout.header);
+    if (siteData.layout?.footer) pageContent.meta.renderedFooter = render(siteData.layout.footer);
 
-    // Propagation récursive des métadonnées globales aux enfants
-    propagateMeta(page.content, { 
+    propagateMeta(pageContent, { 
       mapLibJsContent: options.inline ? mapLibJsContent : undefined,
       mapLibCssContent: options.inline ? mapLibCssContent : undefined 
     });
 
-    const html = render(page.content);
+    let html = render(pageContent);
+
+    // Optimisation CSS par page en mode Inline
+    if (options.inline && globalCssContent) {
+      const purged = await new PurgeCSS().purge({
+        content: [{ extension: "html", raw: html }],
+        css: [{ raw: globalCssContent }],
+        safelist: {
+          standard: [/^leaflet-/, /^carousel-/], // Garder les styles dynamiques
+          deep: [/leaflet/, /carousel/]
+        }
+      });
+      
+      const optimizedCss = purged[0].css;
+      html = html.replace("</head>", `<style>${optimizedCss}</style></head>`);
+    }
+
+    if (isMinify) html = minifyHTML(html);
+    
     fs.writeFileSync(path.join(absoluteOutDir, `${page.slug}.html`), html);
   }
 }

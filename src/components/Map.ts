@@ -1,6 +1,7 @@
 import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { renderState } from "../utils/state.js";
 
 /** Interface pour un marqueur sur la carte. */
 export interface MapMarker {
@@ -95,26 +96,17 @@ export const Map = createComponent({
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
     const containerId = `map-container-${id}`;
     const lat = meta.lat || 46.603354;
     const lng = meta.lng || 1.888334;
     const zoom = meta.zoom || 6;
     const tileUrl = meta.tileUrl || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-    // Gestion du CSS (Inline ou Local)
-    const leafletCss = meta.mapLibCssContent
-      ? `<style>${meta.mapLibCssContent}</style>`
-      : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
-
-    // Gestion du JS (Inline ou Local)
-    const leafletJs = meta.mapLibJsContent
-      ? `<script>${meta.mapLibJsContent}</script>`
-      : `<script src="./libs/leaflet.js"></script>`;
+    renderState.requireScript("map");
 
     return `
-  <div class="map-wrapper flex-shrink-0" style="${styleVars}" ${a11yAttrs}>
-    ${leafletCss}
+  <div class="map-wrapper flex-shrink-0" ${getStyleAttr(styleVars)} ${a11yAttrs}>
     <style>
       #${containerId} { 
         width: 100%; 
@@ -128,50 +120,15 @@ export const Map = createComponent({
     <div id="${containerId}" class="leaflet-container"></div>
   </div>
   
-  ${leafletJs}
   <script type="module">
-    (function() {
-      const initMap = () => {
-        if (typeof L === 'undefined') {
-          console.error("[CodeForge Map] Leaflet n'est pas chargé.");
-          return;
-        }
-        const map = L.map('${containerId}').setView([${lat}, ${lng}], ${zoom});
-        
-        L.tileLayer('${tileUrl}', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        if ('${meta.controls || ""}'.includes('scale')) {
-          L.control.scale().addTo(map);
-        }
-
-        // Ajout des marqueurs
-        const markers = ${JSON.stringify(meta.markers || [])};
-        markers.forEach(m => {
-          const marker = L.marker([m.lat, m.lng]).addTo(map);
-          if (m.name) {
-            marker.bindPopup(m.name);
-          }
-        });
-
-        if ('${meta.src || ""}') {
-          fetch('${meta.src}')
-            .then(res => res.json())
-            .then(data => {
-              L.geoJSON(data).addTo(map);
-            })
-            .catch(err => console.error("[CodeForge Map] Erreur GeoJSON:", err));
-        }
-      };
-
-      if (window.L) {
-        initMap();
-      } else {
-        // Attendre que le script Leaflet soit chargé si nécessaire
-        window.addEventListener('load', initMap);
-      }
-    })();
+    CodeForge.initMap(
+      '${containerId}', 
+      ${lat}, ${lng}, ${zoom}, 
+      '${tileUrl}', 
+      '${meta.controls || ""}', 
+      ${JSON.stringify(meta.markers || [])}, 
+      '${meta.src || ""}'
+    );
   </script>
     `;
   },

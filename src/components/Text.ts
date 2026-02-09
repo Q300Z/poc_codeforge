@@ -50,11 +50,11 @@ export const Text = createComponent({
   description:
     "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr) => {
     const tag = meta.tag || "p";
     return `
       <${tag} 
-        style="${styleVars}" 
+        ${getStyleAttr(styleVars)} 
         class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
         ${a11yAttrs}
       >

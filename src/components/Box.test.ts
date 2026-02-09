@@ -6,7 +6,7 @@ describe("Box Component", () => {
   it("should render a div with style variables", () => {
     const html = Box({}, [], { "box-bg": "red" }, "box-1");
     expect(html).toContain("<div");
-    expect(html).toContain('style="--box-bg: red;"');
+    expect(html).toContain('style="--box-bg:red;"');
     expect(html).toContain('id="box-1"');
   });
 

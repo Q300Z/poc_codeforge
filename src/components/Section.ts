@@ -30,8 +30,8 @@ export const Section = createComponent({
   description:
     "Unité structurelle horizontale pleine largeur utilisée pour découper la page en blocs thématiques.",
   authorizedTokens: ["section-bg", "section-py"],
-  template: (_meta, children, styleVars, a11yAttrs) => `
-    <section style="${styleVars}" class="section-pad bg-[var(--section-bg,transparent)]" ${a11yAttrs}>
+  template: (_meta, children, styleVars, a11yAttrs, _id, getStyleAttr) => `
+    <section ${getStyleAttr(styleVars)} class="section-pad bg-[var(--section-bg,transparent)]" ${a11yAttrs}>
       ${children.join("")}
     </section>
   `,

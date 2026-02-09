@@ -22,7 +22,7 @@ describe("Component Factory", () => {
       "test-id"
     );
 
-    expect(html).toContain('style="--color: red;"');
+    expect(html).toContain('style="--color:red;"');
     expect(html).toContain('id="test-id"');
     expect(html).toContain('aria-hidden="true"');
   });

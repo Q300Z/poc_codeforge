@@ -46,7 +46,8 @@ describe("Video Component", () => {
 
   it("should apply object-fit style", () => {
     const html = Video(meta, [], { "object-fit": "contain" }, "vid-fit");
-    expect(html).toContain("object-fit: contain");
+    expect(html).toContain("--object-fit:contain;");
+    expect(html).toContain("object-fit:var(--object-fit,cover);");
   });
 
   it("should render tracks", () => {

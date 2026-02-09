@@ -78,7 +78,7 @@ export const Hero = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr) => {
     const renderedTitle = Title(
       {
         content: meta.title || "Title",
@@ -105,7 +105,7 @@ export const Hero = createComponent({
       : "";
 
     return `
-    <section class="hero-section" style="${styleVars}" ${a11yAttrs}>
+    <section class="hero-section" ${getStyleAttr(styleVars)} ${a11yAttrs}>
       <div class="hero-content">
         ${renderedTitle}
         ${renderedSubtitle ? `<div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">${renderedSubtitle}</div>` : ""}

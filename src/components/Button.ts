@@ -91,13 +91,13 @@ export const Button = createComponent({
   .build();`,
     },
   ],
-  template: (meta, _children, styleVars, a11yAttrs) => {
+  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr) => {
     const action = meta.action || "";
     const isLink = action.startsWith("/") || action.startsWith("http") || action.endsWith(".html");
     const label = meta.label || "Click me";
 
     if (isLink)
-      return `<a href="${action}" style="${styleVars}" class="btn-base" ${a11yAttrs}>${label}</a>`;
-    return `<button type="button" style="${styleVars}" class="btn-base" ${a11yAttrs} onclick="${action}">${label}</button>`;
+      return `<a href="${action}" ${getStyleAttr(styleVars)} class="btn-base" ${a11yAttrs}>${label}</a>`;
+    return `<button type="button" ${getStyleAttr(styleVars)} class="btn-base" ${a11yAttrs} onclick="${action}">${label}</button>`;
   },
 });

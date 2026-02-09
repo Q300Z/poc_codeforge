@@ -46,7 +46,7 @@ const PROPERTY_MAP: Record<string, string> = {
 };
 
 /**
- * Transforme un objet de style en une chaîne d'attributs style HTML.
+ * Transforme un objet de style en une chaîne de propriétés CSS (sans l'attribut style="").
  * - Les propriétés de Layout (top, left, etc.) sont appliquées directement.
  * - Les Design Tokens et variantes responsives sont appliqués comme variables CSS.
  */
@@ -71,12 +71,19 @@ export function getStyleVariables(style?: Record<string, any>): string {
 
     // Si c'est une propriété de layout pure (sans suffixe comme -md)
     if (LAYOUT_UTILITIES.has(key) || LAYOUT_UTILITIES.has(cssKey)) {
-      result += `${cssKey}: ${normalizedValue}; `;
+      result += `${cssKey}:${normalizedValue};`;
     } else {
       // Sinon, c'est un token ou une variante responsive -> Variable CSS
-      result += `--${key}: ${normalizedValue}; `;
+      result += `--${key}:${normalizedValue};`;
     }
   }
 
-  return result.trim();
+  return result;
+}
+
+/**
+ * Enveloppe le contenu du style dans un attribut HTML style="" si non vide.
+ */
+export function getStyleAttr(content: string): string {
+  return content ? `style="${content}"` : "";
 }

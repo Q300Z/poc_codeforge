@@ -37,8 +37,8 @@ describe("Title Component", () => {
 
     // Check if the style variables are injected
     // Note: createComponent processes styles into --text-align: center, etc.
-    expect(html).toContain("text-align: var(--text-align, left)");
-    expect(html).toContain("font-weight: var(--font-weight, 800)");
+    expect(html).toContain("text-align:var(--text-align,left)");
+    expect(html).toContain("font-weight:var(--font-weight,800)");
 
     // In a real DOM test we would check the computed style, but here we check the template output string
     // containing the CSS variables mapping.
@@ -53,8 +53,8 @@ describe("Title Component", () => {
   it("should handle absolute positioning", () => {
     const style = { position: "absolute", x: 50, y: 100 };
     const html = Title(meta, [], style, "title-abs");
-    expect(html).toContain("position: absolute;");
-    expect(html).toContain("left: 50px;");
-    expect(html).toContain("top: 100px;");
+    expect(html).toContain("position:absolute;");
+    expect(html).toContain("left:50px;");
+    expect(html).toContain("top:100px;");
   });
 });

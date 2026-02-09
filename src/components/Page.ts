@@ -1,6 +1,8 @@
 import { BaseStyles, Node } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { SHARED_SCRIPTS } from "../utils/scripts.js";
+import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant Page. */
 export interface PageMeta {
@@ -60,10 +62,35 @@ export const Page = createComponent({
     "hero-text-default",
     "section-py",
   ],
-  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id) => {
+  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id, getStyleAttr) => {
     const cssPath = meta.cssPath || "style.css";
     const inlineCss = meta.inlineCss ? `<style>${meta.inlineCss}</style>` : "";
     const cssLink = meta.inlineCss ? "" : `<link rel="stylesheet" href="${cssPath}">`;
+
+    // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
+    let scriptsHtml = "";
+
+    // Scripts lourds (libs externes)
+    if (renderState.requiredScripts.has("map")) {
+      scriptsHtml += meta.mapLibCssContent
+        ? `<style>${meta.mapLibCssContent}</style>`
+        : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
+      scriptsHtml += meta.mapLibJsContent
+        ? `<script>${meta.mapLibJsContent}</script>`
+        : `<script src="./libs/leaflet.js"></script>`;
+    }
+
+    // Runtime CodeForge partagé
+    let runtimeJs = "";
+    renderState.requiredScripts.forEach((scriptId) => {
+      if (SHARED_SCRIPTS[scriptId as keyof typeof SHARED_SCRIPTS]) {
+        runtimeJs += SHARED_SCRIPTS[scriptId as keyof typeof SHARED_SCRIPTS];
+      }
+    });
+
+    if (runtimeJs) {
+      scriptsHtml += `<script>(function(){${runtimeJs}})();</script>`;
+    }
 
     return `
 <!DOCTYPE html>
@@ -75,10 +102,11 @@ export const Page = createComponent({
     ${cssLink}
     ${inlineCss}
 </head>
-<body class="site-wrapper h-full" style="${styleVars}" ${meta.debug ? 'data-debug-theme="true"' : ""}>
+<body class="site-wrapper h-full" ${getStyleAttr(styleVars)} ${meta.debug ? 'data-debug-theme="true"' : ""}>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
     <main class="main-content w-full max-w-none">${children.join("")}</main>
     <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>
+    ${scriptsHtml}
 </body>
 </html>`;
   },

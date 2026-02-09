@@ -84,11 +84,11 @@ export const Grid = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, children, styleVars, a11yAttrs) => {
+  template: (meta: Record<string, any>, children, styleVars, a11yAttrs, _id, getStyleAttr) => {
     const colClass = COLUMN_MAP[meta.cols as number] || "md:grid-cols-2";
     return `
       <section 
-        style="${styleVars}" 
+        ${getStyleAttr(styleVars)} 
         class="grid grid-cols-1 ${colClass} gap-${meta.gap || 8} w-full max-w-7xl mx-auto px-4 py-8 bg-[var(--grid-bg,transparent)]"
         ${a11yAttrs}
       >

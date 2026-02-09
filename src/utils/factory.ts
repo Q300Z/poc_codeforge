@@ -1,5 +1,5 @@
 import { Component, ComponentHTML } from "../types.js";
-import { getStyleVariables } from "./style.js";
+import { getStyleAttr, getStyleVariables } from "./style.js";
 import { LAYOUT_UTILITIES, validateStyle } from "./validator.js";
 
 /**
@@ -29,7 +29,8 @@ interface FactoryOptions {
     children: ComponentHTML[],
     styleVars: string,
     a11yAttrs: string,
-    id: string
+    id: string,
+    getStyleAttr: (content: string) => string
   ) => string;
 }
 
@@ -92,7 +93,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     const styleVars = getStyleVariables(style);
 
     // --- LOGIQUE D'ACCESSIBILITÉ AUTOMATIQUE ---
-    let a11yAttrs = `id="${finalId}" data-component-version="${finalMeta.version}"`;
+    let a11yAttrs = `id="${finalId}"`;
 
     // 1. Audio Description -> aria-label
     if (finalMeta.audioDescription) {
@@ -109,14 +110,14 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
       a11yAttrs += ` aria-hidden="true"`;
     }
 
-    // 4. Conservation des autres attributs aria-* manuels (Plus performant que filter/map)
+    // 4. Conservation des autres attributs aria-* manuels
     for (const key in finalMeta) {
       if (key.startsWith("aria-") && key !== "aria-label" && key !== "aria-hidden") {
         a11yAttrs += ` ${key}="${finalMeta[key]}"`;
       }
     }
 
-    return template(finalMeta, children, styleVars, a11yAttrs, finalId);
+    return template(finalMeta, children, styleVars, a11yAttrs, finalId, getStyleAttr);
   };
 
   const tokensObj = Array.isArray(authorizedTokens)

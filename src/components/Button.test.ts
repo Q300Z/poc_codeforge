@@ -42,6 +42,6 @@ describe("Button Component", () => {
   it("should apply custom CSS variables from style prop", () => {
     const style = { "btn-bg": "#ff0000" };
     const html = Button(meta, [], style, "btn-1");
-    expect(html).toContain("--btn-bg: #ff0000");
+    expect(html).toContain("--btn-bg:#ff0000");
   });
 });

@@ -1,6 +1,7 @@
 import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant Carousel. */
 export interface CarouselMeta {
@@ -79,10 +80,12 @@ export const Carousel = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr) => {
     const items = (meta.items as CarouselMeta["items"]) || [];
     const interval = meta.interval || 5000;
     const autoPlay = !!meta.autoPlay;
+
+    renderState.requireScript("carousel");
 
     const slides = items
       .map(
@@ -124,7 +127,7 @@ export const Carousel = createComponent({
 
     return `
     <div 
-      style="${styleVars}" 
+      ${getStyleAttr(styleVars)} 
       class="carousel-container relative overflow-hidden group rounded-[var(--border-radius,1rem)] h-[var(--height,clamp(300px,50vw,600px))]"
       ${a11yAttrs}
       role="region"
@@ -156,86 +159,7 @@ export const Carousel = createComponent({
         ${indicators}
       </div>
 
-      <script>
-        (function() {
-          const container = document.getElementById('${id}');
-          const wrapper = document.getElementById('wrapper-${id}');
-          const slides = wrapper.querySelectorAll('.carousel-slide');
-          const dots = container.querySelectorAll('.carousel-dot');
-          const prevBtn = document.getElementById('prev-${id}');
-          const nextBtn = document.getElementById('next-${id}');
-          
-          let currentIndex = 0;
-          let timer = null;
-          const activeClass = 'bg-[var(--carousel-color,white)]';
-          const inactiveClass = 'bg-[var(--carousel-color,white)]/50';
-
-          function update() {
-            wrapper.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
-            dots.forEach((dot, i) => {
-              dot.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
-              // Gestion des classes dynamiques pour la couleur active
-              if (i === currentIndex) {
-                 dot.classList.add('bg-[var(--carousel-color,white)]');
-                 dot.classList.remove('bg-[var(--carousel-color,white)]/50');
-              } else {
-                 dot.classList.remove('bg-[var(--carousel-color,white)]');
-                 dot.classList.add('bg-[var(--carousel-color,white)]/50');
-              }
-            });
-            slides.forEach((slide, i) => {
-              slide.setAttribute('aria-hidden', i !== currentIndex ? 'true' : 'false');
-            });
-          }
-
-          function next() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            update();
-          }
-
-          function prev() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            update();
-          }
-
-          function goTo(index) {
-            currentIndex = index;
-            update();
-          }
-
-          function startAutoPlay() {
-            if (${autoPlay} && !timer) {
-              timer = setInterval(next, ${interval});
-            }
-          }
-
-          function stopAutoPlay() {
-            if (timer) {
-              clearInterval(timer);
-              timer = null;
-            }
-          }
-
-          nextBtn.addEventListener('click', () => { next(); stopAutoPlay(); });
-          prevBtn.addEventListener('click', () => { prev(); stopAutoPlay(); });
-          
-          dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => { goTo(i); stopAutoPlay(); });
-          });
-
-          // Navigation clavier
-          container.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') { prev(); stopAutoPlay(); }
-            if (e.key === 'ArrowRight') { next(); stopAutoPlay(); }
-          });
-
-          container.addEventListener('mouseenter', stopAutoPlay);
-          container.addEventListener('mouseleave', startAutoPlay);
-
-          startAutoPlay();
-          update();
-        })();
-      </script>
+      <script>CodeForge.initCarousel('${id}', ${autoPlay}, ${interval});</script>
     </div>`;
   },
 });

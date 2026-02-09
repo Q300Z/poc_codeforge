@@ -1,6 +1,7 @@
 import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant AppBar. */
 export interface AppBarMeta {
@@ -82,15 +83,17 @@ export const AppBar = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _children, styleVars, a11yAttrs, id) => {
+  template: (meta: Record<string, any>, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
     const title = meta.title || "My App";
     const links = (meta.links as AppBarMeta["links"]) || [];
     const btnId = `btn-${id}`;
     const menuId = `menu-${id}`;
 
+    renderState.requireScript("appbar");
+
     return `
     <nav 
-      style="${styleVars}" 
+      ${getStyleAttr(styleVars)} 
       class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
       ${a11yAttrs}
     >
@@ -123,19 +126,7 @@ export const AppBar = createComponent({
           ${links.map((l) => `<a href="${l.href}" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">${l.label}</a>`).join("")}
         </div>
       </div>
-      <script>
-        (function() {
-          const btn = document.getElementById('${btnId}');
-          const menu = document.getElementById('${menuId}');
-          if (btn && menu) {
-            btn.addEventListener('click', () => {
-              const exp = btn.getAttribute('aria-expanded') === 'true';
-              btn.setAttribute('aria-expanded', !exp);
-              menu.classList.toggle('hidden');
-            });
-          }
-        })();
-      </script>
+      <script>CodeForge.initAppBar('${btnId}', '${menuId}');</script>
     </nav>`;
   },
 });
