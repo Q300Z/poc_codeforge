@@ -6,6 +6,8 @@ export * from "./utils/factory.js";
 export * from "./utils/style.js";
 export * from "./utils/validator.js";
 export * from "./utils/builder.js";
+export * from "./adapter/screendraft.js";
+export { isScreenDraft } from "./utils/detection.js";
 
 // Export des composants, types et builders autonomes
 export * from "./components/AppBar.js";
