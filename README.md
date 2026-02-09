@@ -63,26 +63,26 @@ npx codeforge ./data/site.json ./generated --watch
 
 | Commande | Description |
 | :--- | :--- |
-| `npm run dev` | Lance le build lib + génération + serveur Vite. |
-| `npm run build` | Compile la lib et génère le showcase complet. |
-| `npm run lint` | Vérifie le code TypeScript (ESLint) et CSS (Stylelint). |
-| `npm run test:a11y` | Lance l'audit d'accessibilité automatisé avec **pa11y-ci**. |
-| `npm run test:screendraft` | Teste le pipeline complet d'import ScreenDraft → Rendu. |
+| `pnpm run dev` | Lance le build lib + reset du JSON + serveur Vite. |
+| `pnpm run build` | Compile la lib et génère le showcase complet. |
+| `pnpm run lint` | Lance le linting global (TS, CSS) et valide la documentation. |
+| `pnpm run test` | Exécute les tests unitaires avec Vitest. |
+| `pnpm run test:all` | Suite complète : Unitaires + Build + E2E + Accessibilité. |
+| `pnpm run test:a11y` | Lance l'audit d'accessibilité avec **pa11y-ci**. |
 
 ---
 
 ## 🧪 Qualité & Tests
 
 Le projet suit des standards de qualité industriels :
-- **Tests Unitaires** : Couverture globale > 80% (Composants > 95%).
-- **Tests E2E** : Validation des scénarios de navigation et du rendu visuel avec Playwright.
-- **Accessibilité** : Validation WCAG 2.0 AA sur toutes les pages générées.
-- **Style CSS** : Validation et formatage automatique via Stylelint.
+- **Tests Unitaires** : Couverture globale > 95% (Composants = 100%).
+- **Tests E2E** : Validation des scénarios de navigation avec Playwright.
+- **Accessibilité** : Validation WCAG 2.0 AA et tests de structure de doc.
+- **Linters** : ESLint, Stylelint et Prettier intégrés.
 
 ```bash
-npm test              # Tests unitaires
-npm run test:e2e      # Tests Playwright
-npm run test:a11y     # Audit Accessibilité
+pnpm run lint         # Validation globale (Code + Doc)
+pnpm run test:all     # Pipeline complet de tests
 ```
 
 ---
