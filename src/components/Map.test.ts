@@ -11,29 +11,47 @@ describe("Map Component", () => {
   };
 
   describe("Template Rendering", () => {
-    it("should render a container and a script tag", () => {
+    it("should render a container and Leaflet assets", () => {
       const html = Map(meta, [], {}, "map-1");
       expect(html).toContain('id="map-container-map-1"');
-      expect(html).toContain("document.createElement('streaming-map')");
-      expect(html).toContain("map.setAttribute('src', 'data.geojson');");
+      expect(html).toContain('href="./libs/leaflet.css"');
+      expect(html).toContain('src="./libs/leaflet.js"');
     });
 
-    it("should render with optional attributes via setAttribute", () => {
+    it("should render inline assets if provided in meta", () => {
       const html = Map(
         {
           ...meta,
-          tileUrl: "https://tiles.com/{z}/{x}/{y}.png",
-          controls: "zoom,layers",
-          debug: true,
+          mapLibJsContent: "console.log('inline-js')",
+          mapLibCssContent: ".inline-css { color: red; }",
+        },
+        [],
+        {},
+        "map-1"
+      );
+      expect(html).toContain("<script>console.log('inline-js')</script>");
+      expect(html).toContain("<style>.inline-css { color: red; }</style>");
+    });
+
+    it("should render with custom view coordinates", () => {
+      const html = Map(
+        {
+          ...meta,
+          lat: 48.8566,
+          lng: 2.3522,
+          zoom: 12,
         },
         [],
         {},
         "map-1"
       );
 
-      expect(html).toContain("map.setAttribute('tile-url', 'https://tiles.com/{z}/{x}/{y}.png');");
-      expect(html).toContain("map.setAttribute('controls', 'zoom,layers');");
-      expect(html).toContain("map.setAttribute('debug', '');");
+      expect(html).toContain("setView([48.8566, 2.3522], 12)");
+    });
+
+    it("should handle optional controls", () => {
+      const html = Map({ ...meta, controls: "scale" }, [], {}, "map-1");
+      expect(html).toContain("L.control.scale()");
     });
 
     it("should be accessible", async () => {
@@ -61,12 +79,19 @@ describe("Map Component", () => {
       expect(html).toContain("--map-height: 600px");
     });
 
-    it("should include the library content in the module script", () => {
-      const html = Map(meta, [], {}, "map-1");
-      expect(html).toContain('<script type="module">');
-      // On vérifie une portion du code injecté (par exemple l'immédiate function)
-      expect(html).toContain("(function() {");
-      expect(html).toContain("const shadow = container.attachShadow({mode: 'open'});");
+    it("should render markers in the script", () => {
+      const html = Map(
+        {
+          ...meta,
+          markers: [{ lat: 48.8, lng: 2.3, name: "Paris" }],
+        },
+        [],
+        {},
+        "map-1"
+      );
+      expect(html).toContain('const markers = [{"lat":48.8,"lng":2.3,"name":"Paris"}]');
+      expect(html).toContain("L.marker([m.lat, m.lng])");
+      expect(html).toContain("marker.bindPopup(m.name)");
     });
   });
 
@@ -76,6 +101,7 @@ describe("Map Component", () => {
         .withSrc("custom.geojson")
         .withTileUrl("https://tiles.test")
         .withControls("zoom")
+        .withView(48.8, 2.3, 10)
         .withDebug(true)
         .withStyle({ "map-height": "400px" })
         .build();
@@ -84,6 +110,9 @@ describe("Map Component", () => {
       expect(node.meta.src).toBe("custom.geojson");
       expect(node.meta.tileUrl).toBe("https://tiles.test");
       expect(node.meta.controls).toBe("zoom");
+      expect(node.meta.lat).toBe(48.8);
+      expect(node.meta.lng).toBe(2.3);
+      expect(node.meta.zoom).toBe(10);
       expect(node.meta.debug).toBe(true);
       expect(node.style?.["map-height"]).toBe("400px");
     });

@@ -1,15 +1,17 @@
 # Map
 
 ## 🎯 Objectif
-Le composant **Map** est une carte interactive haute performance basée sur la bibliothèque `streaming-map`. Il est capable d'afficher des volumes massifs de données GeoJSON via un mécanisme de streaming et propose des contrôles de navigation personnalisables.
+Le composant **Map** est une carte interactive haute performance basée sur la bibliothèque **Leaflet 2.0**. Il permet d'afficher des fonds de carte raster et de superposer des données GeoJSON de manière fluide et accessible.
 
 ## ⚙️ Propriétés (Meta)
 | Propriété | Type | Description |
 | :--- | :--- | :--- |
-| `src` | `string` | URL du fichier GeoJSON (supporte le streaming). |
-| `tileUrl` | `string` | URL du fond de carte (tiles raster). |
-| `controls` | `string` | Liste des contrôles séparés par des virgules (`zoom,layers,reset,info,draw`). |
-| `debug` | `boolean` | Affiche un overlay de performance (FPS, mémoire). |
+| `src` | `string` | URL du fichier GeoJSON à superposer. |
+| `tileUrl` | `string` | URL du fond de carte (tiles raster, défaut: OpenStreetMap). |
+| `lat` / `lng` | `number` | Coordonnées du centre initial de la carte. |
+| `zoom` | `number` | Niveau de zoom initial (défaut: 6). |
+| `markers` | `Array` | Liste d'objets `{ lat, lng, name }` à afficher. |
+| `controls` | `string` | Liste des contrôles (`zoom`, `scale`). |
 
 ## 🎨 Design Tokens (Style)
 | Token | Description |
@@ -20,7 +22,8 @@ Le composant **Map** est une carte interactive haute performance basée sur la b
 ```typescript
 const map = new MapBuilder("world-map")
   .withSrc("https://api.data.com/points.geojson")
-  .withControls("zoom,layers,info")
+  .withView(46.6, 1.8, 6)
+  .withControls("zoom,scale")
   .withStyle({ "map-height": 500 })
   .build();
 ```
@@ -32,7 +35,10 @@ const map = new MapBuilder("world-map")
   "type": "Map",
   "meta": {
     "src": "https://api.data.com/points.geojson",
-    "controls": "zoom,layers,info"
+    "lat": 46.6,
+    "lng": 1.8,
+    "zoom": 6,
+    "controls": "zoom,scale"
   },
   "style": {
     "map-height": 500
@@ -41,13 +47,16 @@ const map = new MapBuilder("world-map")
 ```
 
 ## 🌐 Sortie HTML (Architecture)
-Le composant utilise un `Shadow DOM` pour encapsuler l'élément personnalisé `<streaming-map>` et isoler ses styles et sa logique.
+Le composant utilise les fichiers locaux Leaflet (situés dans `./libs/`) ou injecte directement le code source si l'option `--inline` est activée lors du build.
 ```html
 <div class="map-wrapper ..." id="world-map" style="--map-height: 500px;">
-  <div id="map-container-world-map">
-    <!-- Shadow Root -->
-    <streaming-map src="..." controls="..."></streaming-map>
-  </div>
+  <!-- Link ou Style (Inline) -->
+  <link rel="stylesheet" href="./libs/leaflet.css" />
+  <div id="map-container-world-map" class="leaflet-container"></div>
 </div>
-<script type="module" src="./libs/streaming-map-nodraw.js"></script>
+<!-- Script ou Script Content (Inline) -->
+<script src="./libs/leaflet.js"></script>
+<script type="module">
+  // Initialisation Leaflet L.map(...)
+</script>
 ```

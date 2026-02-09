@@ -2,15 +2,33 @@ import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
 
-/** Interface des métadonnées pour le composant Map. */
+/** Interface pour un marqueur sur la carte. */
+export interface MapMarker {
+  /** Latitude du point. */
+  lat: number;
+  /** Longitude du point. */
+  lng: number;
+  /** Libellé affiché au survol ou dans une popup. */
+  name?: string;
+}
+
+/** Interface des métadonnées pour le composant Map (Leaflet 2.0). */
 export interface MapMeta {
   /** URL du fichier GeoJSON à charger. */
   src?: string;
   /** URL du fond de carte (tiles raster). */
   tileUrl?: string;
-  /** Liste des contrôles à afficher (ex: "zoom,layers"). */
+  /** Liste des contrôles à afficher (ex: "zoom,scale"). */
   controls?: string;
-  /** Affiche un overlay de performance (FPS, mémoire). */
+  /** Latitude initiale. */
+  lat?: number;
+  /** Longitude initiale. */
+  lng?: number;
+  /** Zoom initial. */
+  zoom?: number;
+  /** Liste des marqueurs à afficher. */
+  markers?: MapMarker[];
+  /** Mode debug (optionnel). */
   debug?: boolean;
 }
 
@@ -22,7 +40,7 @@ export interface MapStyles {
 
 /**
  * @class MapBuilder
- * @description Constructeur fluide pour le composant Map.
+ * @description Constructeur fluide pour le composant Map utilisant Leaflet 2.0.
  */
 export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
   constructor(id: string) {
@@ -43,6 +61,13 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
     this.node.meta.controls = controls;
     return this;
   }
+  /** Définit la vue initiale. */
+  withView(lat: number, lng: number, zoom: number = 13): this {
+    this.node.meta.lat = lat;
+    this.node.meta.lng = lng;
+    this.node.meta.zoom = zoom;
+    return this;
+  }
   /** Active le mode debug. */
   withDebug(enabled: boolean = true): this {
     this.node.meta.debug = enabled;
@@ -52,76 +77,102 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
 
 /**
  * @constant Map
- * @description Composant de carte interactive utilisant streaming-map.
+ * @description Composant de carte interactive utilisant Leaflet 2.0.
  */
 export const Map = createComponent({
   name: "Map",
-  version: "1.1.0",
-  description: "Carte interactive haute performance capable de charger des GeoJSON massifs.",
+  version: "2.0.0-alpha.1",
+  description:
+    "Carte interactive utilisant Leaflet 2.0 (Alpha) pour un rendu fluide et accessible.",
   metaSchema: {
-    src: {
-      type: "string",
-      description: "URL du fichier GeoJSON",
-    },
-    tileUrl: {
-      type: "string",
-      description: "URL du fond de carte",
-    },
-    controls: {
-      type: "string",
-      description: "Liste des contrôles (zoom, layers, reset, print, info, draw)",
-    },
-    debug: {
-      type: "boolean",
-      description: "Affiche un overlay de performance",
-    },
-    libUrl: {
-      type: "string",
-      description: "URL de la bibliothèque streaming-map (défaut: ./libs/streaming-map-nodraw.js)",
-    },
+    src: { type: "string", description: "URL du fichier GeoJSON" },
+    tileUrl: { type: "string", description: "URL du fond de carte" },
+    controls: { type: "string", description: "Contrôles (zoom, scale)" },
+    lat: { type: "number", description: "Latitude initiale", default: 46.603354 },
+    lng: { type: "number", description: "Longitude initiale", default: 1.888334 },
+    zoom: { type: "number", description: "Zoom initial", default: 6 },
   },
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
   template: (meta, _children, styleVars, a11yAttrs, id) => {
     const containerId = `map-container-${id}`;
-    const libUrl = meta.libUrl || "./libs/streaming-map-nodraw.js";
-    const inlineLib = meta.mapLibContent
-      ? `<script type="module">${meta.mapLibContent}</script>`
-      : `<script type="module" src="${libUrl}"></script>`;
+    const lat = meta.lat || 46.603354;
+    const lng = meta.lng || 1.888334;
+    const zoom = meta.zoom || 6;
+    const tileUrl = meta.tileUrl || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+    // Gestion du CSS (Inline ou Local)
+    const leafletCss = meta.mapLibCssContent
+      ? `<style>${meta.mapLibCssContent}</style>`
+      : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
+
+    // Gestion du JS (Inline ou Local)
+    const leafletJs = meta.mapLibJsContent
+      ? `<script>${meta.mapLibJsContent}</script>`
+      : `<script src="./libs/leaflet.js"></script>`;
 
     return `
   <div class="map-wrapper flex-shrink-0" style="${styleVars}" ${a11yAttrs}>
+    ${leafletCss}
     <style>
-      /* Force le soulignement des liens pour l'accessibilité (notamment l'attribution MapLibre) */
-      #${containerId} a {
-        text-decoration: underline !important;
+      #${containerId} { 
+        width: 100%; 
+        height: var(--map-height, 400px); 
+        background: #f8f8f8;
+        border-radius: inherit;
       }
+      .leaflet-container { font-family: inherit; z-index: 1; }
+      .leaflet-container a { text-decoration: underline !important; }
     </style>
-    <div id="${containerId}" style="width: 100%; height: 100%;"></div>
+    <div id="${containerId}" class="leaflet-container"></div>
   </div>
-  ${inlineLib}
-  <script type="module">
   
-  (function() {
-    const container = document.getElementById('${containerId}');
-    if (container && !container.shadowRoot) {
-      const shadow = container.attachShadow({mode: 'open'});
-      const map = document.createElement('streaming-map');
-      map.setAttribute('style', 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;');
-      ${meta.src ? `map.setAttribute('src', '${meta.src}');` : ""}
-      ${meta.tileUrl ? `map.setAttribute('tile-url', '${meta.tileUrl}');` : ""}
-      ${meta.controls ? `map.setAttribute('controls', '${meta.controls}');` : ""}
-      ${meta.debug ? `map.setAttribute('debug', '');` : ""}
-      shadow.appendChild(map);
+  ${leafletJs}
+  <script type="module">
+    (function() {
+      const initMap = () => {
+        if (typeof L === 'undefined') {
+          console.error("[CodeForge Map] Leaflet n'est pas chargé.");
+          return;
+        }
+        const map = L.map('${containerId}').setView([${lat}, ${lng}], ${zoom});
+        
+        L.tileLayer('${tileUrl}', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-      // Fix accessibilité pour les liens dans le shadow DOM (attribution)
-      const style = document.createElement('style');
-      style.textContent = 'a { text-decoration: underline !important; }';
-      shadow.appendChild(style);
-    }
-  })();
-</script>
+        if ('${meta.controls || ""}'.includes('scale')) {
+          L.control.scale().addTo(map);
+        }
+
+        // Ajout des marqueurs
+        const markers = ${JSON.stringify(meta.markers || [])};
+        markers.forEach(m => {
+          const marker = L.marker([m.lat, m.lng]).addTo(map);
+          if (m.name) {
+            marker.bindPopup(m.name);
+          }
+        });
+
+        if ('${meta.src || ""}') {
+          fetch('${meta.src}')
+            .then(res => res.json())
+            .then(data => {
+              L.geoJSON(data).addTo(map);
+            })
+            .catch(err => console.error("[CodeForge Map] Erreur GeoJSON:", err));
+        }
+      };
+
+      if (window.L) {
+        initMap();
+      } else {
+        // Attendre que le script Leaflet soit chargé si nécessaire
+        window.addEventListener('load', initMap);
+      }
+    })();
+  </script>
     `;
   },
 });
