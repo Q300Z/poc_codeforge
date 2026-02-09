@@ -97,7 +97,6 @@ export const AppBar = createComponent({
       ${getStyleAttr(combinedStyle)} 
       class="sticky top-0 z-50 w-full border-b dark:bg-[var(--dark-appbar-bg,#111827)] dark:text-[var(--dark-appbar-text,#f9fafb)] dark:border-[var(--dark-appbar-border,#1f2937)]"
       ${a11yAttrs}
-      id="${id}"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">

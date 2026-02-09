@@ -153,7 +153,13 @@ function hslToHex(h: number, s: number, l: number): string {
  * Stratégie : Inversion de la luminosité avec un seuil de sécurité.
  */
 export function autoDarkColor(hex: string, isBackground: boolean = false): string {
-  if (!hex.startsWith("#")) return hex;
+  if (!hex.startsWith("#")) {
+    // Gestion simplifiée du rgba(255,255,255,...) pour les fonds
+    if (isBackground && hex.includes("255, 255, 255")) {
+      return hex.replace(/255, 255, 255/g, "31, 41, 55"); // Vers un gris foncé (gray-800)
+    }
+    return hex;
+  }
   const { h, s, l } = hexToHsl(hex);
 
   let newL;

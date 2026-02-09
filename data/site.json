@@ -2,14 +2,17 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-27T14:32:46.087Z"
+    "createdAt": "2026-01-27T14:32:46.087Z",
+    "defaultTheme": "system"
   },
   "style": {
     "brand-primary": "#4f46e5",
     "brand-secondary": "#06b6d4",
     "btn-bg-default": "var(--brand-primary)",
     "btn-text-default": "#ffffff",
-    "appbar-bg": "rgba(255, 255, 255, 0.8)",
+    "appbar-bg": "#ffffff",
+    "appbar-text": "#111827",
+    "appbar-border": "#e5e7eb",
     "hero-bg-default": "#ffffff",
     "section-py": 40
   },
