@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "appName": "CodeForge Theme Demo",
+    "version": "1.0.0",
+    "createdAt": "2026-02-09T00:00:00.000Z",
+    "defaultTheme": "system"
+  },
+  "layout": {
+    "header": {
+      "id": "main-nav",
+      "type": "AppBar",
+      "meta": {
+        "title": "Theme Demo",
+        "links": [
+          { "label": "Accueil", "href": "#" }
+        ]
+      }
+    }
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "content": {
+        "id": "root-section",
+        "type": "Section",
+        "style": { "section-bg": "#ffffff", "section-py": 80 },
+        "styleDark": { "section-bg": "#0f172a" },
+        "children": [
+          {
+            "id": "demo-hero",
+            "type": "Hero",
+            "meta": {
+              "title": "Contrast Guard en Action",
+              "subtitle": "Ce texte s'adapte automatiquement à son fond pour rester lisible."
+            },
+            "style": { "hero-text": "#111827" },
+            "styleDark": { "hero-text": "#f9fafb" }
+          },
+          {
+            "id": "box-container",
+            "type": "Grid",
+            "style": { "grid-cols": 2, "gap": 20 },
+            "children": [
+              {
+                "id": "light-box",
+                "type": "Box",
+                "style": { "box-bg": "#e2e8f0" },
+                "styleDark": { "box-bg": "#334155" }
+              },
+              {
+                "id": "dark-box",
+                "type": "Box",
+                "style": { "box-bg": "#1e293b" },
+                "styleDark": { "box-bg": "#94a3b8" }
+              }
+            ]
+          },
+          {
+            "id": "a11y-test-text",
+            "type": "Text",
+            "meta": {
+              "content": "Je suis un texte avec une mauvaise couleur forcée. Regardez la console pendant le build."
+            },
+            "style": { "text-color": "#eeeeee" },
+            "styleDark": { "text-color": "#222222" }
+          }
+        ]
+      }
+    }
+  ]
+}

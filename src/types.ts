@@ -52,6 +52,7 @@ export interface Node<TMeta = Record<string, any>, TStyle = Record<string, any>>
     createdAt: string;
   };
   style?: BaseStyles & TStyle;
+  styleDark?: BaseStyles & TStyle;
   children?: Node<any, any>[];
 }
 
@@ -61,6 +62,7 @@ export interface SiteNode {
     appName: string;
     version: string;
     createdAt: string;
+    defaultTheme?: "light" | "dark" | "system";
     [key: string]: unknown;
   };
   style?: BaseStyles;
@@ -79,5 +81,6 @@ export type Component = (
   meta: Record<string, any>,
   children: ComponentHTML[],
   style?: Record<string, any>,
-  id?: string
+  id?: string,
+  styleDark?: Record<string, any>
 ) => ComponentHTML;

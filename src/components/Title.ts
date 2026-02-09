@@ -11,6 +11,8 @@ export interface TitleMeta {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   /** Couleur de fond héritée pour le calcul de contraste. */
   parentBg?: string;
+  /** Couleur de fond sombre héritée. */
+  parentBgDark?: string;
 }
 
 /** Interface des Design Tokens pour le composant Title. */
@@ -74,7 +76,8 @@ export const Title = createComponent({
     styleVars,
     a11yAttrs,
     _id,
-    getStyleAttr
+    getStyleAttr,
+    styleVarsDark
   ) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);
     const tag = `h${level}`;
@@ -96,7 +99,7 @@ export const Title = createComponent({
 
     const extraStyles = `font-size:var(--font-size,${defaultSize});font-weight:var(--font-weight,800);text-align:var(--text-align,left);`;
 
-    // Validation du contraste
+    // 1. Validation du contraste Mode Clair
     let colorStyle = "color:var(--title-text,inherit);";
     if (meta.parentBg && styleVars.includes("--title-text:")) {
       const match = styleVars.match(/--title-text:([^;]+);/);
@@ -106,10 +109,21 @@ export const Title = createComponent({
       }
     }
 
+    // 2. Validation du contraste Mode Sombre
+    let colorStyleDark = "";
+    if (styleVarsDark.includes("--dark-title-text:")) {
+      const match = styleVarsDark.match(/--dark-title-text:([^;]+);/);
+      if (match) {
+        const darkBg = meta.parentBgDark || "#111827";
+        const validatedColor = validateContrast(match[1], darkBg, "Title (Dark)", _id);
+        colorStyleDark = `--dark-title-text:${validatedColor};`;
+      }
+    }
+
     return `
       <${tag} 
-        ${getStyleAttr(styleVars + extraStyles + colorStyle)} 
-        class="bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
+        ${getStyleAttr(styleVars + styleVarsDark + extraStyles + colorStyle + colorStyleDark)} 
+        class="bg-[var(--title-bg,transparent)] dark:bg-[var(--dark-title-bg,transparent)] tracking-tight leading-tight m-0 dark:text-[var(--dark-title-text,inherit)]"
         ${a11yAttrs}
       >
         ${finalContent}

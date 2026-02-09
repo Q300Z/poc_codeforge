@@ -78,9 +78,10 @@ export const Hero = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const renderedTitle = Title(
       {
+        ...meta, // Contient parentBg et parentBgDark
         content: meta.title || "Title",
         level: 1,
         version: "1.1.0",
@@ -88,24 +89,33 @@ export const Hero = createComponent({
       },
       [],
       { "title-text": "var(--hero-text, inherit)" },
-      `${id}-title`
+      `${id}-title`,
+      { "title-text": "var(--dark-hero-text, inherit)" }
     );
 
     const renderedSubtitle = meta.subtitle
       ? Text(
           {
+            ...meta,
             content: meta.subtitle,
             version: "1.0.0",
             createdAt: meta.createdAt,
           },
           [],
           {},
-          `${id}-subtitle`
+          `${id}-subtitle`,
+          {}
         )
       : "";
 
+    const combinedStyle = `${styleVars}${styleVarsDark}`;
+
     return `
-    <section class="hero-section" ${getStyleAttr(styleVars)} ${a11yAttrs}>
+    <section 
+      class="hero-section dark:bg-[var(--dark-hero-bg,linear-gradient(135deg,#111827_0%,#1f2937_100%))]" 
+      ${getStyleAttr(combinedStyle)} 
+      ${a11yAttrs}
+    >
       <div class="hero-content">
         ${renderedTitle}
         ${renderedSubtitle ? `<div class="hero-subtitle-wrapper text-lg leading-8 max-w-2xl mx-auto">${renderedSubtitle}</div>` : ""}

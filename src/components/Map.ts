@@ -97,7 +97,7 @@ export const Map = createComponent({
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const containerId = `map-container-${id}`;
     const lat = meta.lat || 46.603354;
     const lng = meta.lng || 1.888334;
@@ -105,7 +105,7 @@ export const Map = createComponent({
     const tileUrl = meta.tileUrl || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
     return `
-  <div class="map-wrapper flex-shrink-0" ${getStyleAttr(styleVars)} ${a11yAttrs}>
+  <div class="map-wrapper flex-shrink-0" ${getStyleAttr(styleVars + styleVarsDark)} ${a11yAttrs}>
     <style>
       #${containerId} { 
         width: 100%; 

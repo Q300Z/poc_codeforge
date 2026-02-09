@@ -170,15 +170,20 @@ export async function buildSite(
 function propagateMeta(node: any, metaToPass: Record<string, any>) {
   // Détection du fond actuel pour le calcul du contraste des enfants
   let currentBg = metaToPass.parentBg;
+  let currentBgDark = metaToPass.parentBgDark;
+
   if (node.style) {
     currentBg = node.style["section-bg"] || node.style["hero-bg"] || node.style["box-bg"] || currentBg;
   }
+  if (node.styleDark) {
+    currentBgDark = node.styleDark["section-bg"] || node.styleDark["hero-bg"] || node.styleDark["box-bg"] || currentBgDark;
+  }
 
-  node.meta = { ...node.meta, ...metaToPass, parentBg: currentBg };
+  node.meta = { ...node.meta, ...metaToPass, parentBg: currentBg, parentBgDark: currentBgDark };
   
   if (node.children && Array.isArray(node.children)) {
     for (const child of node.children) {
-      propagateMeta(child, { ...metaToPass, parentBg: currentBg });
+      propagateMeta(child, { ...metaToPass, parentBg: currentBg, parentBgDark: currentBgDark });
     }
   }
 }

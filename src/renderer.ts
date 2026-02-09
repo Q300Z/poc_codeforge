@@ -28,6 +28,7 @@ export function render(node: Node<any, any>): string {
     node.meta || {},
     childrenHTML,
     node.style || {},
-    node.id
+    node.id,
+    node.styleDark || {}
   );
 }

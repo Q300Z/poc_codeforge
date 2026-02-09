@@ -102,7 +102,7 @@ export function validateContrast(
  * - Les propriétés de Layout (top, left, etc.) sont appliquées directement.
  * - Les Design Tokens et variantes responsives sont appliqués comme variables CSS.
  */
-export function getStyleVariables(style?: Record<string, any>): string {
+export function getStyleVariables(style?: Record<string, any>, prefix: string = ""): string {
   if (!style) return "";
 
   let result = "";
@@ -122,11 +122,13 @@ export function getStyleVariables(style?: Record<string, any>): string {
     const cssKey = PROPERTY_MAP[key] || key;
 
     // Si c'est une propriété de layout pure (sans suffixe comme -md)
-    if (LAYOUT_UTILITIES.has(key) || LAYOUT_UTILITIES.has(cssKey)) {
+    if (!prefix && (LAYOUT_UTILITIES.has(key) || LAYOUT_UTILITIES.has(cssKey))) {
       result += `${cssKey}:${normalizedValue};`;
     } else {
       // Sinon, c'est un token ou une variante responsive -> Variable CSS
-      result += `--${key}:${normalizedValue};`;
+      // On applique le préfixe si fourni (utile pour le mode sombre)
+      const varName = prefix ? `${prefix}-${key}` : key;
+      result += `--${varName}:${normalizedValue};`;
     }
   }
 

@@ -81,7 +81,7 @@ export const Carousel = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr) => {
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const items = (meta.items as CarouselMeta["items"]) || [];
     const interval = meta.interval || 5000;
     const autoPlay = !!meta.autoPlay;
@@ -126,7 +126,7 @@ export const Carousel = createComponent({
 
     return `
     <div 
-      ${getStyleAttr(styleVars)} 
+      ${getStyleAttr(styleVars + styleVarsDark)} 
       class="carousel-container relative overflow-hidden group rounded-[var(--border-radius,1rem)] h-[var(--height,clamp(300px,50vw,600px))]"
       ${a11yAttrs}
       role="region"
@@ -140,14 +140,14 @@ export const Carousel = createComponent({
       <!-- Controls -->
       <button 
         id="prev-${id}"
-        class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)]"
+        class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)] dark:bg-[var(--dark-carousel-color,white)]/30 dark:hover:bg-[var(--dark-carousel-color,white)]/50 dark:text-[var(--dark-carousel-color,black)]"
         aria-label="Slide précédente"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
       </button>
       <button 
         id="next-${id}"
-        class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)]"
+        class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)] dark:bg-[var(--dark-carousel-color,white)]/30 dark:hover:bg-[var(--dark-carousel-color,white)]/50 dark:text-[var(--dark-carousel-color,black)]"
         aria-label="Slide suivante"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>

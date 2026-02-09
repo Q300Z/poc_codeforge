@@ -116,7 +116,7 @@ export const Select = createComponent({
     "select-border": "Couleur de la bordure",
     "select-radius": "Arrondi des angles",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const options = meta.options || [];
     const selectId = `${id}-select`;
     const placeholderHtml = meta.placeholder
@@ -134,7 +134,7 @@ export const Select = createComponent({
       .join("");
 
     return `
-      <div class="select-container" ${getStyleAttr(styleVars)} ${a11yAttrs}>
+      <div class="select-container" ${getStyleAttr(styleVars + styleVarsDark)} ${a11yAttrs}>
         <style>
           .select-container {
             display: flex;

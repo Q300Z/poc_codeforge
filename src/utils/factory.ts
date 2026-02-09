@@ -32,7 +32,8 @@ interface FactoryOptions {
     styleVars: string,
     a11yAttrs: string,
     id: string,
-    getStyleAttr: (content: string) => string
+    getStyleAttr: (content: string) => string,
+    styleVarsDark: string
   ) => string;
 }
 
@@ -76,7 +77,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
   // Pré-calcul du Set des clés autorisées pour des recherches O(1)
   const allowedKeysSet = new Set([...LAYOUT_UTILITIES, ...tokenKeys]);
 
-  const component: DocumentedComponent = (meta, children, style, id) => {
+  const component: DocumentedComponent = (meta, children, style, id, styleDark) => {
     // Enregistrement automatique du runtime si présent
     if (runtime) {
       renderState.requireScript(name);
@@ -99,7 +100,12 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     }
 
     validateStyle(name, style, allowedKeysSet);
+    if (styleDark) {
+      validateStyle(`${name} (Dark)`, styleDark, allowedKeysSet);
+    }
+
     const styleVars = getStyleVariables(style);
+    const styleVarsDark = getStyleVariables(styleDark, "dark");
 
     // --- LOGIQUE D'ACCESSIBILITÉ AUTOMATIQUE ---
     let a11yAttrs = `id="${finalId}"`;
@@ -126,7 +132,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
       }
     }
 
-    return template(finalMeta, children, styleVars, a11yAttrs, finalId, getStyleAttr);
+    return template(finalMeta, children, styleVars, a11yAttrs, finalId, getStyleAttr, styleVarsDark);
   };
 
   const tokensObj = Array.isArray(authorizedTokens)

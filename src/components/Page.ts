@@ -3,11 +3,14 @@ import { BaseStyles, Node } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent, DocumentedComponent } from "../utils/factory.js";
 import { renderState } from "../utils/state.js";
+import { themeRuntime } from "../runtime/theme.js";
 
 /** Interface des métadonnées pour le composant Page. */
 export interface PageMeta {
   /** Nom de l'application (utilisé dans la balise <title>). */
   appName: string;
+  /** Thème par défaut (light, dark, system). */
+  defaultTheme?: "light" | "dark" | "system";
   /** Active les contours en pointillés pour faciliter le design. */
   debug?: boolean;
 }
@@ -30,6 +33,11 @@ export class PageBuilder extends NodeBuilder<PageMeta, BaseStyles> {
     this.node.meta.appName = name;
     return this;
   }
+  /** Définit le thème par défaut. */
+  withDefaultTheme(theme: PageMeta["defaultTheme"]): this {
+    this.node.meta.defaultTheme = theme;
+    return this;
+  }
   /** Active ou désactive le mode debug visuel. */
   withDebug(enabled: boolean = true): this {
     this.node.meta.debug = enabled;
@@ -47,9 +55,9 @@ export class PageBuilder extends NodeBuilder<PageMeta, BaseStyles> {
  */
 export const Page = createComponent({
   name: "Page",
-  version: "1.4.0",
+  version: "1.5.0",
   description:
-    "Composant racine injectant le squelette HTML5, les styles globaux et les composants partagés (Header/Footer).",
+    "Composant racine injectant le squelette HTML5, le support des thèmes et les composants partagés.",
   authorizedTokens: [
     "brand-primary",
     "brand-secondary",
@@ -62,7 +70,7 @@ export const Page = createComponent({
     "hero-text-default",
     "section-py",
   ],
-  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id, getStyleAttr) => {
+  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
     const cssPath = meta.cssPath || "style.css";
     const cssLink = meta.isInline ? "" : `<link rel="stylesheet" href="${cssPath}">`;
 
@@ -70,6 +78,9 @@ export const Page = createComponent({
     let bodyScripts = "";
     let headScripts = "";
 
+    // Injection immédiate du thème pour éviter le flash
+    headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
+    
     // Scripts lourds (libs externes)
     if (renderState.requiredScripts.has("Map")) {
       headScripts += meta.mapLibCssContent
@@ -105,7 +116,7 @@ export const Page = createComponent({
     ${cssLink}
     ${headScripts}
 </head>
-<body class="site-wrapper h-full" ${getStyleAttr(styleVars)} ${meta.debug ? 'data-debug-theme="true"' : ""}>
+<body class="site-wrapper h-full" ${getStyleAttr(styleVars + styleVarsDark)} ${meta.debug ? 'data-debug-theme="true"' : ""}>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
     <main class="main-content w-full max-w-none">${children.join("")}</main>
     <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>

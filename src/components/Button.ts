@@ -91,13 +91,16 @@ export const Button = createComponent({
   .build();`,
     },
   ],
-  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr) => {
+  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
     const action = meta.action || "";
     const isLink = action.startsWith("/") || action.startsWith("http") || action.endsWith(".html");
     const label = meta.label || "Click me";
 
+    const combinedStyle = `${styleVars}${styleVarsDark}`;
+    const baseClasses = "btn-base dark:bg-[var(--dark-btn-bg,var(--dark-btn-bg-default,#3b82f6))] dark:text-[var(--dark-btn-text,var(--dark-btn-text-default,white))]";
+
     if (isLink)
-      return `<a href="${action}" ${getStyleAttr(styleVars)} class="btn-base" ${a11yAttrs}>${label}</a>`;
-    return `<button type="button" ${getStyleAttr(styleVars)} class="btn-base" ${a11yAttrs} onclick="${action}">${label}</button>`;
+      return `<a href="${action}" ${getStyleAttr(combinedStyle)} class="${baseClasses}" ${a11yAttrs}>${label}</a>`;
+    return `<button type="button" ${getStyleAttr(combinedStyle)} class="${baseClasses}" ${a11yAttrs} onclick="${action}">${label}</button>`;
   },
 });
