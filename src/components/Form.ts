@@ -62,7 +62,7 @@ export const Form = createComponent({
     "form-bg": "Couleur de fond",
     "form-btn-bg": "Couleur du bouton",
   },
-  template: (meta, children, styleVars, a11yAttrs, _id, getStyleAttr, _styleVarsDark) => {
+  template: (meta, children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
     const buttonText = meta.buttonText || "Envoyer";
     const action = meta.action || "#";
     const method = meta.method || "POST";

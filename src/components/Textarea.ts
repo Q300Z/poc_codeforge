@@ -84,7 +84,7 @@ export const Textarea = createComponent({
     "textarea-border": "Couleur de la bordure",
     "textarea-radius": "Arrondi des angles",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const textareaId = `${id}-textarea`;
     const rows = meta.rows || 4;
     const value = meta.value || "";

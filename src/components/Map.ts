@@ -97,7 +97,7 @@ export const Map = createComponent({
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const containerId = `map-container-${id}`;
     const lat = meta.lat || 46.603354;
     const lng = meta.lng || 1.888334;

@@ -87,7 +87,7 @@ export const FormField = createComponent({
     "field-radius": "Arrondi",
     "font-size": "Taille de police",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
     const type = meta.type || "text";
     const label = meta.label || "";
     const placeholder = meta.placeholder || "";

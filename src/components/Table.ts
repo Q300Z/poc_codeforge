@@ -83,7 +83,7 @@ export const Table = createComponent({
     "table-header-text": "Couleur du texte de l'en-tête",
     "table-row-even-bg": "Couleur de fond des lignes paires",
   },
-  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, _styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
     const headers = meta.headers || [];
     const rows = meta.rows || [];
     const caption = meta.caption ? `<caption>${meta.caption}</caption>` : "";
