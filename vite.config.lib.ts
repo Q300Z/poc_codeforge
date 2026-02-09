@@ -12,8 +12,6 @@ export default defineConfig({
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
         cli: path.resolve(__dirname, "src/cli.ts"),
-        "reset-site-json": path.resolve(__dirname, "src/reset-site-json.ts"),
-        "gen-docs": path.resolve(__dirname, "src/gen-docs.ts"),
         "adapter-screendraft": path.resolve(__dirname, "src/adapter/screendraft.ts"),
       },
       formats: ["es"],

@@ -25,8 +25,8 @@ import {
   TextareaBuilder,
   TitleBuilder,
   VideoBuilder,
-} from "./index.js";
-import { Placeholder } from "./utils/placeholder.js";
+} from "../src/index.js";
+import { Placeholder } from "../src/utils/placeholder.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
