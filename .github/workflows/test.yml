@@ -46,6 +46,8 @@ jobs:
       run: pnpm install --frozen-lockfile
     - name: Build Site
       run: pnpm run build
+    - name: Install Puppeteer Chrome
+      run: pnpm exec puppeteer browsers install chrome
     - name: Run Accessibility Tests (pa11y)
       run: pnpm run test:a11y
     - name: Install Playwright Browsers
