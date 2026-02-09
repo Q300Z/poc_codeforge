@@ -25,6 +25,8 @@ export class ContainerBuilder extends NodeBuilder<any, ContainerStyles> {
 export const Container = createComponent({
   name: "Container",
   version: "1.1.0",
+  description:
+    "Conteneur qui centre son contenu horizontalement avec une largeur maximale ajustable.",
   authorizedTokens: ["container-width"],
   template: (_meta, children, styleVars, a11yAttrs) => `
     <div style="${styleVars}" class="container-center" ${a11yAttrs}>

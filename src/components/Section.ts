@@ -27,6 +27,8 @@ export class SectionBuilder extends NodeBuilder<any, SectionStyles> {
 export const Section = createComponent({
   name: "Section",
   version: "1.1.0",
+  description:
+    "Unité structurelle horizontale pleine largeur utilisée pour découper la page en blocs thématiques.",
   authorizedTokens: ["section-bg", "section-py"],
   template: (_meta, children, styleVars, a11yAttrs) => `
     <section style="${styleVars}" class="section-pad bg-[var(--section-bg,transparent)]" ${a11yAttrs}>

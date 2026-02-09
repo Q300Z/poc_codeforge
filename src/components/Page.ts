@@ -46,6 +46,8 @@ export class PageBuilder extends NodeBuilder<PageMeta, BaseStyles> {
 export const Page = createComponent({
   name: "Page",
   version: "1.4.0",
+  description:
+    "Composant racine injectant le squelette HTML5, les styles globaux et les composants partagés (Header/Footer).",
   authorizedTokens: [
     "brand-primary",
     "brand-secondary",

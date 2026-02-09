@@ -47,6 +47,8 @@ export class TextBuilder extends NodeBuilder<TextMeta, TextStyles> {
 export const Text = createComponent({
   name: "Text",
   version: "1.0.0",
+  description:
+    "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs) => {
     const tag = meta.tag || "p";

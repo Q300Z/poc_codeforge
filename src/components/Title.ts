@@ -62,6 +62,8 @@ export class TitleBuilder extends NodeBuilder<TitleMeta, TitleStyles> {
 export const Title = createComponent({
   name: "Title",
   version: "1.2.0",
+  description:
+    "Titre sémantique (H1-H6) avec hiérarchie visuelle fluide et support de l'accessibilité native.",
   authorizedTokens: ["font-size", "title-text", "title-bg", "font-weight", "text-align"],
   template: (meta: Record<string, any>, children: string[], styleVars, a11yAttrs) => {
     const level = Math.min(Math.max(Number(meta.level) || 1, 1), 6);

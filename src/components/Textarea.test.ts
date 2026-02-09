@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { axe } from "vitest-axe";
 
-import { Textarea } from "./Textarea.js";
+import { Textarea, TextareaBuilder } from "./Textarea.js";
 
 describe("Textarea Component", () => {
   const meta = {
@@ -26,6 +26,19 @@ describe("Textarea Component", () => {
     expect(html).toContain("Hello World");
   });
 
+  it("should use default rows if not provided", () => {
+    const metaWithoutRows = { ...meta };
+    delete (metaWithoutRows as any).rows;
+    const html = Textarea(metaWithoutRows, [], {}, "textarea-1");
+    expect(html).toContain('rows="4"');
+  });
+
+  it("should handle empty values", () => {
+    const html = Textarea({ label: "L", name: "n" }, [], {}, "t1");
+    expect(html).toContain('placeholder=""');
+    expect(html).toContain("</textarea>");
+  });
+
   it("should be accessible", async () => {
     const html = Textarea(meta, [], {}, "textarea-1");
     const container = document.createElement("main");
@@ -44,5 +57,24 @@ describe("Textarea Component", () => {
     expect(labelMatch).not.toBeNull();
     expect(textareaMatch).not.toBeNull();
     expect(labelMatch![1]).toBe(textareaMatch![1]);
+  });
+
+  describe("TextareaBuilder", () => {
+    it("should build a valid Textarea node", () => {
+      const node = new TextareaBuilder("area-1")
+        .withLabel("Your Message")
+        .withName("msg")
+        .withPlaceholder("Type here")
+        .withRows(10)
+        .withValue("Default text")
+        .build();
+
+      expect(node.type).toBe("Textarea");
+      expect(node.meta.label).toBe("Your Message");
+      expect(node.meta.name).toBe("msg");
+      expect(node.meta.placeholder).toBe("Type here");
+      expect(node.meta.rows).toBe(10);
+      expect(node.meta.value).toBe("Default text");
+    });
   });
 });
