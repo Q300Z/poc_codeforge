@@ -56,6 +56,9 @@
     "lint:docs": "vitest run src/components/documentation.test.ts",
     "import:screendraft": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node examples/demo-adapter.ts",
     "test:screendraft": "npm run import:screendraft && node dist/cli.js data/site-from-screendraft.json dist-screendraft",
+    "bench": "vitest bench",
+    "profile": "npm run build:lib && node --prof dist/cli.js data/site.json generated",
+    "profile:analyze": "node --prof-process isolate-*-v8.log > profile_report.txt && echo 'Rapport généré dans profile_report.txt'",
     "demo": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node examples/demo.ts",
     "release": "release-it"
   },

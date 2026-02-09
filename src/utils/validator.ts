@@ -6,7 +6,7 @@
 /**
  * Liste des propriétés CSS natives gérées directement comme attributs style.
  */
-export const LAYOUT_UTILITIES = [
+export const LAYOUT_UTILITIES = new Set([
   "width",
   "height",
   "min-width",
@@ -30,7 +30,7 @@ export const LAYOUT_UTILITIES = [
   "opacity",
   "border-radius",
   "border",
-];
+]);
 
 /**
  * Valide que les clés de style fournies à un composant sont autorisées.
@@ -38,25 +38,23 @@ export const LAYOUT_UTILITIES = [
  *
  * @param {string} componentName - Nom du composant (pour le log).
  * @param {Record<string, any>} style - Objet de style à valider.
- * @param {string[]} authorizedTokens - Liste des Design Tokens propres au composant.
+ * @param {Set<string>} allowedKeys - Set des clés autorisées (Layout + Tokens).
  */
 export function validateStyle(
   componentName: string,
   style: Record<string, any> | undefined,
-  authorizedTokens: string[]
+  allowedKeys: Set<string>
 ): void {
   if (!style) return;
 
-  const allowedKeys = [...LAYOUT_UTILITIES, ...authorizedTokens];
-
-  Object.keys(style).forEach((key) => {
+  for (const key in style) {
     // On extrait la racine si c'est une variante responsive (ex: width-md -> width)
-    const baseKey = key.split("-")[0];
+    const baseKey = key.includes("-") ? key.split("-")[0] : key;
 
-    if (!allowedKeys.includes(key) && !allowedKeys.includes(baseKey)) {
+    if (!allowedKeys.has(key) && !allowedKeys.has(baseKey)) {
       console.warn(
         `[Design System] ${componentName} warning: Utilisation de tokens non autorisés : ${key}`
       );
     }
-  });
+  }
 }

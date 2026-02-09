@@ -1,6 +1,6 @@
 import { Component, ComponentHTML } from "../types.js";
 import { getStyleVariables } from "./style.js";
-import { validateStyle } from "./validator.js";
+import { LAYOUT_UTILITIES, validateStyle } from "./validator.js";
 
 /**
  * Options de configuration pour la Factory.
@@ -68,45 +68,53 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     ? authorizedTokens
     : Object.keys(authorizedTokens);
 
+  // Pré-calcul du Set des clés autorisées pour des recherches O(1)
+  const allowedKeysSet = new Set([...LAYOUT_UTILITIES, ...tokenKeys]);
+
   const component: DocumentedComponent = (meta, children, style, id) => {
-    let finalId = id;
-    if (!finalId) {
+    // Lazy ID generation
+    const finalId = id || `gen-${Math.random().toString(36).slice(2, 9)}`;
+
+    if (!id) {
       console.error(`[CodeForge] ID manquant pour : ${name}`);
-      finalId = `gen-${Math.random().toString(36).slice(2, 9)}`;
     }
 
-    const finalMeta = { ...meta };
-    if (!finalMeta.version) finalMeta.version = version;
-    if (!finalMeta.createdAt) finalMeta.createdAt = new Date().toISOString();
+    // Gestion paresseuse des métadonnées obligatoires
+    // On ne clone que si nécessaire (si version ou createdAt manquent)
+    let finalMeta = meta;
+    if (!finalMeta.version || !finalMeta.createdAt) {
+      finalMeta = { ...meta };
+      if (!finalMeta.version) finalMeta.version = version;
+      if (!finalMeta.createdAt) finalMeta.createdAt = new Date().toISOString();
+    }
 
-    validateStyle(name, style, tokenKeys);
+    validateStyle(name, style, allowedKeysSet);
     const styleVars = getStyleVariables(style);
 
     // --- LOGIQUE D'ACCESSIBILITÉ AUTOMATIQUE ---
-    const a11y: string[] = [];
+    let a11yAttrs = `id="${finalId}" data-component-version="${finalMeta.version}"`;
 
     // 1. Audio Description -> aria-label
     if (finalMeta.audioDescription) {
-      a11y.push(`aria-label="${finalMeta.audioDescription}"`);
+      a11yAttrs += ` aria-label="${finalMeta.audioDescription}"`;
     }
 
     // 2. Rôle sémantique
     if (finalMeta.ariaRole) {
-      a11y.push(`role="${finalMeta.ariaRole}"`);
+      a11yAttrs += ` role="${finalMeta.ariaRole}"`;
     }
 
     // 3. Invisibilité sémantique
     if (finalMeta.ariaHidden) {
-      a11y.push(`aria-hidden="true"`);
+      a11yAttrs += ` aria-hidden="true"`;
     }
 
-    // 4. Conservation des autres attributs aria-* manuels
-    const customAria = Object.entries(finalMeta)
-      .filter(([key]) => key.startsWith("aria-") && key !== "aria-label" && key !== "aria-hidden")
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(" ");
-
-    const a11yAttrs = `id="${finalId}" data-component-version="${finalMeta.version}" ${a11y.join(" ")} ${customAria}`;
+    // 4. Conservation des autres attributs aria-* manuels (Plus performant que filter/map)
+    for (const key in finalMeta) {
+      if (key.startsWith("aria-") && key !== "aria-label" && key !== "aria-hidden") {
+        a11yAttrs += ` ${key}="${finalMeta[key]}"`;
+      }
+    }
 
     return template(finalMeta, children, styleVars, a11yAttrs, finalId);
   };
