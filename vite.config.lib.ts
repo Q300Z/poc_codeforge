@@ -12,7 +12,6 @@ export default defineConfig({
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
         cli: path.resolve(__dirname, "src/cli.ts"),
-        "adapter-screendraft": path.resolve(__dirname, "src/adapter/screendraft.ts"),
       },
       formats: ["es"],
       fileName: (format, entryName) => `${entryName}.js`,
@@ -22,12 +21,13 @@ export default defineConfig({
     },
     outDir: "dist",
     emptyOutDir: true,
+    sourcemap: true,
   },
   plugins: [
     dts({ 
-      rollupTypes: false,
+      rollupTypes: true,
       include: ["src/**/*.ts"],
-      exclude: ["src/**/*.test.ts"]
+      exclude: ["src/**/*.test.ts", "src/test/**"]
     })
   ],
 });

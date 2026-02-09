@@ -42,7 +42,7 @@
     "dev": "npm run build:lib && npm run reset:site && vite",
     "dev:file": "VITE_JSON_PATH=$JSON_PATH vite",
     "build": "npm run build:lib && npm run build:showcase",
-    "build:lib": "vite build --config vite.config.lib.ts && npx @tailwindcss/cli -i src/style.css -o dist/style.css && cp -r libs dist/",
+    "build:lib": "vite build --config vite.config.lib.ts && npx @tailwindcss/cli -i src/style.css -o dist/style.css --minify && cp -r libs dist/",
     "build:showcase": "node dist/cli.js -i data/site.json generated",
     "reset:site": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' node examples/reset-site-json.ts",
     "clean": "rm -rf dist generated coverage",
