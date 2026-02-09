@@ -100,7 +100,7 @@ export const Title = createComponent({
     const extraStyles = `font-size:var(--font-size,${defaultSize});font-weight:var(--font-weight,800);text-align:var(--text-align,left);`;
 
     // 1. Validation du contraste Mode Clair
-    let colorVar = "--title-text:inherit;";
+    let colorVar = "";
     if (meta.parentBg && styleVars.includes("--title-text:")) {
       const match = styleVars.match(/--title-text:([^;]+);/);
       if (match) {
@@ -120,10 +120,12 @@ export const Title = createComponent({
       }
     }
 
+    const combined = styleVars + styleVarsDark + extraStyles + colorVar + colorVarDark + "background-color:var(--title-bg,transparent);color:var(--title-text,inherit);";
+
     return `
       <${tag} 
-        ${getStyleAttr(styleVars + styleVarsDark + extraStyles + colorVar + colorVarDark)} 
-        class="bg-[var(--title-bg,transparent)] dark:bg-[var(--dark-title-bg,transparent)] text-[var(--title-text)] dark:text-[var(--dark-title-text)] tracking-tight leading-tight m-0"
+        ${getStyleAttr(combined)} 
+        class="tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >
         ${finalContent}

@@ -128,8 +128,14 @@ export async function buildSite(
     
     pageContent.style = { ...siteData.style, ...pageContent.style };
 
-    if (siteData.layout?.header) pageContent.meta.renderedHeader = render(siteData.layout.header);
-    if (siteData.layout?.footer) pageContent.meta.renderedFooter = render(siteData.layout.footer);
+    if (siteData.layout?.header) {
+      propagateMeta(siteData.layout.header, {});
+      pageContent.meta.renderedHeader = render(siteData.layout.header);
+    }
+    if (siteData.layout?.footer) {
+      propagateMeta(siteData.layout.footer, {});
+      pageContent.meta.renderedFooter = render(siteData.layout.footer);
+    }
 
     propagateMeta(pageContent, { 
       isInline: options.inline,

@@ -28,13 +28,13 @@ export const Box = createComponent({
   description:
     "Un bloc de structure simple qui hérite des styles de base (layout, dimensions, etc.).",
   authorizedTokens: ["box-bg"],
-  template: (_meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (_meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, _styleVarsDark) => {
     // On combine les variables de layout avec les variables de couleur
-    const combinedStyle = `${styleVars}${styleVarsDark}`;
+    const combinedStyle = `background-color:var(--box-bg,#e5e7eb);${styleVars}`;
     return `
     <div 
       ${getStyleAttr(combinedStyle)} 
-      class="min-h-[100px] bg-[var(--box-bg,#e5e7eb)] dark:bg-[var(--dark-box-bg,#1f2937)]"
+      class="min-h-[100px]"
       ${a11yAttrs}
     ></div>
   `;

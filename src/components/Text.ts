@@ -53,18 +53,18 @@ export const Text = createComponent({
   description:
     "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
-    template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
-      const tag = meta.tag || "p";
-  
-      // 1. Validation du contraste Mode Clair
-      let colorVar = "--text-color:inherit;";
-      if (meta.parentBg && styleVars.includes("--text-color:")) {
-        const match = styleVars.match(/--text-color:([^;]+);/);
-        if (match) {
-          const validatedColor = validateContrast(match[1], meta.parentBg, "Text", _id);
-          colorVar = `--text-color:${validatedColor};`;
-        }
+  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+    const tag = meta.tag || "p";
+
+    // 1. Validation du contraste Mode Clair
+    let colorVar = "";
+    if (meta.parentBg && styleVars.includes("--text-color:")) {
+      const match = styleVars.match(/--text-color:([^;]+);/);
+      if (match) {
+        const validatedColor = validateContrast(match[1], meta.parentBg, "Text", _id);
+        colorVar = `--text-color:${validatedColor};`;
       }
+    }
   
       // 2. Validation du contraste Mode Sombre
       let colorVarDark = "";
@@ -77,15 +77,29 @@ export const Text = createComponent({
         }
       }
   
-      return `
-        <${tag} 
-          ${getStyleAttr(styleVars + styleVarsDark + colorVar + colorVarDark)} 
-          class="leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)] text-[var(--text-color)] dark:text-[var(--dark-text-color)]"
-          ${a11yAttrs}
-        >
-          ${meta.content || ""}
-        </${tag}>
-      `;
+          const combined = styleVars + styleVarsDark + colorVar + colorVarDark + "color:var(--text-color,inherit);";
+  
+      
+  
+          return `
+  
+            <${tag} 
+  
+              ${getStyleAttr(combined)} 
+  
+              class="leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
+  
+              ${a11yAttrs}
+  
+            >
+  
+              ${meta.content || ""}
+  
+            </${tag}>
+  
+          `;
+  
+      
     },
   
 });
