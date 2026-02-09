@@ -5,10 +5,16 @@ node_modules/
 # Build
 dist/
 build/
+generated/
+test-inline/
+dist-screendraft/
+dist-inline-test/
 
 # Tests
 coverage/
 .vitest-results/
+playwright-report/
+test-results/
 
 # OS files
 .DS_Store
@@ -18,3 +24,5 @@ Thumbs.db
 output.html
 test-output.html
 *.log
+data/site-from-screendraft.json
+pnpm-workspace.yaml
