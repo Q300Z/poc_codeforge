@@ -290,6 +290,91 @@ describe("ScreenDraftAdapter", () => {
   });
 
   describe("HTML Generation", () => {
+    it("should transform Map component with markers and src", () => {
+      const data: ScreenDraftData = {
+        meta: { appName: "Test", createdAt: "", version: "1" },
+        components: [
+          {
+            id: "map-1",
+            type: "map",
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            mapCenter: { lat: 48, lng: 2 },
+            mapMarkers: [{ id: "m1", lat: 48.1, lng: 2.1, name: "M1" }],
+            mapSrc: "data.geojson",
+          },
+        ],
+      };
+      const result = ScreenDraftAdapter.transform(data);
+      const mapNode = result.pages[0].content.children[0];
+      expect(mapNode.meta.markers).toHaveLength(1);
+      expect(mapNode.meta.src).toBe("data.geojson");
+      expect(mapNode.meta.lat).toBe(48);
+    });
+
+    it("should transform Carousel with images", () => {
+      const data: ScreenDraftData = {
+        meta: { appName: "Test", createdAt: "", version: "1" },
+        components: [
+          {
+            id: "c-1",
+            type: "carousel",
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            carouselImages: [{ id: "i1", src: "img1.jpg", alt: "Alt 1" }],
+          },
+        ],
+      };
+      const result = ScreenDraftAdapter.transform(data);
+      const carouselNode = result.pages[0].content.children[0];
+      expect(carouselNode.meta.items).toHaveLength(1);
+      expect(carouselNode.meta.items[0].alt).toBe("Alt 1");
+    });
+
+    it("should handle Select and Textarea with placeholders", () => {
+      const data: ScreenDraftData = {
+        meta: { appName: "Test", createdAt: "", version: "1" },
+        components: [
+          {
+            id: "s-1",
+            type: "select",
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            selectPlaceholder: "Choose...",
+          },
+          {
+            id: "t-1",
+            type: "textarea",
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            textareaPlaceholder: "Write...",
+            textareaRows: 10,
+          },
+        ],
+      };
+      const result = ScreenDraftAdapter.transform(data);
+      expect(result.pages[0].content.children[0].meta.placeholder).toBe("Choose...");
+      expect(result.pages[0].content.children[1].meta.placeholder).toBe("Write...");
+      expect(result.pages[0].content.children[1].meta.rows).toBe(10);
+    });
+
+    it("should warn and skip unknown component types", () => {
+      const data: ScreenDraftData = {
+        meta: { appName: "Test", createdAt: "", version: "1" },
+        components: [{ id: "u-1", type: "unknown" as any, x: 0, y: 0, width: 100, height: 100 }],
+      };
+      const result = ScreenDraftAdapter.transform(data);
+      expect(result.pages[0].content.children || []).toHaveLength(0);
+    });
+
     it("should render full HTML correctly from ScreenDraft data", () => {
       const site = ScreenDraftAdapter.transform(mockData);
       const html = render(site.pages[0].content);
