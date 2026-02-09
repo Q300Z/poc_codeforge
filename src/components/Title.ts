@@ -1,6 +1,7 @@
 import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { validateContrast } from "../utils/style.js";
 
 /** Interface des métadonnées pour le composant Title. */
 export interface TitleMeta {
@@ -8,6 +9,8 @@ export interface TitleMeta {
   content: string;
   /** Niveau sémantique (1=H1, 2=H2, ..., 6=H6). Défaut : 1. */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Couleur de fond héritée pour le calcul de contraste. */
+  parentBg?: string;
 }
 
 /** Interface des Design Tokens pour le composant Title. */
@@ -93,10 +96,20 @@ export const Title = createComponent({
 
     const extraStyles = `font-size:var(--font-size,${defaultSize});font-weight:var(--font-weight,800);text-align:var(--text-align,left);`;
 
+    // Validation du contraste
+    let colorStyle = "color:var(--title-text,inherit);";
+    if (meta.parentBg && styleVars.includes("--title-text:")) {
+      const match = styleVars.match(/--title-text:([^;]+);/);
+      if (match) {
+        const validatedColor = validateContrast(match[1], meta.parentBg, "Title", _id);
+        colorStyle = `color:${validatedColor};`;
+      }
+    }
+
     return `
       <${tag} 
-        ${getStyleAttr(styleVars + extraStyles)} 
-        class="text-[var(--title-text,inherit)] bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
+        ${getStyleAttr(styleVars + extraStyles + colorStyle)} 
+        class="bg-[var(--title-bg,transparent)] tracking-tight leading-tight m-0"
         ${a11yAttrs}
       >
         ${finalContent}

@@ -138,14 +138,18 @@ export async function buildSite(
     });
 
     let html = render(pageContent);
-
     // Optimisation CSS par page en mode Inline
     if (options.inline && globalCssContent) {
       const purged = await new PurgeCSS().purge({
         content: [{ extension: "html", raw: html }],
         css: [{ raw: globalCssContent }],
+        // Extracteur recommandé par la communauté Tailwind (voir vos liens)
+        defaultExtractor: (content) => {
+          // Capture les classes avec :, [], #, (), /, etc.
+          return content.match(/[A-Za-z0-9-_/:!\[\]#%.]+/g) || [];
+        },
         safelist: {
-          standard: [/^leaflet-/, /^carousel-/], // Garder les styles dynamiques
+          standard: [/^leaflet-/, /^carousel-/, /^bg-/, /^min-h-/],
           deep: [/leaflet/, /carousel/]
         }
       });
@@ -164,10 +168,17 @@ export async function buildSite(
  * Propage récursivement des métadonnées à tous les enfants d'un nœud.
  */
 function propagateMeta(node: any, metaToPass: Record<string, any>) {
-  node.meta = { ...node.meta, ...metaToPass };
+  // Détection du fond actuel pour le calcul du contraste des enfants
+  let currentBg = metaToPass.parentBg;
+  if (node.style) {
+    currentBg = node.style["section-bg"] || node.style["hero-bg"] || node.style["box-bg"] || currentBg;
+  }
+
+  node.meta = { ...node.meta, ...metaToPass, parentBg: currentBg };
+  
   if (node.children && Array.isArray(node.children)) {
     for (const child of node.children) {
-      propagateMeta(child, metaToPass);
+      propagateMeta(child, { ...metaToPass, parentBg: currentBg });
     }
   }
 }

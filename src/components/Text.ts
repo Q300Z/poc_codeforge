@@ -1,6 +1,7 @@
 import { CSSColor, CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
+import { validateContrast } from "../utils/style.js";
 
 /** Interface des métadonnées pour le composant Text. */
 export interface TextMeta {
@@ -8,6 +9,8 @@ export interface TextMeta {
   content: string;
   /** La balise HTML à utiliser pour le rendu (p, span, div). */
   tag?: "p" | "span" | "div";
+  /** Couleur de fond héritée. */
+  parentBg?: string;
 }
 
 /** Interface des Design Tokens pour le composant Text. */
@@ -52,10 +55,21 @@ export const Text = createComponent({
   authorizedTokens: ["font-size", "text-color", "line-height"],
   template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr) => {
     const tag = meta.tag || "p";
+
+    // Validation du contraste
+    let colorStyle = "color:var(--text-color,inherit);";
+    if (meta.parentBg && styleVars.includes("--text-color:")) {
+      const match = styleVars.match(/--text-color:([^;]+);/);
+      if (match) {
+        const validatedColor = validateContrast(match[1], meta.parentBg, "Text", _id);
+        colorStyle = `color:${validatedColor};`;
+      }
+    }
+
     return `
       <${tag} 
-        ${getStyleAttr(styleVars)} 
-        class="text-[var(--text-color,inherit)] leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
+        ${getStyleAttr(styleVars + colorStyle)} 
+        class="leading-[var(--line-height,1.6)] text-[var(--font-size,1.125rem)]"
         ${a11yAttrs}
       >
         ${meta.content || ""}

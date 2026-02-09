@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@source "./**/*.ts";
+
 /* Configuration de base pour écraser le Preflight */
 @layer base {
   html {
@@ -139,5 +141,23 @@
     }
 
   }
+
+  /* Responsive Variables Utilities */
+  @layer utilities {
+    :root {
+      --box-bg: #e5e7eb;
+    }
+
+    @media (width >= 768px) {
+      .md\:flex-row-vars {
+        flex-direction: var(--flex-direction-md, row);
+      }
+
+      .md\:w-vars {
+        width: var(--width-md, 100%);
+      }
+    }
+  }
+  
 
   
