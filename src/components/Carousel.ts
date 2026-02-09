@@ -149,14 +149,14 @@ export const Carousel = createComponent({
       <button 
         id="prev-${id}"
         class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)] dark:bg-[var(--dark-carousel-color,white)]/30 dark:hover:bg-[var(--dark-carousel-color,white)]/50 dark:text-[var(--dark-carousel-color,black)]"
-        aria-label="Slide précédente"
+        aria-label="Précédent"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
       </button>
       <button 
         id="next-${id}"
         class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--carousel-color,black)]/30 hover:bg-[var(--carousel-color,black)]/50 text-[var(--carousel-color,white)] dark:bg-[var(--dark-carousel-color,white)]/30 dark:hover:bg-[var(--dark-carousel-color,white)]/50 dark:text-[var(--dark-carousel-color,black)]"
-        aria-label="Slide suivante"
+        aria-label="Suivant"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
       </button>

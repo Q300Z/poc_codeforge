@@ -138,7 +138,7 @@ export const Page = createComponent({
         Passer au contenu principal
     </a>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
-    <main id="main-content" class="main-content w-full max-w-none">${children.join("")}</main>
+    <main id="main-content" class="main-content w-full max-w-none" tabindex="-1">${children.join("")}</main>
     <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>
     ${bodyScripts}
 </body>
