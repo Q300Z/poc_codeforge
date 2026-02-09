@@ -92,7 +92,7 @@ export class ScreenDraftAdapter {
   }
 
   private static mapComponent(comp: ScreenDraftComponent): NodeBuilder<any, any> | null {
-    let builder: NodeBuilder<any, any> | null = null;
+    let builder: NodeBuilder<any, any>;
 
     // Mapping commun des styles de positionnement
     const commonStyle: Record<string, any> = {

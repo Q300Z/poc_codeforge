@@ -97,12 +97,10 @@ export const FormField = createComponent({
     const commonClasses =
       "block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all";
 
-    let inputHtml = "";
-    if (type === "textarea") {
-      inputHtml = `<textarea id="${inputId}" class="${commonClasses} min-h-[120px]" placeholder="${placeholder}" ${required}></textarea>`;
-    } else {
-      inputHtml = `<input id="${inputId}" type="${type}" class="${commonClasses}" placeholder="${placeholder}" ${required} />`;
-    }
+    const inputHtml =
+      type === "textarea"
+        ? `<textarea id="${inputId}" class="${commonClasses} min-h-[120px]" placeholder="${placeholder}" ${required}></textarea>`
+        : `<input id="${inputId}" type="${type}" class="${commonClasses}" placeholder="${placeholder}" ${required} />`;
 
     return `
 <div class="field-wrapper space-y-2" style="${styleVars}" ${a11yAttrs}>
