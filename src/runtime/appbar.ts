@@ -17,8 +17,8 @@ export const appbarRuntime = `
       if (themeBtn && themeMenu) {
         themeBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const exp = themeBtn.getAttribute('aria-expanded') === 'true';
-          themeBtn.setAttribute('aria-expanded', !exp);
+          const isHidden = themeMenu.classList.contains('invisible');
+          themeBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
           themeMenu.classList.toggle('opacity-0');
           themeMenu.classList.toggle('invisible');
         });

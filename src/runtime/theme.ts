@@ -6,13 +6,12 @@ export const themeRuntime = `
       window.CodeForge = window.CodeForge || {};
       
       window.CodeForge.setTheme = function(theme) {
+        const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        html.classList.toggle('dark', isDark);
+        
         if (theme === 'system') {
-          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          html.classList.toggle('dark', isDark);
           localStorage.removeItem(STORAGE_KEY);
         } else {
-          const isDark = theme === 'dark';
-          html.classList.toggle('dark', isDark);
           localStorage.setItem(STORAGE_KEY, theme);
         }
         window.CodeForge.currentTheme = theme;
