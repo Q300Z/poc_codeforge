@@ -1,7 +1,7 @@
+import { appbarRuntime } from "../runtime/appbar.js";
 import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
-import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant AppBar. */
 export interface AppBarMeta {
@@ -50,6 +50,7 @@ export class AppBarBuilder extends NodeBuilder<AppBarMeta, AppBarStyles> {
 export const AppBar = createComponent({
   name: "AppBar",
   version: "1.1.0",
+  runtime: appbarRuntime,
   description:
     "Barre de navigation supérieure (Sticky) avec support mobile et menu burger automatique.",
   metaSchema: {
@@ -89,13 +90,14 @@ export const AppBar = createComponent({
     const btnId = `btn-${id}`;
     const menuId = `menu-${id}`;
 
-    renderState.requireScript("appbar");
+    const combinedStyle = `border-color:var(--appbar-border,#e5e7eb);background-color:var(--appbar-bg,white);color:var(--appbar-text,#111827);${styleVars}`;
 
     return `
     <nav 
-      ${getStyleAttr(styleVars)} 
-      class="sticky top-0 z-50 w-full border-b border-[var(--appbar-border,theme(colors.gray.200))] bg-[var(--appbar-bg,white)] text-[var(--appbar-text,theme(colors.gray.900))]"
+      ${getStyleAttr(combinedStyle)} 
+      class="sticky top-0 z-50 w-full border-b"
       ${a11yAttrs}
+      id="${id}"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">

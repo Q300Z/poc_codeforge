@@ -1,4 +1,5 @@
 import { Component, ComponentHTML } from "../types.js";
+import { renderState } from "./state.js";
 import { getStyleAttr, getStyleVariables } from "./style.js";
 import { LAYOUT_UTILITIES, validateStyle } from "./validator.js";
 
@@ -20,6 +21,7 @@ interface FactoryOptions {
   description?: string;
   metaSchema?: Record<string, MetaField | string>;
   authorizedTokens: string[] | Record<string, string>;
+  runtime?: string;
   examples?: {
     builderCode: string;
     description?: string;
@@ -35,6 +37,7 @@ interface FactoryOptions {
 }
 
 export interface DocumentedComponent extends Component {
+  runtime?: string;
   doc?: {
     name: string;
     version: string;
@@ -61,6 +64,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     description = "",
     metaSchema = {},
     authorizedTokens,
+    runtime,
     examples,
     template,
   } = options;
@@ -73,6 +77,11 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
   const allowedKeysSet = new Set([...LAYOUT_UTILITIES, ...tokenKeys]);
 
   const component: DocumentedComponent = (meta, children, style, id) => {
+    // Enregistrement automatique du runtime si présent
+    if (runtime) {
+      renderState.requireScript(name);
+    }
+
     // Lazy ID generation
     const finalId = id || `gen-${Math.random().toString(36).slice(2, 9)}`;
 
@@ -124,6 +133,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     ? authorizedTokens.reduce((acc, t) => ({ ...acc, [t]: "" }), {})
     : authorizedTokens;
 
+  component.runtime = runtime;
   component.doc = {
     name,
     version,

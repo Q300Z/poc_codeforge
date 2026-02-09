@@ -1,7 +1,7 @@
+import { mapRuntime } from "../runtime/map.js";
 import { CSSLength } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
-import { renderState } from "../utils/state.js";
 
 /** Interface pour un marqueur sur la carte. */
 export interface MapMarker {
@@ -47,7 +47,7 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
   constructor(id: string) {
     super(id, "Map");
   }
-  /** Définit la source des données GeoJSON. */
+  /** Définit le source des données GeoJSON. */
   withSrc(src: string): this {
     this.node.meta.src = src;
     return this;
@@ -83,6 +83,7 @@ export class MapBuilder extends NodeBuilder<MapMeta, MapStyles> {
 export const Map = createComponent({
   name: "Map",
   version: "2.0.0-alpha.1",
+  runtime: mapRuntime,
   description:
     "Carte interactive utilisant Leaflet 2.0 (Alpha) pour un rendu fluide et accessible.",
   metaSchema: {
@@ -103,24 +104,23 @@ export const Map = createComponent({
     const zoom = meta.zoom || 6;
     const tileUrl = meta.tileUrl || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-    renderState.requireScript("map");
-
     return `
   <div class="map-wrapper flex-shrink-0" ${getStyleAttr(styleVars)} ${a11yAttrs}>
     <style>
       #${containerId} { 
         width: 100%; 
-        height: var(--map-height, 400px); 
+        height: 100%;
+        min-height: var(--map-height, 400px);
         background: #f8f8f8;
         border-radius: inherit;
       }
-      .leaflet-container { font-family: inherit; z-index: 1; }
+      .leaflet-container { font-family: inherit; }
       .leaflet-container a { text-decoration: underline !important; }
     </style>
-    <div id="${containerId}" class="leaflet-container"></div>
+    <div id="${containerId}"></div>
   </div>
   
-  <script type="module">
+  <script>
     CodeForge.initMap(
       '${containerId}', 
       ${lat}, ${lng}, ${zoom}, 

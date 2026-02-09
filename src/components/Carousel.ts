@@ -1,7 +1,7 @@
+import { carouselRuntime } from "../runtime/carousel.js";
 import { CSSColor } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent } from "../utils/factory.js";
-import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant Carousel. */
 export interface CarouselMeta {
@@ -48,6 +48,7 @@ export class CarouselBuilder extends NodeBuilder<CarouselMeta, CarouselStyles> {
 export const Carousel = createComponent({
   name: "Carousel",
   version: "1.0.1",
+  runtime: carouselRuntime,
   description:
     "Composant carrousel interactif supportant le balayage, le clavier et l'accessibilité WCAG.",
   metaSchema: {
@@ -84,8 +85,6 @@ export const Carousel = createComponent({
     const items = (meta.items as CarouselMeta["items"]) || [];
     const interval = meta.interval || 5000;
     const autoPlay = !!meta.autoPlay;
-
-    renderState.requireScript("carousel");
 
     const slides = items
       .map(

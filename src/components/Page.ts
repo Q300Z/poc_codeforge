@@ -1,7 +1,7 @@
+import { registry } from "../registry.js";
 import { BaseStyles, Node } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
-import { createComponent } from "../utils/factory.js";
-import { SHARED_SCRIPTS } from "../utils/scripts.js";
+import { createComponent, DocumentedComponent } from "../utils/factory.js";
 import { renderState } from "../utils/state.js";
 
 /** Interface des métadonnées pour le composant Page. */
@@ -69,18 +69,25 @@ export const Page = createComponent({
     // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
     let bodyScripts = "";
     let headScripts = "";
-    
+
     // Scripts lourds (libs externes)
-    if (renderState.requiredScripts.has("map")) {
-      headScripts += meta.mapLibCssContent ? `<style>${meta.mapLibCssContent}</style>` : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
-      bodyScripts += meta.mapLibJsContent ? `<script>${meta.mapLibJsContent}</script>` : `<script src="./libs/leaflet.js"></script>`;
+    if (renderState.requiredScripts.has("Map")) {
+      headScripts += meta.mapLibCssContent
+        ? `<style>${meta.mapLibCssContent}</style>`
+        : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
+      bodyScripts += meta.mapLibJsContent
+        ? `<script>${meta.mapLibJsContent}</script>`
+        : `<script src="./libs/leaflet.js"></script>`;
     }
 
-    // Runtime CodeForge partagé
+    // Runtime CodeForge partagé (Collecte dynamique depuis le Registry)
     let runtimeJs = "";
-    renderState.requiredScripts.forEach((scriptId) => {
-      if (SHARED_SCRIPTS[scriptId as keyof typeof SHARED_SCRIPTS]) {
-        runtimeJs += SHARED_SCRIPTS[scriptId as keyof typeof SHARED_SCRIPTS];
+    renderState.requiredScripts.forEach((type) => {
+      const comp = registry[type] as DocumentedComponent;
+      if (comp && comp.runtime) {
+        runtimeJs += comp.runtime;
+      } else {
+        console.warn(`[CodeForge] Script runtime demandé mais non trouvé pour le type : ${type}`);
       }
     });
 

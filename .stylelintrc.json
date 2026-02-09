@@ -11,10 +11,12 @@
           "responsive",
           "screen",
           "layer",
-          "theme"
+          "theme",
+          "source"
         ]
       }
     ],
+    "selector-class-pattern": null,
     "function-no-unknown": [
       true,
       {
