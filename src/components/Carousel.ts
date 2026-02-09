@@ -123,7 +123,7 @@ export const Carousel = createComponent({
         (_, index) => `
       <button 
         type="button" 
-        class="carousel-dot w-3 h-3 rounded-full transition-colors bg-[var(--carousel-color,white)]/50 hover:bg-[var(--carousel-color,white)]" 
+        class="carousel-dot w-3 h-3 rounded-full transition-colors bg-[var(--carousel-color,white)]/50 hover:bg-[var(--carousel-color,white)] dark:bg-[var(--dark-carousel-color,black)]/50 dark:hover:bg-[var(--dark-carousel-color,black)]" 
         aria-label="Aller à la slide ${index + 1}"
         aria-current="${index === 0 ? "true" : "false"}"
         data-index="${index}"
