@@ -1,5 +1,26 @@
 # Changelog
 
+# [1.8.0](https://github.com/Q300Z/poc_codeforge/compare/v1.7.0...v1.8.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* achieve true autonomous build in inline mode by removing redundant libs folder ([3309a20](https://github.com/Q300Z/poc_codeforge/commit/3309a20f7a1ec9cf7b88a2ef33de16cb767c3f6b))
+* **ci:** add puppeteer to devDependencies to enable browser installation command ([3f6e55c](https://github.com/Q300Z/poc_codeforge/commit/3f6e55ca470c89e871d13e61692fed780e04d195))
+* **ci:** install chrome for puppeteer to fix pa11y-ci execution ([837e073](https://github.com/Q300Z/poc_codeforge/commit/837e073d44c70eb9ef15d04ddc4dcf0f9b0d0571))
+
+
+### Features
+
+* **dx:** implement type bundling, add sourcemaps and centralize library exports ([ba82397](https://github.com/Q300Z/poc_codeforge/commit/ba823977f33b66784f6d347f31288197e4ebcbc0))
+* enhance ScreenDraft adapter with map center and markers mapping ([acf4ce0](https://github.com/Q300Z/poc_codeforge/commit/acf4ce0807adcea3e93f3b6c047356f5f5e5406d))
+* update Map component to Leaflet 2.0.0-alpha.1 with marker support ([fc916d8](https://github.com/Q300Z/poc_codeforge/commit/fc916d876d5abdca667decf22d60665d687cab19))
+
+
+### Performance Improvements
+
+* minify CSS and exclude test types from distribution ([50af359](https://github.com/Q300Z/poc_codeforge/commit/50af3591e3645b93bea356ca6cf902f64da4daec))
+
 # [1.7.0](https://github.com/Q300Z/poc_codeforge/compare/v1.6.1...v1.7.0) (2026-01-27)
 
 
