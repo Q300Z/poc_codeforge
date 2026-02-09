@@ -101,8 +101,9 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
 
     validateStyle(name, style, allowedKeysSet);
 
-    // --- GÉNÉRATION AUTOMATIQUE DU MODE SOMBRE ---
-    let finalStyleDark = styleDark;
+    // --- GÉNÉRATION AUTOMATIQUE DU MODE SOMBRE DÉSACTIVÉE ---
+    let finalStyleDark = {}; // styleDark;
+    /*
     const isDarkEmpty = !finalStyleDark || Object.keys(finalStyleDark).length === 0;
 
     if (isDarkEmpty && style) {
@@ -117,6 +118,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
         }
       }
     }
+    */
 
     if (finalStyleDark && Object.keys(finalStyleDark).length > 0) {
       validateStyle(`${name} (Dark)`, finalStyleDark, allowedKeysSet);

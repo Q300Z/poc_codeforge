@@ -82,14 +82,23 @@ export const Page = createComponent({
     const cssPath = meta.cssPath || "style.css";
     const cssLink = meta.isInline ? "" : `<link rel="stylesheet" href="${cssPath}">`;
 
-    // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
-    let bodyScripts = "";
-    let headScripts = "";
+        // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
 
-    // Injection immédiate du thème pour éviter le flash
-    headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
+        let bodyScripts = "";
 
-    // Scripts lourds (libs externes)
+        let headScripts = "";
+
+    
+
+        // Injection immédiate du thème désactivée
+
+        // headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
+
+        
+
+        // Scripts lourds (libs externes)
+
+    
     if (renderState.requiredScripts.has("Map")) {
       headScripts += meta.mapLibCssContent
         ? `<style>${meta.mapLibCssContent}</style>`
