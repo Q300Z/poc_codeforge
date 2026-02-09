@@ -61,7 +61,11 @@ interface ScreenDraftComponent {
   // Textarea
   textareaPlaceholder?: string;
   textareaRows?: number;
-  // Map et Form (non supportés nativement pour l'instant -> ignorés ou placeholders)
+  // Map
+  mapCenter?: { lat: number; lng: number };
+  mapZoom?: number;
+  mapMarkers?: { id: string; lat: number; lng: number; name?: string }[];
+  // Form
   [key: string]: any;
 }
 
@@ -193,6 +197,20 @@ export class ScreenDraftAdapter {
           ...commonStyle,
           "map-height": comp.height,
         });
+
+        // Mapping des propriétés spécifiques ScreenDraft
+        if (comp.mapCenter) {
+          (builder as MapBuilder).withView(
+            comp.mapCenter.lat,
+            comp.mapCenter.lng,
+            comp.mapZoom || 6
+          );
+        }
+
+        if (comp.mapMarkers) {
+          builder.withMeta({ markers: comp.mapMarkers } as any);
+        }
+
         // Si ScreenDraft fournit une source GeoJSON (extension possible)
         if (comp.mapSrc) {
           (builder as MapBuilder).withSrc(comp.mapSrc);

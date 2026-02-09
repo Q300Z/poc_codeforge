@@ -233,12 +233,29 @@ describe("ScreenDraftAdapter", () => {
   });
 
   it("should transform Map component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+    const dataWithMapProps = {
+      ...mockData,
+      components: mockData.components.map((c) =>
+        c.id === "map-1"
+          ? {
+              ...c,
+              mapCenter: { lat: 48.8, lng: 2.3 },
+              mapZoom: 10,
+              mapMarkers: [{ lat: 48.8, lng: 2.3, name: "P" }],
+            }
+          : c
+      ),
+    };
+    const site = ScreenDraftAdapter.transform(dataWithMapProps);
     const page = site.pages[0].content;
     const map = page.children.find((c: any) => c.id === "map-1");
 
     expect(map).toBeDefined();
     expect(map.type).toBe("Map");
+    expect(map.meta.lat).toBe(48.8);
+    expect(map.meta.lng).toBe(2.3);
+    expect(map.meta.zoom).toBe(10);
+    expect(map.meta.markers).toHaveLength(1);
     expect(map.style.width).toBe(600);
     expect(map.style["map-height"]).toBe(400);
   });
@@ -293,7 +310,8 @@ describe("ScreenDraftAdapter", () => {
       expect(html).toContain("TestLogo");
 
       // Verify Map
-      expect(html).toContain("const shadow = container.attachShadow({mode: 'open'});");
+      expect(html).toContain("L.map('map-container-map-1')");
+      expect(html).toContain("L.tileLayer");
     });
   });
 });
