@@ -1,6 +1,7 @@
 import { bench, describe } from "vitest";
 import { render } from "./renderer.js";
-import { SiteNode, PageNode } from "./types.js";
+import { SiteNode } from "./types.js";
+import { PageNode } from "./components/Page.js";
 import fs from "fs";
 import path from "path";
 

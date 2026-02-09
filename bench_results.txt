@@ -1,0 +1,11 @@
+[33mBenchmarking is an experimental feature.
+Breaking changes might not follow SemVer, please pin Vitest's version when using it.[39m
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90m/home/tboutin/Documents/poc_render_engine[39m
+
+
+[1m[46m BENCH [49m[22m [36mSummary
+[39m
+  Rendu d'une page complète (Showcase)[2m - src/performance.bench.ts[2m > [22m[2mPerformance du Rendu (CodeForge)[22m
+[32m    NaNx [39m[90mfaster than [39mRendu de 100 répétitions (Stress test)
+

@@ -1,0 +1,36 @@
+{
+  "id": "site-a11y",
+  "type": "Site",
+  "meta": { "appName": "A11y Proof" },
+  "pages": [
+    {
+      "slug": "index",
+      "content": {
+        "id": "a11y-test-page",
+        "type": "Page",
+        "meta": { "appName": "A11y Test" },
+        "children": [
+          {
+            "id": "bad-contrast-section",
+            "type": "Section",
+            "style": { "section-bg": "#ffffff" },
+            "children": [
+              {
+                "id": "bad-title",
+                "type": "Title",
+                "meta": { "content": "Titre peu lisible" },
+                "style": { "title-text": "#dddddd" }
+              },
+              {
+                "id": "bad-text",
+                "type": "Text",
+                "meta": { "content": "Ce texte est trop clair sur fond blanc." },
+                "style": { "text-color": "#cccccc" }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
