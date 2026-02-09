@@ -108,7 +108,15 @@ export const Video = createComponent({
     tracks: { type: "array", description: "Pistes de sous-titres" },
   },
   authorizedTokens: ["object-fit"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    _styleVarsDark
+  ) => {
     if (!meta.src) return "<!-- Vidéo manquante -->";
 
     const controls = meta.controls !== false ? "controls" : "";

@@ -78,7 +78,15 @@ export const Hero = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const renderedTitle = Title(
       {
         ...meta, // Contient parentBg et parentBgDark

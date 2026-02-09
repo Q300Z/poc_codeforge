@@ -90,15 +90,27 @@ CodeForge sépare la structure de l'esthétique via deux types de propriétés d
 1. **Layout Utilities** : Propriétés universelles (`width`, `x`, `y`, `z-index`, etc.) directement mappées sur des styles CSS standards.
 2. **Design Tokens** : Variables spécifiques au composant (ex: `btn-bg`) injectées comme **Variables CSS** (`--btn-bg`) et consommées par le template via `var(--btn-bg, fallback)`.
 
-## 4. Accessibilité (A11y) "Zero-Config"
+## 4. Accessibilité (A11y) & Contrastes
 
-L'accessibilité n'est pas une option mais un composant de base. La `Factory` effectue le mapping suivant :
-- `meta.audioDescription` → `aria-label`
-- `meta.ariaRole` → `role`
-- `meta.ariaHidden` → `aria-hidden="true"`
-- Support natif de tous les autres attributs `aria-*` passés dans `meta`.
+CodeForge garantit l'accessibilité nativement :
+- **Mapping ARIA** : `meta.audioDescription` → `aria-label`, etc.
+- **Contrast Guard** : Pendant le rendu, le moteur valide dynamiquement le ratio de contraste (WCAG 4.5:1). Si une couleur est illisible, elle est corrigée automatiquement.
 
-## 5. Modèle de Données et Builders
+## 5. Scripts Runtime Modulaires (SOLID)
+
+Pour l'interactivité (Map, Carousel, AppBar), CodeForge utilise un système de réhydratation modulaire.
+- **Isolation** : Chaque composant déclare son propre `runtime` (JS pur).
+- **Injection Dynamique** : Seuls les scripts des composants *réellement présents* sur la page sont injectés.
+- **Namespacing** : Tous les scripts partagent l'objet global `window.CodeForge`.
+
+## 6. Système de Thème et Auto-Dark
+
+Le moteur supporte nativement le basculement entre modes Clair, Sombre et Système.
+- **styleDark** : Permet de définir des tokens spécifiques au mode sombre.
+- **Auto-Dark Generation** : Si `styleDark` est omis, CodeForge calcule automatiquement une variante sombre en inversant la luminance des couleurs tout en préservant la teinte.
+- **Zéro Flash** : Un script bloquant minimal injecté dans le `<head>` applique le bon thème avant le premier rendu des pixels.
+
+## 7. Modèle de Données et Builders
 
 Pour faciliter la création de structures JSON complexes sans erreurs, CodeForge utilise des **Builders**.
 

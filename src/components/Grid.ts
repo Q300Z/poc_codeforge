@@ -84,7 +84,15 @@ export const Grid = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    children,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const colClass = COLUMN_MAP[meta.cols as number] || "md:grid-cols-2";
     return `
       <section 

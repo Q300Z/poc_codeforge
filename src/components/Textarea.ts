@@ -84,7 +84,7 @@ export const Textarea = createComponent({
     "textarea-border": "Couleur de la bordure",
     "textarea-radius": "Arrondi des angles",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
     const textareaId = `${id}-textarea`;
     const rows = meta.rows || 4;
     const value = meta.value || "";
@@ -103,7 +103,8 @@ export const Textarea = createComponent({
           }
           .textarea-base {
             padding: 0.5rem 0.75rem;
-            background-color: var(--textarea-bg, #ffffff);
+            background-color: var(--textarea-bg, #ffffff); color: var(--textarea-text, #111827);
+          .dark textarea { background-color: var(--dark-textarea-bg, #1f2937); color: var(--dark-textarea-text, #f9fafb); border-color: var(--dark-textarea-border, #374151); }
             color: var(--textarea-text, #111827);
             border: 1px solid var(--textarea-border, #d1d5db);
             border-radius: var(--textarea-radius, 0.375rem);

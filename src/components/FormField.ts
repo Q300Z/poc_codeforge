@@ -87,7 +87,7 @@ export const FormField = createComponent({
     "field-radius": "Arrondi",
     "font-size": "Taille de police",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
     const type = meta.type || "text";
     const label = meta.label || "";
     const placeholder = meta.placeholder || "";
@@ -95,7 +95,7 @@ export const FormField = createComponent({
     const inputId = `input-${id}`;
 
     const commonClasses =
-      "block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all";
+      "block w-full px-4 py-3 rounded-lg border border-[var(--field-border,theme(colors.gray.300))] bg-[var(--field-bg,white)] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:bg-[var(--dark-field-bg,#1f2937)] dark:border-[var(--dark-field-border,#374151)] dark:text-[var(--dark-field-text,#f9fafb)]";
 
     const inputHtml =
       type === "textarea"
@@ -104,7 +104,7 @@ export const FormField = createComponent({
 
     return `
 <div class="field-wrapper space-y-2" ${getStyleAttr(styleVars + styleVarsDark)} ${a11yAttrs}>
-  <label for="${inputId}" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))]">
+  <label for="${inputId}" class="block text-sm font-semibold text-[var(--label-color,theme(colors.gray.700))] dark:text-[var(--dark-label-color,#d1d5db)]">
     ${label}${meta.required ? ' <span class="text-red-500">*</span>' : ""}
   </label>
   ${inputHtml}

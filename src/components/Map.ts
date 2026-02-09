@@ -97,7 +97,7 @@ export const Map = createComponent({
   authorizedTokens: {
     "map-height": "Hauteur de la carte",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
     const containerId = `map-container-${id}`;
     const lat = meta.lat || 46.603354;
     const lng = meta.lng || 1.888334;
@@ -111,8 +111,11 @@ export const Map = createComponent({
         width: 100%; 
         height: 100%;
         min-height: var(--map-height, 400px);
-        background: #f8f8f8;
+        background: var(--map-bg, #f8f8f8);
         border-radius: inherit;
+      }
+      .dark #${containerId} {
+        background: var(--dark-map-bg, #111827);
       }
       .leaflet-container { font-family: inherit; }
       .leaflet-container a { text-decoration: underline !important; }

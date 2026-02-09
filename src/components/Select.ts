@@ -116,7 +116,7 @@ export const Select = createComponent({
     "select-border": "Couleur de la bordure",
     "select-radius": "Arrondi des angles",
   },
-  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, id, getStyleAttr, _styleVarsDark) => {
     const options = meta.options || [];
     const selectId = `${id}-select`;
     const placeholderHtml = meta.placeholder
@@ -147,7 +147,8 @@ export const Select = createComponent({
           }
           .select-base {
             padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-            background-color: var(--select-bg, #ffffff);
+            background-color: var(--select-bg, #ffffff); color: var(--select-text, #111827);
+          .dark select { background-color: var(--dark-select-bg, #1f2937); color: var(--dark-select-text, #f9fafb); border-color: var(--dark-select-border, #374151); }
             color: var(--select-text, #111827);
             border: 1px solid var(--select-border, #d1d5db);
             border-radius: var(--select-radius, 0.375rem);

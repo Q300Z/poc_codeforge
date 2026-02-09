@@ -84,7 +84,15 @@ export const AppBar = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _children, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _children,
+    styleVars,
+    a11yAttrs,
+    id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const title = meta.title || "My App";
     const links = (meta.links as AppBarMeta["links"]) || [];
     const btnId = `btn-${id}`;

@@ -1,9 +1,9 @@
 import { registry } from "../registry.js";
+import { themeRuntime } from "../runtime/theme.js";
 import { BaseStyles, Node } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent, DocumentedComponent } from "../utils/factory.js";
 import { renderState } from "../utils/state.js";
-import { themeRuntime } from "../runtime/theme.js";
 
 /** Interface des métadonnées pour le composant Page. */
 export interface PageMeta {
@@ -70,7 +70,15 @@ export const Page = createComponent({
     "hero-text-default",
     "section-py",
   ],
-  template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    children,
+    styleVars,
+    _a11yAttrs,
+    _id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const cssPath = meta.cssPath || "style.css";
     const cssLink = meta.isInline ? "" : `<link rel="stylesheet" href="${cssPath}">`;
 
@@ -80,7 +88,7 @@ export const Page = createComponent({
 
     // Injection immédiate du thème pour éviter le flash
     headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
-    
+
     // Scripts lourds (libs externes)
     if (renderState.requiredScripts.has("Map")) {
       headScripts += meta.mapLibCssContent

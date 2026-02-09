@@ -83,7 +83,7 @@ export const Table = createComponent({
     "table-header-text": "Couleur du texte de l'en-tête",
     "table-row-even-bg": "Couleur de fond des lignes paires",
   },
-  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (meta, _children, styleVars, a11yAttrs, _id, getStyleAttr, _styleVarsDark) => {
     const headers = meta.headers || [];
     const rows = meta.rows || [];
     const caption = meta.caption ? `<caption>${meta.caption}</caption>` : "";
@@ -125,6 +125,17 @@ export const Table = createComponent({
           }
           .table-row:nth-child(even) {
             background-color: var(--table-row-even-bg, transparent);
+          }
+          /* Dark Mode Styles */
+          .dark .table-base, .dark .table-header-cell, .dark .table-cell {
+            border-color: var(--dark-table-border, #374151);
+          }
+          .dark .table-header-cell {
+            background-color: var(--dark-table-header-bg, #1f2937);
+            color: var(--dark-table-header-text, #f9fafb);
+          }
+          .dark .table-cell {
+            color: var(--dark-table-text, #d1d5db);
           }
         </style>
         <table class="table-base">

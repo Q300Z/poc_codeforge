@@ -97,7 +97,8 @@ export const Button = createComponent({
     const label = meta.label || "Click me";
 
     const combinedStyle = `${styleVars}${styleVarsDark}`;
-    const baseClasses = "btn-base dark:bg-[var(--dark-btn-bg,var(--dark-btn-bg-default,#3b82f6))] dark:text-[var(--dark-btn-text,var(--dark-btn-text-default,white))]";
+    const baseClasses =
+      "btn-base dark:bg-[var(--dark-btn-bg,var(--dark-btn-bg-default,#3b82f6))] dark:text-[var(--dark-btn-text,var(--dark-btn-text-default,white))]";
 
     if (isLink)
       return `<a href="${action}" ${getStyleAttr(combinedStyle)} class="${baseClasses}" ${a11yAttrs}>${label}</a>`;

@@ -150,7 +150,15 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
       }
     }
 
-    return template(finalMeta, children, styleVars, a11yAttrs, finalId, getStyleAttr, styleVarsDark);
+    return template(
+      finalMeta,
+      children,
+      styleVars,
+      a11yAttrs,
+      finalId,
+      getStyleAttr,
+      styleVarsDark
+    );
   };
 
   const tokensObj = Array.isArray(authorizedTokens)

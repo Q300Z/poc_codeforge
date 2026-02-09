@@ -53,7 +53,15 @@ export const Text = createComponent({
   description:
     "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const tag = meta.tag || "p";
 
     // 1. Validation du contraste Mode Clair

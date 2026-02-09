@@ -81,7 +81,15 @@ export const Carousel = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const items = (meta.items as CarouselMeta["items"]) || [];
     const interval = meta.interval || 5000;
     const autoPlay = !!meta.autoPlay;

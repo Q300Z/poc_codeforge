@@ -28,7 +28,7 @@ export const Container = createComponent({
   description:
     "Conteneur qui centre son contenu horizontalement avec une largeur maximale ajustable.",
   authorizedTokens: ["container-width"],
-  template: (_meta, children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => `
+  template: (_meta, children, styleVars, a11yAttrs, _id, getStyleAttr, _styleVarsDark) => `
     <div ${getStyleAttr(styleVars + styleVarsDark)} class="container-center" ${a11yAttrs}>
       ${children.join("")}
     </div>

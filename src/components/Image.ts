@@ -86,7 +86,15 @@ export const Image = createComponent({
     sizes: { type: "string", description: "Tailles d'affichage" },
   },
   authorizedTokens: ["object-fit"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    _styleVarsDark
+  ) => {
     if (!meta.src) return "<!-- Image manquante -->";
 
     const loading = meta.loading || "lazy";

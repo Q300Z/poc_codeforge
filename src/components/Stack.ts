@@ -99,7 +99,15 @@ export const Stack = createComponent({
   .build();`,
     },
   ],
-  template: (meta: Record<string, any>, children, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    children,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     return `<div ${getStyleAttr(styleVars + styleVarsDark)} class="flex ${meta.direction === "horizontal" ? "flex-row" : "flex-col"} gap-${meta.gap || 6}" ${a11yAttrs}>${children.join("")}</div>`;
   },
 });

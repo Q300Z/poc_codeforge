@@ -15,6 +15,7 @@ Le moteur accepte deux types de structures :
 | Propriété | Type | Description |
 | :--- | :--- | :--- |
 | `meta` | `Object` | Métadonnées globales (`appName`, `version`, `createdAt`). |
+| `meta.defaultTheme`| `string`| (Optionnel) `light`, `dark` ou `system` (défaut). |
 | `style` | `Object` | Tokens de design globaux hérités par toutes les pages. |
 | `layout` | `Object` | Composants partagés (`header`, `footer`) affichés sur chaque page. |
 | `pages` | `Array` | Liste des pages du site avec leur `slug` et leur `content`. |
@@ -26,23 +27,28 @@ Chaque élément de la page suit cette structure :
 | `id` | `string` | **OBLIGATOIRE**. Identifiant unique. |
 | `type` | `string` | **OBLIGATOIRE**. Nom du composant (ex: "Button", "Stack"). |
 | `meta` | `Object` | **OBLIGATOIRE**. Paramètres spécifiques et métadonnées. |
-| `style` | `Object` | (Optionnel) Propriétés visuelles. **Omis si vide.** |
+| `style` | `Object` | (Optionnel) Propriétés visuelles en mode clair. |
+| `styleDark` | `Object` | (Optionnel) Surcharges visuelles en mode sombre. |
 | `children` | `Array` | (Optionnel) Enfants. **Omis si vide.** |
 
 ---
 
-## ♿ Accessibilité (A11y)
+## ♿ Accessibilité (A11y) & Contrastes
 
-CodeForge intègre l'accessibilité nativement. Ces clés dans `meta` sont traduites en attributs HTML standards :
-- `audioDescription` : Traduit en `aria-label`. Description lue par les lecteurs d'écran.
-- `ariaRole` : Traduit en `role`. Définit la fonction de l'élément (ex: "alert").
-- `ariaHidden` : Traduit en `aria-hidden="true"`. Pour cacher les éléments décoratifs.
+CodeForge intègre l'accessibilité nativement :
+- **Attributs ARIA** : `audioDescription` (aria-label), `ariaRole` (role), `ariaHidden`.
+- **Garde-fou de Contraste** : Le moteur valide automatiquement le ratio de contraste (norme WCAG 4.5:1). Si une couleur de texte est jugée illisible sur son fond (clair ou sombre), elle est automatiquement corrigée.
 
 ---
 
-## 🎨 Système de Style
+## 🎨 Système de Thème
 
-CodeForge supporte des propriétés de mise en page natives et des Design Tokens.
+CodeForge supporte nativement les modes Clair et Sombre.
+
+### 🌓 Modes de Thème
+1.  **Light** : Utilise les valeurs de la clé `style`.
+2.  **Dark** : Utilise les valeurs de la clé `styleDark`. 
+3.  **Auto-Génération** : Si `styleDark` est absent, CodeForge génère intelligemment une variante sombre à partir de votre thème clair (inversion de luminance préservant la teinte).
 
 ### Propriétés de Layout (Héritées par tous)
 Ces propriétés sont directement mappées vers des styles CSS `px` ou natifs :
