@@ -117,8 +117,11 @@ export const Page = createComponent({
     ${headScripts}
 </head>
 <body class="site-wrapper h-full" ${getStyleAttr(styleVars + styleVarsDark)} ${meta.debug ? 'data-debug-theme="true"' : ""}>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+        Passer au contenu principal
+    </a>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
-    <main class="main-content w-full max-w-none">${children.join("")}</main>
+    <main id="main-content" class="main-content w-full max-w-none">${children.join("")}</main>
     <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>
     ${bodyScripts}
 </body>

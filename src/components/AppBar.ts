@@ -108,19 +108,22 @@ export const AppBar = createComponent({
             ${links.map((l) => `<a href="${l.href}" class="text-sm font-medium underline hover:text-blue-600 transition-colors">${l.label}</a>`).join("")}
             
             <!-- Theme Switcher -->
-            <div class="relative group ml-4">
+            <div class="relative ml-4">
               <button 
                 id="theme-toggle-${id}"
-                class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border-none cursor-pointer text-inherit"
+                class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border-none cursor-pointer text-inherit outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Changer le thème"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="theme-menu-${id}"
               >
                 <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" /></svg>
                 <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>
               </button>
-              <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[60] py-1">
-                <button onclick="CodeForge.setTheme('light')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer">Clair</button>
-                <button onclick="CodeForge.setTheme('dark')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer">Sombre</button>
-                <button onclick="CodeForge.setTheme('system')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer">Système</button>
+              <div id="theme-menu-${id}" class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-xl opacity-0 invisible transition-all z-[60] py-1">
+                <button onclick="CodeForge.setTheme('light')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-700 outline-none">Clair</button>
+                <button onclick="CodeForge.setTheme('dark')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-700 outline-none">Sombre</button>
+                <button onclick="CodeForge.setTheme('system')" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm border-none bg-transparent text-inherit cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-700 outline-none">Système</button>
               </div>
             </div>
           </div>
@@ -128,7 +131,7 @@ export const AppBar = createComponent({
             <button 
               id="${btnId}" 
               type="button" 
-              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100" 
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" 
               aria-expanded="false" 
               aria-controls="${menuId}"
               aria-label="Ouvrir le menu"
@@ -140,12 +143,12 @@ export const AppBar = createComponent({
           </div>
         </div>
       </div>
-      <div id="${menuId}" class="hidden md:hidden border-t border-gray-100 bg-white">
+      <div id="${menuId}" class="hidden md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#111827]">
         <div class="px-2 pt-2 pb-3 space-y-1">
           ${links.map((l) => `<a href="${l.href}" class="block px-3 py-2 rounded-md text-base font-medium underline hover:bg-gray-50 hover:text-blue-600">${l.label}</a>`).join("")}
         </div>
       </div>
-      <script>CodeForge.initAppBar('${btnId}', '${menuId}');</script>
+      <script>CodeForge.initAppBar('${btnId}', '${menuId}', 'theme-toggle-${id}', 'theme-menu-${id}');</script>
     </nav>`;
   },
 });

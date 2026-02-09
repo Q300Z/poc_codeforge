@@ -26,6 +26,6 @@ describe("AppBar Component", () => {
   it("should include the toggle script with correct IDs", () => {
     const html = AppBar(meta, [], {}, "nav-id");
     expect(html).toContain("<script>");
-    expect(html).toContain("CodeForge.initAppBar('btn-nav-id', 'menu-nav-id')");
+    expect(html).toContain("CodeForge.initAppBar('btn-nav-id', 'menu-nav-id', 'theme-toggle-nav-id', 'theme-menu-nav-id')");
   });
 });

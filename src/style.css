@@ -5,7 +5,7 @@
 /* Configuration de base pour écraser le Preflight */
 @layer base {
   html {
-    @apply max-w-full overflow-x-hidden;
+    @apply max-w-full overflow-x-hidden transition-colors duration-300;
     
     box-sizing: border-box;
     
@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply min-h-full;
+    @apply min-h-full transition-colors duration-300;
   }
 
   *, ::before, ::after {

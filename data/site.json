@@ -86,7 +86,7 @@
                     "version": "1.0.0",
                     "createdAt": "2026-01-27T14:32:46.087Z",
                     "content": "CodeForge POC",
-                    "level": 3
+                    "level": 2
                   },
                   "style": {
                     "title-text": "#ffffff",
@@ -342,8 +342,8 @@
                     "meta": {
                       "version": "1.0.0",
                       "createdAt": "2026-01-27T14:32:46.089Z",
-                      "level": 1,
-                      "content": "Titre Niveau 1"
+                      "level": 2,
+                      "content": "Titre Niveau 1 (Rendu en h2 pour A11y)"
                     }
                   },
                   {
@@ -590,7 +590,7 @@
               "version": "1.0.0",
               "createdAt": "2026-01-27T14:32:46.094Z",
               "content": "Placement Libre",
-              "level": 3
+              "level": 2
             },
             "style": {
               "position": "absolute",
