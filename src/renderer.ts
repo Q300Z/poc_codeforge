@@ -10,10 +10,14 @@ import { Node } from "./types.js";
  * Transforme récursivement un arbre de données (Node) en fragments HTML.
  * 
  * @param {Node<any, any>} node - Le composant racine à traiter.
+ * @param {number} depth - Profondeur actuelle (interne).
  * @returns {string} Le HTML sémantique généré.
- * @throws {Error} Si le type du composant n'est pas enregistré.
  */
-export function render(node: Node<any, any>): string {
+export function render(node: Node<any, any>, depth: number = 0): string {
+  if (depth > 100) {
+    throw new Error(`[CodeForge Renderer] Profondeur de récursion maximale atteinte (100). Vérifiez vos données pour des boucles infinies.`);
+  }
+
   const component = registry[node.type];
 
   if (!component) {
@@ -21,7 +25,7 @@ export function render(node: Node<any, any>): string {
   }
 
   // Traitement récursive des enfants
-  const childrenHTML = (node.children || []).map(render);
+  const childrenHTML = (node.children || []).map((child) => render(child, depth + 1));
 
   // Appel du template du composant
   return component(
