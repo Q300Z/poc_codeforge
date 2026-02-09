@@ -2,8 +2,7 @@
   "meta": {
     "appName": "CodeForge Ultimate Showcase",
     "version": "3.5.0",
-    "createdAt": "2026-01-27T14:32:46.087Z",
-    "defaultTheme": "system"
+    "createdAt": "2026-01-27T14:32:46.087Z"
   },
   "style": {
     "brand-primary": "#4f46e5",
