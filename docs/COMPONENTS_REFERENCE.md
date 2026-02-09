@@ -55,3 +55,14 @@ Ce document sert d'index pour la bibliothèque de composants CodeForge. Chaque c
 | **Map** | Carte interactive haute performance (Streaming GeoJSON). | [📄 Voir la doc](./components/Map.md) |
 | **Carousel** | Diaporama d'images interactif et accessible. | [📄 Voir la doc](./components/Carousel.md) |
 | **Table** | Tableau de données sémantique et accessible. | [📄 Voir la doc](./components/Table.md) |
+
+---
+
+## 🌓 Système de Thème Natif
+
+Tous les composants CodeForge supportent nativement le mode sombre via deux mécanismes :
+
+1.  **styleDark** : Vous pouvez passer un objet de style spécifique pour le mode sombre. Ces tokens surchargeront le thème clair uniquement quand la classe `.dark` est active.
+2.  **Auto-Dark Generation** : Si vous ne fournissez pas de `styleDark`, le moteur calcule automatiquement une version sombre cohérente (inversion de luminance) pour garantir que votre site reste lisible sans effort supplémentaire.
+
+👉 **[Voir la Spécification JSON pour plus de détails](./JSON_SPECIFICATION.md)**

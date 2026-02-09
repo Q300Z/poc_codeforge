@@ -7,7 +7,11 @@ Le composant **Page** est le composant racine indispensable de chaque fichier g�
 | Propriété | Type | Description |
 | :--- | :--- | :--- |
 | `appName` | `string` | Titre de l'onglet du navigateur (balise `<title>`). |
-| `debug` | `boolean` | Active les contours en pointillés sur tous les blocs pour aider à la mise en page. |
+| `defaultTheme`| `string` | Thème par défaut (`light`, `dark` ou `system`). |
+| `debug` | `boolean` | Active les contours en pointillés sur tous les blocs. |
+
+## ♿ Accessibilité (Native)
+Le composant Page injecte automatiquement un **lien d'évitement** ("Passer au contenu principal") invisible par défaut mais accessible au clavier via `TAB` pour faciliter la navigation des utilisateurs de lecteurs d'écran.
 
 ## 🎨 Design Tokens (Style)
 Le composant Page accepte tous les styles globaux et les tokens de marque :

@@ -1,7 +1,12 @@
 # AppBar
 
 ## 🎯 Objectif
-Le composant **AppBar** est une barre de navigation fixe (sticky) située en haut de la page. Il permet d'afficher le titre de l'application (logo) et une liste de liens de navigation. Il intègre automatiquement un menu "burger" interactif pour les supports mobiles.
+Le composant **AppBar** est une barre de navigation fixe (sticky) située en haut de la page. Il permet d'afficher le titre de l'application (logo) et une liste de liens de navigation. 
+
+Il intègre nativement :
+- Un **sélecteur de thème** (Clair / Sombre / Système).
+- Un **menu burger** interactif pour les supports mobiles.
+- Une **détection dynamique du lien actif** (ajoute `aria-current="page"` et un style visuel au lien correspondant à l'URL courante).
 
 ## ⚙️ Propriétés (Meta)
 | Propriété | Type | Description |
