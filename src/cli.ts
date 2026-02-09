@@ -29,6 +29,12 @@ export async function runCli(args: string[]) {
     return;
   }
 
+  if (args.includes("-v") || args.includes("--version")) {
+    const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf-8"));
+    console.log(`v${pkg.version}`);
+    return;
+  }
+
   // Extraction des options
   const isWatch = args.includes("-w") || args.includes("--watch");
   const isInline = args.includes("-i") || args.includes("--inline");

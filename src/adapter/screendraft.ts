@@ -38,7 +38,10 @@ interface ScreenDraftComponent {
     | "navbar"
     | "table"
     | "select"
-    | "textarea";
+    | "textarea"
+    | "box"
+    | "section"
+    | "icon";
   x: number;
   y: number;
   width: number;
@@ -77,17 +80,17 @@ export interface ScreenDraftData {
 // --- Adapter ---
 
 export class ScreenDraftAdapter {
-  static transform(data: ScreenDraftData): SiteNode {
+  static async transform(data: ScreenDraftData): Promise<SiteNode> {
     const pageBuilder = new PageBuilder("home")
       .withAppName(data.meta.appName)
       .withStyle({ position: "relative", width: "100%", "min-height": "100vh" });
 
-    data.components.forEach((comp) => {
-      const node = this.mapComponent(comp);
+    for (const comp of data.components) {
+      const node = await this.mapComponent(comp);
       if (node) {
         pageBuilder.addChild(node);
       }
-    });
+    }
 
     return new SiteBuilder(data.meta.appName)
       .withVersion(data.meta.version)
@@ -95,7 +98,7 @@ export class ScreenDraftAdapter {
       .build();
   }
 
-  private static mapComponent(comp: ScreenDraftComponent): NodeBuilder<any, any> | null {
+  private static async mapComponent(comp: ScreenDraftComponent): Promise<NodeBuilder<any, any> | null> {
     let builder: NodeBuilder<any, any>;
 
     // Mapping commun des styles de positionnement
@@ -290,6 +293,26 @@ export class ScreenDraftAdapter {
         if (comp.textareaRows) {
           builder.withMeta({ rows: comp.textareaRows } as any);
         }
+        break;
+      }
+
+      case "box":
+      case "icon": {
+        // Un icone est souvent une box avec un fond ou une image
+        const { BoxBuilder } = await import("../components/Box.js");
+        builder = new BoxBuilder(comp.id).withStyle({
+          ...commonStyle,
+          backgroundColor: comp.backgroundColor,
+        });
+        break;
+      }
+
+      case "section": {
+        const { SectionBuilder } = await import("../components/Section.js");
+        builder = new SectionBuilder(comp.id).withStyle({
+          ...commonStyle,
+          backgroundColor: comp.backgroundColor,
+        });
         break;
       }
 

@@ -28,8 +28,10 @@ const PX_PROPERTIES = new Set([
  */
 function normalizeValue(key: string, value: string | number): string {
   if (typeof value === "number") {
-    const baseKey = key.includes("-") ? key.split("-")[0] : key;
-    if (PX_PROPERTIES.has(baseKey) || PX_PROPERTIES.has(key)) {
+    // Conversion camelCase -> kebab-case pour la vérification des PX_PROPERTIES
+    const kebabKey = key.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+    const baseKey = kebabKey.includes("-") ? kebabKey.split("-")[0] : kebabKey;
+    if (PX_PROPERTIES.has(baseKey) || PX_PROPERTIES.has(kebabKey)) {
       return `${value}px`;
     }
     return String(value);
@@ -43,6 +45,8 @@ function normalizeValue(key: string, value: string | number): string {
 const PROPERTY_MAP: Record<string, string> = {
   x: "left",
   y: "top",
+  zIndex: "z-index",
+  borderRadius: "border-radius",
 };
 
 /**

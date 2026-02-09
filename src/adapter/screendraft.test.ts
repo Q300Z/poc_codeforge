@@ -135,16 +135,16 @@ describe("ScreenDraftAdapter", () => {
     ],
   };
 
-  it("should transform global meta correctly", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform global meta correctly", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     expect(site.meta.appName).toBe("TestApp");
     expect(site.meta.version).toBe("1.0");
     expect(site.pages).toHaveLength(1);
     expect(site.pages[0].slug).toBe("index");
   });
 
-  it("should transform Title component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Title component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const title = page.children.find((c: any) => c.id === "title-1");
 
@@ -158,8 +158,8 @@ describe("ScreenDraftAdapter", () => {
     expect(title.style["font-size"]).toBe(24);
   });
 
-  it("should transform Button component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Button component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const btn = page.children.find((c: any) => c.id === "btn-1");
 
@@ -170,8 +170,8 @@ describe("ScreenDraftAdapter", () => {
     expect(btn.style["btn-text"]).toBe("white");
   });
 
-  it("should transform Image component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Image component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const img = page.children.find((c: any) => c.id === "img-1");
 
@@ -182,8 +182,8 @@ describe("ScreenDraftAdapter", () => {
     expect(img.style["object-fit"]).toBe("cover");
   });
 
-  it("should transform Video component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Video component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const vid = page.children.find((c: any) => c.id === "vid-1");
 
@@ -193,8 +193,8 @@ describe("ScreenDraftAdapter", () => {
     expect(vid.meta.controls).toBe(true);
   });
 
-  it("should transform Carousel component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Carousel component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const carousel = page.children.find((c: any) => c.id === "car-1");
 
@@ -206,8 +206,8 @@ describe("ScreenDraftAdapter", () => {
     expect(carousel.style["carousel-color"]).toBe("#fff");
   });
 
-  it("should transform Navbar component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Navbar component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const nav = page.children.find((c: any) => c.id === "nav-1");
 
@@ -219,8 +219,8 @@ describe("ScreenDraftAdapter", () => {
     expect(nav.style["appbar-text"]).toBe("white");
   });
 
-  it("should transform Form component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Form component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const form = page.children.find((c: any) => c.id === "form-1");
 
@@ -232,7 +232,7 @@ describe("ScreenDraftAdapter", () => {
     expect(form.children[0].meta.label).toBe("Name");
   });
 
-  it("should transform Map component", () => {
+  it("should transform Map component", async () => {
     const dataWithMapProps = {
       ...mockData,
       components: mockData.components.map((c) =>
@@ -246,7 +246,7 @@ describe("ScreenDraftAdapter", () => {
           : c
       ),
     };
-    const site = ScreenDraftAdapter.transform(dataWithMapProps);
+    const site = await ScreenDraftAdapter.transform(dataWithMapProps);
     const page = site.pages[0].content;
     const map = page.children.find((c: any) => c.id === "map-1");
 
@@ -260,8 +260,8 @@ describe("ScreenDraftAdapter", () => {
     expect(map.style["map-height"]).toBe(400);
   });
 
-  it("should transform Table component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Table component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const table = page.children.find((c: any) => c.id === "tab-1");
 
@@ -274,8 +274,8 @@ describe("ScreenDraftAdapter", () => {
     expect(table.style["table-header-text"]).toBe("black");
   });
 
-  it("should transform Select component", () => {
-    const site = ScreenDraftAdapter.transform(mockData);
+  it("should transform Select component", async () => {
+    const site = await ScreenDraftAdapter.transform(mockData);
     const page = site.pages[0].content;
     const select = page.children.find((c: any) => c.id === "sel-1");
 
@@ -290,7 +290,7 @@ describe("ScreenDraftAdapter", () => {
   });
 
   describe("HTML Generation", () => {
-    it("should transform Map component with markers and src", () => {
+    it("should transform Map component with markers and src", async () => {
       const data: ScreenDraftData = {
         meta: { appName: "Test", createdAt: "", version: "1" },
         components: [
@@ -307,14 +307,14 @@ describe("ScreenDraftAdapter", () => {
           },
         ],
       };
-      const result = ScreenDraftAdapter.transform(data);
+      const result = await ScreenDraftAdapter.transform(data);
       const mapNode = result.pages[0].content.children[0];
       expect(mapNode.meta.markers).toHaveLength(1);
       expect(mapNode.meta.src).toBe("data.geojson");
       expect(mapNode.meta.lat).toBe(48);
     });
 
-    it("should transform Carousel with images", () => {
+    it("should transform Carousel with images", async () => {
       const data: ScreenDraftData = {
         meta: { appName: "Test", createdAt: "", version: "1" },
         components: [
@@ -329,13 +329,13 @@ describe("ScreenDraftAdapter", () => {
           },
         ],
       };
-      const result = ScreenDraftAdapter.transform(data);
+      const result = await ScreenDraftAdapter.transform(data);
       const carouselNode = result.pages[0].content.children[0];
       expect(carouselNode.meta.items).toHaveLength(1);
       expect(carouselNode.meta.items[0].alt).toBe("Alt 1");
     });
 
-    it("should handle Select and Textarea with placeholders", () => {
+    it("should handle Select and Textarea with placeholders", async () => {
       const data: ScreenDraftData = {
         meta: { appName: "Test", createdAt: "", version: "1" },
         components: [
@@ -360,23 +360,42 @@ describe("ScreenDraftAdapter", () => {
           },
         ],
       };
-      const result = ScreenDraftAdapter.transform(data);
+      const result = await ScreenDraftAdapter.transform(data);
       expect(result.pages[0].content.children[0].meta.placeholder).toBe("Choose...");
       expect(result.pages[0].content.children[1].meta.placeholder).toBe("Write...");
       expect(result.pages[0].content.children[1].meta.rows).toBe(10);
     });
 
-    it("should warn and skip unknown component types", () => {
+    it("should warn and skip unknown component types", async () => {
       const data: ScreenDraftData = {
         meta: { appName: "Test", createdAt: "", version: "1" },
         components: [{ id: "u-1", type: "unknown" as any, x: 0, y: 0, width: 100, height: 100 }],
       };
-      const result = ScreenDraftAdapter.transform(data);
+      const result = await ScreenDraftAdapter.transform(data);
       expect(result.pages[0].content.children || []).toHaveLength(0);
     });
 
-    it("should render full HTML correctly from ScreenDraft data", () => {
-      const site = ScreenDraftAdapter.transform(mockData);
+    it("should transform Box, Section and Icon", async () => {
+        const data: ScreenDraftData = {
+          meta: { appName: "Test", createdAt: "", version: "1" },
+          components: [
+            { id: "b1", type: "box", x: 0, y: 0, width: 100, height: 100, backgroundColor: "red" },
+            { id: "s1", type: "section", x: 0, y: 0, width: 100, height: 100, backgroundColor: "blue" },
+            { id: "i1", type: "icon", x: 0, y: 0, width: 32, height: 32, backgroundColor: "green" },
+          ],
+        };
+        const result = await ScreenDraftAdapter.transform(data);
+        const children = result.pages[0].content.children;
+        expect(children[0].type).toBe("Box");
+        expect(children[0].style.backgroundColor).toBe("red");
+        expect(children[1].type).toBe("Section");
+        expect(children[1].style.backgroundColor).toBe("blue");
+        expect(children[2].type).toBe("Box"); // Icon is mapped to Box
+        expect(children[2].style.backgroundColor).toBe("green");
+    });
+
+    it("should render full HTML correctly from ScreenDraft data", async () => {
+      const site = await ScreenDraftAdapter.transform(mockData);
       const html = render(site.pages[0].content);
 
       // Verify basic structure

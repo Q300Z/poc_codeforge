@@ -29,9 +29,20 @@ describe("CLI", () => {
     expect(consoleLogSpy.mock.calls[0][0]).toContain("CodeForge CLI");
   });
 
+  it("should print version when -v is passed", async () => {
+    vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({ version: "1.2.3" }));
+    await runCli(["-v"]);
+    expect(consoleLogSpy).toHaveBeenCalledWith("v1.2.3");
+  });
+
   it("should throw error and print help when no args passed", async () => {
     await expect(runCli([])).rejects.toThrow("Missing arguments");
     expect(consoleLogSpy).toHaveBeenCalled();
+  });
+
+  it("should handle --no-minify flag", async () => {
+    await runCli(["data.json", "--no-minify"]);
+    expect(index.buildSite).toHaveBeenCalledWith("data.json", "dist-static", { inline: false, minify: false });
   });
 
   it("should run buildSite with correct arguments", async () => {

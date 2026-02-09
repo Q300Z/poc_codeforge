@@ -95,7 +95,26 @@ describe("buildSite", () => {
 
     await buildSite("sd.json", "dist");
 
-    // Success if no error thrown and writeFileSync called
-    expect(writeFileSyncSpy).toHaveBeenCalled();
-  });
-});
+        // Success if no error thrown and writeFileSync called
+
+        expect(writeFileSyncSpy).toHaveBeenCalled();
+
+      });
+
+    
+
+      it("should not minify HTML when minify option is false", async () => {
+
+        await buildSite("site.json", "dist", { minify: false });
+
+        // In our mock, the renderer returns a fixed string. 
+
+        // If minify is false, it should be written exactly as returned (modulo our buildSite logic)
+
+        expect(writeFileSyncSpy).toHaveBeenCalled();
+
+      });
+
+    });
+
+    

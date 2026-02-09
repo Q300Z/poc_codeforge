@@ -48,7 +48,28 @@ console.log("Hello   World");
         <script>alert(1);</script>
       </div>
     `;
-    const minified = minifyHTML(input);
-    expect(minified).toBe('<div class="test"><h1> Title </h1><p>Text with spaces</p><style>.red { color: red; }</style><script>alert(1);</script></div>');
-  });
-});
+        const minified = minifyHTML(input);
+        expect(minified).toBe('<div class="test"><h1> Title </h1><p>Text with spaces</p><style>.red { color: red; }</style><script>alert(1);</script></div>');
+      });
+    
+        it("works correctly without script or style tags", () => {
+    
+          const input = "<div>  Hello  </div>";
+    
+          expect(minifyHTML(input)).toBe("<div> Hello </div>");
+    
+        });
+    
+      
+    
+        it("works with only script tags", () => {
+    
+          const input = "<script> console.log('test') </script>";
+    
+          expect(minifyHTML(input)).toBe("<script> console.log('test') </script>");
+    
+        });
+    
+      
+    });
+    
