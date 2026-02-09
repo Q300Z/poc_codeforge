@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "appName": "Auto-Dark Test",
+    "version": "1.0.0",
+    "createdAt": "2026-02-09T00:00:00.000Z"
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "content": {
+        "id": "hero-auto",
+        "type": "Hero",
+        "meta": {
+          "title": "Génération Automatique",
+          "subtitle": "Je n'ai pas de styleDark défini dans le JSON."
+        },
+        "style": { 
+          "hero-bg": "#ffffff",
+          "hero-text": "#111827",
+          "section-py": 100
+        }
+      }
+    }
+  ]
+}

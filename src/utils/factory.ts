@@ -1,6 +1,6 @@
 import { Component, ComponentHTML } from "../types.js";
 import { renderState } from "./state.js";
-import { getStyleAttr, getStyleVariables } from "./style.js";
+import { autoDarkColor, getStyleAttr, getStyleVariables } from "./style.js";
 import { LAYOUT_UTILITIES, validateStyle } from "./validator.js";
 
 /**
@@ -100,12 +100,30 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     }
 
     validateStyle(name, style, allowedKeysSet);
-    if (styleDark) {
-      validateStyle(`${name} (Dark)`, styleDark, allowedKeysSet);
+
+    // --- GÉNÉRATION AUTOMATIQUE DU MODE SOMBRE ---
+    let finalStyleDark = styleDark;
+    const isDarkEmpty = !finalStyleDark || Object.keys(finalStyleDark).length === 0;
+
+    if (isDarkEmpty && style) {
+      finalStyleDark = {};
+      for (const key in style) {
+        const val = style[key];
+        if (typeof val === "string" && val.startsWith("#")) {
+          const isBg = key.includes("bg") || key.includes("hero-bg") || key.includes("section-bg");
+          finalStyleDark[key] = autoDarkColor(val, isBg);
+        } else if (typeof val === "string" || typeof val === "number") {
+          finalStyleDark[key] = val;
+        }
+      }
+    }
+
+    if (finalStyleDark && Object.keys(finalStyleDark).length > 0) {
+      validateStyle(`${name} (Dark)`, finalStyleDark, allowedKeysSet);
     }
 
     const styleVars = getStyleVariables(style);
-    const styleVarsDark = getStyleVariables(styleDark, "dark");
+    const styleVarsDark = getStyleVariables(finalStyleDark, "dark");
 
     // --- LOGIQUE D'ACCESSIBILITÉ AUTOMATIQUE ---
     let a11yAttrs = `id="${finalId}"`;
