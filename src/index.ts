@@ -119,6 +119,7 @@ export async function buildSite(
       ...pageContent.meta,
       appName: siteData.meta.appName,
       cssPath: "./style.css",
+      isInline: options.inline, // Nouveau flag
       ...(options.inline ? {
         mapLibJsContent,
         mapLibCssContent
@@ -131,6 +132,7 @@ export async function buildSite(
     if (siteData.layout?.footer) pageContent.meta.renderedFooter = render(siteData.layout.footer);
 
     propagateMeta(pageContent, { 
+      isInline: options.inline,
       mapLibJsContent: options.inline ? mapLibJsContent : undefined,
       mapLibCssContent: options.inline ? mapLibCssContent : undefined 
     });

@@ -64,20 +64,16 @@ export const Page = createComponent({
   ],
   template: (meta: Record<string, any>, children, styleVars, _a11yAttrs, _id, getStyleAttr) => {
     const cssPath = meta.cssPath || "style.css";
-    const inlineCss = meta.inlineCss ? `<style>${meta.inlineCss}</style>` : "";
-    const cssLink = meta.inlineCss ? "" : `<link rel="stylesheet" href="${cssPath}">`;
+    const cssLink = meta.isInline ? "" : `<link rel="stylesheet" href="${cssPath}">`;
 
     // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
-    let scriptsHtml = "";
-
+    let bodyScripts = "";
+    let headScripts = "";
+    
     // Scripts lourds (libs externes)
     if (renderState.requiredScripts.has("map")) {
-      scriptsHtml += meta.mapLibCssContent
-        ? `<style>${meta.mapLibCssContent}</style>`
-        : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
-      scriptsHtml += meta.mapLibJsContent
-        ? `<script>${meta.mapLibJsContent}</script>`
-        : `<script src="./libs/leaflet.js"></script>`;
+      headScripts += meta.mapLibCssContent ? `<style>${meta.mapLibCssContent}</style>` : `<link rel="stylesheet" href="./libs/leaflet.css" />`;
+      bodyScripts += meta.mapLibJsContent ? `<script>${meta.mapLibJsContent}</script>` : `<script src="./libs/leaflet.js"></script>`;
     }
 
     // Runtime CodeForge partagé
@@ -89,7 +85,7 @@ export const Page = createComponent({
     });
 
     if (runtimeJs) {
-      scriptsHtml += `<script>(function(){${runtimeJs}})();</script>`;
+      headScripts += `<script>(function(){${runtimeJs}})();</script>`;
     }
 
     return `
@@ -100,13 +96,13 @@ export const Page = createComponent({
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${meta.appName || "Generated Page"}</title>
     ${cssLink}
-    ${inlineCss}
+    ${headScripts}
 </head>
 <body class="site-wrapper h-full" ${getStyleAttr(styleVars)} ${meta.debug ? 'data-debug-theme="true"' : ""}>
     <header class="w-full max-w-none">${meta.renderedHeader || ""}</header>
     <main class="main-content w-full max-w-none">${children.join("")}</main>
     <footer class="w-full max-w-none">${meta.renderedFooter || ""}</footer>
-    ${scriptsHtml}
+    ${bodyScripts}
 </body>
 </html>`;
   },

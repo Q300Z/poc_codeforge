@@ -74,17 +74,20 @@ export const SHARED_SCRIPTS = {
   map: `
     window.CodeForge = window.CodeForge || {};
     window.CodeForge.initMap = function(containerId, lat, lng, zoom, tileUrl, controls, markers, geoJsonSrc) {
-      if (typeof L === 'undefined') return;
-      const map = L.map(containerId).setView([lat, lng], zoom);
-      L.tileLayer(tileUrl, { attribution: '&copy; OpenStreetMap' }).addTo(map);
-      if (controls.includes('scale')) L.control.scale().addTo(map);
-      markers.forEach(m => {
-        const marker = L.marker([m.lat, m.lng]).addTo(map);
-        if (m.name) marker.bindPopup(m.name);
-      });
-      if (geoJsonSrc) {
-        fetch(geoJsonSrc).then(res => res.json()).then(data => L.geoJSON(data).addTo(map));
-      }
+      const init = () => {
+        if (typeof L === 'undefined') return;
+        const map = L.map(containerId).setView([lat, lng], zoom);
+        L.tileLayer(tileUrl, { attribution: '&copy; OpenStreetMap' }).addTo(map);
+        if (controls.includes('scale')) L.control.scale().addTo(map);
+        markers.forEach(m => {
+          const marker = L.marker([m.lat, m.lng]).addTo(map);
+          if (m.name) marker.bindPopup(m.name);
+        });
+        if (geoJsonSrc) {
+          fetch(geoJsonSrc).then(res => res.json()).then(data => L.geoJSON(data).addTo(map));
+        }
+      };
+      if (window.L) init(); else window.addEventListener('load', init);
     };
   `,
 };
