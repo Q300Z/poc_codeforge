@@ -12,4 +12,20 @@ describe("Page Component", () => {
     expect(html).toContain("<!DOCTYPE html>");
     expect(html).toContain('<div id="test-child">Child Content</div>');
   });
+
+  it("should render SEO and Social metadata correctly", () => {
+    const seoMeta = {
+      ...meta,
+      description: "Une description SEO",
+      ogTitle: "Titre OG",
+      ogImage: "https://example.com/image.jpg",
+      twitterCard: "summary_large_image",
+    };
+    const html = Page(seoMeta, ["Content"], {}, "page-1", (s) => `style="${s}"`);
+
+    expect(html).toContain('<meta name="description" content="Une description SEO">');
+    expect(html).toContain('<meta property="og:title" content="Titre OG">');
+    expect(html).toContain('<meta property="og:image" content="https://example.com/image.jpg">');
+    expect(html).toContain('<meta name="twitter:card" content="summary_large_image">');
+  });
 });

@@ -1,5 +1,4 @@
 import { registry } from "../registry.js";
-import { themeRuntime } from "../runtime/theme.js";
 import { BaseStyles, Node } from "../types.js";
 import { NodeBuilder } from "../utils/builder.js";
 import { createComponent, DocumentedComponent } from "../utils/factory.js";
@@ -13,6 +12,18 @@ export interface PageMeta {
   defaultTheme?: "light" | "dark" | "system";
   /** Active les contours en pointillés pour faciliter le design. */
   debug?: boolean;
+  /** Description SEO de la page. */
+  description?: string;
+  /** Titre OpenGraph. */
+  ogTitle?: string;
+  /** Description OpenGraph. */
+  ogDescription?: string;
+  /** URL de l'image de partage OpenGraph. */
+  ogImage?: string;
+  /** Type de carte Twitter. */
+  twitterCard?: "summary" | "summary_large_image" | "app" | "player";
+  /** Site Twitter (ex: @CodeForge). */
+  twitterSite?: string;
 }
 
 /** Type représentant un nœud racine de page. */
@@ -82,23 +93,32 @@ export const Page = createComponent({
     const cssPath = meta.cssPath || "style.css";
     const cssLink = meta.isInline ? "" : `<link rel="stylesheet" href="${cssPath}">`;
 
-        // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
+    // 0. Génération des métadonnées SEO
+    let seoTags = "";
+    if (meta.description)
+      seoTags += `<meta name="description" content="${meta.description}">\n    `;
+    if (meta.ogTitle || meta.appName)
+      seoTags += `<meta property="og:title" content="${meta.ogTitle || meta.appName}">\n    `;
+    if (meta.ogDescription || meta.description)
+      seoTags += `<meta property="og:description" content="${meta.ogDescription || meta.description}">\n    `;
+    if (meta.ogImage) seoTags += `<meta property="og:image" content="${meta.ogImage}">\n    `;
+    if (meta.twitterCard)
+      seoTags += `<meta name="twitter:card" content="${meta.twitterCard}">\n    `;
+    if (meta.twitterSite)
+      seoTags += `<meta name="twitter:site" content="${meta.twitterSite}">\n    `;
 
-        let bodyScripts = "";
+    // 1. Collecte des scripts nécessaires (dédupliqués via renderState)
 
-        let headScripts = "";
+    let bodyScripts = "";
 
-    
+    let headScripts = "";
 
-        // Injection immédiate du thème désactivée
+    // Injection immédiate du thème désactivée
 
-        // headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
+    // headScripts += `<script>window.CodeForge = window.CodeForge || {}; window.CodeForge.defaultTheme = '${meta.defaultTheme || "system"}'; ${themeRuntime}</script>`;
 
-        
+    // Scripts lourds (libs externes)
 
-        // Scripts lourds (libs externes)
-
-    
     if (renderState.requiredScripts.has("Map")) {
       headScripts += meta.mapLibCssContent
         ? `<style>${meta.mapLibCssContent}</style>`
@@ -130,7 +150,7 @@ export const Page = createComponent({
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${meta.appName || "Generated Page"}</title>
-    ${cssLink}
+    ${seoTags}${cssLink}
     ${headScripts}
 </head>
 <body class="site-wrapper h-full" ${getStyleAttr(styleVars + styleVarsDark)} ${meta.debug ? 'data-debug-theme="true"' : ""}>

@@ -40,8 +40,8 @@ describe("Carousel Component", () => {
 
   it("should render navigation buttons and dots", () => {
     const html = Carousel(meta, [], {}, "carousel-1");
-    expect(html).toContain('aria-label="Slide précédente"');
-    expect(html).toContain('aria-label="Slide suivante"');
+    expect(html).toContain('aria-label="Précédent"');
+    expect(html).toContain('aria-label="Suivant"');
     expect(html).toContain('aria-label="Aller à la slide 1"');
     expect(html).toContain('aria-label="Aller à la slide 2"');
   });
