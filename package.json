@@ -96,5 +96,8 @@
     "vite-plugin-singlefile": "^2.3.0",
     "vitest": "^4.0.18",
     "vitest-axe": "^0.1.0"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
   }
 }

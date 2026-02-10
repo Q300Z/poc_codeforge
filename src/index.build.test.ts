@@ -34,7 +34,7 @@ describe("buildSite", () => {
         if (p.endsWith("site.json")) return JSON.stringify({
             meta: { appName: "Test" },
             style: {},
-            pages: [{ slug: "index", content: {} }]
+            pages: [{ slug: "index", content: { id: "root", type: "Box" } }]
         });
         if (p.endsWith(".css")) return "body { color: red; }";
         if (p.endsWith(".js")) return "console.log('lib');";

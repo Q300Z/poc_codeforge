@@ -41,6 +41,7 @@ import { isScreenDraft } from "./utils/detection.js";
 import { minifyHTML } from "./utils/html.js";
 import { PurgeCSS } from "purgecss";
 import { renderState } from "./utils/state.js";
+import { validateSiteSchema } from "./utils/validator.zod.js";
 
 /**
  * Génère un site statique de manière autonome.
@@ -71,10 +72,13 @@ export async function buildSite(
   let siteData: SiteNode;
 
   if (isScreenDraft(jsonContent)) {
-    siteData = ScreenDraftAdapter.transform(jsonContent);
+    siteData = await ScreenDraftAdapter.transform(jsonContent);
   } else {
     siteData = jsonContent;
   }
+
+  // Validation stricte du schéma
+  validateSiteSchema(siteData);
 
   // 1. Assets
   const foldersToCopy = options.inline ? ["images"] : ["libs", "images"];

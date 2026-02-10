@@ -14,7 +14,7 @@ describe("Auto-detection Logic", () => {
   it("should NOT detect CodeForge format as ScreenDraft", () => {
     const codeForgeData = {
       meta: { appName: "Test" },
-      pages: [{ slug: "index", content: {} }],
+      pages: [{ slug: "index", content: { id: "1", type: "Box" } }],
     };
     expect(isScreenDraft(codeForgeData)).toBe(false);
   });
