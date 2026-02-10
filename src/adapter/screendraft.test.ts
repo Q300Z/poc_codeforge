@@ -395,11 +395,11 @@ describe("ScreenDraftAdapter", () => {
       const result = await ScreenDraftAdapter.transform(data);
       const children = result.pages[0].content.children;
       expect(children[0].type).toBe("Box");
-      expect(children[0].style.backgroundColor).toBe("red");
+      expect(children[0].style["box-bg"]).toBe("red");
       expect(children[1].type).toBe("Section");
-      expect(children[1].style.backgroundColor).toBe("blue");
+      expect(children[1].style["section-bg"]).toBe("blue");
       expect(children[2].type).toBe("Box"); // Icon is mapped to Box
-      expect(children[2].style.backgroundColor).toBe("green");
+      expect(children[2].style["box-bg"]).toBe("green");
     });
 
     it("should render full HTML correctly from ScreenDraft data", async () => {
