@@ -146,7 +146,7 @@
   @layer utilities {
     :root {
       --box-bg: #e5e7eb;
-      --appbar-bg: #ffffff;
+      --appbar-bg: #fff;
       --appbar-text: #111827;
       --appbar-border: #e5e7eb;
     }

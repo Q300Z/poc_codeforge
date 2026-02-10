@@ -98,7 +98,9 @@ export class ScreenDraftAdapter {
       .build();
   }
 
-  private static async mapComponent(comp: ScreenDraftComponent): Promise<NodeBuilder<any, any> | null> {
+  private static async mapComponent(
+    comp: ScreenDraftComponent
+  ): Promise<NodeBuilder<any, any> | null> {
     let builder: NodeBuilder<any, any>;
 
     // Mapping commun des styles de positionnement
@@ -302,7 +304,7 @@ export class ScreenDraftAdapter {
         const { BoxBuilder } = await import("../components/Box.js");
         builder = new BoxBuilder(comp.id).withStyle({
           ...commonStyle,
-          backgroundColor: comp.backgroundColor,
+          "box-bg": comp.backgroundColor,
         });
         break;
       }
@@ -311,7 +313,7 @@ export class ScreenDraftAdapter {
         const { SectionBuilder } = await import("../components/Section.js");
         builder = new SectionBuilder(comp.id).withStyle({
           ...commonStyle,
-          backgroundColor: comp.backgroundColor,
+          "section-bg": comp.backgroundColor,
         });
         break;
       }

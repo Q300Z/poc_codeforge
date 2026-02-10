@@ -1,6 +1,6 @@
 import { Component, ComponentHTML } from "../types.js";
 import { renderState } from "./state.js";
-import { autoDarkColor, getStyleAttr, getStyleVariables } from "./style.js";
+import { getStyleAttr, getStyleVariables } from "./style.js";
 import { LAYOUT_UTILITIES, validateStyle } from "./validator.js";
 
 /**
@@ -77,7 +77,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
   // Pré-calcul du Set des clés autorisées pour des recherches O(1)
   const allowedKeysSet = new Set([...LAYOUT_UTILITIES, ...tokenKeys]);
 
-  const component: DocumentedComponent = (meta, children, style, id, styleDark) => {
+  const component: DocumentedComponent = (meta, children, style, id, _styleDark) => {
     // Enregistrement automatique du runtime si présent
     if (runtime) {
       renderState.requireScript(name);
@@ -102,7 +102,7 @@ export function createComponent(options: FactoryOptions): DocumentedComponent {
     validateStyle(name, style, allowedKeysSet);
 
     // --- GÉNÉRATION AUTOMATIQUE DU MODE SOMBRE DÉSACTIVÉE ---
-    let finalStyleDark = {}; // styleDark;
+    const finalStyleDark = {}; // styleDark;
     /*
     const isDarkEmpty = !finalStyleDark || Object.keys(finalStyleDark).length === 0;
 
