@@ -376,22 +376,30 @@ describe("ScreenDraftAdapter", () => {
     });
 
     it("should transform Box, Section and Icon", async () => {
-        const data: ScreenDraftData = {
-          meta: { appName: "Test", createdAt: "", version: "1" },
-          components: [
-            { id: "b1", type: "box", x: 0, y: 0, width: 100, height: 100, backgroundColor: "red" },
-            { id: "s1", type: "section", x: 0, y: 0, width: 100, height: 100, backgroundColor: "blue" },
-            { id: "i1", type: "icon", x: 0, y: 0, width: 32, height: 32, backgroundColor: "green" },
-          ],
-        };
-        const result = await ScreenDraftAdapter.transform(data);
-        const children = result.pages[0].content.children;
-        expect(children[0].type).toBe("Box");
-        expect(children[0].style.backgroundColor).toBe("red");
-        expect(children[1].type).toBe("Section");
-        expect(children[1].style.backgroundColor).toBe("blue");
-        expect(children[2].type).toBe("Box"); // Icon is mapped to Box
-        expect(children[2].style.backgroundColor).toBe("green");
+      const data: ScreenDraftData = {
+        meta: { appName: "Test", createdAt: "", version: "1" },
+        components: [
+          { id: "b1", type: "box", x: 0, y: 0, width: 100, height: 100, backgroundColor: "red" },
+          {
+            id: "s1",
+            type: "section",
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            backgroundColor: "blue",
+          },
+          { id: "i1", type: "icon", x: 0, y: 0, width: 32, height: 32, backgroundColor: "green" },
+        ],
+      };
+      const result = await ScreenDraftAdapter.transform(data);
+      const children = result.pages[0].content.children;
+      expect(children[0].type).toBe("Box");
+      expect(children[0].style.backgroundColor).toBe("red");
+      expect(children[1].type).toBe("Section");
+      expect(children[1].style.backgroundColor).toBe("blue");
+      expect(children[2].type).toBe("Box"); // Icon is mapped to Box
+      expect(children[2].style.backgroundColor).toBe("green");
     });
 
     it("should render full HTML correctly from ScreenDraft data", async () => {

@@ -53,7 +53,15 @@ export const Text = createComponent({
   description:
     "Composant de base pour l'affichage de texte courant, paragraphes ou spans avec support typographique.",
   authorizedTokens: ["font-size", "text-color", "line-height"],
-  template: (meta: Record<string, any>, _, styleVars, a11yAttrs, _id, getStyleAttr, styleVarsDark) => {
+  template: (
+    meta: Record<string, any>,
+    _,
+    styleVars,
+    a11yAttrs,
+    _id,
+    getStyleAttr,
+    styleVarsDark
+  ) => {
     const tag = meta.tag || "p";
 
     // 1. Validation du contraste Mode Clair
@@ -65,23 +73,22 @@ export const Text = createComponent({
         colorVar = `--text-color:${validatedColor};`;
       }
     }
-  
-      // 2. Validation du contraste Mode Sombre
-      let colorVarDark = "";
-      if (styleVarsDark.includes("--dark-text-color:")) {
-        const match = styleVarsDark.match(/--dark-text-color:([^;]+);/);
-        if (match) {
-          const darkBg = meta.parentBgDark || "#111827"; // Fallback bg sombre
-          const validatedColor = validateContrast(match[1], darkBg, "Text (Dark)", _id);
-          colorVarDark = `--dark-text-color:${validatedColor};`;
-        }
+
+    // 2. Validation du contraste Mode Sombre
+    let colorVarDark = "";
+    if (styleVarsDark.includes("--dark-text-color:")) {
+      const match = styleVarsDark.match(/--dark-text-color:([^;]+);/);
+      if (match) {
+        const darkBg = meta.parentBgDark || "#111827"; // Fallback bg sombre
+        const validatedColor = validateContrast(match[1], darkBg, "Text (Dark)", _id);
+        colorVarDark = `--dark-text-color:${validatedColor};`;
       }
-  
-          const combined = styleVars + styleVarsDark + colorVar + colorVarDark + "color:var(--text-color,inherit);";
-  
-      
-  
-          return `
+    }
+
+    const combined =
+      styleVars + styleVarsDark + colorVar + colorVarDark + "color:var(--text-color,inherit);";
+
+    return `
   
             <${tag} 
   
@@ -98,8 +105,5 @@ export const Text = createComponent({
             </${tag}>
   
           `;
-  
-      
-    },
-  
+  },
 });

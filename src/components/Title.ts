@@ -120,7 +120,13 @@ export const Title = createComponent({
       }
     }
 
-    const combined = styleVars + styleVarsDark + extraStyles + colorVar + colorVarDark + "background-color:var(--title-bg,transparent);color:var(--title-text,inherit);";
+    const combined =
+      styleVars +
+      styleVarsDark +
+      extraStyles +
+      colorVar +
+      colorVarDark +
+      "background-color:var(--title-bg,transparent);color:var(--title-text,inherit);";
 
     return `
       <${tag} 
